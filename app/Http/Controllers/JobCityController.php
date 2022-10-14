@@ -43,7 +43,7 @@ class JobCityController extends Controller
      */
     public function index()
     {
-        $jobcity = job_city::latest()->get();
+        $jobcity = job_city::latest()->paginate(10);
 
         return view("admin.jobs.city.index",  ['jobcity' => $jobcity] );
     }

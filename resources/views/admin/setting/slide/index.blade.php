@@ -23,7 +23,7 @@
         <td>{{$item->id}}</td>
         <td>{{$item->title}}</td>
         <td>{{$item->des}}</td>
-        <td>{{$item->img}}</td>
+        <td><a target="blank" href="{{url('storage/'.$item->img)}}" ><img width="100" src="{{url('storage/'.$item->img)}}" /></td>
         <td>{{$item->url}}</td>
         <td class="cellControll">
             <a  href="{{url('/admin/Slide/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>

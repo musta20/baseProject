@@ -26,6 +26,8 @@
         </tr>
             @endforeach
         </table>
+        {{$jobcity->links('admin.pagination.custom')}}
+
 </section>
 <script>
   function showModel(e) {

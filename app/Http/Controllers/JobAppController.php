@@ -14,7 +14,7 @@ class JobAppController extends Controller
      */
     public function index()
     {
-        $alljopapp = job_app::latest()->get();
+        $alljopapp = job_app::latest()->paginate(10);
 
         return view("admin.jobs.jobApp.index",  ['alljopapp' => $alljopapp]);
     }

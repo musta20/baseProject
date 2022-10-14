@@ -9,7 +9,9 @@ class SlideController extends Controller
 {
     public $rule = [
         "title" => "required|string|max:255|min:3",
-        "img" => "required|string|max:255|min:3",
+       // "img" => "required|string|max:255|min:3",
+       //'file' => ['required','mimes:pdf,docx','max:2048'],
+       'img' => 'required|max:2048|mimes:jpg,jpeg,png',
         "des" => "required|string|max:255|min:3",
         "url" => "required|string|max:255|min:3",
     ];
@@ -57,7 +59,7 @@ class SlideController extends Controller
     public function index()
     {
         //
-        $allslide = slide::latest()->get();
+        $allslide = slide::latest()->paginate(10);
         // dd( $allcategory);
         //Services
          return view("admin.setting.slide.index",  ['allslide' => $allslide] );
@@ -84,7 +86,9 @@ class SlideController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate( $this->rule,$this->messages());
-
+       // if($request->hasFile(;))
+      
+       $data['img'] =  $request->file('img')->store('logo','public');
         slide::create($data);
        
         return redirect('/admin/Slide')->with('messages','تم إضافة البيانات');

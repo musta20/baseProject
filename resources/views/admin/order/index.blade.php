@@ -31,6 +31,7 @@
         </tr>
             @endforeach
         </table>
+        {{$AllOrder->links('admin.pagination.custom')}}
 </section>
 <script>
   function showModel(e) {

@@ -28,6 +28,8 @@
         </tr>
             @endforeach
         </table>
+        {{$alljobs->links('admin.pagination.custom')}}
+
 </section>
 <script>
   function showModel(e) {

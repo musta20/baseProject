@@ -29,6 +29,8 @@
         </tr>
             @endforeach
         </table>
+        {{$alljopapp->links('admin.pagination.custom')}}
+
 </section>
 <script>
   function showModel(e) {

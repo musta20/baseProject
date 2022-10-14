@@ -20,7 +20,9 @@
         <tr>
         <td>{{$item->id}}</td>
         <td>{{$item->title}}</td>
-        <td>{{$item->icon}}</td>
+        <td> 
+            <i class="{{$item->icon}}"></i>
+        </td>
         <td class="cellControll">
             <a  href="{{url('/admin/Category/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>
             <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#"><i class="fa-sharp fa-solid fa-trash"></i></a>
@@ -28,6 +30,8 @@
         </tr>
             @endforeach
         </table>
+        {{$allcategory->links('admin.pagination.custom')}}
+
 </section>
 <script>
   function showModel(e) {

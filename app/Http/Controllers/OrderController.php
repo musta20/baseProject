@@ -52,7 +52,7 @@ class OrderController extends Controller
      */
     public function showOrderList($type)
     {
-        $AllOrder = order::where('status', $type)->get();
+        $AllOrder = order::where('status', $type)->paginate(10);
         switch ($type) {
             case 0:
                 $title = "الطلبات الجديدة";

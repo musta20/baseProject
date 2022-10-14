@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->string("name");
             
             $table->integer("price");
+            $table->integer("cat_id");
             $table->text("des")->nullable();
             $table->string("icon");
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\services;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,9 @@ class ServicesController extends Controller
         "name" => "required|string|max:100|min:3",
         "price" => "required|integer|digits_between:1,10",
         "icon" => "required|string|max:255|min:3",
+        "cat_id" =>"required|integer|digits_between:1,10"
     ];
-
+    
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -54,7 +56,7 @@ class ServicesController extends Controller
     {
         //
                //Services
-               $allServices = services::get();
+               $allServices = services::paginate(10);
                return view("admin.services.index",  ['allServices' => $allServices] );
     }
 
@@ -65,8 +67,9 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
-        return view("admin.services.add");
+        $cat = category::get();
+
+        return view("admin.services.add",["cat"=>$cat]);
 
     }
 
@@ -78,7 +81,7 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //$request
         $data = $request->validate( $this->rule,$this->messages());
 
         services::create($data);
@@ -95,7 +98,8 @@ class ServicesController extends Controller
     public function show($id)
     {
         $services = services::find($id);
-        return view("admin.services.edit",  ['services' => $services] );
+        $cat = category::get();
+        return view("admin.services.edit",  ['services' => $services,"cat"=>$cat] );
     }
 
     /**

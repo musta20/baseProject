@@ -20,7 +20,17 @@
     </div>
     <div class="formLaple" >
         <label> مقر الوظيفة </label>
-        <input class="form-input" name="city_id" placeholder=" مقر الوظيفة" />
+
+        <select   class="form-input" name="city_id" >
+            @foreach ($jobCity as $item)
+            <option value="{{$item->id}}">{{$item->name}}</option>
+                
+            @endforeach
+
+
+        </select>
+
+
         @error('city_id')
         <span class="helper">
         {{$message}}

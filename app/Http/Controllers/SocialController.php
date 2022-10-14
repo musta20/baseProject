@@ -48,7 +48,7 @@ class SocialController extends Controller
      */
     public function index()
     {
-        $allsocial = social::latest()->get();
+        $allsocial = social::latest()->paginate(10);
         // dd( $allcategory);
         //Services
          return view("admin.setting.social.index",  ['allsocial' => $allsocial] );

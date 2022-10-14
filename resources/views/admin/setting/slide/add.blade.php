@@ -7,7 +7,7 @@
 
     <h3>اضافة سيلايد</h3>
 </div>
-<form method="POST" action="{{url('/admin/Slide')}}">
+<form method="POST" enctype="multipart/form-data" action="{{url('/admin/Slide')}}">
     @csrf
     <div class="formLaple" >
         <label>عنوان السيلاد </label>
@@ -27,6 +27,8 @@
         <input class="form-input" 
         
         value="{{old('img')}}"
+
+        type="file"
 
         name="img" placeholder=" الصورة" />
         

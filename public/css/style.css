@@ -352,4 +352,17 @@ form {
   padding: 2px 16px;
   background-color: #4dd0e1;
   color: white;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.pagination {
+  gap: 0.5em;
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */

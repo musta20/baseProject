@@ -369,3 +369,15 @@ justify-content: center;
   }
   
 
+    .justify-between{
+        justify-content: space-between;
+    }
+
+   .pagination{
+    gap: 0.5em;
+    display: flex;
+   }
+
+.items-center{
+    align-items: center;
+}

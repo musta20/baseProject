@@ -52,7 +52,7 @@ class NumbersController extends Controller
      */
     public function index()
     {
-        $allnumbers = numbers::latest()->get();
+        $allnumbers = numbers::latest()->paginate(10);
        // dd( $allcategory);
        //Services
         return view("admin.setting.number.index",  ['allnumbers' => $allnumbers] );

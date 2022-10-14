@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\job_city;
 use App\Models\jobs;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,7 @@ class JobsController extends Controller
     public function index()
     {
         //
-        $alljobs = jobs::latest()->get();
+        $alljobs = jobs::latest()->paginate(10);
         
         return view("admin.jobs.index",  ['alljobs' => $alljobs] );
 
@@ -76,7 +77,8 @@ class JobsController extends Controller
      */
     public function create()
     {
-        return view("admin.jobs.add");
+        $jobCity = job_city::get();
+        return view("admin.jobs.add",['jobCity'=>$jobCity]);
 
     }
 

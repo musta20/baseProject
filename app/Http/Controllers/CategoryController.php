@@ -52,7 +52,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $allcategory = category::latest()->get();
+        $allcategory = category::latest()->paginate(10);
        // dd( $allcategory);
        //Services
         return view("admin.category.index",  ['allcategory' => $allcategory] );

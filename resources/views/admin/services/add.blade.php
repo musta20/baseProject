@@ -13,8 +13,7 @@
         <label>عنوان الخدمة</label>
         <input class="form-input" name="name"
         value="{{old('name')}}"
-         placeholder="عنوان الخدمة" />
-
+        placeholder="عنوان الخدمة" />
         @error('name')
         <span class="helper">
         {{$message}}
@@ -37,6 +36,32 @@
         @enderror
 
     </div>
+
+
+    <div class="formLaple" >
+        <label> التصنيف</label>
+        <select name="cat_id" >
+
+                @foreach($cat as $item)
+                
+                <option value="{{$item->id}}" >{{$item->title}}</option>
+
+                @endforeach
+
+
+
+        </select>
+     
+        
+        @error('cat_id')
+        <span class="helper">
+        {{$message}}
+        </span>
+        @enderror
+
+    </div>
+
+
 
     <div class="formLaple" >
         <label> السعر</label>
