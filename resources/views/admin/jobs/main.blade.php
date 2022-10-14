@@ -1,0 +1,24 @@
+@extends('admin.layout.index')
+@section('content')
+    <section class="boxs border">
+
+        <a href="{{url('/admin/Jobs')}}" >
+            <i class="fa-solid fa-list fa-2x"></i>
+            <h3> جميع الوظائف </h3>
+        </a>
+
+        <a href="{{url('/admin/JobApp')}}" >
+            <i class="fa-solid fa-clipboard-check fa-2x"></i>
+            <h3> طلبات التوظيف</h3>
+        </a>
+
+        <a href="{{url('/admin/JobCity')}}" >
+            <i class="fa-solid fa-map fa-2x"></i>           
+             <h3> مناطق التوظيف</h3>
+        </a>
+
+   
+
+
+    </section>
+@endsection
