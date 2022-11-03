@@ -36,6 +36,44 @@
         @enderror
 
     </div>
+
+
+    <span class="btn" onclick="addFile()" >إضافة ملف</span>
+    <div id="files" >
+
+    @foreach ($filesInput as $key=>$item)
+    <div class='formLaple'>
+
+        <input class='form-input' 
+        value="{{$item->name}}" 
+        name='files-{{$key}}' 
+        placeholder='اسم الملف' />
+        
+    </div>
+
+
+    @endforeach
+
+    
+        @error("files")
+        <span class="helper">
+        {{$message}}
+        </span>
+        @enderror
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="formLaple" >
         <label> السعر</label>
         <input class="form-input"
@@ -59,5 +97,17 @@
 </div>
 </form>
 </section>
-    
+<script>
+
+    function addFile() {
+     //   file.preventDefault();
+let file = document.getElementById('files');
+let div = document.createElement("div")
+div.innerHTML ="<div class='formLaple'><input class='form-input' name='files-"+ file.children.length +"' placeholder='اسم الملف' /></div>";
+file.append (div);
+        
+    }
+
+
+</script>
 @endsection

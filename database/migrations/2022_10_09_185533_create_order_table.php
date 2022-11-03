@@ -18,7 +18,7 @@ class CreateOrderTable extends Migration
             $table->string("name");
             $table->string("email");
             $table->string("empy_id");
-            $table->integer("phone");
+            $table->bigInteger("phone");
             $table->text("des");
             $table->string("title");
             $table->string("receipt");

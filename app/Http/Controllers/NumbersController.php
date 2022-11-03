@@ -43,8 +43,6 @@ class NumbersController extends Controller
         ];
     }
 
-
-
     /**
      * Display a listing of the resource.
      *
@@ -53,8 +51,7 @@ class NumbersController extends Controller
     public function index()
     {
         $allnumbers = numbers::latest()->paginate(10);
-       // dd( $allcategory);
-       //Services
+
         return view("admin.setting.number.index",  ['allnumbers' => $allnumbers] );
     }
     /**
@@ -64,9 +61,7 @@ class NumbersController extends Controller
      */
     public function create()
     {
-        //
         return view("admin.setting.number.add" );
-
     }
 
     /**
@@ -109,8 +104,6 @@ class NumbersController extends Controller
     {
         dd($id);
 
-        //category
-
     }
 
     /**
@@ -122,10 +115,7 @@ class NumbersController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //
-       // dd($request);
-
-
+ 
         $data = $request->validate( $this->rule,$this->messages());
         $number = numbers::find($id);
 
@@ -148,8 +138,7 @@ class NumbersController extends Controller
      */
     public function destroy($id)
     {
-        //CAT
-       // category::deleting()
+
        $number = numbers::find($id);
        $number->delete();
        return redirect('/admin/Number')->with('messages','تم حذف العنصر');

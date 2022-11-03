@@ -22,13 +22,14 @@
             <h3>الطلبات الملغية</h3>
         </a>
 
+        <a href="{{url('/admin/Payment')}}" >
+            <i class="fas fa-truck fa-2x"></i>
+            <h3> طرق الدفع</h3>
+        </a>
 
-
-
-
-
-
-
-
+        <a href="{{url('/admin/Delivery')}}" >
+            <i class="fas fa-truck fa-2x"></i>
+            <h3> طرق التوصيل</h3>
+        </a>
     </section>
 @endsection

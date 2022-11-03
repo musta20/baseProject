@@ -16,30 +16,23 @@ class orderFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'empy_id' => rand(1,4),
-
-            'phone' => rand(1,4),
-
+            'empy_id' => rand(2,20),
+            'phone' =>  rand(100000,1000000),
             'des' => $this->faker->paragraph(),
             'title' => $this->faker->title(),
             'name' => $this->faker->name(),
-
             'receipt' => rand(1,4),
-
             'cash' => rand(1,4),
             'ip' => rand(1,4),
             'count' => rand(1,4),
-            'time' => rand(1,4),
-            'approve_time' => rand(1,4),
-            'adress' => rand(1,4),
-            
+            'time' => now(),
+            'approve_time' => "none",
+            'adress' => $this->faker->address(),
             'files' => rand(1,4),
             'payed' => rand(1,4),
-            'status' => 0,
-            'code' => rand(1,4),
+            'status' => 2,
+            'code' => rand(4000,5000),
             's_id' => rand(1,4),
-
-            
         ];
     }
 

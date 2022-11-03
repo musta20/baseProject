@@ -39,6 +39,20 @@
       @enderror
   </div>
 
+
+  <div class="formLaple" >
+    <label>   رابط الخريطة</label>
+    <input class="form-input"
+    value="{{$setting->map}}"
+
+    name="map" placeholder="  رابط موقع جوجل " />
+    @error('map')
+    <span class="helper">
+    {{$message}}
+    </span>
+    @enderror
+</div>
+
   <div class="formLaple" >
     <label>  كلمات مفتاحية</label>
     <input class="form-input"
@@ -52,13 +66,41 @@
     @enderror
 </div>
 
+<div class="formLaple" >
+  <label>  شروط الفاتورة </label>
+  <input class="form-input"
+  value="{{$setting->billterm}}"
+
+  name="billterm" placeholder="   شروط الفاتورة" />
+  @error('billterm')
+  <span class="helper">
+  {{$message}}
+  </span>
+  @enderror
+</div>
+
+
 
 <div class="formLaple" >
   <label>   النص اسفل الصفحة</label>
   <input
   value="{{$setting->footer}}"
 
-  class="form-input" name="footer" placeholder="الموقع" />
+  class="form-input" name="footertext" placeholder="الموقع" />
+  @error('footer')
+  <span class="helper">
+  {{$message}}
+  </span>
+  @enderror
+</div>
+
+
+<div class="formLaple" >
+  <label>    اسفل الصفحة</label>
+  <input
+  value="{{$setting->footer}}"
+
+  class="form-input" name="footer" placeholder="اسف الصفحة" />
   @error('footer')
   <span class="helper">
   {{$message}}

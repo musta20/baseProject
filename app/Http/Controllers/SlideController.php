@@ -86,11 +86,11 @@ class SlideController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate( $this->rule,$this->messages());
-       // if($request->hasFile(;))
-      
-       $data['img'] =  $request->file('img')->store('logo','public');
+        
+        $data['img'] =  $request->file('img')->store('logo','public');
+
         slide::create($data);
-       
+
         return redirect('/admin/Slide')->with('messages','تم إضافة البيانات');
     }
 

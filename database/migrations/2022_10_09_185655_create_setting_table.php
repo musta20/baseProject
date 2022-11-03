@@ -26,7 +26,9 @@ class CreateSettingTable extends Migration
             $table->string("adress");
             $table->string("email");
 
+            $table->string("billterm");
             $table->string("footer");
+
             $table->string("footertext");
 
 

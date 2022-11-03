@@ -25,10 +25,19 @@
     </div>
     <div class="formLaple" >
         <label> مقر الوظيفة</label>
-        <input class="form-input"
-        value="{{$jobs->city_id}}"
 
-        name="city_id" placeholder=" الايقونة" />
+        <select class="form-input" name="city_id">
+            <option value="{{ $currentcity->id }}">{{ $currentcity->name }}</option>
+
+            @foreach ($jobCity as $item)
+            @if ($jobs->city_id != $item->id)
+            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                
+            @endif
+            @endforeach
+        </select>
+
+
         @error('city_id')
         <span class="helper">
         {{$message}}

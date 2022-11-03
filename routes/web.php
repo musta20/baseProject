@@ -12,6 +12,20 @@ use App\Http\Controllers\NumbersController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\JobAppController;
 use App\Http\Controllers\JobCityController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LogsController;
+
+
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\NotifySalesController;
+use App\Http\Controllers\NotifyTypeController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SalesTypeController;
+use App\Http\Controllers\TasksController;
+use App\Http\Controllers\TasksNotifyController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,47 +38,181 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function () {
+    $ratingCode = (object) array('token' => '0');
 
-Route::get('/admin', function () {
-    return view('admin.index');
+    return view('test',[
+        'img' => "banana.png",
+        'status' => 0,
+        'bill' => 1,
+        'ratingCode' => $ratingCode
+    
+]);
 });
 
-Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
-
-    Route::resource('Setting', SettingController::class);
-
-    Route::resource('Category', CategoryController::class);
-
-    Route::resource('Jobs', JobsController::class);
-
-    Route::resource('Services', ServicesController::class);
-
-    Route::resource('Clients', ClientsController::class);
-
-    Route::resource('Order', OrderController::class);
-
-    Route::resource('Slide', SlideController::class);
-
-    Route::resource('Contact', ContactController::class);
-
-    Route::resource('Number', NumbersController::class);
-
-    Route::resource('Social', SocialController::class);
-
-    Route::resource('JobApp', JobAppController::class);
-
-    Route::resource('JobCity', JobCityController::class);
-
-    Route::get('basic/', 'App\Http\Controllers\SettingController@setting')->name('admin.basic');
-
-    Route::get('main/', 'App\Http\Controllers\JobsController@main')->name('admin.main');
-
-    Route::get('showOrderList/{type}', 'App\Http\Controllers\OrderController@showOrderList')->name('admin.showOrderList');
 
 
 
+Route::get('login/', [UsersController::class, 'loginView'])->name('login');
+
+Route::get('logout/', [UsersController::class, 'logout'])->name('admin.logout');
+
+Route::post('login/', [UsersController::class, 'login'])->name('admin.login');
+
+
+
+Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], function () {
+
+    Route::get('/', function () {
+        return view('admin.index');
+    });
+
+
+    
+
+    Route::group(['middleware' => ['permission:Task']], function () {
+
+        Route::get('MainTask', [TasksController::class, 'MainTask'])->name('admin.MainTask');
+        Route::get('ShowTask/{id}', [TasksController::class, 'ShowTask'])->name('admin.ShowTask');
+        Route::post('EditTask/{id}', [TasksController::class, 'EditTask'])->name('admin.EditTask');
+
+    });
+
+    Route::group(['middleware' => ['permission:TaskMangment']], function () {
+
+        Route::resource('Task', TasksController::class);
+        
+        Route::resource('NotifySales', NotifySalesController::class);
+        
+        Route::resource('SalesType', SalesTypeController::class);
+
+        Route::resource('TasksNotify', TasksNotifyController::class);
+        
+        Route::resource('NotifyType', NotifyTypeController::class);
+        
+        Route::get('MenuTask', [TasksController::class,'MenuTask'])->name('admin.MenuTask');
+
+    });
+
+
+    Route::group(['middleware' => ['permission:Massages']], function () {
+
+        Route::resource('Messages', MessageController::class);
+
+        Route::get('inbox/{type}', [MessageController::class, 'inbox'])->name('admin.inbox');
+
+        Route::get('AllMessages/', [MessageController::class, 'main'])->name('admin.AllMessages');
+    });
+
+
+    Route::group(['middleware' => ['permission:Setting']], function () {
+
+        Route::resource('Setting', SettingController::class);
+
+        Route::resource('Slide', SlideController::class);
+
+        Route::resource('Contact', ContactController::class);
+
+        Route::resource('Number', NumbersController::class);
+
+        Route::resource('Social', SocialController::class);
+
+        Route::get('basic/', [SettingController::class, 'setting'])->name('admin.basic');
+    });
+
+    Route::group(['middleware' => ['permission:Logs']], function () {
+
+        Route::resource('Logs', LogsController::class);
+
+        Route::get('LogsList/{id}', [LogsController::class, 'LogsList'])->name('admin.LogsList');
+
+    });
+
+    Route::group(['middleware' => ['permission:Category/Services']], function () {
+
+        Route::resource('Category', CategoryController::class);
+
+        Route::resource('Services', ServicesController::class);
+
+        Route::resource('JobApp', JobAppController::class);
+
+        Route::resource('JobCity', JobCityController::class);
+
+        Route::resource('Delivery', DeliveryController::class);
+
+        Route::resource('Payment', PaymentController::class);
+    });
+
+    Route::group(['middleware' => ['permission:jobs']], function () {
+
+        Route::resource('Jobs', JobsController::class);
+
+        Route::get('main/', [JobsController::class, 'main'])->name('admin.main');
+    });
+
+    Route::group(['middleware' => ['permission:Reviews']], function () {
+
+        Route::resource('Clients', ClientsController::class);
+    });
+
+
+    Route::group(['middleware' => ['permission:Order']], function () {
+
+        Route::get('showOrderList/{type}', [OrderController::class, 'showOrderList'])->name('admin.showOrderList');
+
+        Route::resource('Order', OrderController::class);
+
+        Route::get('Billprint/{id}', [ReportController::class, 'Billprint'])->name('Report.Billprint');
+
+        Route::get('BillInnerPrint/{id}', [ReportController::class, 'BillInnerPrint'])->name('Report.BillInnerPrint');
+
+        Route::get('seedAllOrderList/', [OrderController::class, 'seedAllOrderList'])->name('admin.seedAllOrderList');
+    });
+
+
+    Route::group(['middleware' => ['permission:Users']], function () {
+
+        Route::resource('Users', UsersController::class);
+
+        Route::delete('rmrole/{id}', [UsersController::class, 'rmrole'])->name('admin.rmrole');
+
+        Route::post('addrole/', [UsersController::class, 'addrole'])->name('admin.addrole');
+
+        Route::get('indexrole/', [UsersController::class, 'indexrole'])->name('admin.indexrole');
+
+        Route::get('perm/', [UsersController::class, 'Perm'])->name('admin.perm');
+
+        Route::post('addPerm/', [UsersController::class, 'addPerm'])->name('admin.addPerm');
+
+        Route::get('UsersList/', [UsersController::class, 'UsersList'])->name('admin.UsersList');
+
+        Route::get('addpermison/', [UsersController::class, 'addpermison'])->name('admin.addpermison');
+
+        //Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
+
+        Route::post('createUser/', [UsersController::class, 'createUser'])->name('admin.createUser');
+    });
+
+
+
+
+    Route::group(['middleware' => ['permission:Report']], function () {
+
+        Route::get('showPdfReport/', [ReportController::class, 'showPdfReport'])->name('Report.showPdfReport');
+
+        Route::get('Reportmain/', [ReportController::class, 'main'])->name('Report.main');
+
+        Route::resource('Report', ReportController::class);
+
+        Route::get('orderReport/', [ReportController::class, 'orderReport'])->name('Report.orderReport');
+
+        Route::get('billReport/', [ReportController::class, 'billReport'])->name('Report.billReport');
+
+        Route::get('cashReport/', [ReportController::class, 'cashReport'])->name('Report.cashReport');
+    });
 });

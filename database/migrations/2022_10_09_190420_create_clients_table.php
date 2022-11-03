@@ -17,8 +17,8 @@ class CreateClientsTable extends Migration
             $table->id();
 
             $table->string("name");
-            $table->string("des");
-            $table->integer("rate");
+            $table->longText("des")->nullable();
+            $table->integer("rate")->nullable();
             $table->integer("status");
             $table->integer("israted");
             $table->string("token");

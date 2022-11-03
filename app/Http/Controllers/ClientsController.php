@@ -12,9 +12,28 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+   
+
+    public function messages()
+    {
+        return [
+            'status.required' => 'يجب تحديد حالة الطلب ',
+            'status.integer' => 'يجب ان تكون الحالة رقم  فقط',
+            "status.digits_between" => "  الرقم بين 1-2",
+
+            
+        ];
+    }
+
+
+
     public function index()
     {
-        //
+        $client = clients::where('israted',2)->latest()->paginate(10);
+        return view("admin.client.index",['client'=>$client]);
+
     }
 
     /**
@@ -55,9 +74,11 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function edit(clients $clients)
+    public function edit( $id)
     {
-        //
+        $client = clients::find($id);
+        return view("admin.client.edit",['client'=>$client]);
+
     }
 
     /**
@@ -67,9 +88,18 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, clients $clients)
+    public function update(Request $request,$id)
     {
-        //
+        
+        $data = $request->validate( [ "status" => "required|integer|digits_between:1,2"],$this->messages());
+        $clint = clients::find($id);
+
+        $clint->status=$request->status;
+
+        $clint->save();
+
+        return redirect('/admin/Clients/')->with('messages','تم تعديل العنصر');
+
     }
 
     /**
@@ -78,8 +108,10 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(clients $clients)
+    public function destroy( $id)
     {
-        //
+        $category = clients::find($id);
+        $category->delete();
+        return redirect('/admin/Clients/')->with('messages','تم حذف العنصر');
     }
 }

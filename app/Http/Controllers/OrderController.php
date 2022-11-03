@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderStatus;
+use App\Models\delivery;
+use App\Models\Files;
+use App\Models\job_city;
 use App\Models\order;
+use App\Models\payment;
 use App\Models\services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -40,8 +46,8 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $allorder = order::latest()->get();
-    
+        $allorder = order::latest()->paginate(10);
+
         return view("admin.order.main",  ['allorder' => $allorder]);
     }
 
@@ -69,7 +75,7 @@ class OrderController extends Controller
             default:
                 break;
         }
-        return view("admin.order.index",  ['AllOrder' => $AllOrder, "title" => $title]);
+        return view("admin.order.index",  ['AllOrder' => $AllOrder,'type'=>$type, "title" => $title]);
     }
 
     /**
@@ -80,6 +86,63 @@ class OrderController extends Controller
     public function create()
     {
         //
+    }
+
+    public function seedAllOrderList()
+    {
+        $payment_way = array("فاتورة", "تحويل بنكي", "عند التسليم", "كاش ");
+        $delevryway = array("استلام من الفرع", "ارسال للايميل", "ارسال للواتساب", "توصيل ");
+
+
+        foreach ($delevryway as $value) {
+            $item = delivery::where('name', $value)->first();;
+            if (!$item) {
+                delivery::create(["name" => $value]);
+            }
+        }
+
+        foreach ($payment_way as $value) {
+            $item = payment::where('name', $value)->first();;
+            if (!$item) {
+                payment::create(["name" => $value]);
+            }
+        }
+
+
+        $cars = array(
+            " الخرج | Al-Kharag",
+            "الدوادمي | Al-Dawadmi",
+            "الجبيل | Jubail",
+            "الاحساء | Al-Ahsa",
+            "الخبر | Khobar",
+            "المجمعة | Al-Majmaah",
+            "تبوك | Tabuk",
+            "الجوف | Al-jouf ",
+            "الظهران| Dhahran",
+            "جازان | Jizan",
+            "نجران | Najran",
+            "ابها | Abha",
+            "عسير | Asser",
+            "الباحة | Al-Baha",
+            "الطائف | Taif",
+            "ينبع | Yanbu",
+            "مكة المكرمة  | Makkah",
+            "المدينة المنورة | Medina",
+            "حفر الباطن | Hafar Al-batin",
+            "الدمام | Dammam",
+            "حائل | Hail",
+            "القصيم | Qassim",
+            "الرياض | Riyadh"
+        );
+
+        foreach ($cars as $value) {
+            $item = job_city::where('name', $value)->first();;
+            if (!$item) {
+                job_city::create(["name" => $value]);
+            }
+        }
+
+        return "job city seeded";
     }
 
     /**
@@ -101,17 +164,22 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = order::find($id);
-        $services = services::find($order->s_id);
-        //  dd($order);services
+        $order = order::with('servicesNmae')->with('dev')->with('pym')->find($id);
 
-        //$order->price = ;
-        $order->price = $order->count * $services->price;
-        // $order->push($price);
+        //$order = order::find($id)->with('dev');//->with('pym');
+        //with('servicesNmae')
+     //   dd($order->name);
+    //    $services = services::find($order->s_id);
+  
+        $order->price = $order->count * $order->servicesNmae->price;
+        
+        $order->ServiceName = $order->servicesNmae->name; //still
 
-        $order->ServiceName = $services->name; //still
         $order->still = $order->price - $order->payed;   //still
 
+        $files = Files::where('type', 0)->where('typeid', $order->id)->get();
+
+  
         switch ($order->status) {
             case 0:
                 $order->status_order = "قيد الانتظار";
@@ -135,7 +203,7 @@ class OrderController extends Controller
 
 
 
-        return view("admin.order.edit",  ['order' =>  $order]);
+        return view("admin.order.edit",  ['order' =>  $order ,"files"=>$files]);
     }
 
     /**
@@ -156,32 +224,40 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-       // dd($request->status);
-        $data = $request->validate( $this->rule,$this->messages());
+        $data = $request->validate($this->rule, $this->messages());
 
         $order  = order::find($id);
 
-        if($request->time)
-        {
+        if ($request->time) {
             $order->time = $request->time;
         }
 
-        if($request->cost){
-
+        if ($request->cost) {
             $order->payed = $order->payed + $request->cost;
+        }
+
+        $send=false;
+
+        if($order->status != $request->status)
+        {
+            $send=true;
         }
 
         $order->status = $request->status;
 
+        if ($request->status == 1) {
+            $order->approve_time = date('d-m-y h:i:s');
+        }
+     
         $order->save();
 
-        return redirect('/admin/showOrderList/'.$order->status);
+        if($send){
+        Mail::to($order->email)->send(new OrderStatus(($order)));
+        }
 
-
-
-        
+        return redirect('/admin/showOrderList/' . $order->status);
     }
 
     /**

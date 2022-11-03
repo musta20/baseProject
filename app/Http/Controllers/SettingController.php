@@ -142,18 +142,20 @@ class SettingController extends Controller
         $setting->map = $request->map;
         $setting->keyword = $request->keyword;
 
-        $setting->phone = $request->keyword;
-        $setting->adress = $request->keyword;
-        $setting->email = $request->keyword;
+        $setting->phone = $request->phone;
+        $setting->adress = $request->adress;
+        $setting->email = $request->email;
 
-        $setting->footer = $request->keyword;
+        $setting->footer = $request->footer;
 
-        $setting->footertext = $request->keyword;
+        $setting->footertext = $request->footertext;
+        $setting->billterm = $request->billterm;
+        
+        $setting->save();
 
-        $setting->Save();
 
-
-        return redirect('/admin/basic');
+        return redirect('/admin/basic')->with('messages','تم تعديل البيانات');
+        
         //
     }
 

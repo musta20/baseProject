@@ -13,7 +13,7 @@ class JobsController extends Controller
     public $rule = [
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
-        "city_id" => "required|string|max:255|min:3",
+        "city_id" =>"required|integer|digits_between:1,500",
     ];
 
     /**
@@ -78,6 +78,7 @@ class JobsController extends Controller
     public function create()
     {
         $jobCity = job_city::get();
+
         return view("admin.jobs.add",['jobCity'=>$jobCity]);
 
     }
@@ -107,8 +108,11 @@ class JobsController extends Controller
      */
     public function show( $id)
     {
+        $jobCity = job_city::get();
         $jobs = jobs::find($id);
-        return view("admin.jobs.edit",  ['jobs' => $jobs] );
+        $currentcity = job_city::find($jobs->city_id);
+
+        return view("admin.jobs.edit",  ['jobs' => $jobs,"currentcity"=>$currentcity,"jobCity"=>$jobCity] );
     }
 
     /**

@@ -13,8 +13,16 @@
             <th>#</th>
             <th>الاسم</th>
             <th> عنوان</th>
-            <th>تاريخ الطلب</th>
+            <th>تاريخ الاعتماد</th>
             <th>عنوان الطلب</th>
+            @if ($type!=0)
+            <th>الفاتورة</th>
+
+            @else
+                
+            @endif
+            
+            
             <th> التحكم</th>
         </tr>
         @foreach ($AllOrder as $item)
@@ -24,6 +32,15 @@
         <td>{{$item->name}}</td>
         <td>{{$item->approve_time}}</td>
         <td>{{$item->adress}}</td>
+        @if ($type!=0)
+        <td>
+            <a target="_blank" href="{{url('admin/BillInnerPrint/'.$item->id)}}" >الفاتورة الداخلية</a>
+            <a target="_blank" href="{{url('admin/Billprint/'.$item->id)}}" >فاتورة الزبون</a>
+        </td>
+        @else
+            
+        @endif
+
         <td class="cellControll">
             <a  href="{{url('/admin/Order/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>
             <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#"><i class="fa-sharp fa-solid fa-trash"></i></a>

@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\RequiredFiles;
 use App\Models\services;
 use Illuminate\Http\Request;
 
 class ServicesController extends Controller
 {
-    
+
 
     public $rule = [
         "name" => "required|string|max:100|min:3",
         "price" => "required|integer|digits_between:1,10",
         "icon" => "required|string|max:255|min:3",
-        "cat_id" =>"required|integer|digits_between:1,10"
+        "cat_id" => "required|integer|digits_between:1,10"
     ];
-    
+
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -33,8 +34,7 @@ class ServicesController extends Controller
 
             'price.required' => 'يجب كتابة السعر ',
             'price.integer' => 'يجب ان يكون السعر  رقم',
-            "price.max" => "يجب ان لا يزيد السعر  عن 255 حرف",
-            "price.min" => "يجب ان لا يقل  السعر عن 3 حرف",
+            "price.digits_between" => "يجب ان لا يزيد السعر  عن 255 حرف",
 
             'icon.required' => 'يجب إضافة  ايقونة ',
             'icon.string' => 'يجب ان يكون الايقونة نص فقط',
@@ -55,9 +55,9 @@ class ServicesController extends Controller
     public function index()
     {
         //
-               //Services
-               $allServices = services::paginate(10);
-               return view("admin.services.index",  ['allServices' => $allServices] );
+        //Services
+        $allServices = services::paginate(10);
+        return view("admin.services.index",  ['allServices' => $allServices]);
     }
 
     /**
@@ -69,8 +69,8 @@ class ServicesController extends Controller
     {
         $cat = category::get();
 
-        return view("admin.services.add",["cat"=>$cat]);
 
+        return view("admin.services.add", ["cat" => $cat]);
     }
 
     /**
@@ -81,12 +81,29 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //$request
-        $data = $request->validate( $this->rule,$this->messages());
+        $data = $request->validate($this->rule, $this->messages());
 
-        services::create($data);
-       
-        return redirect('/admin/Services/create')->with('messages','تم إضافة البيانات');
+        $services = services::create([
+            "name" => $data["name"],
+            "price" => $data["price"],
+            "icon" => $data["icon"],
+            "cat_id" => $data["cat_id"],
+        ]);
+
+        $i = 0;
+
+        while (isset($request["files-" . $i])) {
+            RequiredFiles::create([
+                'type' => 0, 
+
+                "name" => $request["files-" . $i], 
+
+                "service_id" => $services->id]);
+
+                $i=$i+1;
+        }
+
+        return redirect('/admin/Services')->with('messages', 'تم إضافة البيانات');
     }
 
     /**
@@ -99,7 +116,9 @@ class ServicesController extends Controller
     {
         $services = services::find($id);
         $cat = category::get();
-        return view("admin.services.edit",  ['services' => $services,"cat"=>$cat] );
+        $filesInput = RequiredFiles::where('type',0)->where('service_id', $services->id)->get();
+
+        return view("admin.services.edit",  ['services' => $services, "cat" => $cat, 'filesInput' => $filesInput ]);
     }
 
     /**
@@ -110,7 +129,6 @@ class ServicesController extends Controller
      */
     public function edit(services $services)
     {
-
     }
 
     /**
@@ -120,20 +138,45 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-                
-        $data = $request->validate( $this->rule,$this->messages());
-        
+
+        $data = $request->validate($this->rule, $this->messages());
+
         $services = services::find($id);
 
-        $services->name=$request->name;
-        $services->price=$request->price;
-        $services->icon=$request->icon;
+        $services->name = $request->name;
+        $services->price = $request->price;
+        $services->icon = $request->icon;
 
         $services->save();
 
-        return redirect('/admin/Services/')->with('messages','تم تعديل العنصر');
+
+
+        RequiredFiles::where('type' , 0)->where('service_id' ,  $services->id)->delete();
+
+
+        $i = 0;
+
+        while (isset($request["files-" . $i])) {
+            RequiredFiles::create([
+                'type' => 0, 
+
+                "name" => $request["files-" . $i], 
+
+                "service_id" => $services->id]);
+
+                $i=$i+1;
+        }
+
+
+
+
+
+
+
+
+        return redirect('/admin/Services/')->with('messages', 'تم تعديل العنصر');
     }
 
     /**
@@ -146,6 +189,6 @@ class ServicesController extends Controller
     {
         $services = services::find($id);
         $services->delete();
-        return redirect('/admin/Services/')->with('messages','تم حذف العنصر');
+        return redirect('/admin/Services/')->with('messages', 'تم حذف العنصر');
     }
 }

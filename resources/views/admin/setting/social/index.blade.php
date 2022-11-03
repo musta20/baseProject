@@ -20,7 +20,7 @@
         <tr>
         <td>{{$item->id}}</td>
 
-        <td>{{$item->img}}</td>
+        <td><i class="{{$item->img}}"></i></td>
         <td>{{$item->url}}</td>
         <td class="cellControll">
             <a  href="{{url('/admin/Social/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>

@@ -12,6 +12,7 @@ class CategoryController extends Controller
     public $rule = [
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
+        
         "icon" => "required|string|max:255|min:3",
     ];
 

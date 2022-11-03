@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable , HasRoles , LogsActivity;
+
+
+    protected static $logAttributes = ['name','email'];
+
+    protected static $logName = 'User';
+    
 
     /**
      * The attributes that are mass assignable.
@@ -21,8 +28,21 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'admin'
     ];
 
+
+/*     public function message()
+    {
+        return $this->hasOneThrough(
+            message::class,
+            'from', // Foreign key on the cars table...
+        );
+        return $this->hasOneThrough(
+            message::class,
+            'to', // Foreign key on the cars table...
+        );
+    } */
     /**
      * The attributes that should be hidden for serialization.
      *

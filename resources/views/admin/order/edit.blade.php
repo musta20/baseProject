@@ -63,7 +63,20 @@
                         <td>{{ $order->status_order }}</td>
                     </tr>
 
-
+                    <tr>
+                        <th> المرفقات</th>
+                        <td>
+                            @if (!count($files))
+                                لايوجد مرفقات
+                            @endif
+                            @foreach ($files as $key=> $item)
+                            <br>
+                                <a target="_blank" href="{{ url('/storage/' . $item->name) }}">
+                                   ملف {{$key}}
+                                    </a>
+                            @endforeach
+                        </td>
+                    </tr>
 
 
 
