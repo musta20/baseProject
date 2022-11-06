@@ -7,7 +7,8 @@
 
     <h3>اضافة سيلايد</h3>
 </div>
-<form method="POST" action="{{url('/admin/Slide/'.$slide->id)}}">
+<form method="POST" enctype="multipart/form-data"
+action="{{url('/admin/Slide/'.$slide->id)}}">
     @csrf
     @method('PUT')
     <div class="formLaple" >

@@ -82,12 +82,12 @@
 
 
 <div class="formLaple" >
-  <label>   النص اسفل الصفحة</label>
+  <label>   حقوق النشر</label>
   <input
-  value="{{$setting->footer}}"
+  value="{{$setting->copyright}}"
 
-  class="form-input" name="footertext" placeholder="الموقع" />
-  @error('footer')
+  class="form-input" name="copyright" placeholder="حقوق النشر" />
+  @error('copyright')
   <span class="helper">
   {{$message}}
   </span>
@@ -117,6 +117,23 @@
 
   class="form-input" name="email" placeholder="   الموقع" />
   @error('email')
+  <span class="helper">
+  {{$message}}
+  </span>
+  @enderror
+</div>
+
+
+
+
+
+<div class="formLaple" >
+  <label>   مواعيد العمل </label>
+  <input
+  value="{{$setting->adress}}"
+
+  class="form-input" name="weekwork" placeholder="    مواعيد العمل " />
+  @error('weekwork')
   <span class="helper">
   {{$message}}
   </span>

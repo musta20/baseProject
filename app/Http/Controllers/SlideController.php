@@ -128,11 +128,13 @@ class SlideController extends Controller
     {
         
         $data = $request->validate( $this->rule,$this->messages());
+
         $slide = slide::find($id);
 
         $slide->title=$request->title;
         $slide->des=$request->des;
-        $slide->img=$request->img;
+        $slide->img =  $request->file('img')->store('logo','public');
+
         $slide->url=$request->url;
 
         $slide->save();

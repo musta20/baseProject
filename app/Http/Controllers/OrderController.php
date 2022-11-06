@@ -177,7 +177,7 @@ class OrderController extends Controller
 
         $order->still = $order->price - $order->payed;   //still
 
-        $files = Files::where('type', 0)->where('typeid', $order->id)->get();
+        $files = Files::where('type', 1)->where('typeid', $order->id)->get();
 
   
         switch ($order->status) {

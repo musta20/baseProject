@@ -14,6 +14,7 @@ class SettingController extends Controller
         "des" => "required|string|max:255|min:3",
         "map" => "required|string|max:255|min:3",
         "keyword" => "required|string|max:255|min:3",
+        "copyright" => "required|string|max:255|min:3",
     ];
 
     /**
@@ -35,6 +36,13 @@ class SettingController extends Controller
             "des.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
             "des.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
             
+
+            'copyright.required' => 'يجب كتابة الوصف ',
+            'copyright.string' => 'يجب ان يكون الوصف نص فقط',
+            "copyright.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
+            "copyright.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
+
+            
             'map.required' => 'يجب  رابط الخريطة ',
             'map.string' => 'يجب ان يكون الخريطة نص فقط',
             "map.max" => "يجب ان لا يزيد الخريطة  عن 255 حرف",
@@ -44,8 +52,13 @@ class SettingController extends Controller
             'keyword.string' => 'يجب ان يكون الكلمات نص فقط',
             "keyword.max" => "يجب ان لا يزيد الكلمات  عن 255 حرف",
             "keyword.min" => "يجب ان لا يقل  الكلمات عن 3 حرف",
-            
 
+            'weekwork.required' => 'يجب كتابة الكلمات الخريطة ',
+            'weekwork.string' => 'يجب ان يكون الكلمات نص فقط',
+            "weekwork.max" => "يجب ان لا يزيد الكلمات  عن 255 حرف",
+            "weekwork.min" => "يجب ان لا يقل  الكلمات عن 3 حرف",
+            
+            
         ];
     }
 
@@ -150,6 +163,9 @@ class SettingController extends Controller
 
         $setting->footertext = $request->footertext;
         $setting->billterm = $request->billterm;
+        
+        $setting->copyright = $request->copyright;
+        $setting->weekwork = $request->weekwork;
         
         $setting->save();
 

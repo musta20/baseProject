@@ -30,8 +30,10 @@ class CreateSettingTable extends Migration
             $table->string("footer");
 
             $table->string("footertext");
+            $table->string("copyright");
+            $table->string("weekwork");
 
-
+            
             $table->timestamps();
         });
     }

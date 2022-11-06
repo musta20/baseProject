@@ -36,11 +36,11 @@
                     </tr>
                     <tr>
                         <td> طريقة الاستلام </td>
-                        <td>{{ $order->receipt }}</td>
+                        <td>{{ $order->dev->name }}</td>
                     </tr>
                     <tr>
                         <td> طريقة الدفع </td>
-                        <td>{{ $order->cash }}</td>
+                        <td>{{ $order->pym->name }}</td>
                     </tr>
                     <tr>
                         <td> تاريخ التسليم </td>

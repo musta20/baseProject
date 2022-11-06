@@ -23,6 +23,27 @@
         @enderror
 
     </div>
+
+    <div class="formLaple">
+        <label> التصنيف</label>
+        <select name="cat_id">
+            <option value="{{ $catmy->id }}">{{ $catmy->title }}</option>
+
+            @foreach ($cat as $item)
+            @if ( $item->id != $services->cat_id)
+            <option value="{{ $item->id }}">{{ $item->title }}</option>
+
+            @endif
+            @endforeach
+        </select>
+        @error('cat_id')
+            <span class="helper">
+                {{ $message }}
+            </span>
+        @enderror
+    </div>
+
+
     <div class="formLaple" >
         <label> الايقونة</label>
         <input class="form-input"

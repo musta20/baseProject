@@ -11,10 +11,9 @@
     <table>
         <tr>
             <th>#</th>
-            <th>الاسم</th>
-            <th> عنوان</th>
-            <th>تاريخ الاعتماد</th>
             <th>عنوان الطلب</th>
+            <th>الاسم</th>
+
             @if ($type!=0)
             <th>الفاتورة</th>
 
@@ -23,6 +22,7 @@
             @endif
             
             
+            <th> تاريخ الاعتماد</th>
             <th> التحكم</th>
         </tr>
         @foreach ($AllOrder as $item)
@@ -30,8 +30,15 @@
         <td>{{$item->id}}</td>
         <td>{{$item->title}}</td>
         <td>{{$item->name}}</td>
-        <td>{{$item->approve_time}}</td>
-        <td>{{$item->adress}}</td>
+        <td>
+            @if (!$item->approve_time)
+                غير معتد بعد
+            @else
+            {{$item->approve_time}}
+
+            @endif
+        
+        </td>
         @if ($type!=0)
         <td>
             <a target="_blank" href="{{url('admin/BillInnerPrint/'.$item->id)}}" >الفاتورة الداخلية</a>

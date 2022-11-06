@@ -116,9 +116,10 @@ class ServicesController extends Controller
     {
         $services = services::find($id);
         $cat = category::get();
+        $catmy = category::find($services->cat_id);
         $filesInput = RequiredFiles::where('type',0)->where('service_id', $services->id)->get();
 
-        return view("admin.services.edit",  ['services' => $services, "cat" => $cat, 'filesInput' => $filesInput ]);
+        return view("admin.services.edit",  ['catmy'=>$catmy,'services' => $services, "cat" => $cat, 'filesInput' => $filesInput ]);
     }
 
     /**
@@ -148,6 +149,8 @@ class ServicesController extends Controller
         $services->name = $request->name;
         $services->price = $request->price;
         $services->icon = $request->icon;
+
+        $services->cat_id = $request->cat_id;
 
         $services->save();
 

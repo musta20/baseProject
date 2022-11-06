@@ -7,7 +7,10 @@
             <h3> إعداد الموقع الاساسية</h3>
         </a>
 
-   
+        <a href="{{url('/admin/CustmerSlide')}}" >
+            <i class="fa-solid fa-clipboard-check fa-2x"></i>
+            <h3> العملاء</h3>
+        </a>
 
         <a href="{{url('/admin/Slide')}}" >
             <i class="fa-solid fa-clipboard-check fa-2x"></i>

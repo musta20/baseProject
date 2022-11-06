@@ -8,6 +8,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CustmerSlideController;
 use App\Http\Controllers\NumbersController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\JobAppController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\LogsController;
 
 
 use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\mainSite;
 use App\Http\Controllers\NotifySalesController;
 use App\Http\Controllers\NotifyTypeController;
 use App\Http\Controllers\PaymentController;
@@ -40,9 +42,25 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/',[mainSite::class, 'index']);
+Route::get('/category',[mainSite::class, 'category']);
+Route::get('/services/{id}',[mainSite::class, 'services']);
+Route::get('/order/{id}',[mainSite::class, 'order']);
+Route::post('/SaveOrder/{id}',[mainSite::class, 'SaveOrder']);
+Route::get('/jobs',[mainSite::class, 'job']);
+
+Route::get('/contact',[mainSite::class, 'contact']);
+Route::post('/SendContact',[mainSite::class, 'SendContact']);
+
+Route::get('/CheckStatus',[mainSite::class, 'CheckStatus']);
+Route::post('/CheckOrderStatus',[mainSite::class, 'CheckOrderStatus']);
+
+
+
+Route::post('/SaveJobs',[mainSite::class, 'SaveJobs']);
+
+
 Route::get('/test', function () {
     $ratingCode = (object) array('token' => '0');
 
@@ -114,6 +132,8 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Setting', SettingController::class);
 
+        Route::resource('CustmerSlide', CustmerSlideController::class);
+        
         Route::resource('Slide', SlideController::class);
 
         Route::resource('Contact', ContactController::class);

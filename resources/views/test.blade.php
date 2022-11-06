@@ -35,7 +35,7 @@
                     style="display: flex;align-content: center;text-align: center;border: 5px solid #004111;border-radius: 1em;padding: 5px;font-size: 1.3rem;">
                     <a href={{ url('rating/' . $ratingCode->token) }}
                         style="display: flex;align-content: center;justify-content: center;"> قيمنا</a>
-                    </td>
+                </td>
             </tr>
             <tr>
                 <td >
