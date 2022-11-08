@@ -155,7 +155,7 @@ public function addpermison()
   //  Permission::create(['name' => 'Logs']);
   //  Permission::create(['name' => 'Employee']);
  //  Permission::create(['name' => 'Reviews']);
- $TaskMangment = Permission::create(['name' => 'TaskMangment']);
+ $TaskMangment = Permission::create(['name' => 'Report']);
  $Admin = Role::create(['name' => $this->ADMIN]);
  $Admin->givePermissionTo($TaskMangment);
 
@@ -165,6 +165,8 @@ public function addpermison()
     public $ADMIN = 'Admin';
     public $MANGER = 'Manager';
     public $WORKER = 'employee';
+
+    
 
     public function createAllPerm()
     {
@@ -207,6 +209,7 @@ public function addpermison()
         $Reviews = Permission::create(['name' => 'Reviews']);
         $task = Permission::create(['name' => 'Task']);
         $TaskMangment = Permission::create(['name' => 'TaskMangment']);
+        $Report = Permission::create(['name' => 'Report']);
 
 
 
@@ -228,6 +231,7 @@ public function addpermison()
         $Admin->givePermissionTo($Setting);
         $Admin->givePermissionTo($Users);
         $Admin->givePermissionTo($jobs);
+        $Admin->givePermissionTo($Report);
 
         $Admin->givePermissionTo($Logs);
         $Admin->givePermissionTo($Employee);

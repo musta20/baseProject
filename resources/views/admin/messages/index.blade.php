@@ -1,6 +1,6 @@
 
-@extends('admin.layout.index')
-@section('content')
+<x-admin-layout>
+
 <section class="list border">
 <div class="controller">
 
@@ -17,7 +17,7 @@
 <a href="{{url('/admin/Messages/create')}}" class="btn btn-Primary"> ارسال رسالة</a>
 
 </div>
-    <table>
+    <table class="table table-centered mb-0">
         <tr>
             <th>#</th>
             @if ($type==1)
@@ -78,5 +78,5 @@
 
 <x-model-box></x-model-box>
 
-@endsection
+</x-admin-layout>
 

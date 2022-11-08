@@ -41,7 +41,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
+Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
 
+Route::get('/admin2', function ()
+{
+   return view('dash.index');
+});
 
 Route::get('/',[mainSite::class, 'index']);
 Route::get('/category',[mainSite::class, 'category']);

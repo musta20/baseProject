@@ -1,5 +1,5 @@
-@extends('admin.layout.index')
-@section('content')
+<x-admin-layout>
+
     <section class="boxs border">
 
         <a href="{{url('/admin/Task')}}" >
@@ -21,4 +21,5 @@
 
 
     </section>
-@endsection
+
+</x-admin-layout>

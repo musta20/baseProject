@@ -1,15 +1,19 @@
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+<x-admin-layout>
+
+    <section class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
 
 
     <h3> المهام </h3>
 <x-card-message />
 
-</div>
-    <table>
+    <table class="table  table-striped table-centered mb-0">
+        <thead class="table-dark">
+
         <tr>
             <th>#</th>
             <th>العنوان</th>
@@ -19,7 +23,7 @@
             <th>التحكم</th>
 
         </tr>
-            
+        </thead>
        
         @foreach ($alltask as $item)
         <tr>
@@ -44,7 +48,7 @@
         @endswitch</td>
   
         <td class="cellControll">
-            <a  href="{{url('/admin/ShowTask/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>
+            <a  href="{{url('/admin/ShowTask/'.$item->id)}}"><i class="mdi mdi-pencil"></i></a>
         </td>
         </tr>
             @endforeach
@@ -52,9 +56,11 @@
         {{$alltask->links('admin.pagination.custom')}}
 
 </section>
+</div>
+</div></div>
+</div>
 
 
 <x-model-box></x-model-box>
 
-@endsection
-
+</x-admin-layout>

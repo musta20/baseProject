@@ -31,7 +31,7 @@
         <a href="{{url('/admin/Clients')}}">أراء العملاء</a>
         @endcan
 
-        @can('Massages')
+        @can('Order')
         <a href="{{url('/admin/Order')}}">الطلبات</a>
         @endcan
 
