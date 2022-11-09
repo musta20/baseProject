@@ -1,33 +1,48 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+    <h3>اضافة نوع سجل  </h3>
 
-    <h3>انواع السحلات</h3>
-</div>
-<form method="POST" action="{{url('/admin/NotifyType')}}">
-    @csrf
-    <div class="formLaple" >
-        <label>اضافة نوع تنبيه </label>
-        <input class="form-input" name="name" placeholder="عنوان التصنيف" />
-
-        @error('name')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
 
+        <form method="POST" class="w-75" action="{{ url('/admin/NotifyType') }}">
+            @csrf
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+            
 
-</div>
-</form>
-</section>
-    
-@endsection
+
+            <div class="mb-3">
+                <label for="projectName" class="form-label">اضافة نوع تنبيه  </label>
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}"
+                placeholder="عنوان التصنيف">
+                @error('name')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+
+      
+
+
+
+            <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/TasksNotify') }}" class="btn btn-light">الغاء</a>
+                </div>
+            </div>
+
+
+
+
+
+        </form>
+
+    </x-admin-contaner>
+</x-admin-layout>

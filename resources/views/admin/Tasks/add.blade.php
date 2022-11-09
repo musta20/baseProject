@@ -1,109 +1,136 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
-
+<x-admin-layout>
     <h3>اسناد مهمة</h3>
-</div>
-<form method="POST" enctype="multipart/form-data" action="{{url('/admin/Task')}}">
-    @csrf
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
-    <div class="formLaple" >
-        <label> اسم المهمة </label>
-        <input class="form-input" name="title"
-        value="{{old('title')}}"
-        placeholder=" اسم المهمة" />
-        @error('title')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-    </div>
 
-    <div class="formLaple" >
-        <label>الى الموظف : </label>
-        <select name="user_id" class="form-input">
-            @foreach ($users as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
-            @endforeach
-        </select>
+        <form method="POST" enctype="multipart/form-data" action="{{ url('/admin/Task') }}">
+            @csrf
 
-        @error('user_id')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-    </div>
-    <div class="formLaple" >
-        <label> وصف المهمة </label>
-        <textarea class="form-input" name="des" rows="12"
-        placeholder=" وصف المهمة ">{{old('des')}}</textarea>
-        @error('des')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-    </div>
+            <div class="modal-body p-4">
+                <div class="mb-3">
+                    <label for="projectName" class="form-label">اسم المهمة</label>
+                    <input type="text" class="form-control" name="title" value="{{ old('title') }}"
+                        placeholder=" اسم المهمة">
+                    @error('title')
+                        <span class="helper">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                <div class="mb-3" data-select2-id="select2-data-7-k3kd">
+                    <label for="formGroupExampleInput" class="form-label">الى الموظف:</label>
+                    <select class="form-select select2 select2-hidden-accessible" data-toggle="select2"
+                        aria-label="Default select example" data-select2-id="select2-data-1-m3py" tabindex="-1"
+                        aria-hidden="true" name="user_id">
+                        @foreach ($users as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
 
-    <div class="formLaple" >
-        <label>  تاريخ بداء المهمة </label>
-        <input type="date" class="form-input" name="start"
-        value="{{old('start')}}"
-        placeholder=" اسم المهمة" />
-        @error('start')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-    </div>
 
-    <div class="formLaple" >
-        <label>  تاريخ إنهاء المهمة </label>
-        <input type="date" class="form-input" name="end"
-        value="{{old('end')}}"
-        placeholder=" اسم المهمة" />
-        @error('end')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-    </div>
+                    </select>
+                    @error('user_id')
+                        <span class="helper">
+                            {{ $message }}
+                        </span>
+                    @enderror
 
-    <span class="btn" onclick="addFile()">إضافة ملف</span>
-
-    <div id="files">
-
-        @error('files')
-            <span class="helper">
-                {{ $message }}
-            </span>
-        @enderror
-    </div>
-
-    
-    
+                </div>
 
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+                <div class="mb-3">
+                    <label for="description" class="form-label">وصف المهمة</label>
+                    <textarea class="form-control" id="description" name="des" rows="4">{{ old('des') }}</textarea>
+                    @error('des')
+                        <span class="helper">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
 
-</div>
-</form>
-</section>
+                <div class="mb-3">
+                    <label for="projectName" class="form-label">تاريح بداء المهمة </label>
+                    <input class="form-control" type="date" name="start" value="{{ old('start') }}"
+                        placeholder=" تاريح بداء المهمة  ">
+                    @error('start')
+                        <span class="helper">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="projectName" class="form-label">تاريح انتهاء المهمة </label>
+                    <input class="form-control" type="date" name="end" value="{{ old('end') }}"
+                        placeholder=" تاريح بداء المهمة  ">
+                    @error('end')
+                        <span class="helper">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
 
 
-<script>
-    function addFile() {
+                <div class="mb-3">
 
-        let file = document.getElementById('files');
-        let div = document.createElement("div")
-        div.innerHTML = "<div class='formLaple'><input class='form-input' name='attachment-" + file.children.length +"' type='file' placeholder='اسم الملف' /></div>";
-        file.append(div);
+                    <span class="btn btn-light" onclick="addFile()">إضافة ملف</span>
 
-    }
-</script>
-    
-@endsection
+                    <div id="files">
+
+                        @error('files')
+                            <span class="helper">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="mb-3">
+
+                    <div class="px-3 pb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                        <a type="button" href="{{ url('admin/Task') }}" class="btn btn-light">الغاء</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </form>
+
+
+        <script>
+            function addFile() {
+
+                let file = document.getElementById('files');
+                let div = document.createElement("div")
+                div.innerHTML = "<div class='w-50 p-1'> <input class='form-control' name='attachment-" + file.children.length +
+                    "' type='file' placeholder='اسم الملف' /></div>";
+                file.append(div);
+
+            }
+        </script>
+
+    </x-admin-contaner>
+
+
+
+
+
+
+
+
+
+
+</x-admin-layout>

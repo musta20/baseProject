@@ -1,17 +1,16 @@
-@extends('admin.layout.index')
-@section('content')
-    <section class="list border">
-        <div class="controller">
-            <x-card-message></x-card-message>
+<x-admin-layout>
+    <h3> تعديل بيانات السجل</h3>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
-            <h3>البيانات</h3>
-        </div>
+
         <form method="POST" action="{{ url('/admin/TasksNotify/' . $tasksNotify->id) }}">
             @csrf
             @method('PUT')
-            <div class="formLaple">
-                <label> الاسم</label>
-                <input class="form-input" value="{{ $tasksNotify->name }}" name="name" placeholder="عنوان التصنيف" />
+            <div class="mb-3">
+                <label  class="form-label"> الاسم</label>
+                <input  class="form-control"  value="{{ $tasksNotify->name }}" name="name" placeholder="عنوان التصنيف" />
 
                 @error('name')
                     <span class="helper">
@@ -21,9 +20,9 @@
 
             </div>
 
-            <div class="formLaple">
-                <label> الرقم</label>
-                <input class="form-input" value="{{ $tasksNotify->number }}" name="number" placeholder=" الايقونة" />
+            <div class="mb-3">
+                <label  class="form-label"> الرقم</label>
+                <input  class="form-control"  value="{{ $tasksNotify->number }}" name="number" placeholder=" الايقونة" />
                 @error('number')
                     <span class="helper">
                         {{ $message }}
@@ -34,9 +33,9 @@
 
 
 
-            <div class="formLaple">
-                <label> تاريخ الاصدار</label>
-                <input class="form-input" type="date" value="{{ $tasksNotify->issueAt }}" name="issueAt"
+            <div class="mb-3">
+                <label class="form-label"> تاريخ الاصدار</label>
+                <input class="form-control"  type="date" value="{{ $tasksNotify->issueAt }}" name="issueAt"
                     placeholder=" الايقونة" />
                 @error('issueAt')
                     <span class="helper">
@@ -47,17 +46,15 @@
             </div>
 
 
-            <div class="formLaple">
-                <label>بالشهر مدة الصلاحية</label>
-
-                <select class="form-input" name="duration">
+            <div class="mb-3">
+                <label class="form-label">بالشهر مدة الصلاحية</label>
+                <select class="form-control" name="duration">
                     <option>{{ $tasksNotify->duration }}</option>
 
                     @for ($i = 1; $i < 25; $i++)
-                    @if ($tasksNotify->duration != $i)
-                    <option>{{ $i }}</option>
-
-                    @endif
+                        @if ($tasksNotify->duration != $i)
+                            <option>{{ $i }}</option>
+                        @endif
                     @endfor
 
                 </select>
@@ -71,11 +68,16 @@
             </div>
 
 
+            <div class="mb-3">
 
-            <div>
-                <button class="btn btn-Primary">حفظ</button>
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
 
+                    <a type="button" href="{{ url('admin/TasksNotify') }}" class="btn btn-light">الغاء</a>
+                </div>
             </div>
+
         </form>
-    </section>
-@endsection
+    </x-admin-contaner>
+</x-admin-layout>

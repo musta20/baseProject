@@ -89,9 +89,10 @@ class TasksNotifyController extends Controller
      */
     public function show($id)
     {
-        $task  = TasksNotify::where('from', Auth::user()->id)
-            ->orWhere('user_id', Auth::user()->id)
-            ->where('type', $id)
+        $task  = TasksNotify:://where('from', Auth::user()->id)
+          //  ->orWhere('user_id', Auth::user()->id)
+            //->
+            where('type', $id)
             ->latest()
             ->paginate(10);
 
@@ -140,8 +141,8 @@ class TasksNotifyController extends Controller
      */
     public function destroy($id)
     {
-        $tasksNotify = TasksNotify::find($id)
-            ->where('from', Auth::user()->id);
+        $tasksNotify = TasksNotify::find($id);
+          //  ->where('from', Auth::user()->id);
 
         $theType =  $tasksNotify->type;
 

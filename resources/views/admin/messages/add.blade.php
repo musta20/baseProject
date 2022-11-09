@@ -1,61 +1,68 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
-    <h3>إرسال رسالة</h3>
-</div>
-<form method="POST" action="{{url('/admin/Messages')}}">
-    @csrf
+    <div class="row">
+        <div class="page-title-box">
 
-    <div class="formLaple" >
-        <label> : إلى</label>
-        <select class="form-input" name="to" placeholder=" الى" >
-            @foreach ($Users as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
-            @endforeach
-        </select>
-        
-        @error('to')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+            <div class="page-title">
+                انشاء رسالة
+            </div>
 
+
+
+        </div>
     </div>
 
+    <x-admin-contaner>
 
-    <div class="formLaple" >
-        <label> عنوان الرسالة</label>
-        <input class="form-input" name="title" placeholder="عنوان الرسالة" />
+        <div class="p-1 w-75">
+            <div class=" px-3 pt-3 pb-0">
+                <form method="POST" action="{{ url('/admin/Messages') }}">
+                    @csrf
+                    <div class="mb-2">
+                        <label for="msgto" class="form-label">الى</label>
+                        <select class="form-control" name="to" placeholder=" الى">
+                            @foreach ($Users as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('to')
+                            <span class="helper">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-2">
+                        <label for="mailsubject" class="form-label">عنوان الرسالة</label>
+                        <input class="form-control" name="title" placeholder="عنوان الرسالة" />
 
-        @error('title')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+                        @error('title')
+                            <span class="helper">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="write-mdg-box mb-3">
+                        <label class="form-label"> نص الرسالة</label>
 
-    </div>
+                        <textarea class="form-control" name="message" placeholder=" نص الرسالة" 
+                        cols="30" rows="10"></textarea>
 
-    <div class="formLaple" >
-        <label> نص الرسالة</label>
-        <textarea class="form-input" name="message" placeholder=" نص الرسالة" cols="30" rows="10"></textarea>
+                        @error('message')
+                            <span class="helper">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="px-3 pb-3">
+                        <button  type="submit" class="btn btn-primary">
+                            <i class="mdi mdi-send me-1"></i> ارسال</button>
 
-        @error('message')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+                        <a type="button" href="{{ url('admin/inbox/1') }}" class="btn btn-light">الغاء</a>
+                    </div>
+            </form>
+        </div>
 
-    </div>
+        </div>
 
-
-<div>
-    <button class="btn btn-Primary" >إرسال</button>
-
-</div>
-</form>
-</section>
-    
-@endsection
+    </x-admin-contaner>
+</x-admin-layout>

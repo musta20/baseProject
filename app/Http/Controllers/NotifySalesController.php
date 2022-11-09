@@ -6,6 +6,7 @@ use App\Models\NotifySales;
 use App\Models\SalesType;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class NotifySalesController extends Controller
 {
@@ -44,6 +45,8 @@ class NotifySalesController extends Controller
         $tasksNotify =   NotifySales::create([
             'name'=>$request->name,
             'count'=>$request->count,
+            'from'=>Auth::user()->id,
+            'user_id'=>$request->user_id,
             'isDone'=>0,
             'type'=>$request->type,
      ]);
@@ -74,6 +77,7 @@ class NotifySalesController extends Controller
     public function edit($id)
     {
         $tasksNotify  = NotifySales::find($id);
+       
 
         $type = SalesType::get();
 

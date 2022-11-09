@@ -1,33 +1,32 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+<x-admin-layout>
 
     <h3>اضافة طريقة دفع</h3>
-</div>
-<form method="POST" action="{{url('/admin/Payment')}}">
-    @csrf
-    <div class="formLaple" >
-        <label>الاسم   </label>
-        <input class="form-input" name="name" placeholder="عنوان التصنيف" />
 
-        @error('name')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
 
+        <form method="POST" action="{{ url('/admin/Payment') }}">
+            @csrf
+            <div class="formLaple">
+                <label>الاسم </label>
+                <input class="form-input" name="name" placeholder="عنوان التصنيف" />
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+                @error('name')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
 
-</div>
-</form>
-</section>
-    
-@endsection
+            </div>
+
+
+
+            <div>
+                <button class="btn btn-Primary">حفظ</button>
+
+            </div>
+        </form>
+
+    </x-admin-contaner>
+</x-admin-layout>

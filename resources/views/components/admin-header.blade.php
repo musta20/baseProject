@@ -26,7 +26,7 @@
  --}}
         <!-- Icons css -->
         <link href="{{asset('Dashboard/icons.min.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{asset('Dashboard/icons.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('css/ExtraCss.css')}}" rel="stylesheet" type="text/css">
     
 
 </head>

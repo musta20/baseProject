@@ -1,42 +1,44 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
-    <a href="{{url('/admin/Messages/create')}}" class="btn btn-Primary"> ارسال رسالة</a>
+    <div class="row">
+        <div class="page-title-box"> 
+            تفاصيل الرسالة
+        </div>
+    </div>
 
-</div>
-<table>
-<tr>
-    <td>من</td>
-    <td>{{$message->fromm->name}}</td>
-</tr>
-<tr>
-    <td>الى</td>
-    <td>{{$message->too->name}}</td>
-</tr>
+    <x-admin-contaner>
+        <div class="p-1 w-75">
+            <div class=" px-3 pt-3 pb-0">       
+                <div class="mb-2">
+                    <label for="msgto" class="form-label">من</label>    
+               <div class="conversation-text">{{ $message->fromm->name }}</div> 
+                </div>
 
-<tr>
-    <td>العنوان</td>
-    <td>{{$message->title}}</td>
-</tr>
+            </div>
+            <div class=" px-3 pt-3 pb-0">       
+                <div class="mb-2">
+                    <label for="msgto" class="form-label">الى</label>    
+               <div class="conversation-text">{{ $message->too->name }}</div> 
+                </div>
 
-<tr>
-    <td>من</td>
-    <td>{{$message->message}}</td>
-</tr>
+            </div>  
 
-<tr>
-    <td></td>
-    <td></td>
-</tr>
+            <div class=" px-3 pt-3 pb-0">       
+                <div class="mb-2">
+                    <label for="msgto" class="form-label">عنوان الرسالة</label>    
+               <div class="conversation-text">{{ $message->title }}</div> 
+                </div>
 
-</table>
- 
+            </div>  
+            <div class="write-mdg-box mb-3">
+                <label class="form-label"> نص الرسالة</label>
+            <div class="conversation-text"  >{{ $message->message }}</div>
+        </div>
+
+        <div class="px-3 pb-3">
     
 
-
-</section>
-    
-@endsection
+            <a type="button" href="{{ url('admin/inbox/1') }}" class="btn btn-light">عودة</a>
+        </div>
+    </x-admin-contaner>
+</x-admin-layout>

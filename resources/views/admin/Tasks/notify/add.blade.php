@@ -1,49 +1,44 @@
-@extends('admin.layout.index')
-@section('content')
-    <section class="list border">
-        <div class="controller">
-            <x-card-message></x-card-message>
+<x-admin-layout>
+    <h3> اضافة سجل</h3>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
-            <h3>البيانات</h3>
-        </div>
-        <form method="POST" action="{{ url('/admin/TasksNotify/') }}">
+        <form method="POST" class="w-75" action="{{ url('/admin/TasksNotify/') }}">
             @csrf
 
-            <div class="formLaple">
-                <label> نوع السجل</label>
 
-                <select class="form-input"  name="type">
-
+            <div class="mb-3">
+                <label class="form-label">نوع السجل : </label>
+                <select class="form-control" name="type">
                     @foreach ($types as $item)
-                        <option value={{$item->id}} >{{$item->name}}</option>
+                        <option value={{ $item->id }}>{{ $item->name }}</option>
                     @endforeach
-
                 </select>
-
                 @error('type')
                     <span class="helper">
                         {{ $message }}
                     </span>
                 @enderror
-
-            </div>            
-            <div class="formLaple" >
-                <label>الى الموظف : </label>
-                <select name="user_id" class="form-input">
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">الى الموظف : </label>
+                <select name="user_id" class="form-control">
                     @foreach ($users as $item)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
-        
+
                 @error('user_id')
-                <span class="helper">
-                {{$message}}
-                </span>
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
                 @enderror
             </div>
-            <div class="formLaple">
-                <label> الاسم</label>
-                <input class="form-input"  name="name" placeholder="عنوان التصنيف" />
+
+            <div class="mb-3">
+                <label  class="form-label"> الاسم</label>
+                <input class="form-control" name="name" placeholder="عنوان التصنيف" />
 
                 @error('name')
                     <span class="helper">
@@ -53,9 +48,9 @@
 
             </div>
 
-            <div class="formLaple">
-                <label> الرقم</label>
-                <input class="form-input" name="number" placeholder=" الايقونة" />
+            <div class="mb-3">
+                <label class="form-label"> الرقم</label>
+                <input class="form-control" name="number" placeholder=" الرقم" />
                 @error('number')
                     <span class="helper">
                         {{ $message }}
@@ -66,12 +61,9 @@
 
 
 
-            <div class="formLaple">
-                <label> تاريخ الاصدار</label>
-                <input class="form-input" type="date"
-                 
-                 name="issueAt"
-                    placeholder=" الايقونة" />
+            <div class="mb-3">
+                <label class="form-label"> تاريخ الاصدار</label>
+                <input class="form-control" type="date" name="issueAt" placeholder="  تاريخ الاصدار" />
                 @error('issueAt')
                     <span class="helper">
                         {{ $message }}
@@ -81,10 +73,10 @@
             </div>
 
 
-            <div class="formLaple">
-                <label>بالشهر مدة الصلاحية</label>
+            <div class="mb-3">
+                <label  class="form-label">بالشهر مدة الصلاحية</label>
 
-                <select class="form-input" name="duration">
+                <select class="form-control" name="duration">
                     @for ($i = 1; $i < 25; $i++)
                         <option>{{ $i }}</option>
                     @endfor
@@ -100,10 +92,24 @@
             </div>
 
 
-            <div>
-                <button class="btn btn-Primary">حفظ</button>
+        
 
+
+
+            <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/TasksNotify') }}" class="btn btn-light">الغاء</a>
+                </div>
             </div>
+
+
+
         </form>
-    </section>
-@endsection
+
+
+    </x-admin-contaner>
+</x-admin-layout>

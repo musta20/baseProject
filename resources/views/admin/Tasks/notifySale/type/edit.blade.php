@@ -1,18 +1,17 @@
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+    <x-admin-layout>
+        <h3>  تعديل التصنيف</h3>
+        <hr>
+        <x-admin-contaner>
     <x-card-message></x-card-message>
 
-    <h3>اضافة</h3>
-</div>
 <form method="POST" action="{{url('/admin/SalesType/'.$NotifyType->id)}}">
     @csrf
     @method('PUT')
-    <div class="formLaple" >
-        <label> الاسم </label>
-        <input class="form-input"
+
+    <div class="mb-3">
+        <label class="form-label"> الاسم </label>
+        <input class="form-control"
         value="{{$NotifyType->name}}"
         name="name" placeholder="عنوان التصنيف" />
 
@@ -25,9 +24,9 @@
     </div>
   
 
-    <div class="formLaple" >
-        <label> السعر </label>
-        <input class="form-input"
+    <div  class="mb-3">
+        <label class="form-label"> السعر </label>
+        <input class="form-control"
         value="{{$NotifyType->price}}"
         name="price" placeholder="عنوان التصنيف" />
 
@@ -40,11 +39,16 @@
     </div>
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+    <div class="mb-3">
 
-</div>
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+            <a type="button" href="{{ url('admin/NotifySales') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
 </form>
-</section>
     
-@endsection
+        </x-admin-contaner>
+    </x-admin-layout>

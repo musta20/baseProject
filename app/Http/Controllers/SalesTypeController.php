@@ -72,7 +72,7 @@ class SalesTypeController extends Controller
 
     SalesType::create($data);
    
-    return redirect('/admin/SalesType')->with('messages','تم إضافة البيانات');
+    return redirect('/admin/NotifySales')->with('messages','تم إضافة البيانات');
     }
 
     /**
@@ -116,7 +116,7 @@ class SalesTypeController extends Controller
 
         $NotifyType->save();
 
-        return redirect('/admin/SalesType/')->with('messages','تم تعديل العنصر');
+        return redirect('/admin/NotifySales/')->with('messages','تم تعديل العنصر');
     }
 
     /**
@@ -131,9 +131,9 @@ class SalesTypeController extends Controller
         $task=  NotifySales::where('type',$NotifyType->id)->get();
   
         if(!$task->isEmpty()){
-          return redirect('/admin/SalesType/')->with('messages','  هذا العنصر مستخدم . لايمكنك حذفه');
+          return redirect('/admin/NotifySales/')->with('messages','  هذا العنصر مستخدم . لايمكنك حذفه');
   
         }
           $NotifyType->delete();
-          return redirect('/admin/SalesType/')->with('messages','تم حذف العنصر');    }
+          return redirect('/admin/NotifySales/')->with('messages','تم حذف العنصر');    }
 }
