@@ -92,7 +92,9 @@ Route::post('login/', [UsersController::class, 'login'])->name('admin.login');
 Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], function () {
 
     Route::get('/', function () {
-        return view('admin.index');
+        return view('dash.index');
+        //        return redirect('admin/MainTask');
+
     });
 
 

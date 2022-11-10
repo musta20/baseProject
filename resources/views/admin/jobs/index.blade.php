@@ -1,42 +1,44 @@
+<x-admin-layout>
+    <h3> الوظائف</h3>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message />
+        <div class="page-title p-1">
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-<h3>الوظائف</h3>
-<x-card-message />
-
-<a href="{{url('/admin/Jobs/create')}}" class="btn btn-Primary">إضافة وظيفة</a>
-
-</div>
-    <table>
-        <tr>
-            <th>#</th>
-            <th>المسمى الوظيفي</th>
-            <th>الوصف الوظيفي</th>
-            <th>مقر الوظيفة</th>
-        </tr>
-        @foreach ($alljobs as $item)
-        <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->title}}</td>
-        <td>{{$item->des}}</td>
-        <td class="cellControll">
-            <a href="{{url('/admin/Jobs/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>
-            <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#"><i class="fa-sharp fa-solid fa-trash"></i></a>
-        </td>
-        </tr>
+            <a href="{{ url('/admin/Jobs/create') }}" class="btn btn-success">إضافة وظيفة</a>
+        </div>
+        </div>
+        <table class="table  table-striped table-centered mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>المسمى الوظيفي</th>
+                    <th>الوصف الوظيفي</th>
+                    <th>مقر الوظيفة</th>
+                </tr>
+            </thead>
+            @foreach ($alljobs as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td>{{ $item->des }}</td>
+                    <td class="table-action">
+                        <a href="{{ url('/admin/Jobs/' . $item->id) }}"><i class="mdi mdi-pencil"></i></a>
+                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                                class="mdi mdi-delete"></i></a>
+                    </td>
+                </tr>
             @endforeach
         </table>
-        {{$alljobs->links('admin.pagination.custom')}}
+        {{ $alljobs->links('admin.pagination.custom') }}
 
-</section>
-<script>
-  function showModel(e) {
 
-   return `<form method='POST' 
+        <script>
+            function showModel(e) {
+
+                return `<form method='POST' 
         
-        action='{{url('/admin/Jobs/${e.id}')}}' >
+        action='{{ url('/admin/Jobs/${e.id}') }}' >
         @method('DELETE')
         @csrf
         <div class='formLaple' >
@@ -45,10 +47,11 @@
             <button type='submit' class='btn btn-Danger' >حذف</button>
         </div>
         </form>`
-    
-  }
-</script>
 
-<x-model-box></x-model-box>
+            }
+        </script>
 
-@endsection
+        <x-model-box></x-model-box>
+
+    </x-admin-contaner>
+</x-admin-layout>

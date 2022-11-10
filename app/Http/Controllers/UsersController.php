@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 class UsersController extends Controller
 {
@@ -18,12 +19,16 @@ class UsersController extends Controller
         "password" => "required|string|max:25|min:6",
         "name" => "required|string|max:100|min:3",
         "role" => "required|integer|digits_between:1,3",
+        'img' => 'max:2048|mimes:jpg,jpeg,png'
+
     ];
 
     public $UpDateRule =  [
         "email" => "required|email|max:255|min:3",
         "name" => "required|string|max:100|min:3",
         "role" => "required|integer|digits_between:1,3",
+        'img' => 'max:2048|mimes:jpg,jpeg,png'
+
     ];
 
     public $PasswordRule =  [
@@ -62,6 +67,9 @@ class UsersController extends Controller
             'name.string' => 'يجب ان يكون الاسم نص فقط',
             "name.max" => "يجب ان لا يزيد الاسم  عن 25 حرف",
             "name.min" => "يجب ان لا يقل الاسم عن 3 حرف",
+
+            'img.mimes' => 'الملف يجب ان يكون صورة فقط',
+            "img.max" => "يجب ان لا يزيد   عن 25 م",
         ];
     }
 
@@ -82,6 +90,8 @@ class UsersController extends Controller
 
     public function UsersList()
     {
+        $locale = App::currentLocale();
+
         $Users = User::latest()->with('roles')->paginate(10);
         $allRole = Role::all();
         return view("admin.users.index", ['Users' => $Users,'allRole'=>$allRole]);
@@ -257,7 +267,11 @@ public function addpermison()
     public function store(Request $request)
     {
         $user = $request->validate($this->Rule, $this->messages());
-
+       // $slide->img =  $request->file('img')->store('logo','public');
+    if($request->hasFile('img'))
+    {
+        $$user['img'] =  $request->file('img')->store('userimg','public');
+    }
         // $user = $request->all();
         $user['password'] = Hash::make($request->password);
 
@@ -315,7 +329,10 @@ public function addpermison()
             ],
             $this->messages()
         );
-
+        if($request->hasFile('img'))
+        {
+            $user->img =  $request->file('img')->store('userimg','public');
+        }
        // dd($request->password);
         if ($request->password) {
             $request->validate($this->PasswordRule, $this->messages());

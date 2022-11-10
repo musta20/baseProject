@@ -15,6 +15,8 @@ class SettingController extends Controller
         "map" => "required|string|max:255|min:3",
         "keyword" => "required|string|max:255|min:3",
         "copyright" => "required|string|max:255|min:3",
+        'logo' => 'max:2048|mimes:jpg,jpeg,png'
+
     ];
 
     /**
@@ -58,7 +60,8 @@ class SettingController extends Controller
             "weekwork.max" => "يجب ان لا يزيد الكلمات  عن 255 حرف",
             "weekwork.min" => "يجب ان لا يقل  الكلمات عن 3 حرف",
             
-            
+            'logo.mimes' => 'الملف يجب ان يكون صورة فقط',
+            "logo.max" => "يجب ان لا يزيد   عن 25 م",
         ];
     }
 
@@ -166,7 +169,10 @@ class SettingController extends Controller
         
         $setting->copyright = $request->copyright;
         $setting->weekwork = $request->weekwork;
-        
+        if($request->hasFile('logo'))
+        {
+            $setting->logo =  $request->file('logo')->store('logo','public');
+        }
         $setting->save();
 
 

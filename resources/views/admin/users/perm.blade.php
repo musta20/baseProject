@@ -1,28 +1,33 @@
+<x-admin-layout>
+    <h3>الصلاحيات</h3>
+    <hr>
+    <x-admin-contaner>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-<h3>الصلاحيات</h3>
+
 <x-card-message />
+<div class="page-title p-1" >
 
-<a href="{{url('/admin/indexrole')}}" class="btn btn-Primary">  اضافة / حذف  : وظيفي</a>
+<a href="{{url('/admin/indexrole')}}" class="btn btn-success">  اضافة / حذف  : وظيفي</a>
 
 </div>
-<form method="POST" class="fullWidth"  action="{{url('/admin/addPerm')}}">
+
+<form method="POST" class="overflow-scroll"  action="{{url('/admin/addPerm')}}">
     @csrf    
-    <table dir="ltr">
-        <tr>
+    <table  class="table table-striped  table-centered mb-0 ">
+        <thead class="table-dark">        
+            <tr>
             <th>الصلاحية / الوظيفة </th>
         @foreach ($perm as $permName)
-            <th> {{$permName->name}}</th>
+            <th> {{__($permName->name)}}</th>
         @endforeach
 
         </tr>
-        
+        </thead>
             @foreach ($role as $key =>  $roleName)
+            
         <tr>
-            <th> {{$roleName->name}}</th>
+
+            <th class="table-dark"> {{__($roleName->name)}}</th>
                 @foreach ($perm as $key1 =>  $permName)
                 <td>
                    
@@ -65,16 +70,16 @@
         
    
         </table>
-        <div>
+        <div class="page-title p-1" >
 
-            <button class="btn btn-Primary" type="submit" >حفظ</button>
+            <button class="btn btn-success" type="submit" >حفظ</button>
 
         </div>
 </form>
 {{--         {{$Users->links('admin.pagination.custom')}}
  --}}
-</section>
-<script>
+
+ <script>
 
 function chek(input)
 {
@@ -90,6 +95,9 @@ function chek(input)
 
 </script>
 
+
+
 <x-model-box></x-model-box>
 
-@endsection
+    </x-admin-contaner>
+</x-admin-layout>

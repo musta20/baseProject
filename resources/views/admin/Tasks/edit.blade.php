@@ -1,18 +1,16 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+    <h3>تعديل مهمة</h3>
+
+    <x-admin-contaner>
     <x-card-message></x-card-message>
 
-    <h3>اسناد مهمة</h3>
-</div>
-<form method="POST" action="{{url('/admin/Task')}}">
+<form method="POST" class="w-75" action="{{url('/admin/Task/'.$task->id)}}">
     @csrf
-
-    <div class="formLaple" >
-        <label> اسم المهمة </label>
-        <input class="form-input" name="title"
+@method('PUT')
+    <div class="mb-3" >
+        <label class="form-label"> اسم المهمة </label>
+        <input class="form-control" name="title"
         value="{{$task->title}}"
         placeholder=" اسم المهمة" />
         @error('title')
@@ -23,9 +21,9 @@
     </div>
     
     
-    <div class="formLaple" >
-        <label> حالة المهمة : </label>
-        <select name="isdone" class="form-input"> 
+    <div class="mb-3" >
+        <label class="form-label"> حالة المهمة : </label>
+        <select name="isdone" class="form-select select2 select2-hidden-accessible"> 
             @switch($task->isdone)
             @case(0)
 
@@ -87,11 +85,11 @@
 
 
 
-    <div class="formLaple" >
-        <label>الى الموظف : </label>
-        <select name="user_id" class="form-input">
+    <div class="mb-3" >
+        <label class="form-label">الى الموظف : </label>
+        <select name="user_id" class="form-select select2 select2-hidden-accessible">
             
-        <option value="{{$task->id}}">{{$task->user->name}}</option>
+        <option value="{{$item->id}}">{{$task->user->name}}</option>
             @foreach ($users as $item)
 
             @if ($item->id != $task->id)
@@ -108,9 +106,9 @@
         @enderror
     </div>
 
-    <div class="formLaple" >
-        <label> وصف المهمة </label>
-        <textarea class="form-input" name="des" rows="12"
+    <div class="mb-3" >
+        <label class="form-label"> وصف المهمة </label>
+        <textarea class="form-control" name="des" rows="12"
         placeholder=" وصف المهمة ">{{$task->des}}</textarea>
         @error('des')
         <span class="helper">
@@ -121,12 +119,12 @@
 
 
     
-    <div class="formLaple" >
-        <label>  تاريخ بداء المهمة </label>
+    <div class="mb-3" >
+        <label class="form-label">  تاريخ بداء المهمة </label>
         <input
         
         type="date" 
-        class="form-input" 
+        class="form-control" 
         name="start"
         value="{{$task->start}}"
         placeholder=" اسم المهمة"
@@ -139,9 +137,9 @@
         @enderror
     </div>
 
-    <div class="formLaple" >
-        <label>تاريخ إنهاء المهمة </label>
-        <input type="date" class="form-input" name="end"
+    <div class="mb-3" >
+        <label class="form-label">تاريخ إنهاء المهمة </label>
+        <input type="date" class="form-control" name="end"
         value="{{$task->end}}"
         placeholder=" اسم المهمة" />
         @error('end')
@@ -154,12 +152,17 @@
     
 
 
+    <div class="mb-3">
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-</div>
+            <a type="button" href="{{ url('admin/Task') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
+
 </form>
-</section>
-    
-@endsection
+
+    </x-admin-contaner>
+</x-admin-layout>

@@ -1,10 +1,12 @@
-@extends('admin.layout.index')
-@section('content')
-    <section class="list border">
-        <div class="controller">
-            <h3>التتبع</h3>
-            <x-card-message />
-        </div>
+<x-admin-layout>
+
+    <h3> عرض العملية</h3>
+
+    <hr>
+    <x-admin-contaner>
+        <x-card-message />
+
+
 
         <br />
 
@@ -22,21 +24,27 @@
                 <td> {{ $log->created_at }}</td>
             </tr>
             <tr>
-                <th> بيانات الاجراء</th>
-                <td>
-                    <pre>
-                <code> {{ json_encode($log->properties, JSON_UNESCAPED_UNICODE) }}
-                </code>
+                <th>
+                    بيانات الاجراء:
+                </th>
+
+            </tr>
+            <tr>
+                <td >
+                    <pre dir="ltr"  id="json">
+                     {{json_encode($log->properties,  JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)}}
+
+
             </pre>
                 </td>
             </tr>
 
 
         </table>
-    </section>
-    <script>
-        function showModel(e) {
-            return `
+<a  class='btn btn-light' href="{{url('/admin/Logs')}}">عودة</a>
+        <script>
+            function showModel(e) {
+                return `
    <form method='POST' 
         action='{{ url('/admin/Order/${e.id}') }}' >
         @method('DELETE')
@@ -47,14 +55,17 @@
             <button type='submit' class='btn btn-Danger' >حذف</button>
         </div>
     </form>`
-        }
+            }
 
-        function goToUser() {
+            function goToUser() {
 
-            const users = document.getElementById('users')
+                const users = document.getElementById('users')
 
-            document.location = '/admin/LogsList/' + users.value;
-        }
-    </script>
-    <x-model-box></x-model-box>
-@endsection
+                document.location = '/admin/LogsList/' + users.value;
+            }
+        </script>
+        <x-model-box></x-model-box>
+
+
+    </x-admin-contaner>
+</x-admin-layout>

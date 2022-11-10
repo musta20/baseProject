@@ -1,15 +1,15 @@
-@extends('admin.layout.index')
-@section('content')
-    <section class="list border">
-        <div class="controller">
-            <x-card-message></x-card-message>
-            <h3>إضافة وظيفة</h3>
-        </div>
-        <form method="POST" action="{{ url('/admin/Jobs') }}">
+<x-admin-layout>
+    <h3>إضافة وظيفة</h3>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
+
+        <form method="POST" class="w-75" action="{{ url('/admin/Jobs') }}">
             @csrf
-            <div class="formLaple">
-                <label> المسمى الوظيفي</label>
-                <input class="form-input" value="{{old('title')}}" name="title" placeholder="عنوان التصنيف" />
+
+            <div class="mb-3">
+                <label class="form-label"> المسمى الوظيفي</label>
+                <input class="form-control" value="{{ old('title') }}" name="title" placeholder="عنوان التصنيف" />
                 @error('title')
                     <span class="helper">
                         {{ $message }}
@@ -17,9 +17,9 @@
                 @enderror
 
             </div>
-            <div class="formLaple">
-                <label> مقر الوظيفة </label>
-                <select class="form-input" name="city_id">
+            <div class="mb-3">
+                <label class="form-label"> مقر الوظيفة </label>
+                <select class="form-select select2 select2-hidden-accessible" name="city_id">
                     @foreach ($jobCity as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
@@ -31,9 +31,9 @@
                 @enderror
 
             </div>
-            <div class="formLaple">
-                <label> الوصف</label>
-                <textarea class="form-input" name="des" placeholder=" الوصف" cols="30" rows="10">{{old('des')}}</textarea>
+            <div class="mb-3">
+                <label class="form-label"> الوصف</label>
+                <textarea class="form-control" name="des" placeholder=" الوصف" cols="30" rows="10">{{ old('des') }}</textarea>
 
                 @error('des')
                     <span class="helper">
@@ -44,10 +44,18 @@
             </div>
 
 
-            <div>
-                <button class="btn btn-Primary">حفظ</button>
 
+            <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/Jobs') }}" class="btn btn-light">الغاء</a>
+                </div>
             </div>
         </form>
-    </section>
-@endsection
+
+
+    </x-admin-contaner>
+</x-admin-layout>

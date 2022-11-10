@@ -1,20 +1,20 @@
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+
+<x-admin-layout>
+    <h3>تعديل سيلايد</h3>
+    <hr>
+    <x-admin-contaner>
     <x-card-message></x-card-message>
 
-    <h3>اضافة سيلايد</h3>
-</div>
-<form method="POST" enctype="multipart/form-data"
+
+    <form method="POST" class="w-75" enctype="multipart/form-data"
 action="{{url('/admin/CustmerSlide/'.$slide->id)}}">
     @csrf
     @method('PUT')
 
-    <div class="formLaple" >
-        <label> الصورة</label>
-        <input class="form-input" 
+    <div class="mb-3">
+        <label class="form-label"> الصورة</label>
+        <input class="form-control" 
         
 
         type="file"
@@ -30,9 +30,9 @@ action="{{url('/admin/CustmerSlide/'.$slide->id)}}">
     </div>
 
     
-    <div class="formLaple" >
-        <label> الرابط</label>
-        <input class="form-input"
+    <div class="mb-3">
+        <label class="form-label"> الرابط</label>
+        <input class="form-control"
         value="{{$slide->url}}"
 
         name="url" placeholder=" الرابط" />
@@ -48,11 +48,17 @@ action="{{url('/admin/CustmerSlide/'.$slide->id)}}">
 
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+    <div class="mb-3">
 
-</div>
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+            <a type="button" href="{{ url('admin/CustmerSlide') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
 </form>
-</section>
     
-@endsection
+
+    </x-admin-contaner>
+</x-admin-layout>

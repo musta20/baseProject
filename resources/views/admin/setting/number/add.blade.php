@@ -1,18 +1,17 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+<x-admin-layout>
 
     <h3>اضافة رابط</h3>
-</div>
-<form method="POST" action="{{url('/admin/Number')}}">
+
+    <x-admin-contaner>
+
+    <x-card-message></x-card-message>
+
+<form method="POST" class="w-75" action="{{url('/admin/Number')}}">
     @csrf
 
-    <div class="formLaple" >
-        <label> الصورة</label>
-        <input class="form-input" 
+    <div class="mb-3">
+        <label class="form-label"> الصورة</label>
+        <input class="form-control" 
         
         value="{{old('img')}}"
 
@@ -27,9 +26,9 @@
     </div>
 
 
-    <div class="formLaple" >
-        <label> النص</label>
-        <input class="form-input"
+    <div class="mb-3">
+        <label class="form-label"> النص</label>
+        <input class="form-control"
         value="{{old('title')}}"
 
         name="title" placeholder=" النص" />
@@ -42,9 +41,9 @@
 
     </div>
 
-    <div class="formLaple" >
-        <label> الرقم</label>
-        <input class="form-input"
+    <div class="mb-3">
+        <label class="form-label"> الرقم</label>
+        <input class="form-control"
         value="{{old('number')}}"
 
         name="number" placeholder=" الرقم" />
@@ -57,14 +56,18 @@
 
     </div>
 
+    <div class="mb-3">
 
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
-
-</div>
+            <a type="button" href="{{ url('admin/Number') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
 </form>
-</section>
-    
-@endsection
+
+
+
+    </x-admin-contaner>
+</x-admin-layout>

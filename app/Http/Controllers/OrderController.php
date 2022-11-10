@@ -64,18 +64,21 @@ class OrderController extends Controller
                 $title = "الطلبات الجديدة";
                 break;
             case 1:
-                $title = "الطلبات المكتملة";
+                $title = "الطلبات  المسلتلمة";
                 break;
             case 2:
-                $title = "الطلبات المسلتلمة";
+                $title = "الطلبات المكتملة";
                 break;
             case 3:
+                $title = "الطلبات المسلمة";
+                break;
+            case 4:
                 $title = "الطلبات الملغية";
                 break;
             default:
                 break;
         }
-        return view("admin.order.index",  ['AllOrder' => $AllOrder,'type'=>$type, "title" => $title]);
+        return view("admin.order.index",  ['AllOrder' => $AllOrder, 'type' => $type, "title" => $title]);
     }
 
     /**
@@ -168,18 +171,18 @@ class OrderController extends Controller
 
         //$order = order::find($id)->with('dev');//->with('pym');
         //with('servicesNmae')
-     //   dd($order->name);
-    //    $services = services::find($order->s_id);
-  
+        //   dd($order->name);
+        //    $services = services::find($order->s_id);
+
         $order->price = $order->count * $order->servicesNmae->price;
-        
+
         $order->ServiceName = $order->servicesNmae->name; //still
 
         $order->still = $order->price - $order->payed;   //still
 
         $files = Files::where('type', 1)->where('typeid', $order->id)->get();
 
-  
+
         switch ($order->status) {
             case 0:
                 $order->status_order = "قيد الانتظار";
@@ -203,7 +206,7 @@ class OrderController extends Controller
 
 
 
-        return view("admin.order.edit",  ['order' =>  $order ,"files"=>$files]);
+        return view("admin.order.edit",  ['order' =>  $order, "files" => $files]);
     }
 
     /**
@@ -238,11 +241,10 @@ class OrderController extends Controller
             $order->payed = $order->payed + $request->cost;
         }
 
-        $send=false;
+        $send = false;
 
-        if($order->status != $request->status)
-        {
-            $send=true;
+        if ($order->status != $request->status) {
+            $send = true;
         }
 
         $order->status = $request->status;
@@ -250,11 +252,11 @@ class OrderController extends Controller
         if ($request->status == 1) {
             $order->approve_time = date('d-m-y h:i:s');
         }
-     
+
         $order->save();
 
-        if($send){
-        Mail::to($order->email)->send(new OrderStatus(($order)));
+        if ($send) {
+            Mail::to($order->email)->send(new OrderStatus(($order)));
         }
 
         return redirect('/admin/showOrderList/' . $order->status);

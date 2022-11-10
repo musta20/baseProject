@@ -1,20 +1,19 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+<x-admin-layout>
+    <h3> تعديل مدينة</h3>
+    <hr>
+    <x-admin-contaner>
     <x-card-message></x-card-message>
 
-    <h3>المدن</h3>
-</div>
-<form method="POST" action="{{url('/admin/JobCity/'.$jobcity->id)}}">
+
+    <form method="POST" class="w-75" action="{{url('/admin/JobCity/'.$jobcity->id)}}">
     @csrf
     @method('PUT')
-    <div class="formLaple" >
-        <label> اسم المدينة</label>
-        <input class="form-input"
+
+    <div class="mb-3">
+                <label class="form-label">اسم مدينة </label>
+        <input class="form-control"
         value="{{$jobcity->name}}"
-        name="name" placeholder="عنوان التصنيف" />
+        name="name" placeholder=" اسم مدينة" />
 
         @error('name')
         <span class="helper">
@@ -25,12 +24,16 @@
     </div>
   
 
+    <div class="mb-3">
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-</div>
+            <a type="button" href="{{ url('admin/JobCity') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
 </form>
-</section>
     
-@endsection
+    </x-admin-contaner>
+</x-admin-layout>

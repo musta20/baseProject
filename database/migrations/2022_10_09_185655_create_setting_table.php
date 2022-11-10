@@ -28,6 +28,7 @@ class CreateSettingTable extends Migration
 
             $table->string("billterm");
             $table->string("footer");
+            $table->string("logo");
 
             $table->string("footertext");
             $table->string("copyright");

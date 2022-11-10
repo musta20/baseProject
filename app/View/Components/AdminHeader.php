@@ -2,10 +2,13 @@
 
 namespace App\View\Components;
 
+use App\Models\setting;
 use Illuminate\View\Component;
 
 class AdminHeader extends Component
 {
+    public $setting;
+
     /**
      * Create a new component instance.
      *
@@ -13,7 +16,7 @@ class AdminHeader extends Component
      */
     public function __construct()
     {
-        //
+//
     }
 
     /**

@@ -2,22 +2,33 @@
             <div class="leftside-menu">
 
                 <!-- Logo Light -->
-                <a href="https://coderthemes.com/hyper_2/saas/index.html" class="logo logo-light">
-                    <span class="logo-lg">
-                        <img src="{{asset('Dashboard/logo.png')}}" alt="logo" height="22">
+                <a href="{{url('admin/')}}"class="logo logo-light">
+                    <span class="logo-lg ">
+                        <img class=''src="{{asset('storage/'.$setting->logo)}}" 
+                        alt="logo" height="66">
                     </span>
-                    <span class="logo-sm">
-                        <img src="{{asset('Dashboard/logo-sm.png')}}" alt="small logo" height="22">
+                    <span class="logo-sm ">
+                        <img class='' src="{{asset('storage/'.$setting->logo)}}"
+                         alt="small logo" height="66">
                     </span>
                 </a>
-
+                <style>
+                     .logoImge {
+    background-color: #e6d2bd;
+    border: 1px solid #745635;
+    padding: 1px;
+    border-radius: 5px;
+}
+                </style>
                 <!-- Logo Dark -->
-                <a href="https://coderthemes.com/hyper_2/saas/index.html" class="logo logo-dark">
-                    <span class="logo-lg">
-                        <img src="{{asset('Dashboard/logo-dark.png')}}" alt="dark logo" height="22">
+                <a href="{{url('admin/')}}" class="logo logo-dark">
+                    <span class="logo-sm ">
+                        <img class='' src="{{asset('storage/'.$setting->logo)}}" 
+                        alt="dark logo" height="66">
                     </span>
-                    <span class="logo-sm">
-                        <img src="{{asset('Dashboard/logo-dark-sm.png')}}" alt="small logo" height="22">
+                    <span class="logo-sm ">
+                        <img class='' src="{{asset('storage/'.$setting->logo)}}" 
+                        alt="small logo" height="66">
                     </span>
                 </a>
 
@@ -30,7 +41,7 @@
                 <div class="h-100" id="leftside-menu-container" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="left: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
                     <!-- Leftbar User -->
                     <div class="leftbar-user">
-                        <a href="https://coderthemes.com/hyper_2/saas/pages-profile.html">
+                        <a href="{{url('admin/')}}">
                             <img src="{{asset('Dashboard/avatar-1.jpg')}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
                             <span class="leftbar-user-name">{{ auth()->user()->name }} </span>
                         </a>
@@ -70,12 +81,12 @@
  --}}
                         <li class="side-nav-title side-nav-item">الادارة اليومية</li>
 
-                        <li class="side-nav-item">
+     {{--                    <li class="side-nav-item">
                             <a href="https://coderthemes.com/hyper_2/saas/apps-calendar.html" class="side-nav-link">
                                 <i class="uil-calender"></i>
                                 <span> التقويم </span>
                             </a>
-                        </li>
+                        </li> --}}
 
                         @can('Task')
 
@@ -376,7 +387,7 @@
                                     </li>
                                     <li>
                                         <a
-                                        href="{{url('/admin/create')}}"                                         
+                                        href="{{url('/admin/Users/create')}}"                                         
                                          >اضافة موظف جديد</a>
                                     </li>
                                 </ul>
@@ -951,7 +962,7 @@
                     <!--- End Sidemenu -->
 
                     <!-- Help Box -->
-                    <div class="help-box text-white text-center">
+   {{--                  <div class="help-box text-white text-center">
                         <a href="javascript: void(0);" class="float-end close-btn text-white">
                             <i class="mdi mdi-close"></i>
                         </a>
@@ -959,10 +970,19 @@
                         <h5 class="mt-3">Unlimited Access</h5>
                         <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
                         <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>
-                    </div>
+                    </div> --}}
                     <!-- end Help Box -->
 
                     <div class="clearfix"></div>
-                </div></div></div></div><div class="simplebar-placeholder" style="width: auto; height: 1518px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: visible;"><div class="simplebar-scrollbar simplebar-visible" style="height: 134px; transform: translate3d(0px, 300px, 0px); display: block;"></div></div></div>
+
+                </div></div></div></div>
+                <div class="simplebar-placeholder" style="width: auto; height: 1518px;"></div>
+
+            </div>
+            
+            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                <div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div>
+            </div><div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                    <div class="simplebar-scrollbar " style="height: 134px; transform: translate3d(0px, 300px, 0px); display: block;"></div></div></div>
             </div>
             <!-- ========== Left Sidebar End ========== -->

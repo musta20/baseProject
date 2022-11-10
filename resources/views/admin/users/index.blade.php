@@ -1,75 +1,69 @@
+<x-admin-layout>
+    <h3>الموظفين</h3>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message />
+        <div class="page-title p-1">
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-<h3>الموظفين</h3>
-<x-card-message />
+            <a href="{{ url('/admin/Users/create') }}" class="btn btn-success"> اضافة موظف</a>
+        </div>
+        <table class="table  table-striped table-centered mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>الاسم </th>
+                    <th>الصلاحية</th>
+                    <th>البريد الالكتروني </th>
 
-<a href="{{url('/admin/Users/create')}}" class="btn btn-Primary"> اضافة موظف</a>
-
-</div>
-    <table>
-        <tr>
-            <th>#</th>
-            <th>الاسم </th>
-            <th>الصلاحية</th>
-            <th>البريد الالكتروني </th>
-
-            <th>التحكم</th>
-        </tr>
-        @foreach ($Users as $item)
-        <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->name}}</td>
-        @if ($item->hasAnyRole($allRole))
-        <td>{{$item->roles->pluck('name')[0]}}</td>
-
-        @else
-            <td>
-                لايوجد صلاحية
-            </td>
-        @endif
-
-
-        <td>{{$item->email}}</td>
-        <td class="cellControll">
-            
-                @if ($item->hasAnyRole($allRole))
-                    @if ($item->getRoleNames()[0]=='مدير')
-
-                    <a href="{{url('/admin/Users/'.$item->id.'/edit/')}}"><i class="fa-regular fa-pen-to-square"></i></a>
-               
+                    <th>التحكم</th>
+                </tr>
+            </thead>
+            @foreach ($Users as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->name }}</td>
+                    @if ($item->hasAnyRole($allRole))
+                        <td>{{ __($item->roles->pluck('name')[0]) }}</td>
                     @else
+                        <td>
+                            لايوجد صلاحية
+                        </td>
+                    @endif
 
 
-                    <a href="{{url('/admin/Users/'.$item->id.'/edit/')}}"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                    <td>{{ $item->email }}</td>
+                    <td class="cellControll">
 
-            
-                    @endif 
+                        @if ($item->hasAnyRole($allRole))
+                            @if ($item->getRoleNames()[0] == 'مدير')
+                                <a href="{{ url('/admin/Users/' . $item->id . '/edit/') }}"><i
+                                    class="mdi mdi-pencil"></i></a>
+                            @else
+                                <a href="{{ url('/admin/Users/' . $item->id . '/edit/') }}"><i
+                                    class="mdi mdi-pencil"></i></a>
+                                <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                                    class="mdi mdi-delete"></i></a>
+                            @endif
+                        @else
+                            <a href="{{ url('/admin/Users/' . $item->id . '/edit/') }}"><i
+                                    class="mdi mdi-pencil"></i></a>
+                            <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                                    class="mdi mdi-delete"></i></a>
+                        @endif
 
-                @else                  
-
-
-                <a href="{{url('/admin/Users/'.$item->id.'/edit/')}}"><i class="fa-regular fa-pen-to-square"></i></a>
-                <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#"><i class="fa-sharp fa-solid fa-trash"></i></a>
-
-                @endif
-            
-         </td>
-        </tr>
+                    </td>
+                </tr>
             @endforeach
         </table>
-        {{$Users->links('admin.pagination.custom')}}
+        {{ $Users->links('admin.pagination.custom') }}
 
-</section>
-<script>
-  function showModel(e) {
 
-   return `<form method='POST' 
+        <script>
+            function showModel(e) {
+
+                return `<form method='POST' 
         
-        action='{{url('/admin/Users/${e.id}')}}' >
+        action='{{ url('/admin/Users/${e.id}') }}' >
         @method('DELETE')
         @csrf
         <div class='formLaple' >
@@ -78,10 +72,11 @@
             <button type='submit' class='btn btn-Danger' >حذف</button>
         </div>
         </form>`
-    
-  }
-</script>
 
-<x-model-box></x-model-box>
+            }
+        </script>
 
-@endsection
+        <x-model-box></x-model-box>
+
+    </x-admin-contaner>
+</x-admin-layout>

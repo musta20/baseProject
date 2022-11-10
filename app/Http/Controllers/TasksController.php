@@ -25,6 +25,19 @@ class TasksController extends Controller
         "end" =>   'required|date|after:start'
     ];
 
+
+
+    public $ruleUPDATE = [
+        "title" => "required|string|max:100|min:3",
+        "des" => "required|string|max:255|min:3",
+        // "user_id" => "required|string|max:255|min:3",
+        "user_id" => "required|integer",
+        "isdone" => "required|integer",
+
+        "start" => "required|date",
+        "end" =>   'required|date|after:start'
+    ];
+    
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -57,7 +70,7 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $alltask = Tasks::latest()->paginate(10);
+        $alltask = Tasks::latest()->with('user')->paginate(10);
         return view('admin.Tasks.index', ['alltask' => $alltask]);
     }
 
@@ -140,6 +153,8 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $data = $request->validate($this->rule, $this->messages());
         $data['isdone'] = 0;
         $data['isread'] = 0;
@@ -148,7 +163,7 @@ class TasksController extends Controller
         $task =  Tasks::create($data);
         $user =  User::find($task->user_id);
 
-        Mail::to($user->email)->send(new TasksMail(($task)));
+      //  Mail::to($user->email)->send(new TasksMail(($task)));
 
         message::create([
             "title" => "مهمة جديدة",
@@ -212,9 +227,39 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tasks $tasks)
-    {
-        //
+    public function update(Request $request,  $id)
+    {        $task = Tasks::find($id);
+
+  
+        $data = $request->validate($this->ruleUPDATE, $this->messages());
+   
+        $task->title=$data['title'];
+        $task->des=$data['des'];
+        $task->user_id=$data['user_id'];
+        $task->start=$data['start'];
+        $task->end=$data['end'];
+        $task->isdone=$data['isdone'];
+       // $task =  Tasks::create($data);
+        //$user =  User::find($task->user_id);
+        $task->save();
+      //  Mail::to($user->email)->send(new TasksMail(($task)));
+      Files::where("typeid", $task->id)->where("type", 0)->delete();
+
+        $i = 0;
+
+        while ($request->hasFile('attachment-' . $i)) {
+            $filename =  $request->file('attachment-' . $i)->store('task', 'public');
+            Files::create([
+                "name" => $filename,
+                "typeid" => $task->id,
+                "type" => 0,
+            ]);
+
+            $i = $i + 1;
+        }
+
+
+        return redirect('/admin/Task')->with('messages', 'تم إضافة البيانات');
     }
 
     /**

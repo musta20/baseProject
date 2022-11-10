@@ -8,12 +8,13 @@
 
 
 
-        <form method="POST" action="{{ url('/admin/Payment/' . $payment->id) }}">
+        <form method="POST" class="w-75" action="{{ url('/admin/Payment/' . $payment->id) }}">
             @csrf
             @method('PUT')
-            <div class="formLaple">
-                <label> الاسم </label>
-                <input class="form-input" value="{{ $payment->name }}" name="name" placeholder="عنوان التصنيف" />
+            <div class="mb-3">
+                <label class="form-label"> الاسم </label>
+                <input class="form-control" value="{{ $payment->name }}" 
+                name="name" placeholder="عنوان التصنيف" />
 
                 @error('name')
                     <span class="helper">
@@ -25,9 +26,14 @@
 
 
 
-            <div>
-                <button class="btn btn-Primary">حفظ</button>
+            <div class="mb-3">
 
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/Payment') }}" class="btn btn-light">الغاء</a>
+                </div>
             </div>
         </form>
 

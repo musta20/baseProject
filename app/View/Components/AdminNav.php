@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\setting;
 use Illuminate\View\Component;
 
 class AdminNav extends Component
@@ -11,9 +12,11 @@ class AdminNav extends Component
      *
      * @return void
      */
+    public $setting;
     public function __construct()
     {
-        //
+        $this->setting = setting::first();
+
     }
 
     /**

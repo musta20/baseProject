@@ -1,15 +1,15 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-<h3>الخدمات</h3>
+<x-admin-layout>
+    <h3> السلايدات</h3>
+    <hr>
+    <x-admin-contaner>
 <x-card-message />
+<div class="page-title p-1" >
 
-<a href="{{url('/admin/Slide/create')}}" class="btn btn-Primary">إضافة سلايد</a>
+<a href="{{url('/admin/Slide/create')}}" class="btn btn-success">إضافة سلايد</a>
 
 </div>
-    <table>
+<table class="table  table-striped table-centered mb-0">
+    <thead class="table-dark">        
         <tr>
             <th>#</th>
             <th>الاسم</th>
@@ -18,6 +18,7 @@
             <th>الرابط</th>
             <th>التحكم</th>
         </tr>
+    </thead>
         @foreach ($allslide as $item)
         <tr>
         <td>{{$item->id}}</td>
@@ -25,14 +26,19 @@
         <td>{{$item->des}}</td>
         <td><a target="blank" href="{{url('storage/'.$item->img)}}" ><img width="100" src="{{url('storage/'.$item->img)}}" /></td>
         <td>{{$item->url}}</td>
-        <td class="cellControll">
-            <a  href="{{url('/admin/Slide/'.$item->id)}}"><i class="fa-regular fa-pen-to-square"></i></a>
-            <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#"><i class="fa-sharp fa-solid fa-trash"></i></a>
+
+        <td class="table-action">
+            <a  href="{{url('/admin/Slide/'.$item->id)}}">
+                <i class="mdi mdi-pencil"></i></a>
+            <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#">
+                <i class="mdi mdi-delete"></i></a>
         </td>
+
         </tr>
             @endforeach
         </table>
-</section>
+
+
 <script>
   function showModel(e) {
 
@@ -53,4 +59,6 @@
 
 <x-model-box></x-model-box>
 
-@endsection
+
+    </x-admin-contaner>
+</x-admin-layout>

@@ -1,54 +1,61 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+    <h3> اضافة تصنيف </h3>
 
-    <h3>التصنيفات</h3>
-</div>
-<form method="POST" action="{{url('/admin/Category')}}">
-    @csrf
-    <div class="formLaple" >
-        <label>عنوان التصنيف</label>
-        <input class="form-input" name="title" placeholder="عنوان التصنيف" />
-
-        @error('title')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-    <div class="formLaple" >
-        <label> الايقونة</label>
-        <input class="form-input" name="icon" placeholder=" الايقونة" />
-        
-        @error('icon')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-    <div class="formLaple" >
-        <label> الوصف</label>
-        <textarea class="form-input" name="des" placeholder=" الوصف" cols="30" rows="10"></textarea>
-
-        @error('des')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+        <form method="POST" class="w-75" action="{{ url('/admin/Category') }}">
+            @csrf
+            <div class="mb-3">
+                <label  class="form-label">عنوان التصنيف</label>
+                <input class="form-control" name="title" placeholder="عنوان التصنيف" />
+                @error('title')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
 
-</div>
-</form>
-</section>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"> الايقونة</label>
+                <input class="form-control" name="icon" placeholder=" الايقونة" />
+                @error('icon')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+            <div class="mb-3">
+                <label  class="form-label"> الوصف</label>
+                <textarea class="form-control" name="des" placeholder=" الوصف" cols="30" rows="10"></textarea>
+
+                @error('des')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+
     
-@endsection
+            <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+        
+                    <a type="button" href="{{ url('admin/Category') }}" class="btn btn-light">الغاء</a>
+                </div>
+            </div>
+
+        </form>
+
+
+
+    </x-admin-contaner>
+</x-admin-layout>

@@ -1,49 +1,56 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-<h3>التتبع</h3>
-<x-card-message />
-</div>
-اسم الموظف
-    <select  onchange="goToUser()" id="users" name="user">
-        <option  value="0">اختر اسم الموظف</option>
+    <h3> التتبع </h3>
 
-        @foreach ($users as $item)
-        <option value="{{$item->id}}">{{$item->name}}</option>
-        @endforeach
-    </select>
-    <br />
-    <table>
-        <tr>
-            <th>#</th>
-            <th>قسم الاجراء</th>
-            <th>نوع الاجراء</th>
-            <th>التاريخ</th>
-            <th>عرض</th>
-        </tr>
-        @foreach ($AllLogs as $item)
-        <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->log_name}}</td>
-        <td>{{$item->description}}</td>
-        <td>{{$item->created_at}}</td>
-        <td>
-            <a href="/admin/Logs/{{$item->id}}">عرض</a>
+    <hr>
+    <x-admin-contaner>
+        <x-card-message />
 
-        </td>
-        </tr>
+        <div class="mb-3 w-25">
+            <label class="form-lable">اسم الموظف
+            </label>
+            <select class="form-select select2 select2-hidden-accessible" onchange="goToUser()" id="users"
+                name="user">
+                <option value="0">اختر اسم الموظف</option>
+
+                @foreach ($users as $item)
+                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <br />
+        <table class="table  table-striped table-centered mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>قسم الاجراء</th>
+                    <th>نوع الاجراء</th>
+                    <th>التاريخ</th>
+                    <th>عرض</th>
+                </tr>
+            </thead>
+            @foreach ($AllLogs as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->log_name }}</td>
+                    <td>{{ $item->description }}</td>
+                    <td>{{ $item->created_at }}</td>
+                    <td>
+                        <a href="/admin/Logs/{{ $item->id }}">عرض</a>
+
+                    </td>
+                </tr>
             @endforeach
         </table>
-        {{$AllLogs->links('admin.pagination.custom')}}
-</section>
-<script>
-  function showModel(e) {
+        {{ $AllLogs->links('admin.pagination.custom') }}
 
-   return `<form method='POST' 
+        <script>
+            function showModel(e) {
+
+                return `<form method='POST' 
         
-        action='{{url('/admin/Order/${e.id}')}}' >
+        action='{{ url('/admin/Order/${e.id}') }}' >
         @method('DELETE')
         @csrf
         <div class='formLaple' >
@@ -52,16 +59,17 @@
             <button type='submit' class='btn btn-Danger' >حذف</button>
         </div>
         </form>`
-    
-  }
 
-  function goToUser() {
-        const users =  document.getElementById('users')
+            }
 
-        document.location = '/admin/LogsList/'+users.value;
-    }
-</script>
+            function goToUser() {
+                const users = document.getElementById('users')
 
-<x-model-box></x-model-box>
+                document.location = '/admin/LogsList/' + users.value;
+            }
+        </script>
 
-@endsection
+        <x-model-box></x-model-box>
+
+    </x-admin-contaner>
+</x-admin-layout>

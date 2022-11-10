@@ -1,71 +1,67 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+<x-admin-layout>
     <h3>انشاء مستخدم</h3>
-</div>
-<form method="POST" action="{{url('/admin/Users')}}">
-    @csrf
-    <div class="formLaple" >
-        <label> الاسم </label>
-        <input class="form-input" name="name" placeholder="الاسم" />
-        @error('name')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+    <hr>
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
-    </div>
-    <div class="formLaple" >
-        <label> الصلاحية</label>
-        <select   class="form-input" name="role" >
-            @foreach ($role as $item)
-            <option value="{{$item->id}}">{{$item->name}}</option>
-                
-            @endforeach
+        <form method="POST" class="w-75" enctype="multipart/form-data" action="{{ url('/admin/UsersList') }}">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label"> الاسم </label>
+                <input class="form-control" name="name" placeholder="الاسم" />
+                @error('name')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> الصلاحية</label>
+                <select class="form-select select2 select2-hidden-accessible" name="role">
+                    @foreach ($role as $item)
+                        <option value="{{ $item->id }}">{{ __($item->name) }}</option>
+                    @endforeach
+                </select>
+                @error('city_id')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> البريد الالكتروني </label>
+                <input class="form-control" type="email" name="email" placeholder="البريد الالكتروني " />
+                @error('email')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> كلمة المرور </label>
+                <input class="form-control" type="password" name="password" placeholder="كلمة المرور " />
+                @error('password')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
 
 
-        </select>
+            <div class="mb-3">
 
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-        @error('city_id')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+                    <a type="button" href="{{ url('admin/UsersList') }}" class="btn btn-light">الغاء</a>
+                </div>
+            </div>
+        </form>
 
-    </div>
-
-    <div class="formLaple" >
-        <label> البريد الالكتروني </label>
-        <input class="form-input" type="email" name="email" placeholder="البريد الالكتروني " />
-        @error('email')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-
-    <div class="formLaple" >
-        <label> كلمة المرور  </label>
-        <input class="form-input" type="password" name="password" placeholder="كلمة المرور " />
-        @error('password')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
- 
-
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
-
-</div>
-</form>
-</section>
-    
-@endsection
+    </x-admin-contaner>
+</x-admin-layout>

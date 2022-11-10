@@ -1,134 +1,122 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+    <h3>تعديل الخدمة</h3>
 
-    <h3>الخدمة</h3>
-</div>
-<form method="POST" action="{{url('/admin/Services/'.$services->id)}}">
-    @csrf
-    @method('PUT')
-    <div class="formLaple" >
-        <label>عنوان الخدمة</label>
-        <input class="form-input"
-        value="{{$services->name}}"
-        name="name" placeholder="عنوان التصنيف" />
+    <hr>
+    <x-admin-contaner>
 
-        @error('name')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-
-    <div class="formLaple">
-        <label> التصنيف</label>
-        <select name="cat_id">
-            <option value="{{ $catmy->id }}">{{ $catmy->title }}</option>
-
-            @foreach ($cat as $item)
-            @if ( $item->id != $services->cat_id)
-            <option value="{{ $item->id }}">{{ $item->title }}</option>
-
-            @endif
-            @endforeach
-        </select>
-        @error('cat_id')
-            <span class="helper">
-                {{ $message }}
-            </span>
-        @enderror
-    </div>
+        <x-card-message></x-card-message>
 
 
-    <div class="formLaple" >
-        <label> الايقونة</label>
-        <input class="form-input"
-        value="{{$services->icon}}"
+        <form method="POST" class="w-75" action="{{ url('/admin/Services/' . $services->id) }}">
+            @csrf
+            @method('PUT')
 
-        name="icon" placeholder=" الايقونة" />
-        @error('icon')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+            <div class="mb-3">
+                <label class="form-label">عنوان الخدمة</label>
+                <input class="form-control" value="{{ $services->name }}" name="name" placeholder="عنوان التصنيف" />
 
-    </div>
+                @error('name')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> التصنيف</label>
+                <select class="form-select select2 select2-hidden-accessible" name="cat_id">
+                    <option value="{{ $catmy->id }}">{{ $catmy->title }}</option>
+
+                    @foreach ($cat as $item)
+                        @if ($item->id != $services->cat_id)
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                @error('cat_id')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
 
 
-    <span class="btn" onclick="addFile()" >إضافة ملف</span>
-    <div id="files" >
+            <div class="mb-3">
+                <label  class="form-label"> الايقونة</label>
+                <input class="form-control" value="{{ $services->icon }}" name="icon" placeholder=" الايقونة" />
+                @error('icon')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
 
-    @foreach ($filesInput as $key=>$item)
-    <div class='formLaple'>
-
-        <input class='form-input' 
-        value="{{$item->name}}" 
-        name='files-{{$key}}' 
-        placeholder='اسم الملف' />
-        
-    </div>
+            </div>
 
 
-    @endforeach
+            <span class="btn btn-success p-1" onclick="addFile()">إضافة ملف</span>
+            <div id="files">
 
-    
-        @error("files")
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-    </div>
+                @foreach ($filesInput as $key => $item)
+                    <div class='mb-1'>
+
+                        <input class='form-control' value="{{ $item->name }}" name='files-{{ $key }}'
+                            placeholder='اسم الملف' />
+
+                    </div>
+                @endforeach
+
+
+                @error('files')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
 
 
 
 
 
+            <div class="mb-3">
+                <label class="form-label"> السعر</label>
+                <input class="form-control" name="price" placeholder=" السعر" cols="30" rows="10"
+                    value="{{ $services->price }}" />
 
 
+                @error('price')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
 
 
+                <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/Services') }}" class="btn btn-light">الغاء</a>
+                </div>
+            </div>
+        </form>
+
+        <script>
+            function addFile() {
+                //   file.preventDefault();
+                let file = document.getElementById('files');
+                let div = document.createElement("div")
+                div.innerHTML = "<div class='formLaple'><input class='form-input' name='files-" + file.children.length +
+                    "' placeholder='اسم الملف' /></div>";
+                file.append(div);
+
+            }
+        </script>
 
 
-
-
-    <div class="formLaple" >
-        <label> السعر</label>
-        <input class="form-input"
-        name="price" placeholder=" السعر" cols="30" rows="10"
-        value="{{$services->price}}"
-        />
-       
-
-        @error('price')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-
-
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
-
-</div>
-</form>
-</section>
-<script>
-
-    function addFile() {
-     //   file.preventDefault();
-let file = document.getElementById('files');
-let div = document.createElement("div")
-div.innerHTML ="<div class='formLaple'><input class='form-input' name='files-"+ file.children.length +"' placeholder='اسم الملف' /></div>";
-file.append (div);
-        
-    }
-
-
-</script>
-@endsection
+    </x-admin-contaner>
+</x-admin-layout>

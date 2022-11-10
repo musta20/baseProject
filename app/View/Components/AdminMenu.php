@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\setting;
 use Illuminate\View\Component;
 
 class AdminMenu extends Component
@@ -11,9 +12,10 @@ class AdminMenu extends Component
      *
      * @return void
      */
+    public $setting;
     public function __construct()
     {
-        //
+        $this->setting = setting::first();
     }
 
     /**

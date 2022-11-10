@@ -1,77 +1,73 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+    <h3> اضافة رقم</h3>
 
-    <h3>اضافة سيلايد</h3>
-</div>
-<form method="POST" action="{{url('/admin/Number/'.$number->id)}}">
-    @csrf
-    @method('PUT')
+    <x-admin-contaner>
+        <x-card-message></x-card-message>
 
 
-
-
-    <div class="formLaple" >
-        <label> النص</label>
-        <input class="form-input" 
-        
-        value="{{$number->title}}"
-
-        name="title" placeholder=" الصورة" />
-        
-        @error('title')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-
-
-    <div class="formLaple" >
-        <label> الصورة</label>
-        <input class="form-input" 
-        
-        value="{{$number->img}}"
-
-        name="img" placeholder=" الصورة" />
-        
-        @error('img')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
-
-
-
-    <div class="formLaple" >
-        <label> الرقم</label>
-        <input class="form-input"
-        value="{{$number->number}}"
-
-        name="number" placeholder=" الرابط" />
-        
-        @error('number')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
-
-    </div>
+        <form method="POST" class='w-75' action="{{ url('/admin/Number/' . $number->id) }}">
+            @csrf
+            @method('PUT')
 
 
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+            <div class="mb-3">
+                <label class="form-label"> النص</label>
+                <input class="form-control" value="{{ $number->title }}" name="title" placeholder=" الصورة" />
 
-</div>
-</form>
-</section>
-    
-@endsection
+                @error('title')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label"> الصورة</label>
+                <input class="form-control" value="{{ $number->img }}" name="img" placeholder=" الصورة" />
+
+                @error('img')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+
+
+            <div class="mb-3">
+                <label class="form-label"> الرقم</label>
+                <input class="form-control" value="{{ $number->number }}" name="number" placeholder=" الرابط" />
+
+                @error('number')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+
+
+
+
+            <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/Number') }}" class="btn btn-light">الغاء</a>
+                </div>
+            </div>
+        </form>
+
+
+
+    </x-admin-contaner>
+</x-admin-layout>

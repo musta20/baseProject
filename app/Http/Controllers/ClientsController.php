@@ -31,7 +31,8 @@ class ClientsController extends Controller
 
     public function index()
     {
-        $client = clients::where('israted',2)->latest()->paginate(10);
+        //where('israted',2)->
+        $client = clients::latest()->paginate(10);
         return view("admin.client.index",['client'=>$client]);
 
     }

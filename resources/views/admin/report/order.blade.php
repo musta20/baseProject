@@ -1,64 +1,64 @@
-@extends('admin.layout.index')
-@section('content')
-    <section class="list border">
-        <div class="controller">
-            <h3>تقارير الطلبات</h3>
-            <form method="POST" target="_blank" class="D-flex" action="{{ url('/admin/Report') }}">
-                @csrf
+<x-admin-layout>
+    <h3>تقارير الطلبات</h3>
+    <hr>
+    <x-admin-contaner>
 
-                <input hidden name="reporttype" value="order" />
+        <form method="POST" target="_blank" class="D-flex w-25" action="{{ url('/admin/Report') }}">
+            @csrf
 
-                <div class="formLaple">
-                    نوع التقرير
-                    <select class="form-input" name="type">
-                        <option value="6">عام</option>
-                        <option value="0">قيد الانتظار</option>
-                        <option value="1"> تحت المعالجة</option>
-                        <option value="2">المكتملة</option>
-                        <option value="3">المستلمة</option>
-                        <option value="4">ملغي</option>
-                    </select>
+            <input hidden name="reporttype" value="order" />
 
-                </div>
+            <div class="mb-3">
+                نوع التقرير
+                <select class="form-select select2 select2-hidden-accessible" name="type">
+                    <option value="6">عام</option>
+                    <option value="0">قيد الانتظار</option>
+                    <option value="1"> تحت المعالجة</option>
+                    <option value="2">المكتملة</option>
+                    <option value="3">المستلمة</option>
+                    <option value="4">ملغي</option>
+                </select>
 
-                <div class="formLaple">
-                    <label>من</label>
-                    <input class="form-input" type="date" name="from" />
+            </div>
 
-                    @error('from')
-                        <span class="helper">
-                            {{ $message }}
-                        </span>
-                    @enderror
+            <div class="mb-3">
+                <label class="form-lable">من</label>
+                <input class="form-control" type="date" name="from" />
 
-                </div>
-                <div class="formLaple">
-                    <label> الى</label>
+                @error('from')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
 
-                    <input class="form-input" type="date" name="to" />
+            </div>
+            <div class="mb-3">
+                <label class="form-lable"> الى</label>
 
-                    @error('to')
-                        <span class="helper">
-                            {{ $message }}
-                        </span>
-                    @enderror
+                <input class="form-control" type="date" name="to" />
 
-                </div>
+                @error('to')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
 
-
+            </div>
 
 
-                <div class="formLaple">
-                    <label></label>
-                    <button class="btn btn-Dark">عرض</button>
-                </div>
-            </form>
-            <x-card-message />
 
 
-        </div>
-        <table>
-            <tr>
+            <div class="mb-3">
+                <label></label>
+                <button class="btn btn-primary">عرض</button>
+            </div>
+        </form>
+        <x-card-message />
+
+
+        <table class="table  table-striped table-centered mb-0">
+            <thead class="table-dark">            
+                <tr>
                 <th>#</th>
                 <th>نوع التقرير</th>
                 <th>تاريخ التقرير</th>
@@ -66,6 +66,7 @@
                 <th>الى </th>
                 <th> التحكم</th>
             </tr>
+            </thead>
             @foreach ($orderReport as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
@@ -104,19 +105,19 @@
                     <td>{{ $item->to }}</td>
                     <td class="cellControll">
                         <a target="_blank" href="{{ url('storage/pdf/' . $item->file) }}"><i
-                                class="fa-regular fa-pen-to-square"></i></a>
+                                class="mdi mdi-pencil"></i></a>
                         <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
-                                class="fa-sharp fa-solid fa-trash"></i></a>
+                                class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
             @endforeach
         </table>
         {{ $orderReport->links('admin.pagination.custom') }}
-    </section>
-    <script>
-        function showModel(e) {
 
-            return `<form method='POST' 
+        <script>
+            function showModel(e) {
+
+                return `<form method='POST' 
         
         action='{{ url('/admin/Report/${e.id}') }}' >
         @method('DELETE')
@@ -128,8 +129,9 @@
         </div>
         </form>`
 
-        }
-    </script>
+            }
+        </script>
 
-    <x-model-box></x-model-box>
-@endsection
+        <x-model-box></x-model-box>
+    </x-admin-contaner>
+</x-admin-layout>

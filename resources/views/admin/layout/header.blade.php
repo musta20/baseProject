@@ -7,7 +7,7 @@
     <a href="{{url('/logout')}}">تسجيل الخروج</a>
     </div>
     <div class="userBox">
-        {{getNotif()}}
+        {{getNotif()['all']}}
     </div>
     
     @else

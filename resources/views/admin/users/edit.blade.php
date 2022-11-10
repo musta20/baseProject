@@ -1,95 +1,114 @@
-
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
-    <x-card-message></x-card-message>
+<x-admin-layout>
     <h3>تعديل مستخدم</h3>
-</div>
-<form method="POST" action="{{url('/admin/Users/'.$user->id)}}">
-    @csrf
-    @method('PUT')
-    <div class="formLaple" >
-        <label> الاسم </label>
-        <input class="form-input"
-        value="{{$user->name}}"
-        name="name" placeholder="الاسم" />
-        @error('name')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+    <hr>
+    <x-admin-contaner>
 
-    </div>
-    <div class="formLaple" >
-        <label> الصلاحية</label>
+        <x-card-message></x-card-message>
 
-@if ($user->hasAnyRole($role))
+        <form method="POST" enctype="multipart/form-data" class="w-75" action="{{ url('/admin/Users/' . $user->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="mb-3">
+                <label class="form-label"> الاسم </label>
+                <input class="form-control" value="{{ $user->name }}" name="name" placeholder="الاسم" />
+                @error('name')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
 
-<select   class="form-input" name="role" >
-    <option value="{{$user->roles->pluck('id')[0]}}">{{$user->roles->pluck('name')[0]}}</option>
-    @foreach ($role as $item)
-    @if ($user->roles->pluck('name')[0] !=$item->name )
-    <option value="{{$item->id}}">{{$item->name}}</option>
-    @endif   
-    @endforeach
-
-</select>
-    
-@else
-
-<select class="form-input" name="role" >
-    @foreach ($role as $item)
-    <option value="{{$item->id}}">{{$item->name}}</option>
-    @endforeach
-</select>
-
-
-    
-@endif
+            @if ($user->img)
+            <div class="mb-3">
+                <img width="80" src="{{url('storage/'.$user->img)}}" alt="">
+            </div>
+            @endif
 
 
 
+            <div class="mb-3">
+                <label class="form-label"> صورة شخصية </label>
+                <input class="form-control" type="file" name="img" placeholder="img" />
+                @error('img')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
 
-        @error('role')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+            </div>
 
-    </div>
 
-    <div class="formLaple" >
-        <label> البريد الالكتروني </label>
-        <input class="form-input" type="email"
-        value="{{$user->email}}"
 
-        name="email" placeholder="البريد الالكتروني " />
-        @error('email')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+            <div class="mb-3">
+                <label class="form-label" > الصلاحية</label>
 
-    </div>
+                @if ($user->hasAnyRole($role))
 
-    <div class="formLaple" >
-        <label>   إنشاء كلمة مرور جديدة </label>
-        <input class="form-input" type="password" name="password" placeholder="كلمة المرور " />
-        @error('password')
-        <span class="helper">
-        {{$message}}
-        </span>
-        @enderror
+                    <select class="form-select select2 select2-hidden-accessible" name="role">
+                        <option value="{{ $user->roles->pluck('id')[0] }}">{{ __($user->roles->pluck('name')[0]) }}</option>
+                        @foreach ($role as $item)
+                            @if ($user->roles->pluck('name')[0] != $item->name)
+                                <option value="{{ $item->id }}">{{ __($item->name) }}</option>
+                            @endif
+                        @endforeach
 
-    </div>
- 
+                    </select>
+                @else
+                    <select class="form-select select2 select2-hidden-accessible" name="role">
+                        @foreach ($role as $item)
+                            <option value="{{ $item->id }}">{{ __($item->name) }}</option>
+                        @endforeach
+                    </select>
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
 
-</div>
-</form>
-</section>
-    
-@endsection
+
+                @endif
+
+
+
+
+                @error('role')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> البريد الالكتروني </label>
+                <input class="form-control" type="email" value="{{ $user->email }}" name="email"
+                    placeholder="البريد الالكتروني " />
+                @error('email')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"> إنشاء كلمة مرور جديدة </label>
+                <input class="form-control" type="password" name="password" placeholder="كلمة المرور " />
+                @error('password')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+
+            </div>
+
+
+            <div class="mb-3">
+
+                <div class="px-3 pb-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+                    <a type="button" href="{{ url('admin/Users') }}" class="btn btn-light">الغاء</a>
+                </div>
+            </div>
+        </form>
+
+    </x-admin-contaner>
+</x-admin-layout>

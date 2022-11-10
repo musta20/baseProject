@@ -1,18 +1,16 @@
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+<x-admin-layout>
+    <h3>اضافة رابط</h3>
+    <hr>
+    <x-admin-contaner>
     <x-card-message></x-card-message>
 
-    <h3>اضافة رابط</h3>
-</div>
-<form method="POST" action="{{url('/admin/Social')}}">
+<form method="POST" class="w-75" action="{{url('/admin/Social')}}">
     @csrf
 
-    <div class="formLaple" >
-        <label> الصورة</label>
-        <input class="form-input" 
+    <div class="mb-3" >
+        <label class="form-label"> الصورة</label>
+        <input class="form-control" 
         
         value="{{old('img')}}"
 
@@ -27,9 +25,9 @@
     </div>
 
 
-    <div class="formLaple" >
+    <div class="mb-3" >
         <label> الرابط</label>
-        <input class="form-input"
+        <input class="form-control"
         value="{{old('url')}}"
 
         name="url" placeholder=" الرابط" />
@@ -45,11 +43,19 @@
 
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
 
-</div>
+    <div class="mb-3">
+
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+            <a type="button" href="{{ url('admin/Social') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
+
 </form>
-</section>
-    
-@endsection
+
+
+    </x-admin-contaner>
+</x-admin-layout>

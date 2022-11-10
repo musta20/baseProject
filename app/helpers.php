@@ -9,10 +9,12 @@ if(!function_exists('getNotif'))
     function getNotif()
     {
       //  message::where*
-     $task= count(Tasks::where('user_id',Auth::user()->id)->where('isread',0)->get());
-       $msg =  count(message::where('to',Auth::user()->id)->where('isred',0)->get());
-
-       return $task+$msg;
+     $task= Tasks::where('user_id',Auth::user()->id)->where('isread',0)->get();
+      $msg =  message::where('to',Auth::user()->id)->where('isred',0)->get();
+      $all = count($task)+count($msg);
+       return ["all"=>$all,
+       "task"=>$task,
+       "msg"=>$msg];
     }
     
 }

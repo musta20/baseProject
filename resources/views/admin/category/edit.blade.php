@@ -1,18 +1,18 @@
+<x-admin-layout>
 
-@extends('admin.layout.index')
-@section('content')
-<section class="list border">
-<div class="controller">
+    <h3> تعدل التصنيف </h3>
+
+    <hr>
+    <x-admin-contaner>
     <x-card-message></x-card-message>
 
-    <h3>التصنيفات</h3>
-</div>
-<form method="POST" action="{{url('/admin/Category/'.$category->id)}}">
+
+    <form method="POST" class="w-75" action="{{url('/admin/Category/'.$category->id)}}">
     @csrf
     @method('PUT')
-    <div class="formLaple" >
-        <label>عنوان التصنيف</label>
-        <input class="form-input"
+    <div class="mb-3">
+        <label class="form-label">عنوان التصنيف</label>
+        <input class="form-control"
         value="{{$category->title}}"
         name="title" placeholder="عنوان التصنيف" />
 
@@ -23,9 +23,9 @@
         @enderror
 
     </div>
-    <div class="formLaple" >
-        <label> الايقونة</label>
-        <input class="form-input"
+    <div class="mb-3">
+        <label class="form-label"> الايقونة</label>
+        <input class="form-control"
         value="{{$category->icon}}"
 
         name="icon" placeholder=" الايقونة" />
@@ -36,9 +36,9 @@
         @enderror
 
     </div>
-    <div class="formLaple" >
-        <label> الوصف</label>
-        <textarea class="form-input"
+    <div class="mb-3">
+        <label class="form-label"> الوصف</label>
+        <textarea  class="form-control"
         name="des" placeholder=" الوصف" cols="30" rows="10">
         {{$category->des}}
     </textarea>
@@ -52,11 +52,18 @@
     </div>
 
 
-<div>
-    <button class="btn btn-Primary" >حفظ</button>
+    <div class="mb-3">
 
-</div>
+        <div class="px-3 pb-3">
+            <button type="submit" class="btn btn-primary">
+                <i class="mdi mdi-send me-1"></i> حفظ</button>
+
+            <a type="button" href="{{ url('admin/Category') }}" class="btn btn-light">الغاء</a>
+        </div>
+    </div>
 </form>
-</section>
-    
-@endsection
+
+
+
+    </x-admin-contaner>
+</x-admin-layout>
