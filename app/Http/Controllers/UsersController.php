@@ -166,9 +166,9 @@ public function addpermison()
   //  Permission::create(['name' => 'Logs']);
   //  Permission::create(['name' => 'Employee']);
  //  Permission::create(['name' => 'Reviews']);
- $TaskMangment = Permission::create(['name' => 'Report']);
- $Admin = Role::create(['name' => $this->ADMIN]);
- $Admin->givePermissionTo($TaskMangment);
+ $TaskMangment = Permission::create(['name' => 'Search']);
+ //$Admin = Role::create(['name' => $this->ADMIN]);
+ //$Admin->givePermissionTo($TaskMangment);
 
     return "new perm added";
 }

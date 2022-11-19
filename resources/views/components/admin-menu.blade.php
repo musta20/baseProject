@@ -111,6 +111,8 @@
 
                             </a>
                         </li>
+                        
+                        @can('Search')
 
                                             <li class="side-nav-item">
 
@@ -120,6 +122,7 @@
 
                                                 </a>
                                             </li>
+                                            @endcan
 
                                             @can('Task')
                                                 <li class="side-nav-item">

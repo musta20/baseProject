@@ -98,14 +98,16 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     });
 
-    
+    Route::group(['middleware' => ['permission:Search']], function () {
+
     Route::post('search',[SearchController::class,'search']);
     Route::get('Search', function () {
         return view('admin.search.index');
         //        return redirect('admin/MainTask');
 
     });
-
+});
+    
 
     Route::group(['middleware' => ['permission:Task']], function () {
 
