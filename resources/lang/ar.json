@@ -4,6 +4,7 @@
     "Manager": "إداري",
     "employee": "موظف",
     "Order": "الطلبات",
+    "order": "الطلبات",
     "Category/Services": "التصنيفات / الخدمات",
     "Setting": "الإعدادات",
     "Users": "المستخدمين",
@@ -13,7 +14,27 @@
     "Reviews": "اراء العملاء",
     "Task": "المهام",
     "TaskMangment": "ادارة المهام",
-    "Report": "التقارير"
-
-
+    "Report": "التقارير",
+    "updated": "تعديل",
+    "created": "انشاء",
+    "message": "الرسائل",
+    "social": "وسائل التواصل",
+    "clients": "العملاء",
+    "TasksNotify": "تنبيهات المهام",
+    "SalesType": "انواع المبيهات",
+    "NotifySales": "تنبيهات المبيعات",
+    "numbers": "احصائات",
+    "services": "الخدمات",
+    "setting": "اعداد الموفع",
+    "category": "التصنيفات",
+    "RequiredFiles": "الملفات المطلوبة",
+    "job_city": "مدن الوظائف",
+    "delivery": "طرق التوصيل",
+    "payment": "طرق الدفع",
+    "default": "افتراضي",
+    "NotifyType": "نوع التنبيه",
+    "User": "المستخدمين",
+    "deleted": "حذف"
+    
+    
 } 

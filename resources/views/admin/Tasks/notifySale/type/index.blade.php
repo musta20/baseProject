@@ -4,25 +4,30 @@
     <x-admin-contaner>
 
         <x-card-message></x-card-message>
+        <div class="p-1">
 
-        <a href="{{ url('/admin/SalesType/create') }}" class="btn btn-Primary">إضافة مدينة</a>
+        <a href="{{ url('/admin/SalesType/create') }}" class="btn btn-success">إضافة مدينة</a>
+        </div>
 
-        <table>
+        <table class="table  table-striped table-centered mb-0">
+            <thead class="table-dark">
             <tr>
                 <th>#</th>
                 <th>الاسم</th>
                 <th>السعر</th>
                 <th>التحكم</th>
             </tr>
+            </thead>
             @foreach ($NotifyType as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->price }}</td>
-                    <td class="cellControll">
-                        <a href="{{ url('/admin/SalesType/' . $item->id) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <td class="table-action">
+                        <a href="{{ url('/admin/SalesType/' . $item->id) }}">
+                            <i   class="mdi mdi-pencil"></i></a>
                         <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
-                                class="fa-sharp fa-solid fa-trash"></i></a>
+                            class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
             @endforeach

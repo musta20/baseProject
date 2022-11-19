@@ -7,6 +7,7 @@ use App\Models\category;
 use App\Models\clients;
 use App\Models\CustmerSlide;
 use App\Models\delivery;
+use App\Models\dev_to_serv;
 use App\Models\Files;
 use App\Models\job_app;
 use App\Models\job_city;
@@ -15,6 +16,7 @@ use App\Models\message;
 use App\Models\numbers;
 use App\Models\order;
 use App\Models\payment;
+use App\Models\pym_to_serv;
 use App\Models\RequiredFiles;
 use App\Models\services;
 use App\Models\setting;
@@ -381,8 +383,13 @@ class mainSite extends Controller
         $services  = services::find($id);
         $files = RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
         // dd( $files );
-        $payment = payment::get();
-        $cash =  delivery::get();
+/*         $payment = payment::get();
+        $cash =  delivery::get(); */
+
+        $payment = pym_to_serv::where('serv_id',$services->id)->with('pym')->get();
+
+        $cash = dev_to_serv::where('serv_id',$services->id)->with('dev')->get();
+        
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
     }
 

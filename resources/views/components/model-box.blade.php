@@ -4,11 +4,11 @@
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
-        <h2>  حذف العنصر</h2>
+        <h4>  حذف العنصر</h4>
 
-        <i class="fa-solid fa-xmark close"></i>
+        <i class=" close btn-close btn-close-white ms-auto"></i>
       </div>
-      <div id="itemToDelete" class="modal-body">
+      <div id="itemToDelete" class="modal-body m-1 p-2">
       </div>
      {{--  <div class="modal-footer">
         <h3>Modal Footer</h3>
@@ -19,6 +19,23 @@
 
 
   <style>
+    .btn-Danger{
+
+    --ct-btn-color: #fff;
+    --ct-btn-bg: #fa5c7c;
+    --ct-btn-border-color: #fa5c7c;
+    --ct-btn-hover-color: #fff;
+    --ct-btn-hover-bg: #d54e69;
+    --ct-btn-hover-border-color: #c84a63;
+    --ct-btn-focus-shadow-rgb: 251,116,144;
+    --ct-btn-active-color: #fff;
+    --ct-btn-active-bg: #c84a63;
+    --ct-btn-active-border-color: #bc455d;
+    --ct-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --ct-btn-disabled-color: #fff;
+    --ct-btn-disabled-bg: #fa5c7c;
+    --ct-btn-disabled-border-color: #fa5c7c;
+    }
 
 .modal {
   display: none; /* Hidden by default */
@@ -85,7 +102,7 @@
   display: flex;
   justify-content: space-between;
   padding: 1em;
-  background-color: #4dd0e1;
+  background-color: #3a444e;
   color: white;
 }
 .modal .modal-body {

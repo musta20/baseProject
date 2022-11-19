@@ -9,7 +9,10 @@
             <input hidden name="reporttype" value="order" />
 
             <div class="mb-3">
+              <h3>
                 نوع التقرير
+              </h3>
+                <hr>
                 <select class="form-select select2 select2-hidden-accessible" name="type">
                     <option value="6">عام</option>
                     <option value="0">قيد الانتظار</option>
@@ -50,7 +53,7 @@
 
             <div class="mb-3">
                 <label></label>
-                <button class="btn btn-primary">عرض</button>
+                <button class="btn btn-primary">انشاء التقرير</button>
             </div>
         </form>
         <x-card-message />

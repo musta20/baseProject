@@ -1,7 +1,7 @@
 <x-admin-layout>
 
     <h3>تعديل مهمة</h3>
-
+<hr>
     <x-admin-contaner>
     <x-card-message></x-card-message>
 
@@ -89,7 +89,7 @@
         <label class="form-label">الى الموظف : </label>
         <select name="user_id" class="form-select select2 select2-hidden-accessible">
             
-        <option value="{{$item->id}}">{{$task->user->name}}</option>
+        <option value="{{$task->id}}">{{$task->user->name}}</option>
             @foreach ($users as $item)
 
             @if ($item->id != $task->id)

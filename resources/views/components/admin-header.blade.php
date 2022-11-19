@@ -14,6 +14,8 @@
         <!-- Vector Map css -->
         <link rel="stylesheet" href="{{asset('Dashboard/jquery-jvectormap-1.2.2.css')}}">
 
+        <script src="{{ asset('Dashboard/chart.min.js') }}"></script>
+
         <!-- Theme Config Js -->
         <script src="{{asset('Dashboard/hyper-config.js')}}"></script>
 

@@ -110,7 +110,10 @@ class UsersController extends Controller
 
     public function loginView()
     {
-        //
+      //
+         if(Auth::user()){
+            return redirect('admin/');
+        } 
         return view("auth.login");
     }
 
@@ -130,9 +133,7 @@ class UsersController extends Controller
 
 
         // dd(  $this->Rule );
-
         $credentials = $request->validate($this->LogInRule, $this->messages());
-
         //   dd( $credentials );
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();

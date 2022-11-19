@@ -13,6 +13,27 @@ use PDF;
 
 class ReportController extends Controller
 {
+    public $rule = [
+        "from" => "required|date",
+        "to" => "required|date",
+
+    ];
+
+    public function messages()
+    {
+        return [
+            'from.required' => 'يجب اختيار التاريخ',
+            'from.date' => 'يجب ان تكون القيمة  تاريخ',
+ 
+
+            'to.required' => 'يجب اختيار التاريخ',
+            'to.date' => 'يجب ان تكون القيمة تاريخ',
+
+
+        ];
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -45,10 +66,17 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+         $request->validate( $this->rule,$this->messages());
+   
         if ($request->reporttype == "cash") {
 
             $reports = order::whereBetween('created_at', [$request->from, $request->to])
                 ->with('servicesNmae')->get();
+                
+                if($reports->isEmpty())
+                {
+                    return Redirect::back()->with('messages', 'لا يوجد سجلات للتواريخ المذكورة');
+                }
 
             $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
             $pdf = PDF::loadView(
@@ -75,6 +103,12 @@ class ReportController extends Controller
             } else {
                 $reports = order::where('status', $request->type)->whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
             }
+
+            if($reports->isEmpty())
+            {
+                return Redirect::back()->with('messages', 'لا يوجد سجلات للتواريخ المذكورة');
+            }
+
             $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
             $pdf = PDF::loadView('admin.pdf.report', ['from' => $request->from, 'to' => $request->to, 'reports' => $reports, "type" => $request->type])
                 ->setOption('enable-local-file-access', true)
@@ -91,7 +125,14 @@ class ReportController extends Controller
     {
         $setting = setting::first();
         $order = order::with('servicesNmae')->with('dev')->with('pym')->find($id);
+       // dd($order);
+        if (!$order->first()) {
+            return Redirect::back()->with('messages', 'غير موجود ');
+        }
+
+
         if ($order->payed == 0) {
+
             return Redirect::back()->with('messages', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
         }
 
@@ -136,6 +177,10 @@ class ReportController extends Controller
     {
         $setting = setting::first();
         $order = order::with('servicesNmae')->find($id);
+
+        if (!$order->first()) {
+            return Redirect::back()->with('messages', 'غير موجود ');
+        }
         if ($order->payed == 0) {
             return Redirect::back()->with('messages', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
         }
@@ -173,9 +218,14 @@ class ReportController extends Controller
 
     public function showPdfReport(Request $request)
     {
+        $request->validate( $this->rule,$this->messages());
+ 
         if ($request->type == 1) {
             $reports = order::whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
-
+            if($reports->isEmpty())
+            {
+                return  Redirect::back()->with('messages', 'لا يوجد سجلات  ');
+            }
             return view('admin.pdf.report', ['from' => $request->from, 'to' => $request->to, 'reports' => $reports]);
         }
     }
@@ -196,18 +246,26 @@ class ReportController extends Controller
         $orderReport = Report::latest()->paginate(10);
         return view('admin.report.order', ['orderReport' => $orderReport]);
     }
-
+    public function billReportView()
+    {     $orderReport = Report::
+        where('reporttype', 'bill')
+        ->paginate(10);
+        return view('admin.report.bills', ['orderReport' => $orderReport]);
+    }
     public function billReport(Request $request)
     {
+        $request->validate( $this->rule,$this->messages());
 
         if ($request->from && $request->to) {
             if ($request->type) {
                 $orderReport = Report::where('type', $request->type)
                     ->where('reporttype', 'bill')->whereBetween('created_at', [$request->from, $request->to])
                     ->paginate(10);
+                
             } else {
                 $orderReport = Report::where('reporttype', 'bill')->whereBetween('created_at', [$request->from, $request->to])
                     ->paginate(10);
+                 
             }
         } else {
             if (isset($request->type)) {
@@ -217,9 +275,73 @@ class ReportController extends Controller
                 $orderReport = Report::where('reporttype', 'bill')->latest()->paginate(10);
             }
         }
-
+        if($orderReport->isEmpty())
+        {
+            return  Redirect::back()->with('messages', 'لا يوجد سجلات  ');
+        }
         return view('admin.report.bills', ['orderReport' => $orderReport]);
     }
+
+
+
+
+
+
+
+//
+public function printCreateBill()
+{
+    //$orderReport = Report::where('reporttype', 'cash')->latest()->paginate(10);
+
+    return view('admin.report.createBill');
+}
+
+public function createBill()
+{
+    //$orderReport = Report::where('reporttype', 'cash')->latest()->paginate(10);
+
+    return view('admin.report.createBill');
+}
+
+
+public function postCreateBill(Request $request)
+{
+    //$orderReport = Report::where('reporttype', 'cash')->latest()->paginate(10);
+
+    $setting = setting::first();
+  
+
+    $filename = 'invoice' . sprintf('%04d', $request->id) . '.pdf';
+    $fileName2 =  Storage::get('public/logo/h.png');
+    $dataUri = 'data:image/png;base64,' . base64_encode($fileName2);
+    $pdf = PDF::loadView(
+        'admin.pdf.createbill',
+        [
+            'setting' => $setting,
+            'order' => $request,
+            "dataUri" => $dataUri
+        ]
+    )
+        ->setOption('page-width', '80mm')
+        ->setOption('page-height', '190mm')
+        ->setOption('enable-local-file-access', true)
+        ->setOption('margin-bottom', '0mm')
+        ->setOption('margin-top', '0mm')
+        ->setOption('margin-right', '0mm')
+        ->setOption('margin-left', '0mm')->save(storage_path('app/public/pdf/') . $filename, true);
+
+    Report::create([
+        "type" => 0,
+        "reporttype" => "bill",
+        "to" => $request->name,
+        "from" => "none",
+        "file" => $filename
+    ]);
+    return $pdf->inline();
+
+}
+
+
 
     public function cashReport()
     {
@@ -264,7 +386,7 @@ class ReportController extends Controller
     {
         $file = Report::find($id);
         $file->delete();
-        return redirect('/admin/orderReport/')->with('messages', 'تم حذف العنصر');
+        return  Redirect::back()->with('messages', 'تم حذف العنصر');
 
         //
     }

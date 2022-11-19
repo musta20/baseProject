@@ -14,7 +14,7 @@ class JobAppController extends Controller
      */
     public function index()
     {
-        $alljopapp = job_app::latest()->paginate(10);
+        $alljopapp = job_app::latest()->with('job')->paginate(10);
 
         return view("admin.jobs.jobApp.index",  ['alljopapp' => $alljopapp]);
     }
@@ -49,7 +49,7 @@ class JobAppController extends Controller
     public function show($id)
     {
         
-            $job = job_app::find($id);
+            $job = job_app::with('job')->find($id);
     
             return view("admin.jobs.jobApp.show",  ['job' => $job]);
     }

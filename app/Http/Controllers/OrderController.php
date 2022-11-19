@@ -11,6 +11,7 @@ use App\Models\payment;
 use App\Models\services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
 {
@@ -35,6 +36,7 @@ class OrderController extends Controller
         ];
     }
 
+    
 
 
 
@@ -268,8 +270,12 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(order $order)
+    public function destroy( $id)
     {
-        //
+        $order  = order::find($id);
+        $order->status=4;
+        $order->save();
+        return  Redirect::back()->with('messages', 'تم حذف العنصر');
+
     }
 }

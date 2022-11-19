@@ -17,4 +17,11 @@ class NotifySales extends Model
 
     protected static $logName = 'NotifySales';
 
+    public function user()
+    {
+        return $this->belongsTo(User::class,'from','id');
+    }
+
+
+
 }

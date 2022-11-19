@@ -1,7 +1,7 @@
 <x-admin-layout>
 
     <h3>اضافة طريقة توصيل </h3>
-
+    <hr>
     <x-admin-contaner>
         <x-card-message></x-card-message>
 

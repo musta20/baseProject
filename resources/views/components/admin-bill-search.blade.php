@@ -1,0 +1,4 @@
+<div>
+    
+{{$resault->id}}
+</div>

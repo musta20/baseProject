@@ -59,5 +59,7 @@
               </script>
               
               <x-model-box></x-model-box>
-    </x-admin-contaner>
+   
+        </table>
+            </x-admin-contaner>
 </x-admin-layout>

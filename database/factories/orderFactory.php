@@ -16,7 +16,7 @@ class orderFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'empy_id' => rand(2,20),
+            'empy_id' => rand(1,9),
             'phone' =>  rand(100000,1000000),
             'des' => $this->faker->paragraph(),
             'title' => $this->faker->title(),
@@ -30,9 +30,10 @@ class orderFactory extends Factory
             'adress' => $this->faker->address(),
             'files' => rand(1,4),
             'payed' => rand(1,4),
-            'status' => 2,
+            'status' => 3,
             'code' => rand(4000,5000),
             's_id' => rand(1,4),
+            'created_at' => $this->faker->dateTimeInInterval('-1 week', '+1 days'),
         ];
     }
 

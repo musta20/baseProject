@@ -3,11 +3,11 @@
     <div class="row">
         <div class="page-title-box">
 
-            <div class="page-title">
+            <h3 class="page-title">
                 انشاء رسالة
-            </div>
+            </h3>
 
-
+<hr>
 
         </div>
     </div>

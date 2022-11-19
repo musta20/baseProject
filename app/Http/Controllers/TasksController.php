@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\TasksMail;
+
 use App\Models\Files;
 use App\Models\message;
+use App\Models\NotifySales;
+use App\Models\NotifyType;
+use App\Models\SalesType;
 use App\Models\Tasks;
+use App\Models\TasksNotify;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -14,6 +19,16 @@ use Illuminate\Support\Facades\Mail;
 class TasksController extends Controller
 {
 
+    public $ruleNotfy = [
+
+        "duration" => "required|integer|min:1",
+        "issueAt" => "required|date",
+    ];
+
+
+    public $ruleisDone = [
+        "isDone" => "required|numeric",
+    ];
 
     public $rule = [
         "title" => "required|string|max:100|min:3",
@@ -58,9 +73,15 @@ class TasksController extends Controller
             "des.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
 
 
+            "duration.required" => "يجب اضافة المدة",
+            "issueAt.required" => "يجب اضافة تاريخ الاصدار",
+            "issueAt.date" => "يجب ان تكون القيمة تاريخ ",
+
+        
+
+
         ];
     }
-
 
 
     /**
@@ -144,6 +165,100 @@ class TasksController extends Controller
         return view('admin.Tasks.Menu');
     }
 
+    public function showmysale($type)
+    {
+        $alltask =    NotifySales::where('type',$type)->where('user_id',Auth::user()->id)->paginate(10);
+        $saletype = SalesType::get();
+        return view('admin.Tasks.showmysale',['alltask'=>$alltask,'saletype'=>$saletype]);
+    }
+
+    public function editmysale($type)
+    {
+        $task = NotifySales::find($type);
+
+        if(Auth::user()->id != $task->user_id)
+        {
+            return redirect('/admin/showmysale/1');
+
+        }
+
+        return view('admin.Tasks.editmysale',['task'=>$task]);
+    }
+
+    public function postmysale(Request $request,$id)
+    {
+        $data = $request->validate($this->ruleisDone, $this->messages());
+        
+        $task = NotifySales::find($id);
+
+        if(Auth::user()->id != $task->user_id)
+        {
+            return redirect('/admin/showmysale/1');
+
+        }
+        $task->isDone = $data['isDone'];
+        $task->save();
+        return redirect('/admin/showmysale/' . $task->type)->with('messages', 'تم تعديل العنصر');
+
+    }
+
+
+
+    //
+    public function postMyNotifyTask(Request $request,$id)
+    {
+
+       $data = $request->validate($this->ruleNotfy, $this->messages());
+       $date = Carbon::createFromFormat('Y-m-d', $request->issueAt);
+       $endMonth = $date->addDays(30 * $request->duration)->format('Y-m-d');
+       $tasksNotify = TasksNotify::find($id);
+
+       if(Auth::user()->id != $tasksNotify->user_id)
+       {
+           return redirect('/admin/showmysale/1');
+
+       }
+       $tasksNotify->issueAt = $request->issueAt;
+       $tasksNotify->duration = $request->duration;
+       $tasksNotify->exp = $endMonth;
+       $tasksNotify->save();
+
+       return redirect('/admin/showMyNotifyTask/' . $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
+    }
+    
+
+    public function editMyNotifyTask( $id)
+    {
+        $task =TasksNotify::find($id);
+
+
+        if(Auth::user()->id != $task->user_id)
+        {
+            return redirect('/admin/showmysale/1');
+
+        }
+
+        return view('admin.Tasks.editMyNotifyTask',['task'=>$task ]);
+    }
+
+    public function showMyNotifyTask($type)
+    {
+        $NotifyType=NotifyType::get();
+        
+        $alltask = TasksNotify::where('type',$type)->where('user_id',Auth::user()->id)->latest()->paginate(10);
+
+        return view('admin.Tasks.showMyNotifyTask',['alltask'=>$alltask,'NotifyType'=>$NotifyType]);
+
+
+
+
+/*         if(Auth::user()->id != $task->user_id)
+        {
+            return redirect('/admin/showmysale/1');
+
+        } */
+    }
+
     
     /**
      * Store a newly created resource in storage.
@@ -164,14 +279,14 @@ class TasksController extends Controller
         $user =  User::find($task->user_id);
 
       //  Mail::to($user->email)->send(new TasksMail(($task)));
-
+/* 
         message::create([
             "title" => "مهمة جديدة",
             "to" => $user->id,
             "from" =>$task->boss_id,
             "message" =>  "لديك مخمة جديدة ",
             "isred" =>  0
-        ]);
+        ]); */
 
         $i = 0;
 

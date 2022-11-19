@@ -16,7 +16,7 @@ class LogsController extends Controller
     public function index()
     {
         //AllLogs
-        $AllLogs = Activity::latest()->paginate(10);
+        $AllLogs = Activity::latest()->paginate(8);
         $users = User::get();
 
         return view("admin.Logs.index",  ['AllLogs' => $AllLogs,'users'=>$users] );
@@ -26,7 +26,7 @@ class LogsController extends Controller
     {
         //AllLogs LogsList
 
-        $AllLogs = Activity::where('causer_id',$id)->paginate(10);
+        $AllLogs = Activity::where('causer_id',$id)->paginate(8);
         $users = User::get();
         $name =  User::find($id);
         return view("admin.Logs.list",  ['AllLogs' => $AllLogs,'users'=>$users,'name'=>$name->name] );

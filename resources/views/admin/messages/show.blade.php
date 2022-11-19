@@ -1,11 +1,11 @@
 <x-admin-layout>
-
+<br>
     <div class="row">
-        <div class="page-title-box"> 
+        <h3 class="page-title-box"> 
             تفاصيل الرسالة
-        </div>
+        </h3>
     </div>
-
+<hr>
     <x-admin-contaner>
         <div class="p-1 w-75">
             <div class=" px-3 pt-3 pb-0">       
@@ -30,9 +30,10 @@
                 </div>
 
             </div>  
-            <div class="write-mdg-box mb-3">
+            <div class="px-3 pt-3 pb-0">
                 <label class="form-label"> نص الرسالة</label>
             <div class="conversation-text"  >{{ $message->message }}</div>
+            <hr>
         </div>
 
         <div class="px-3 pb-3">

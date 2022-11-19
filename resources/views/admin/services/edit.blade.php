@@ -59,11 +59,11 @@
             <div id="files">
 
                 @foreach ($filesInput as $key => $item)
-                    <div class='mb-1'>
+                    <div class='mb-1 input-group w-25'>
 
-                        <input class='form-control' value="{{ $item->name }}" name='files-{{ $key }}'
+                        <input class='form-control' value="{{ $item->name }}" name='files[]'
                             placeholder='اسم الملف' />
-
+                            <span onclick="remitem(this)" class="btn btn-danger">حذف</span>
                     </div>
                 @endforeach
 
@@ -74,6 +74,89 @@
                     </span>
                 @enderror
             </div>
+
+
+
+
+            <div class="mb-3 border p-1">
+
+            <label class="form-lable"> طرق التوصيل</label>
+                <select class="form-select select2 select2-hidden-accessible  " id="devValue">
+                    @foreach ($dev as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+                </select>
+                <span class="btn btn-success p-1" onclick="addDev()"> اضافة </span>
+
+            <div id="dev">
+                @foreach ($delv as $key => $item)
+
+
+                <div class="mb-1 input-group w-25"><span class="form-control">{{ $item->dev->name }}</span>
+                    <input hidden="" value="{{ $item->dev->id }}" name="devs[]">
+                    <span onclick="remitem(this)" class="btn btn-danger">حذف</span></div>
+          
+                @endforeach
+                @error('dev')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+            </div>
+
+
+
+            <div class="mb-3 border p-1">
+
+                <label class="form-lable"> طرق الدفع</label>
+
+                <select class="form-select select2 select2-hidden-accessible  " id="paymentValue">
+
+                    @foreach ($pym as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                    @endforeach
+
+                </select>
+
+            <span class="btn btn-success p-1" onclick="addpyment()"> اضافة</span>
+            <div id="payment">
+
+                @foreach ($pay as $key => $item)
+                <div class="mb-1 input-group w-25">
+                    <span class="form-control">{{ $item->pym->name }}</span>
+                    <input hidden="" value="{{$item->pym->id}}" name="pys[]">
+                    <span onclick="remitem(this)" class="btn btn-danger">حذف</span>
+                </div>
+
+
+                @endforeach
+
+
+                @error('files')
+                    <span class="helper">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,16 +189,44 @@
         </form>
 
         <script>
-            function addFile() {
-                //   file.preventDefault();
-                let file = document.getElementById('files');
+            function addDev() {
+                let file = document.getElementById('dev');
                 let div = document.createElement("div")
-                div.innerHTML = "<div class='formLaple'><input class='form-input' name='files-" + file.children.length +
-                    "' placeholder='اسم الملف' /></div>";
+                let fileV = document.getElementById('devValue');
+
+
+                div.innerHTML = "<div class='mb-1 input-group w-25'><span class='form-control'>" + fileV.options[fileV.selectedIndex].text + "</span><input hidden  value='" + fileV.value + "'  name='devs[]' /><span onclick='remitem(this)' class='btn btn-danger'>حذف</span></div>";
+                file.append(div);
+
+
+
+            }
+
+
+
+
+            function addpyment() {
+                let file = document.getElementById('payment');
+                let fileV = document.getElementById('paymentValue');
+                let div = document.createElement("div")
+                div.innerHTML = "<div class='mb-1 input-group w-25'><span class='form-control'>" + fileV.options[fileV .selectedIndex].text + "</span><input hidden   value='" + fileV.value +  "'  name='pys[]' /><span onclick='remitem(this)' class='btn btn-danger'>حذف</span></div>";
                 file.append(div);
 
             }
+
+            function addFile() {
+                let file = document.getElementById('files');
+                let div = document.createElement("div")
+                div.innerHTML =  "<div class='mb-1 input-group w-25'><input class='form-control' name='files[]' placeholder='اسم الملف' /><span onclick='remitem(this)' class='btn btn-danger'>حذف</span></div>";
+                file.append(div);  }
+
+            function remitem(id) {
+                id.parentElement.remove();
+
+            }
         </script>
+
+
 
 
     </x-admin-contaner>

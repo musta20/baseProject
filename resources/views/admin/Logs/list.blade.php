@@ -24,7 +24,6 @@
             <thead class="table-dark">
                 <tr>
                     <th>#</th>
-                    <th>اسم الموظف</th>
                     <th>قسم الاجراء</th>
                     <th>نوع الاجراء</th>
                     <th>التاريخ</th>
@@ -32,17 +31,17 @@
                 </tr>
             </thead>
             @foreach ($AllLogs as $item)
-                <tr>
-                    <td></td>
-                    <td>{{ $item->causer_id }}</td>
-                    <td>{{ $item->log_name }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td>{{ $item->created_at }}</td>
-                    <td>
-                        <a href="/admin/Logs/{{ $item->id }}">عرض</a>
-                    </td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>{{ $item->id }}</td>
+                <td>{{ __($item->log_name) }}</td>
+                <td>{{ __($item->description) }}</td>
+                <td>{{ $item->created_at }}</td>
+                <td>
+                    <a href="/admin/Logs/{{ $item->id }}">عرض</a>
+
+                </td>
+            </tr>
+        @endforeach
         </table>
         {{ $AllLogs->links('admin.pagination.custom') }}
 

@@ -5,12 +5,11 @@
                     <!-- Topbar Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="{{url('admin/')}}" class="logo-light">
+                        <a href="{{ url('admin/') }}" class="logo-light">
                             <span class="logo-lg">
-                                
-                                @if ($setting->logo)
-                                <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
 
+                                @if ($setting->logo)
+                                    <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
                                 @else
                                     <i class="mdi mdi-account-circle me-1 fa-2x"></i>
                                 @endif
@@ -18,29 +17,29 @@
                             <span class="logo-sm">
 
                                 @if ($setting->logo)
-                                <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
-
+                                    <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
                                 @else
                                     <i class="mdi mdi-account-circle me-1 fa-2x"></i>
-                                @endif                            </span>
+                                @endif
+                            </span>
                         </a>
 
                         <!-- Logo Dark -->
-                        <a href="{{url('admin/')}}" class="logo-dark">
+                        <a href="{{ url('admin/') }}" class="logo-dark">
                             <span class="logo-lg">
                                 @if ($setting->logo)
-                                <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
-
+                                    <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
                                 @else
                                     <i class="mdi mdi-account-circle me-1 fa-2x"></i>
-                                @endif                            </span>
+                                @endif
+                            </span>
                             <span class="logo-sm">
                                 @if ($setting->logo)
-                                <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
-
+                                    <img src="{{ asset('storage/' . $setting->logo) }}" alt="logo" height="22">
                                 @else
                                     <i class="mdi mdi-account-circle me-1 fa-2x"></i>
-                                @endif                            </span>
+                                @endif
+                            </span>
                         </a>
                     </div>
 
@@ -112,7 +111,7 @@
                                             <h6 class="m-0 font-16 fw-semibold"> التنبيهات {{ getNotif()['all'] }}</h6>
                                         </div>
                                         <div class="col-auto">
-                                       {{--      <a href="{{url('admin/clearAllNotif')}}" class="text-dark text-decoration-underline">
+                                            {{--      <a href="{{url('admin/clearAllNotif')}}" class="text-dark text-decoration-underline">
                                                 <small>حذف الكل</small>
                                             </a> --}}
                                         </div>
@@ -120,15 +119,15 @@
 
                                             <h5 class="text-muted font-13 fw-normal mt-2">المهام</h5>
                                             @if (getNotif()['task']->isEmpty())
-                                            لا يوجد
-                                                
+                                                لا يوجد
                                             @endif
                                             @foreach (getNotif()['task'] as $item)
                                                 <a href="{{ url('/admin/MainTask') }}"
                                                     class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                                     <div class="card-body">
                                                         {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>   
- --}} <div class="d-flex align-items-center">
+ --}}
+                                                        <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0">
                                                                 <div class="notify-icon bg-primary">
                                                                     <i class="mdi mdi-comment-account-outline"></i>
@@ -145,14 +144,13 @@
                                                 </a>
                                             @endforeach
 
-
+                                                <hr>
                                             <h5 class="text-muted font-13 fw-normal mt-2">الرسائل</h5>
                                             @if (getNotif()['msg']->isEmpty())
-                                            لا يوجد
-                                                
+                                                لا يوجد
                                             @endif
                                             @foreach (getNotif()['msg'] as $item)
-                                                <a href="{{ url('/admin//inbox/2') }}"
+                                                <a href="{{ url('/admin/inbox/2') }}"
                                                     class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                                     <div class="card-body">
                                                         {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>   
@@ -352,7 +350,7 @@
                                 </div>
 
                                 <!-- All-->
-                           {{--      <a href="javascript:void(0);"
+                                {{--      <a href="javascript:void(0);"
                                     class="dropdown-item text-center text-primary notify-item border-top border-light py-2">
                                     عرض الجميع
                                 </a> --}}
@@ -443,12 +441,12 @@
                                     aria-haspopup="false" aria-expanded="false">
                                     <span class="account-user-avatar">
                                         @if (auth()->user()->img)
-                                        <img src="{{ url('storage/' . auth()->user()->img) }}" alt="user-image"
-                                        class="rounded-circle">        
+                                            <img src="{{ url('storage/' . auth()->user()->img) }}" alt="user-image"
+                                                class="rounded-circle">
                                         @else
                                             <i class="mdi mdi-account-circle me-1 fa-2x"></i>
                                         @endif
-                                       
+
                                     </span>
                                     <span>
                                         <span class="account-user-name"> {{ auth()->user()->name }}</span>
@@ -503,14 +501,15 @@
                     @endauth
                     <!-- Topbar Search Form -->
                     <div class="app-search dropdown">
-                        {{--              <form>
+                                     {{-- <form>
                             <div class="input-group">
-                                <input type="search" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
+                                <input type="search" class="form-control dropdown-toggle"
+                                 placeholder="Search..." id="top-search">
                                 <span class="mdi mdi-magnify search-icon"></span>
-                                <button class="input-group-text btn btn-primary" type="submit">Search</button>
+                                <button class="input-group-text btn btn-primary" type="submit">بحث</button>
                             </div>
                         </form> --}}
-
+{{-- 
                         <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
                             <!-- item-->
                             <div class="dropdown-header noti-title">
@@ -567,7 +566,7 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

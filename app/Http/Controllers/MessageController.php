@@ -70,9 +70,7 @@ class MessageController extends Controller
       
         }elseif($type==2){
              message::where('to',Auth::user()->id)->update(['isred' => 1]);
-
             $Messages = message::where('to',Auth::user()->id)->with('fromm')->latest()->paginate(10);
- 
         }
  
         return view("admin.messages.index")->with('Messages', $Messages)->with('type', $type);

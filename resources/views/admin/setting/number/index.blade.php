@@ -1,6 +1,7 @@
 <x-admin-layout>
 
     <h3>روابط التواصل</h3>
+    <hr>
 
     <x-admin-contaner>
 

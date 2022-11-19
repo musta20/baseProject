@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
+use App\Models\delivery;
+use App\Models\dev_to_serv;
+use App\Models\payment;
+use App\Models\pym_to_serv;
 use App\Models\RequiredFiles;
 use App\Models\services;
 use Illuminate\Http\Request;
@@ -69,8 +73,11 @@ class ServicesController extends Controller
     {
         $cat = category::get();
 
+        $pay = payment::get();
 
-        return view("admin.services.add", ["cat" => $cat]);
+        $delv = delivery::get();
+
+        return view("admin.services.add", ["cat" => $cat, "delv" => $delv, "pay" => $pay]);
     }
 
     /**
@@ -90,21 +97,43 @@ class ServicesController extends Controller
             "cat_id" => $data["cat_id"],
         ]);
 
-        $i = 0;
+        if($request['files']){
 
-        while (isset($request["files-" . $i])) {
+            foreach ($request['files'] as  $value) {
+            
             RequiredFiles::create([
-                'type' => 0, 
-
-                "name" => $request["files-" . $i], 
-
-                "service_id" => $services->id]);
-
-                $i=$i+1;
+                'type' => 0,
+                "name" => $value,
+                "service_id" => $services->id
+            ]);
         }
+        }
+        //pys
+
+        if($request['pys']){
+            foreach ($request['pys'] as  $value) {
+                pym_to_serv::create([
+                "pym_id" => $value,
+                "serv_id" => $services->id
+            ]);
+        }
+        }
+
+        if($request['devs']){
+            foreach ($request['devs'] as  $value) {
+                dev_to_serv::create([
+                "dev_id" => $value,
+                "serv_id" => $services->id
+            ]);
+        }
+        }
+
+
 
         return redirect('/admin/Services')->with('messages', 'تم إضافة البيانات');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -117,9 +146,17 @@ class ServicesController extends Controller
         $services = services::find($id);
         $cat = category::get();
         $catmy = category::find($services->cat_id);
-        $filesInput = RequiredFiles::where('type',0)->where('service_id', $services->id)->get();
+        $filesInput = RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
 
-        return view("admin.services.edit",  ['catmy'=>$catmy,'services' => $services, "cat" => $cat, 'filesInput' => $filesInput ]);
+        $dev = delivery::get();
+        $pym = payment::get();
+
+        $pay = pym_to_serv::where('serv_id',$services->id)->with('pym')->get();
+
+        $delv = dev_to_serv::where('serv_id',$services->id)->with('dev')->get();
+        
+
+        return view("admin.services.edit",  ['pym'=>$pym,'dev'=>$dev,'delv'=>$delv,'pay'=>$pay,'catmy' => $catmy, 'services' => $services, "cat" => $cat, 'filesInput' => $filesInput]);
     }
 
     /**
@@ -156,20 +193,51 @@ class ServicesController extends Controller
 
 
 
-        RequiredFiles::where('type' , 0)->where('service_id' ,  $services->id)->delete();
+        RequiredFiles::where('type', 0)->where('service_id',  $services->id)->delete();
+        dev_to_serv::where('serv_id',  $services->id)->delete();
+        pym_to_serv::where('serv_id',  $services->id)->delete();
 
 
-        $i = 0;
-
+/*         $i = 0;
         while (isset($request["files-" . $i])) {
             RequiredFiles::create([
-                'type' => 0, 
+                'type' => 0,
+                "name" => $request["files-" . $i],
+                "service_id" => $services->id
+            ]);
+            $i = $i + 1;
+        } */
 
-                "name" => $request["files-" . $i], 
 
-                "service_id" => $services->id]);
+        if($request['files']){
 
-                $i=$i+1;
+            foreach ($request['files'] as  $value) {
+            
+            RequiredFiles::create([
+                'type' => 0,
+                "name" => $value,
+                "service_id" => $services->id
+            ]);
+        }
+        }
+        //pys
+
+        if($request['pys']){
+            foreach ($request['pys'] as  $value) {
+                pym_to_serv::create([
+                "pym_id" => $value,
+                "serv_id" => $services->id
+            ]);
+        }
+        }
+
+        if($request['devs']){
+            foreach ($request['devs'] as  $value) {
+                dev_to_serv::create([
+                "dev_id" => $value,
+                "serv_id" => $services->id
+            ]);
+        }
         }
 
 

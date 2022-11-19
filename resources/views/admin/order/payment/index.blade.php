@@ -1,6 +1,7 @@
 <x-admin-layout>
 
     <h3>طريق الدفع</h3>
+    <hr>
 
     <x-admin-contaner>
         <x-card-message />

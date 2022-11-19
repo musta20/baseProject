@@ -15,10 +15,10 @@
             @foreach ($role as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->name }}</td>
+                    <td>{{__($item->name) }}</td>
                     <td class="table-action">
                         <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
-                                class="mdi mdi-pencil"></i></a>
+                                class="mdi  mdi-delete"></i></a>
                     </td>
                 </tr>
             @endforeach

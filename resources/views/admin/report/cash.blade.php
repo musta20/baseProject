@@ -66,11 +66,11 @@
                     <td>
                         @switch($item->type)
                             @case(0)
-                                قيد الانتظار
+                            مبالغ مدفوعة بالكامل                            
                             @break
 
                             @case(1)
-                                جاري العمل عليه
+                            مبالغ متبقية 
                             @break
 
                             @case(2)
@@ -78,17 +78,10 @@
                             @break
 
                             @case(3)
-                                تم التسليم
+                            
+                            مبالغ مستحقة غير مدفوعى                            
                             @break
-
-                            @case(6)
-                                عام
-                            @break
-
-                            @case(4)
-                                ملغي
-                            @break
-
+                            
                             @default
                         @endswitch
 

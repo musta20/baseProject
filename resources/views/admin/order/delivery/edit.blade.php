@@ -1,6 +1,7 @@
 <x-admin-layout>
 
     <h3>طرق التوصيل</h3>
+    <hr>
 
     <x-admin-contaner>
         <x-card-message></x-card-message>

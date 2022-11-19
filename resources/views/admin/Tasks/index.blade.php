@@ -1,7 +1,7 @@
 <x-admin-layout>
 
     <h3> المهام </h3>
-
+<hr>
     <x-admin-contaner>
 
         <x-card-message />

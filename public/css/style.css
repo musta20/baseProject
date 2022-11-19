@@ -214,7 +214,6 @@ form {
   text-shadow: none;
   color: #df1e00;
 }
-
 .formLaple label {
   padding: 0.2em;
 }
@@ -369,7 +368,6 @@ form {
 }
 
 .login {
-  background-color: #4dd0e1;
   display: flex;
   gap: 1.5em;
 }

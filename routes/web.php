@@ -25,6 +25,7 @@ use App\Http\Controllers\NotifyTypeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SalesTypeController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasksNotifyController;
 
@@ -43,10 +44,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
 
-Route::get('/admin2', function ()
+/* Route::get('/admin2', function ()
 {
    return view('dash.index');
-});
+}); */
 
 Route::get('/',[mainSite::class, 'index']);
 Route::get('/category',[mainSite::class, 'category']);
@@ -97,14 +98,33 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     });
 
-
     
+    Route::post('search',[SearchController::class,'search']);
+    Route::get('Search', function () {
+        return view('admin.search.index');
+        //        return redirect('admin/MainTask');
+
+    });
+
 
     Route::group(['middleware' => ['permission:Task']], function () {
 
         Route::get('MainTask', [TasksController::class, 'MainTask'])->name('admin.MainTask');
         Route::get('ShowTask/{id}', [TasksController::class, 'ShowTask'])->name('admin.ShowTask');
         Route::post('EditTask/{id}', [TasksController::class, 'EditTask'])->name('admin.EditTask');
+
+
+        Route::get('showMyNotifyTask/{type}', [TasksController::class,'showMyNotifyTask']);
+        Route::get('editMyNotifyTask/{type}', [TasksController::class,'editMyNotifyTask']);
+        Route::post('postMyNotifyTask/{id}', [TasksController::class,'postMyNotifyTask']);
+
+
+        Route::get('showmysale/{type}', [TasksController::class,'showmysale']);
+        Route::get('editmysale/{type}', [TasksController::class,'editmysale']);
+        Route::post('postmysale/{id}', [TasksController::class,'postmysale']);
+
+
+
 
     });
 
@@ -117,6 +137,18 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
         Route::resource('SalesType', SalesTypeController::class);
 
         Route::resource('TasksNotify', TasksNotifyController::class);
+
+
+
+
+
+
+
+
+
+
+
+
         
         Route::resource('NotifyType', NotifyTypeController::class);
         
@@ -238,8 +270,19 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::get('orderReport/', [ReportController::class, 'orderReport'])->name('Report.orderReport');
 
+        Route::get('billReportView/', [ReportController::class, 'billReportView'])->name('Report.billReportView');
         Route::get('billReport/', [ReportController::class, 'billReport'])->name('Report.billReport');
 
         Route::get('cashReport/', [ReportController::class, 'cashReport'])->name('Report.cashReport');
+
+
+       // printCreateBill
+
+        
+        Route::post('postCreateBill/', [ReportController::class, 'postCreateBill'])->name('Report.postCreateBill');
+        Route::get('createBill/', [ReportController::class, 'createBill'])->name('Report.createBill');
+
+
+        
     });
 });

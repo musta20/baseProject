@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->job_id }}</td>
+                    <td>{{ $item->job->title }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td class="cellControll">
                         <a href="{{ url('/admin/JobApp/' . $item->id) }}">

@@ -105,7 +105,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/Users') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ url('admin/UsersList') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
         </form>

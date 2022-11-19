@@ -13,5 +13,8 @@ class job_app extends Model
 
     protected $table = "job_apps";
 
-
+    public function job()
+    {
+        return $this->belongsTo(jobs::class,'job_id','id');
+    }
 }

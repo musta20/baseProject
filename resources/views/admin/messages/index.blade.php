@@ -10,7 +10,7 @@
                     <h3>صندوق الوارد</h3>
                 @endif
             </div>
-
+<hr>
     
     
         </div>
@@ -41,11 +41,11 @@
                 class={{$type==2 ? "text-danger fw-bold" : ""}}>
 
                 <i class="ri-mail-send-line me-2"></i>الرسائل المرسلة</a>
-                <a
+{{--                 <a
                 href="{{ url('/admin/inbox/3') }}"
                 class={{$type==3 ? "text-danger fw-bold" : ""}}
 
-                 ><i class="ri-delete-bin-line me-2"></i>سلة المحذوفات</a>
+                 ><i class="ri-delete-bin-line me-2"></i>سلة المحذوفات</a> --}}
 
             </div>
 
@@ -106,15 +106,19 @@
                     @foreach ($Messages as $key => $item)
 
                     <li>
+
                         <div class="email-sender-info">
-                            <div class="checkbox-wrapper-mail">
+
+{{--                             <div class="checkbox-wrapper-mail">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="mail20">
                                     <label class="form-check-label" for="mail20"></label>
                                 </div>
-                            </div>
-                            <span class="star-toggle mdi mdi-star-outline"></span>
-                            <a href="javascript: void(0);" class="email-title">
+                            </div> --}}
+
+
+{{--                             <span class="star-toggle mdi mdi-star-outline"></span>
+ --}}                            <a href="javascript: void(0);" class="email-title">
                                 @if ($type == 1)
                                 {{ $item->too->name }}
                         @else

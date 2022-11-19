@@ -2,57 +2,72 @@
             <div class="leftside-menu">
 
                 <!-- Logo Light -->
-                <a href="{{url('admin/')}}"class="logo logo-light">
+                <a href="{{ url('admin/') }}"class="logo logo-light">
                     <span class="logo-lg ">
-                        <img class=''src="{{asset('storage/'.$setting->logo)}}" 
-                        alt="logo" height="66">
+                        <img 
+                        src="{{ asset('storage/' . $setting->logo) }}" 
+                        alt="logo" 
+                        height="55">
                     </span>
                     <span class="logo-sm ">
-                        <img class='' src="{{asset('storage/'.$setting->logo)}}"
-                         alt="small logo" height="66">
+                        <img 
+                        src="{{ asset('storage/' . $setting->logo) }}" 
+                        alt="small logo" 
+                        height="22">
                     </span>
                 </a>
-                <style>
-                     .logoImge {
-    background-color: #e6d2bd;
-    border: 1px solid #745635;
-    padding: 1px;
-    border-radius: 5px;
-}
-                </style>
+
                 <!-- Logo Dark -->
-                <a href="{{url('admin/')}}" class="logo logo-dark">
-                    <span class="logo-sm ">
-                        <img class='' src="{{asset('storage/'.$setting->logo)}}" 
-                        alt="dark logo" height="66">
+                <a href="{{ url('admin/') }}" class="logo logo-dark">
+                    <span class="logo-lg ">
+                        <img src="{{ asset('storage/' . $setting->logo) }}" alt="dark logo" height="55">
                     </span>
                     <span class="logo-sm ">
-                        <img class='' src="{{asset('storage/'.$setting->logo)}}" 
-                        alt="small logo" height="66">
+                        <img src="{{ asset('storage/' . $setting->logo) }}" alt="small logo" height="22">
                     </span>
                 </a>
 
                 <!-- Sidebar Hover Menu Toggle Button -->
-                <button type="button" class="btn button-sm-hover p-0" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Show Full Sidebar">
+                <button type="button" class="btn button-sm-hover p-0" data-bs-toggle="tooltip"
+                    data-bs-placement="right" aria-label="Show Full Sidebar">
                     <i class="ri-checkbox-blank-circle-line align-middle"></i>
                 </button>
 
                 <!-- Sidebar -left -->
-                <div class="h-100" id="leftside-menu-container" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="left: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;"><div class="simplebar-content" style="padding: 0px;">
-                    <!-- Leftbar User -->
-                    <div class="leftbar-user">
-                        <a href="{{url('admin/')}}">
-                            <img src="{{asset('Dashboard/avatar-1.jpg')}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name">{{ auth()->user()->name }} </span>
-                        </a>
-                    </div>
+                <div class="h-100" id="leftside-menu-container" data-simplebar="init">
+                    <div class="simplebar-wrapper" style="margin: 0px;">
+                        <div class="simplebar-height-auto-observer-wrapper">
+                            <div class="simplebar-height-auto-observer"></div>
+                        </div>
+                        <div class="simplebar-mask">
+                            <div class="simplebar-offset" style="left: 0px; bottom: 0px;">
+                                <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                    aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+                                    <div class="simplebar-content" style="padding: 0px;">
+                                        <!-- Leftbar User -->
+                                        <div class="leftbar-user">
+                                            <a href="{{ url('admin/') }}">
+                                                <span class="account-user-avatar">
+                                                    @if (auth()->user()->img)
+                                                        <img src="{{ url('storage/' . auth()->user()->img) }}"
+                                                            alt="user-image" height="42"
+                                                            class="rounded-circle shadow-sm">
+                                                    @else
+                                                        <i class="mdi mdi-account-circle me-1 fa-2x"></i>
+                                                    @endif
 
-                    <!--- Sidemenu -->
-                    <ul class="side-nav">
+                                                </span>
 
-                        <li class="side-nav-title side-nav-item"></li>
+                                                <span class="leftbar-user-name">{{ auth()->user()->name }} </span>
+                                            </a>
+                                        </div>
 
-{{--                         <li class="side-nav-item">
+                                        <!--- Sidemenu -->
+                                        <ul class="side-nav">
+
+                                            <li class="side-nav-title side-nav-item"></li>
+
+                                            {{--                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="https://coderthemes.com/hyper_2/saas/index-rtl.html#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span class="badge bg-success float-end">5</span>
@@ -79,371 +94,340 @@
                             </div>
                         </li>
  --}}
-                        <li class="side-nav-title side-nav-item">الادارة اليومية</li>
+                                            <li class="side-nav-title side-nav-item">الادارة اليومية</li>
 
-     {{--                    <li class="side-nav-item">
+                                            {{--                    <li class="side-nav-item">
                             <a href="https://coderthemes.com/hyper_2/saas/apps-calendar.html" class="side-nav-link">
                                 <i class="uil-calender"></i>
                                 <span> التقويم </span>
                             </a>
                         </li> --}}
 
-                        @can('Task')
-
-
                         <li class="side-nav-item">
-                            <a
-                            href="{{url('/admin/MainTask')}}"                                         
-                             
-                             class="side-nav-link">
-                                <i class="uil uil-tachometer-fast"></i>
-                                <span> المهام </span>
+
+                            <a href="{{ url('admin/') }}" class="side-nav-link">
+                                <i class="mdi mdi-home home-icon"></i>
+                                <span> الرئيسية </span>
+
                             </a>
                         </li>
 
-                        @endcan
+                                            <li class="side-nav-item">
 
-                        @can('Massages')
+                                                <a href="{{ url('admin/Search') }}" class="side-nav-link">
+                                                    <i class="mdi mdi-magnify search-icon"></i>
+                                                    <span> البحث </span>
 
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse"
-                            href="#sidebarCrm"                             
-                            aria-expanded="false" aria-controls="sidebarCrm" class="side-nav-link">
-                                <i class="uil-envelope"></i>
+                                                </a>
+                                            </li>
 
-                            <span> الرسائل </span>
-                            <span class="menu-arrow"></span>
+                                            @can('Task')
+                                                <li class="side-nav-item">
 
-                            </a>
-                            <div class="collapse" id="sidebarCrm">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/inbox/2')}}"                                         
-                                          >صندوق الوارد</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/inbox/1')}}"                                         
-                                        
-                                        >الرسائل المرسلة</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/Messages/create')}}"                                         
-                                        >انشاء رسالة</a>
-                                    </li>
-                                   
-                                </ul>
-                            </div>
-                        </li>
+                                                    <a data-bs-toggle="collapse" href="#SidebarMyTask" aria-expanded="false"
+                                                        aria-controls="sidebarCrm" class="side-nav-link">
+                                                        <i class="uil uil-tachometer-fast"></i>
+                                                        <span> المهام </span>
+                                                        <span class="menu-arrow"></span>
 
-                        @endcan
+                                                    </a>
 
 
-                        @can('TaskMangment')
-
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse"
-                             href="#sidebarEmail" 
-
-                            aria-expanded="false" aria-controls="sidebarEmail" class="side-nav-link">
-                            <i class="uil-comments-alt"></i>
-                            <span> ادارة المهام </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarEmail">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/Task')}}"                                         
-                                        >مهام داخلية</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/TasksNotify')}}"                                         
-                                        
-                                        >التنبيهات</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/NotifySales')}}"                                         
-                                         
-                                         >مهام المبيعات</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        @endcan
 
 
-                        @can('Category/Services')
 
 
-                        <li class="side-nav-title side-nav-item">ادارة العملاء</li>
 
-                        @endcan
-
-                        @can('Order')
-
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" 
-                            href="#sidebarEcommerce" 
-                            aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
-                                <i class="uil-store"></i>
-                                <span> إدارة الطلبات </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarEcommerce">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/showOrderList/0')}}"                                         
-                                         > طلبات جديدة</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/showOrderList/1')}}"                                         
-                                        >طلبات مستلمة</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/showOrderList/2')}}"                                         
-                                        >طلبات مكتملة</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/showOrderList/3')}}"                                         
-                                        >طلبات مسلمة</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/showOrderList/4')}}"                                         
-                                        >طلبات ملغية</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/Payment')}}"                                         
-                                         >ادارة طرق الدفع</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/Delivery')}}"                                         
-                                        >ادارة طرق التوصيل</a>
-                                    </li>
-                     
-                                </ul>
-                            </div>
-                        </li>
-                        @endcan
-
-                        @can('Reviews')
-
-                        <li class="side-nav-item">
-                            <a 
-                            href="{{url('/admin/Clients')}}"                                         
-                            
-                            class="side-nav-link">
-                                <i class="uil-folder-plus"></i>
-                                <span> اراء العملاء </span>
-                            </a>
-                        </li>
-
-                        @endcan
-
-                        @can('Category/Services')
-
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse"
-                             href="#sidebarProjects" 
-                            aria-expanded="false" aria-controls="sidebarProjects" class="side-nav-link">
-                                <i class="uil-briefcase"></i>
-                                <span> الخدمات و التصنيفات </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarProjects">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a
-                                        
-                                        href="{{url('/admin/Services')}}"                                         
-                                        
-                                        >الخدمات</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/Category')}}"                                         
-                                         
-                                         >التصنيفات</a>
-                                    </li>
-                                
-                             
-                                </ul>
-                            </div>
-                        </li>
-
-                        @endcan
-
-                        @can('Logs')
-
-                        <li class="side-nav-item">
-                            <a
-                            
-                            href="{{url('/admin/Logs')}}"                                         
-                            
-                            class="side-nav-link">
-                                <i class="uil-rss"></i>
-                                <span> التتبع </span>
-                            </a>
-                        </li>
-
-                        @endcan
-
-                        @can('Report')
-
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#ReportMangment" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
-                                <i class="uil-chart"></i>
-                                <span> ادارة التقارير </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="ReportMangment">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/orderReport')}}"                                         
-                                        >تقارير العمليات</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/cashReport')}}"                                         
-                                        >تقارير الحسابات</a>
-                                    </li>
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/billReport')}}"                                         
-                                        >الفواتير</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        @endcan
-
-                        @can('jobs')
+                                                    {{--                <a href="{{ url('/admin/MainTask') }}" class="side-nav-link">
+                                                        <i class="uil uil-tachometer-fast"></i>
+                                                        <span> المهام </span>
+                                                    </a> --}}
 
 
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#JobMangemnt" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
-                                <i class="uil-package"></i>
-                                <span> ادارة التوظيف </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="JobMangemnt">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a 
-                                        
-                                        href="{{url('/admin/Jobs')}}"                                         
-                                        
-                                        >جميع الوظائف</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/JobApp')}}"                                         
-                                        >طلبات التوظيف</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/JobCity')}}"                                         
-                                         >مناطق التوظيف</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                                                    <div class="collapse" id="SidebarMyTask">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/MainTask') }}">المهام الداخلية </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/showMyNotifyTask/1') }}">
+                                                                    تنبيهات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/showmysale/1') }}">
+                                                                    مهام المبيعات</a>
+                                                            </li>
 
-                        @endcan
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
 
-                        @can('Users')
+                                            @can('Massages')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#sidebarCrm" aria-expanded="false"
+                                                        aria-controls="sidebarCrm" class="side-nav-link">
+                                                        <i class="uil-envelope"></i>
 
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#userMangement" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
-                                <i class="uil-clipboard-alt"></i>
-                                <span> ادارة المستخدمين </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="userMangement">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/perm')}}"                                         
-                                         
-                                         >ادارة الصلاحيات</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/UsersList')}}"                                         
-                                         >جميع الموظفين</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/Users/create')}}"                                         
-                                         >اضافة موظف جديد</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                                                        <span> الرسائل </span>
+                                                        <span class="menu-arrow"></span>
 
-                        @endcan
+                                                    </a>
+                                                    <div class="collapse" id="sidebarCrm">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/inbox/2') }}">صندوق الوارد</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/inbox/1') }}">الرسائل المرسلة</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/Messages/create') }}">انشاء
+                                                                    رسالة</a>
+                                                            </li>
 
-                        @can('Setting')
-
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#SettingSideBar" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
-                                <i class="ri-settings-3-line noti-icon"></i>
-                                <span>  اعداد الموقع </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="SettingSideBar">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/basic')}}"                                         
-                                        >اعداد الموقع الاساسبة</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/CustmerSlide')}}"                                         
-                                         >العملاء</a>
-                                    </li>
-                                    <li>
-                                        <a
-                                        href="{{url('/admin/Slide')}}"                                         
-                                         
-                                         >السلايدات</a>
-                                    </li>
-
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/Number')}}"                                         
-                                        
-                                        >عرض الاحصائات</a>
-                                    </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
 
 
-                                    <li>
-                                        <a 
-                                        href="{{url('/admin/Social')}}"                                         
-                                        >وسائل التواصل</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                                            @can('TaskMangment')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#sidebarEmail" aria-expanded="false"
+                                                        aria-controls="sidebarEmail" class="side-nav-link">
+                                                        <i class="uil-comments-alt"></i>
+                                                        <span> ادارة المهام </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarEmail">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/Task') }}">مهام داخلية</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/TasksNotify') }}">التنبيهات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/NotifySales') }}">مهام
+                                                                    المبيعات</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
 
-                        @endcan
+
+                                            @can('Category/Services')
+                                                <li class="side-nav-title side-nav-item">ادارة العملاء</li>
+                                            @endcan
+
+                                            @can('Order')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#sidebarEcommerce"
+                                                        aria-expanded="false" aria-controls="sidebarEcommerce"
+                                                        class="side-nav-link">
+                                                        <i class="uil-store"></i>
+                                                        <span> إدارة الطلبات </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarEcommerce">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/showOrderList/0') }}"> طلبات
+                                                                    جديدة</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/showOrderList/1') }}">طلبات
+                                                                    مستلمة</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/showOrderList/2') }}">طلبات
+                                                                    مكتملة</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/showOrderList/3') }}">طلبات
+                                                                    مسلمة</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/showOrderList/4') }}">طلبات
+                                                                    ملغية</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/Payment') }}">ادارة طرق الدفع</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/Delivery') }}">ادارة طرق
+                                                                    التوصيل</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
+
+                                            @can('Reviews')
+                                                <li class="side-nav-item">
+                                                    <a href="{{ url('/admin/Clients') }}" class="side-nav-link">
+                                                        <i class="uil-folder-plus"></i>
+                                                        <span> اراء العملاء </span>
+                                                    </a>
+                                                </li>
+                                            @endcan
+
+                                            @can('Category/Services')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#sidebarProjects"
+                                                        aria-expanded="false" aria-controls="sidebarProjects"
+                                                        class="side-nav-link">
+                                                        <i class="uil-briefcase"></i>
+                                                        <span> الخدمات و التصنيفات </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarProjects">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/Services') }}">الخدمات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/Category') }}">التصنيفات</a>
+                                                            </li>
 
 
-      {{--                   <li class="side-nav-title side-nav-item">Custom</li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
+
+                                            @can('Logs')
+                                                <li class="side-nav-item">
+                                                    <a href="{{ url('/admin/Logs') }}" class="side-nav-link">
+                                                        <i class="uil-rss"></i>
+                                                        <span> التتبع </span>
+                                                    </a>
+                                                </li>
+                                            @endcan
+
+                                            @can('Report')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#ReportMangment"
+                                                        aria-expanded="false" aria-controls="sidebarTasks"
+                                                        class="side-nav-link">
+                                                        <i class="uil-chart"></i>
+                                                        <span> ادارة التقارير </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="ReportMangment">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/orderReport') }}">تقارير
+                                                                    العمليات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/cashReport') }}">تقارير
+                                                                    الحسابات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/billReportView') }}">الفواتير</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/createBill') }}">انشاء فاتورة
+                                                                    عميل</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
+
+                                            @can('jobs')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#JobMangemnt"
+                                                        aria-expanded="false" aria-controls="sidebarTasks"
+                                                        class="side-nav-link">
+                                                        <i class="uil-package"></i>
+                                                        <span> ادارة التوظيف </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="JobMangemnt">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/Jobs') }}">جميع الوظائف</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/JobApp') }}">طلبات التوظيف</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/JobCity') }}">مناطق التوظيف</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
+
+                                            @can('Users')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#userMangement"
+                                                        aria-expanded="false" aria-controls="sidebarTasks"
+                                                        class="side-nav-link">
+                                                        <i class="uil-clipboard-alt"></i>
+                                                        <span> ادارة المستخدمين </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="userMangement">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/perm') }}">ادارة الصلاحيات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/UsersList') }}">جميع الموظفين</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/Users/create') }}">اضافة موظف
+                                                                    جديد</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
+
+                                            @can('Setting')
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#SettingSideBar"
+                                                        aria-expanded="false" aria-controls="sidebarTasks"
+                                                        class="side-nav-link">
+                                                        <i class="ri-settings-3-line noti-icon"></i>
+                                                        <span> اعداد الموقع </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="SettingSideBar">
+                                                        <ul class="side-nav-second-level">
+                                                            <li>
+                                                                <a href="{{ url('/admin/basic') }}">اعداد الموقع
+                                                                    الاساسبة</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/CustmerSlide') }}">العملاء</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ url('/admin/Slide') }}">السلايدات</a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="{{ url('/admin/Number') }}">عرض الاحصائات</a>
+                                                            </li>
+
+
+                                                            <li>
+                                                                <a href="{{ url('/admin/Social') }}">وسائل التواصل</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            @endcan
+
+
+                                            {{--                   
+                                                <li class="side-nav-title side-nav-item">Custom</li>
 
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="https://coderthemes.com/hyper_2/saas/index-rtl.html#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
@@ -958,11 +942,11 @@
                                 </ul>
                             </div>
                         </li> --}}
-                    </ul>
-                    <!--- End Sidemenu -->
+                                        </ul>
+                                        <!--- End Sidemenu -->
 
-                    <!-- Help Box -->
-   {{--                  <div class="help-box text-white text-center">
+                                        <!-- Help Box -->
+                                        {{--                  <div class="help-box text-white text-center">
                         <a href="javascript: void(0);" class="float-end close-btn text-white">
                             <i class="mdi mdi-close"></i>
                         </a>
@@ -971,18 +955,51 @@
                         <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
                         <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>
                     </div> --}}
-                    <!-- end Help Box -->
+                                        <!-- end Help Box -->
 
-                    <div class="clearfix"></div>
+                                        <div class="clearfix"></div>
 
-                </div></div></div></div>
-                <div class="simplebar-placeholder" style="width: auto; height: 1518px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="simplebar-placeholder" style="width: auto; height: 1518px;"></div>
 
-            </div>
-            
-            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
-                <div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div>
-            </div><div class="simplebar-track simplebar-vertical" style="visibility: visible;">
-                    <div class="simplebar-scrollbar " style="height: 134px; transform: translate3d(0px, 300px, 0px); display: block;"></div></div></div>
+                    </div>
+
+                    <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                        <div class="simplebar-scrollbar simplebar-visible" style="width: 0px; display: none;"></div>
+                    </div>
+                    <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                        <div class="simplebar-scrollbar "
+                            style="height: 134px; transform: translate3d(0px, 300px, 0px); display: block;"></div>
+                    </div>
+                </div>
             </div>
             <!-- ========== Left Sidebar End ========== -->
+            <style>
+                a:has(> i.mdi-pencil) {
+                    /* styles to apply to the li tag */
+                    font-size: 20px !important;
+
+                    color: #26a338;
+                    margin-right: 0.75rem !important;
+                }
+
+                a:has(> i.mdi-delete) {
+                    /* styles to apply to the li tag */
+                    font-size: 20px !important;
+
+                    color: #c42727;
+                    margin-right: 0.75rem !important;
+                }
+
+
+                * {
+                    transition: .4s all ease-in !important;
+                }
+
+                /* html[data-sidenav-color=light] .logo.logo-light {
+    display: block !important;
+} */
+            </style>

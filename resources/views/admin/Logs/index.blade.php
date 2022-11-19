@@ -31,17 +31,17 @@
                 </tr>
             </thead>
             @foreach ($AllLogs as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->log_name }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td>{{ $item->created_at }}</td>
-                    <td>
-                        <a href="/admin/Logs/{{ $item->id }}">عرض</a>
+            <tr>
+                <td>{{ $item->id }}</td>
+                <td>{{ __($item->log_name) }}</td>
+                <td>{{ __($item->description) }}</td>
+                <td>{{ $item->created_at }}</td>
+                <td>
+                    <a href="/admin/Logs/{{ $item->id }}">عرض</a>
 
-                    </td>
-                </tr>
-            @endforeach
+                </td>
+            </tr>
+        @endforeach
         </table>
         {{ $AllLogs->links('admin.pagination.custom') }}
 

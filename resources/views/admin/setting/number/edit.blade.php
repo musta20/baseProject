@@ -1,6 +1,7 @@
 <x-admin-layout>
 
-    <h3> اضافة رقم</h3>
+    <h3>  تعديل عنصر</h3>
+    <hr>
 
     <x-admin-contaner>
         <x-card-message></x-card-message>

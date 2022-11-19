@@ -24,7 +24,17 @@
 
                     <tr>
                         <td> الحالة  : </td>
-                        <td>{{ $client->status }}</td>
+                        <td>@switch($client->status)
+                            @case(1)
+                             مخفي
+                                
+                                @break
+                            @case(2)
+                                تم العرض
+                                @break
+                            @default
+                                
+                        @endswitch</td>
                     </tr>
                     <tr>
                         <td> تاريخ التقييم  : </td>
@@ -45,14 +55,14 @@
                         <select class="form-select select2 select2-hidden-accessible w-25" name="status">
                             @switch($client->status)
                                 @case('1')
-                                    <option value="1">غير ظاهر </option>
+                                    <option value="1"> مخفي </option>
                                     <option value="2"> تم العرض</option>
                                 @break
 
                                 @case('2')
                                     <option value="2"> تم العرض</option>
 
-                                    <option value="1">غير ظاهر </option>
+                                    <option value="1"> مخفي </option>
                                 @break
 
                                 @default

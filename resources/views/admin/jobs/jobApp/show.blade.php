@@ -12,7 +12,7 @@
             <tr>
             </tr>
             <th>الوظيفة </th>
-            <td>{{ $job->job_id }}</td>
+            <td>{{ $job->job->title }}</td>
             </tr>
 
             </tr>
