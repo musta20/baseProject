@@ -18,9 +18,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\message::factory(20)->create();
         // \App\Models\clients::factory(20)->create();
         // \App\Models\Report::factory(20)->create();
-
       //  \App\Models\TasksNotify::factory(10)->create();
-      \App\Models\Tasks::factory(10)->create();
+
+      $this->call([
+        settingSeeder::class,
+        permissionSeeder::class,
+        userSeeder::class
+      ]);
+      // \App\Models\Tasks::factory(10)->create();
 
     }
 }

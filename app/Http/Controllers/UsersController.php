@@ -181,80 +181,12 @@ public function addpermison()
 
     public function createAllPerm()
     {
-        setting::create([
-            "title"=>"سدنه",
-            "des"=>"سدنه للخدمات الفانونية و الخدمات الحكومية و المؤسسات",
-            "keyword"=>"محامات , مؤسسات ,شركات",
-            "map"=>"https://www.google.com/maps/search/olds+lad'/@27.5248233,41.1334047,10z?hl=en",
-            "billterm"=>"
-            1-لا يمكن استرجاع المبلغ بعد اعتماد الطلب
-            2-يمكن التعديل على الطلب بعد ثلاث ايام من الاعتماد
-            للشكاوي و الاقتراحات : 0536576138
-            ",
-            "weekwork"=>"dsada",
-            "terms"=>"
-            1-لا يمكن استرجاع المبلغ بعد اعتماد الطلب
-            2-يمكن التعديل على الطلب بعد ثلاث ايام من الاعتماد
-            للشكاوي و الاقتراحات : 0536576138
-            ",
-            'copyright'=>'© 2022 - سدنه للخدمات الفانونية و الخدمات الحكومية و المؤسسات',
-            'logo'=>'logo.png',
-            "phone"=>"0536576138",
-            "email"=>"info@sadana.info",
-            "adress"=>"مؤسسة سليمان باسم الدلالي للخدمات الطلابية - حائل-  شارع المطار - بالقرم من فرع الراجحي",
-            "footer"=>"footer",
-            "footertext"=>"footertext"
+      
         
-        ]);
-      //  dd("ok");
 
-        $Admin = Role::create(['name' => $this->ADMIN]);
-        $Manger = Role::create(['name' => $this->MANGER]);
-        $Worker = Role::create(['name' => $this->WORKER]);
+       // $user = User::create(['email' => 'saif.muh2020@gmail.com', 'name' => 'مصطفى', 'password' => Hash::make('Aa@123456')]);
 
-        $Massages = Permission::create(['name' => 'Massages']);
-        $Order = Permission::create(['name' => 'Order']);
-        $CategoryServices = Permission::create(['name' => 'Category/Services']);
-        $Setting = Permission::create(['name' => 'Setting']);
-        $Users = Permission::create(['name' => 'Users']);
-        $jobs = Permission::create(['name' => 'jobs']);
-        $Logs = Permission::create(['name' => 'Logs']);
-        $Employee = Permission::create(['name' => 'Employee']);
-        $Reviews = Permission::create(['name' => 'Reviews']);
-        $task = Permission::create(['name' => 'Task']);
-        $TaskMangment = Permission::create(['name' => 'TaskMangment']);
-        $Report = Permission::create(['name' => 'Report']);
-
-
-
-        
-        $Worker->givePermissionTo($Massages);
-
-        $Worker->givePermissionTo($Order);
-
-
-        $Manger->givePermissionTo($Massages);
-        $Manger->givePermissionTo($Order);
-        $Manger->givePermissionTo($CategoryServices);
-        $Manger->givePermissionTo($jobs);
-
-
-        $Admin->givePermissionTo($Massages);
-        $Admin->givePermissionTo($Order);
-        $Admin->givePermissionTo($CategoryServices);
-        $Admin->givePermissionTo($Setting);
-        $Admin->givePermissionTo($Users);
-        $Admin->givePermissionTo($jobs);
-        $Admin->givePermissionTo($Report);
-
-        $Admin->givePermissionTo($Logs);
-        $Admin->givePermissionTo($Employee);
-        $Admin->givePermissionTo($Reviews);
-        $Admin->givePermissionTo($task);
-
-        $user = User::create(['email' => 'saif.muh2020@gmail.com', 'name' => 'مصطفى', 'password' => Hash::make('Aa@123456')]);
-
-        $user->assignRole($this->ADMIN);
+      //  $user->assignRole($this->ADMIN);
 
 
         return ("<h1>all perm added and admin created</h1>");
