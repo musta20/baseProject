@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class message extends Model
@@ -24,6 +25,11 @@ class message extends Model
         return $this->morphOne(User::class, 'userable');
     } */
 
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
+    }
+    
     public function too()
     {
         return $this->belongsTo(User::class,'to','id');

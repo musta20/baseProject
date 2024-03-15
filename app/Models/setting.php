@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class setting extends Model
@@ -16,5 +17,13 @@ class setting extends Model
     protected static $logAttributes = ['title', 'des', 'keyword', 'map', 'terms', 'phone', 'adress', 'email', 'billterm', 'footer', 'footertext'];
 
     protected static $logName = 'setting';
+
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
+    }
+
+
 
 }
