@@ -66,11 +66,14 @@ class MessageController extends Controller
         if(!$type){ redirect("/admin/AllMessages"); }
 
         if($type==1){
-            $Messages = message::where('from',Auth::user()->id)->with('too')->latest()->paginate(10);
+            
+            $Messages = message::where('from',Auth::user()->id)->with('toUser')->latest()->paginate(10);
       
         }elseif($type==2){
-             message::where('to',Auth::user()->id)->update(['isred' => 1]);
-            $Messages = message::where('to',Auth::user()->id)->with('fromm')->latest()->paginate(10);
+
+            message::where('to',Auth::user()->id)->update(['isred' => 1]);
+
+            $Messages = message::with('fromUser')->where('to',Auth::user()->id)->latest()->paginate(10);
         }
  
         return view("admin.messages.index")->with('Messages', $Messages)->with('type', $type);
@@ -114,7 +117,9 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate( $this->rule,$this->messages());
+        
         $data['from']=Auth::user()->id;
+
         $data['isred']=0;
         
         message::create($data);
@@ -130,16 +135,14 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        $message = message::find($id);
+        $message = message::with('fromUser','toUser')->find($id);
 
         if($message->from !=Auth::user()->id And $message->to !=Auth::user()->id)
         {
             return redirect('/admin/inbox/1')->with('messages','حدث خطء ');
         }
 
-        $message->with('too');
 
-        $message->with('fromm');
 
         return view("admin.messages.show",  ['message' =>$message ] );
 

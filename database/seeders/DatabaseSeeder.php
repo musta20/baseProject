@@ -13,17 +13,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-         //\App\Models\order::factory(10)->create();
-        // \App\Models\message::factory(20)->create();
-        // \App\Models\clients::factory(20)->create();
-        // \App\Models\Report::factory(20)->create();
-      //  \App\Models\TasksNotify::factory(10)->create();
+
 
       $this->call([
         settingSeeder::class,
         permissionSeeder::class,
-        userSeeder::class
+        userSeeder::class,
+        clientsSeeder::class,
+        deliverySeeder::class,
+        paymentSeeder::class,
+        servicesSeeder::class,
+        orderSeeder::class,
+        MessageSeeder::class,
+        reportSeeder::class,
+        taskSeeder::class,
+        NotifySalesSeeder::class,
+        categorySeeder::class,
+        NotifyTypeSeeder::class,
       ]);
       // \App\Models\Tasks::factory(10)->create();
 

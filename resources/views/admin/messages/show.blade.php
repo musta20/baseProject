@@ -11,14 +11,14 @@
             <div class=" px-3 pt-3 pb-0">       
                 <div class="mb-2">
                     <label for="msgto" class="form-label">من</label>    
-               <div class="conversation-text">{{ $message->fromm->name }}</div> 
+               <div class="conversation-text">{{ $message->fromUser->name }}</div> 
                 </div>
 
             </div>
             <div class=" px-3 pt-3 pb-0">       
                 <div class="mb-2">
                     <label for="msgto" class="form-label">الى</label>    
-               <div class="conversation-text">{{ $message->too->name }}</div> 
+               <div class="conversation-text">{{ $message->toUser->name }}</div> 
                 </div>
 
             </div>  

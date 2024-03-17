@@ -11,6 +11,7 @@ class CategoryController extends Controller
 
     public $rule = [
         "title" => "required|string|max:100|min:3",
+
         "des" => "required|string|max:255|min:3",
         
         "icon" => "required|string|max:255|min:3",
@@ -54,8 +55,7 @@ class CategoryController extends Controller
     public function index()
     {
         $allcategory = category::latest()->paginate(10);
-       // dd( $allcategory);
-       //Services
+
         return view("admin.category.index",  ['allcategory' => $allcategory] );
     }
     /**
@@ -110,8 +110,6 @@ class CategoryController extends Controller
     {
         dd($id);
 
-        //category
-
     }
 
     /**
@@ -123,11 +121,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request,$id)
     {
-        //
-       // dd($request);
 
-
-        $data = $request->validate( $this->rule,$this->messages());
+        $request->validate( $this->rule,$this->messages());
         $category = category::find($id);
 
         $category->title=$request->title;
@@ -149,8 +144,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //CAT
-       // category::deleting()
+      
        $category = category::find($id);
        $category->delete();
        return redirect('/admin/Category/')->with('messages','تم حذف العنصر');

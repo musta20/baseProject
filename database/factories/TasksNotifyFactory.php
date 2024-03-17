@@ -15,7 +15,7 @@ class TasksNotifyFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'type' => 4,
+            'type' => rand(1,3),
             'number' => $this->faker->numerify('##########'),
             'issueAt' => $this->faker->dateTimeInInterval('-3 week', '+1 days'),
             'duration' => rand(1,24),

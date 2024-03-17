@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Files;
-use App\Models\message;
 use App\Models\NotifySales;
 use App\Models\NotifyType;
 use App\Models\SalesType;
@@ -14,7 +13,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class TasksController extends Controller
 {
@@ -109,8 +107,6 @@ class TasksController extends Controller
         $task = Tasks::find($id);
 
         $files = Files::where('type', 0)->where('typeid', $task->id)->get();
-
-        //  files
 
         if ($task->user_id == Auth::user()->id) {
             return view('admin.Tasks.ShowTask', ['task' => $task, "files" => $files]);

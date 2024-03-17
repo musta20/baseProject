@@ -6,7 +6,7 @@
         <form method="POST" target="_blank" class="D-flex w-25" action="{{ url('/admin/Report') }}">
             @csrf
 
-            <input hidden name="reporttype" value="order" />
+            <input hidden name="reporttype" value="ORDER" />
 
             <div class="mb-3">
               <h3>

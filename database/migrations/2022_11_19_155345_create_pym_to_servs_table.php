@@ -14,9 +14,8 @@ class CreatePymToServsTable extends Migration
     public function up()
     {
         Schema::create('pym_to_servs', function (Blueprint $table) {
-            $table->id();
-            $table->integer("serv_id");
-            $table->integer("pym_id");
+            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
+            $table->foreignUlid("payment_id")->references("id")->on("payments")->onDelete("cascade");
 
             $table->timestamps();
         });

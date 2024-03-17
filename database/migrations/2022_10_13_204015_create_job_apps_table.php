@@ -14,20 +14,24 @@ class CreateJobAppsTable extends Migration
     public function up()
     {
         Schema::create('job_apps', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string("name");
             $table->string("email");
             $table->string("phone");
             $table->string("cert");
             $table->string("exp");
-            $table->string("exp_des");
+            $table->longText("exp_des");
             $table->string("city");
+
             $table->string("job_city");
+
             $table->string("majer");
             $table->string("code");
             $table->string("cv");
-            $table->string("job_id");
-            $table->string("about");
+            
+            $table->foreignUlid("job_id")->references("id")->on("jobs")->onDelete("cascade");
+
+            $table->longText("about");
             
             $table->timestamps();
         });

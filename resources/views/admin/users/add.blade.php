@@ -23,7 +23,7 @@
                         <option value="{{ $item->id }}">{{ __($item->name) }}</option>
                     @endforeach
                 </select>
-                @error('city_id')
+                @error('job_cities_id')
                     <span class="helper">
                         {{ $message }}
                     </span>

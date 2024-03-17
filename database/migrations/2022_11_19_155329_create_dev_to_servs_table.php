@@ -14,9 +14,8 @@ class CreateDevToServsTable extends Migration
     public function up()
     {
         Schema::create('dev_to_servs', function (Blueprint $table) {
-            $table->id();
-            $table->integer("serv_id");
-            $table->integer("dev_id");
+            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
+            $table->foreignUlid("delivery_id")->references("id")->on("delivery")->onDelete("cascade");
             $table->timestamps();
         });
     }

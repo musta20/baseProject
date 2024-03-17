@@ -346,13 +346,12 @@ class mainSite extends Controller
             'approve_time' => 0,
             'adress' => 0,
             'files' => 0,
-            's_id' => $services->id,
+            'service_id' => $services->id,
             'email' => $data['email'],
             'receipt' => $data['receipt'],
             'cash' => $data['cash'],
             'count' => $data['count'],
             'time' => $data['time'],
-            'empy_id' => 0,
             'ip' => $request->ip(),
             'payed' => 0,
             'status' => 0,
@@ -386,9 +385,9 @@ class mainSite extends Controller
 /*         $payment = payment::get();
         $cash =  delivery::get(); */
 
-        $payment = pym_to_serv::where('serv_id',$services->id)->with('pym')->get();
+        $payment = pym_to_serv::where('service_id',$services->id)->with('pym')->get();
 
-        $cash = dev_to_serv::where('serv_id',$services->id)->with('dev')->get();
+        $cash = dev_to_serv::where('service_id',$services->id)->with('dev')->get();
         
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
     }

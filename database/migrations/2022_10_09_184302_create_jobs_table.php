@@ -14,10 +14,14 @@ class CreateJobsTable extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('title');
-            $table->text('des');
-            $table->integer('city_id');
+            $table->mediumText('des');
+
+            $table->foreignUlid('job_cities_id')
+            ->references('id')
+            ->on('job_cities')
+            ->onDelete('cascade');
 
 
             $table->timestamps();

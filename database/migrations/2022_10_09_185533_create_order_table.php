@@ -14,15 +14,17 @@ class CreateOrderTable extends Migration
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string("name");
             $table->string("email");
-            $table->string("empy_id");
+
+            $table->foreignUlid("user_id")->nullable()->references("id")->on("users")->onDelete("cascade");
+
             $table->bigInteger("phone");
             $table->text("des");
             $table->string("title");
-            $table->string("receipt");
-            $table->string("cash");
+            $table->foreignUlid("delivery_id")->nullable()->references("id")->on("delivery")->onDelete("cascade");
+            $table->foreignUlid("payment_id")->nullable()->references("id")->on("payments")->onDelete("cascade");;
 
             $table->string("ip");
             $table->string("count");
@@ -36,7 +38,7 @@ class CreateOrderTable extends Migration
             $table->integer("payed");
 
             
-            $table->integer("s_id");
+            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
             $table->timestamps();
         });
     }

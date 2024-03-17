@@ -120,9 +120,9 @@
 {{--                             <span class="star-toggle mdi mdi-star-outline"></span>
  --}}                            <a href="javascript: void(0);" class="email-title">
                                 @if ($type == 1)
-                                {{ $item->too->name }}
+                                {{ $item->toUser->name }}
                         @else
-                                {{ $item->fromm->name }}
+                                {{ $item->fromUser->name }}
                         @endif
                             </a>
                         </div>

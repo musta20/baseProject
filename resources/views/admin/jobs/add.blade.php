@@ -19,12 +19,12 @@
             </div>
             <div class="mb-3">
                 <label class="form-label"> مقر الوظيفة </label>
-                <select class="form-select select2 select2-hidden-accessible" name="city_id">
+                <select class="form-select select2 select2-hidden-accessible" name="job_cities_id">
                     @foreach ($jobCity as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
-                @error('city_id')
+                @error('job_cities_id')
                     <span class="helper">
                         {{ $message }}
                     </span>

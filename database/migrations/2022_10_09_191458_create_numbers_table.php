@@ -14,7 +14,7 @@ class CreateNumbersTable extends Migration
     public function up()
     {
         Schema::create('numbers', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string("img");
             $table->string("title");
             $table->string("number");

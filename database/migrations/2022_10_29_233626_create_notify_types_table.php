@@ -14,7 +14,7 @@ class CreateNotifyTypesTable extends Migration
     public function up()
     {
         Schema::create('notify_types', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string("name");
             $table->timestamps();
         });

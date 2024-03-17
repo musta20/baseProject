@@ -13,7 +13,7 @@ class JobsController extends Controller
     public $rule = [
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
-        "city_id" =>"required|integer|digits_between:1,500",
+        "job_cities_id" =>"required|integer|digits_between:1,500",
     ];
 
     /**
@@ -35,10 +35,10 @@ class JobsController extends Controller
             "des.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
             "des.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
 
-            'city_id.required' => 'يجب إضافة  ايقونة ',
-            'city_id.string' => 'يجب ان يكون الايقونة نص فقط',
-            "city_id.max" => "يجب ان لا يزيد  الايقونة عن 255 حرف",
-            "city_id.min" => "يجب ان لا يقل الايقونة النص عن 3 حرف",
+            'job_cities_id.required' => 'يجب إضافة  ايقونة ',
+            'job_cities_id.string' => 'يجب ان يكون الايقونة نص فقط',
+            "job_cities_id.max" => "يجب ان لا يزيد  الايقونة عن 255 حرف",
+            "job_cities_id.min" => "يجب ان لا يقل الايقونة النص عن 3 حرف",
 
 
         ];
@@ -110,7 +110,7 @@ class JobsController extends Controller
     {
         $jobCity = job_city::get();
         $jobs = jobs::find($id);
-        $currentcity = job_city::find($jobs->city_id);
+        $currentcity = job_city::find($jobs->job_cities_id);
 
         return view("admin.jobs.edit",  ['jobs' => $jobs,"currentcity"=>$currentcity,"jobCity"=>$jobCity] );
     }
@@ -142,7 +142,7 @@ class JobsController extends Controller
 
         $jobs->title=$request->title;
         $jobs->des=$request->des;
-        $jobs->city_id=$request->city_id;
+        $jobs->job_cities_id=$request->job_cities_id;
 
         $jobs->save();
 

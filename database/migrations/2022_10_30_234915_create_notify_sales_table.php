@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotifySalesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class CreateNotifySalesTable extends Migration
     public function up()
     {
         Schema::create('notify_sales', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string("name");
-            $table->integer("user_id");
-            $table->integer("from");
+            $table->foreignUlid("user_id")->references("id")->on("users")->onDelete("cascade");
+            $table->foreignUlid("from")->references("id")->on("users")->onDelete("cascade");
             $table->integer("count");
             $table->integer("type");
             $table->integer("isDone");
@@ -34,4 +34,4 @@ class CreateNotifySalesTable extends Migration
     {
         Schema::dropIfExists('notify_sales');
     }
-}
+};

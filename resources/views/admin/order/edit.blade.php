@@ -225,7 +225,7 @@
                                 alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
-                                                {{ $order->empy_id }}
+                                                {{ $order->user_id }}
                                             </h5>
                                         </div>
                                     </div>

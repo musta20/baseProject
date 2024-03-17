@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
@@ -9,7 +10,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class message extends Model
 {
-    use HasFactory , LogsActivity;
+    use HasFactory , LogsActivity,HasUlids;
 
     protected $guarded = [];
 
@@ -30,31 +31,18 @@ class message extends Model
         return LogOptions::defaults();
     }
     
-    public function too()
+    public function toUser()
     {
         return $this->belongsTo(User::class,'to','id');
     }
-    public function fromm()
+    public function fromUser()
     {
         return $this->belongsTo(User::class,'from','id');
     }
 
-  /*   public function sender() {
-        return $this->belongsTo('App\Models\User', 'user_id');
-    }
-    
-    public function receiver() {
-        return $this->belongsTo('App\Models\User', 'receiver_id');
-    } */
-
+ 
     
 
 
-
-
-/*     public function messagetable()
-    {
-        return $this->morphTo();
-    } */
 
 }

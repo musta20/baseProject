@@ -22,18 +22,18 @@
             <div class="mb-3">
                 <label class="form-label"> مقر الوظيفة</label>
 
-                <select class="form-select select2 select2-hidden-accessible" name="city_id">
+                <select class="form-select select2 select2-hidden-accessible" name="job_cities_id">
                     <option value="{{ $currentcity->id }}">{{ $currentcity->name }}</option>
 
                     @foreach ($jobCity as $item)
-                        @if ($jobs->city_id != $item->id)
+                        @if ($jobs->job_cities_id != $item->id)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endif
                     @endforeach
                 </select>
 
 
-                @error('city_id')
+                @error('job_cities_id')
                     <span class="helper">
                         {{ $message }}
                     </span>

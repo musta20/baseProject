@@ -14,9 +14,12 @@ class CreateRequiredFilesTable extends Migration
     public function up()
     {
         Schema::create('required_files', function (Blueprint $table) {
-            $table->id();
+            
+            $table->ulid('id')->primary();
+
             $table->integer("type");
-            $table->integer("service_id");
+
+            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
             $table->string("name");
             $table->timestamps();
         });

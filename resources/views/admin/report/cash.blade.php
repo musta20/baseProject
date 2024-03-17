@@ -5,7 +5,7 @@
 
         <form method="POST" target="_blank" class="D-flex w-25" action="{{ url('/admin/Report') }}">
             @csrf
-            <input hidden name="reporttype" value="cash" />
+            <input hidden name="reporttype" value="CASH" />
 
             <div class="mb-3">
                 نوع التقرير

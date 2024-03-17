@@ -174,7 +174,7 @@ class OrderController extends Controller
         //$order = order::find($id)->with('dev');//->with('pym');
         //with('servicesNmae')
         //   dd($order->name);
-        //    $services = services::find($order->s_id);
+        //    $services = services::find($order->service_id);
 
         $order->price = $order->count * $order->servicesNmae->price;
 

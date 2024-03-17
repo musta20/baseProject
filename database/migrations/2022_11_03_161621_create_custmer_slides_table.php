@@ -14,7 +14,7 @@ class CreateCustmerSlidesTable extends Migration
     public function up()
     {
         Schema::create('custmer_slides', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('img');
             $table->string('url');
             $table->timestamps();

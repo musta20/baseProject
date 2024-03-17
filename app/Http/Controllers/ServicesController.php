@@ -113,8 +113,8 @@ class ServicesController extends Controller
         if($request['pys']){
             foreach ($request['pys'] as  $value) {
                 pym_to_serv::create([
-                "pym_id" => $value,
-                "serv_id" => $services->id
+                "payment_id" => $value,
+                "service_id" => $services->id
             ]);
         }
         }
@@ -122,8 +122,8 @@ class ServicesController extends Controller
         if($request['devs']){
             foreach ($request['devs'] as  $value) {
                 dev_to_serv::create([
-                "dev_id" => $value,
-                "serv_id" => $services->id
+                "delivery_id" => $value,
+                "service_id" => $services->id
             ]);
         }
         }
@@ -151,9 +151,9 @@ class ServicesController extends Controller
         $dev = delivery::get();
         $pym = payment::get();
 
-        $pay = pym_to_serv::where('serv_id',$services->id)->with('pym')->get();
+        $pay = pym_to_serv::where('service_id',$services->id)->with('pym')->get();
 
-        $delv = dev_to_serv::where('serv_id',$services->id)->with('dev')->get();
+        $delv = dev_to_serv::where('service_id',$services->id)->with('dev')->get();
         
 
         return view("admin.services.edit",  ['pym'=>$pym,'dev'=>$dev,'delv'=>$delv,'pay'=>$pay,'catmy' => $catmy, 'services' => $services, "cat" => $cat, 'filesInput' => $filesInput]);
@@ -194,8 +194,8 @@ class ServicesController extends Controller
 
 
         RequiredFiles::where('type', 0)->where('service_id',  $services->id)->delete();
-        dev_to_serv::where('serv_id',  $services->id)->delete();
-        pym_to_serv::where('serv_id',  $services->id)->delete();
+        dev_to_serv::where('service_id',  $services->id)->delete();
+        pym_to_serv::where('service_id',  $services->id)->delete();
 
 
 /*         $i = 0;
@@ -225,8 +225,8 @@ class ServicesController extends Controller
         if($request['pys']){
             foreach ($request['pys'] as  $value) {
                 pym_to_serv::create([
-                "pym_id" => $value,
-                "serv_id" => $services->id
+                "payment_id" => $value,
+                "service_id" => $services->id
             ]);
         }
         }
@@ -234,8 +234,8 @@ class ServicesController extends Controller
         if($request['devs']){
             foreach ($request['devs'] as  $value) {
                 dev_to_serv::create([
-                "dev_id" => $value,
-                "serv_id" => $services->id
+                "delivery_id" => $value,
+                "service_id" => $services->id
             ]);
         }
         }

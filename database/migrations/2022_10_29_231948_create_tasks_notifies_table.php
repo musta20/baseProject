@@ -14,12 +14,12 @@ class CreateTasksNotifiesTable extends Migration
     public function up()
     {
         Schema::create('tasks_notifies', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->integer("type");
             $table->string("name");
             $table->string("number");
-            $table->bigInteger("from");
-            $table->bigInteger("user_id");
+            $table->foreignUlid("from")->references("id")->on("users")->onDelete("cascade");
+            $table->foreignUlid("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->date("issueAt");
             $table->date("exp");
             $table->integer("duration");

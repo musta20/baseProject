@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\setting;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use  App\Models\Role;
+use  App\Models\Permission;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;

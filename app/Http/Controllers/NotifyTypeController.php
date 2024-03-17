@@ -120,7 +120,7 @@ class NotifyTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\NotifyType  $notifyType
+     * @param  \App\Models\NotifyType  $
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id)

@@ -14,11 +14,13 @@ class CreateMessageTable extends Migration
     public function up()
     {
         Schema::create('message', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
 
-            $table->foreignId('from');//->constrained('users');
+            $table->foreignUlid('from')->references('id')->on('users')->onDelete('cascade');
+            //->constrained('users');
             
-            $table->foreignId('to');//->constrained('users');
+            $table->foreignUlid('to')->references('id')->on('users')->onDelete('cascade');
+            //->constrained('users');
 
             $table->string("title");
             $table->integer("isred");

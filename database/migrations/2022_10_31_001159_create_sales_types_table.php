@@ -14,7 +14,7 @@ class CreateSalesTypesTable extends Migration
     public function up()
     {
         Schema::create('sales_types', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string("name");
             $table->bigInteger("price");
             $table->timestamps();

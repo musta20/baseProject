@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TasksFactory extends Factory
@@ -14,13 +15,13 @@ class TasksFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(1,5),
+            'user_id' => User::factory()->create()->id,
             'isread' => rand(0,1),
-            'isdone' => 1,
-            'boss_id' =>1,
+            'isdone' =>  rand(0,1),
+            'boss_id' => User::factory()->create()->id,
             
             'des' => $this->faker->paragraph(),
-            'title' => $this->faker->title(),
+            'title' => $this->faker->word(),
 
             'start' => $this->faker->dateTimeInInterval('-1 week', '+1 days'),
 
@@ -30,4 +31,16 @@ class TasksFactory extends Factory
 
         ];
     }
+
+    public function withManger($id)
+    {
+        return $this->state(function (array $attributes) use($id) {
+            return [
+                'boss_id' => $id,
+            ];
+        });
+    }
+
+
+
 }
