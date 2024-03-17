@@ -62,14 +62,14 @@
     
         <tr >
             <td colspan="1" class="titleCase"> طريقة الاستلام</td>
-            <td colspan="2" >{{$order->dev->name}}</td>
+            <td colspan="2" >{{$order->delivery->name}}</td>
             <td colspan="1" class="titleCase">  تاريخ التسليم</td>
             <td  colspan="2">{{$order->time}}</td>
         </tr>
     
         <tr>
             <td class="titleCase"> طريقة الدفع </td>
-            <td colspan="4" >{{$order->pym->name}}</td>
+            <td colspan="4" >{{$order->payment->name}}</td>
         </tr>
     
         <tr>

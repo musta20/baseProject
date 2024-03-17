@@ -125,9 +125,9 @@ class ReportController extends Controller
     public function BillInnerPrint($id)
     {
         $setting = setting::first();
-        $order = order::with('servicesNmae')->with('dev')->with('pym')->find($id);
-       // dd($order);
-        if (!$order->first()) {
+        $order = order::with('servicesNmae')->with('user')->with('delivery')->with('payment')->find($id);
+
+        if (!$order) {
             return Redirect::back()->with('messages', 'غير موجود ');
         }
 

@@ -92,8 +92,8 @@
                 @foreach ($delv as $key => $item)
 
 
-                <div class="mb-1 input-group w-25"><span class="form-control">{{ $item->dev->name }}</span>
-                    <input hidden="" value="{{ $item->dev->id }}" name="devs[]">
+                <div class="mb-1 input-group w-25"><span class="form-control">{{ $item->delivery->name }}</span>
+                    <input hidden="" value="{{ $item->delivery->id }}" name="devs[]">
                     <span onclick="remitem(this)" class="btn btn-danger">حذف</span></div>
           
                 @endforeach
@@ -124,8 +124,8 @@
 
                 @foreach ($pay as $key => $item)
                 <div class="mb-1 input-group w-25">
-                    <span class="form-control">{{ $item->pym->name }}</span>
-                    <input hidden="" value="{{$item->pym->id}}" name="pys[]">
+                    <span class="form-control">{{ $item->payment->name }}</span>
+                    <input hidden="" value="{{$item->payment->id}}" name="pys[]">
                     <span onclick="remitem(this)" class="btn btn-danger">حذف</span>
                 </div>
 

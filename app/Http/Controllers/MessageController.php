@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\message;
 use App\Models\User;
-use App\Models\users;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -15,8 +14,8 @@ class MessageController extends Controller
 
     public $rule = [
         "title" => "required|string|max:100|min:3",
-        "to" => "required|integer|digits_between:1,10",
         "message" => "required|string|max:255|min:3",
+        "to" => "required",
     ];
 
     /**
@@ -33,14 +32,13 @@ class MessageController extends Controller
             "title.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
             "title.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
 
+            "to.required"=>"يجب كتابة المستلم",
             'message.required' => 'يجب كتابة الرسالة ',
             'message.string' => 'يجب ان يكون الرسالة نص فقط',
             "message.max" => "يجب ان لا يزيد الرسالة  عن 255 حرف",
             "message.min" => "يجب ان لا يقل عنوان الرسالة عن 3 حرف",
 
-            'to.required' => 'يجب كتابة القيمة ',
-            'to.integer' => 'يجب ان يكون القيمة  رقم',
-            "to.digits_between" => "يجب ان لا يزيد القيمة  عن 10 حرف",
+    
 
 
 
@@ -117,12 +115,15 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate( $this->rule,$this->messages());
-        
-        $data['from']=Auth::user()->id;
 
-        $data['isred']=0;
-        
-        message::create($data);
+        message::create([
+            'title' => $data['title'],
+            'message' => $data['message'],
+            'from' => Auth::user()->id,
+            'to' => $data['to'],
+            'isred' => 0,
+
+        ]);
        
         return redirect('/admin/inbox/1')->with('messages','تم إرسال الرسالة');
     }
@@ -137,12 +138,10 @@ class MessageController extends Controller
     {
         $message = message::with('fromUser','toUser')->find($id);
 
-        if($message->from !=Auth::user()->id And $message->to !=Auth::user()->id)
+        if($message->from != Auth::user()->id And $message->to !=Auth::user()->id)
         {
             return redirect('/admin/inbox/1')->with('messages','حدث خطء ');
         }
-
-
 
         return view("admin.messages.show",  ['message' =>$message ] );
 

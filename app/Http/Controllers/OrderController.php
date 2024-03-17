@@ -169,12 +169,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = order::with('servicesNmae')->with('dev')->with('pym')->find($id);
-
-        //$order = order::find($id)->with('dev');//->with('pym');
-        //with('servicesNmae')
-        //   dd($order->name);
-        //    $services = services::find($order->service_id);
+        $order = order::with('servicesNmae')->with('delivery')->with('payment')->find($id);
 
         $order->price = $order->count * $order->servicesNmae->price;
 
@@ -258,7 +253,7 @@ class OrderController extends Controller
         $order->save();
 
         if ($send) {
-            Mail::to($order->email)->send(new OrderStatus(($order)));
+           // Mail::to($order->email)->send(new OrderStatus(($order)));
         }
 
         return redirect('/admin/showOrderList/' . $order->status);

@@ -21,7 +21,7 @@ fresh:
 # php artisan cache:clear && php artisan config:clear &&  php artisan config:clear &&  composer dump-autoload -o && php artisan view:clear 
 
 clearfiles: 
-	rm -rf storage/tenant* &&  rm -rf storage/app/*
+		rm -rf  storage/app/public/category/* && rm -rf storage/app/public/services/*
 
 prod:
 	docker --file 'docker-compose-prod.yaml' start 

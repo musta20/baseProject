@@ -55,8 +55,8 @@ services:
         networks:
             - ${PROJECT_NAME}
 
-    mysql:
-        image: mariadb:10
+    mariadb:
+        image: mariadb:latest
         container_name: "${PROJECT_NAME}_mysql"
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'

@@ -117,7 +117,7 @@
 
                     <select class="input-form" name="receipt">
                         @foreach ($payment as $item)
-                            <option value="{{ $item->pym->id }}">{{ $item->pym->name }}</option>
+                            <option value="{{ $item->payment->id }}">{{ $item->payment->name }}</option>
                         @endforeach
                     </select>
                     @error('receipt')
@@ -131,7 +131,7 @@
 
                     <select class="input-form" name="cash">
                         @foreach ($cash as $item)
-                            <option value="{{ $item->dev->id }}">{{ $item->dev->name }}</option>
+                            <option value="{{ $item->delivery->id }}">{{ $item->delivery->name }}</option>
                         @endforeach
                     </select>
                     @error('cash')

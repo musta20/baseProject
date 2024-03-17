@@ -6,7 +6,7 @@ use App\Models\delivery;
 use App\Models\order;
 use App\Models\payment;
 use App\Models\services;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class orderSeeder extends Seeder
@@ -22,9 +22,10 @@ class orderSeeder extends Seeder
         $services = services::get();
         $payments = payment::get();
         $delivary = delivery::get();
+        $users = User::get();
         foreach ($services as  $service) {
 
-                order::factory(3)->for($payments->random())->for($delivary->random())->for($service)->create();
+                order::factory(3)->for($users->random())->for($payments->random())->for($delivary->random())->for($service)->create();
                 
         }
          

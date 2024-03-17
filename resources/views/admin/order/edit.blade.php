@@ -256,7 +256,7 @@
                                 alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
-                                                {{ $order->dev->name }}
+                                                {{ $order->delivery->name }}
                                             </h5>
                                         </div>
                                     </div>
@@ -269,7 +269,7 @@
                                     <div class="d-flex">
                                         <div>
                                             <h5 class="mt-1 font-14">
-                                                {{ $order->pym->name }}
+                                                {{ $order->payment->name }}
                                             </h5>
                                         </div>
                                     </div>
