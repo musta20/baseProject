@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\ReportTtpe;
+use App\Enums\ReportType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReportFactory extends Factory
@@ -15,8 +15,8 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            'type' => rand(0,4),
-            'reporttype' =>  ReportTtpe::BILL->value,
+            'type' => rand(0,1),
+            'reporttype' =>  ReportType::BILL->value,
             'file' => rand(1,4),
             'from' => $this->faker->dateTimeInInterval('-3 week', '+1 days'),
             'to' => $this->faker->dateTimeInInterval('-3 week', '+1 days'),

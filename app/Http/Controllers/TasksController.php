@@ -161,42 +161,10 @@ class TasksController extends Controller
         return view('admin.Tasks.Menu');
     }
 
-    public function showmysale($type)
-    {
-        $alltask =    NotifySales::where('type',$type)->where('user_id',Auth::user()->id)->paginate(10);
-        $saletype = SalesType::get();
-        return view('admin.Tasks.showmysale',['alltask'=>$alltask,'saletype'=>$saletype]);
-    }
+ 
+ 
 
-    public function editmysale($type)
-    {
-        $task = NotifySales::find($type);
 
-        if(Auth::user()->id != $task->user_id)
-        {
-            return redirect('/admin/showmysale/1');
-
-        }
-
-        return view('admin.Tasks.editmysale',['task'=>$task]);
-    }
-
-    public function postmysale(Request $request,$id)
-    {
-        $data = $request->validate($this->ruleisDone, $this->messages());
-        
-        $task = NotifySales::find($id);
-
-        if(Auth::user()->id != $task->user_id)
-        {
-            return redirect('/admin/showmysale/1');
-
-        }
-        $task->isDone = $data['isDone'];
-        $task->save();
-        return redirect('/admin/showmysale/' . $task->type)->with('messages', 'تم تعديل العنصر');
-
-    }
 
 
 

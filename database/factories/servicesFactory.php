@@ -20,7 +20,7 @@ class servicesFactory extends Factory
         return [
             'name' => $this->faker->name,
             'price' => $this->faker->numberBetween(100, 1000), // Adjust the range as per your requirement
-            'cat_id' => $this->faker->numberBetween(1, 10), // Assuming categories are from 1 to 10
+           // 'cat_id' => $this->faker->numberBetween(1, 10), // Assuming categories are from 1 to 10
             'des' => $this->faker->paragraph,
             'icon' => $this->faker->imageUrl(), // You might want to change this to a proper icon source
     
@@ -29,7 +29,7 @@ class servicesFactory extends Factory
 
 public function withCategory($cat):Factory{
 
-    return $this->state(fn (array $attributes) => ['cat_id' =>$cat]);
+    return $this->state(fn (array $attributes) => ['category_id' =>$cat]);
 
 
 }

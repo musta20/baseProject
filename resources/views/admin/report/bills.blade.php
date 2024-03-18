@@ -2,7 +2,6 @@
     <h3> الفواتير المصدرة</h3>
     <hr>
     <x-admin-contaner>
-
         <form method="GET" class="D-flex w-25" action="{{ url('/admin/billReport') }}">
             <div class="mb-3">
                 نوع الفاتورة

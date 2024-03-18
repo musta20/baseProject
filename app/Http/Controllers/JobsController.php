@@ -13,7 +13,7 @@ class JobsController extends Controller
     public $rule = [
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
-        "job_cities_id" =>"required|integer|digits_between:1,500",
+        "job_cities_id" =>"required",
     ];
 
     /**

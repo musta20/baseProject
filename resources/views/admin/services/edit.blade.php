@@ -4,45 +4,36 @@
 
     <hr>
     <x-admin-contaner>
-
         <x-card-message></x-card-message>
-
-
         <form method="POST" class="w-75" action="{{ url('/admin/Services/' . $services->id) }}">
             @csrf
             @method('PUT')
-
             <div class="mb-3">
                 <label class="form-label">عنوان الخدمة</label>
                 <input class="form-control" value="{{ $services->name }}" name="name" placeholder="عنوان التصنيف" />
-
                 @error('name')
                     <span class="helper">
                         {{ $message }}
                     </span>
                 @enderror
-
             </div>
-
             <div class="mb-3">
                 <label class="form-label"> التصنيف</label>
-                <select class="form-select select2 select2-hidden-accessible" name="cat_id">
-                    <option value="{{ $catmy->id }}">{{ $catmy->title }}</option>
-
+                <select class="form-select select2 select2-hidden-accessible" name="category_id">
                     @foreach ($cat as $item)
-                        @if ($item->id != $services->cat_id)
-                            <option value="{{ $item->id }}">{{ $item->title }}</option>
-                        @endif
+                            <option
+                            @if ($item->id == $services->category->id)
+                                selected
+                            @endif
+                            value="{{ $item->id }}">{{ $item->title }}</option>
                     @endforeach
                 </select>
-                @error('cat_id')
+                @error('category_id')
                     <span class="helper">
                         {{ $message }}
                     </span>
                 @enderror
             </div>
-
-
             <div class="mb-3">
                 <label  class="form-label"> الايقونة</label>
                 <input class="form-control" value="{{ $services->icon }}" name="icon" placeholder=" الايقونة" />
@@ -51,13 +42,9 @@
                         {{ $message }}
                     </span>
                 @enderror
-
             </div>
-
-
             <span class="btn btn-success p-1" onclick="addFile()">إضافة ملف</span>
             <div id="files">
-
                 @foreach ($filesInput as $key => $item)
                     <div class='mb-1 input-group w-25'>
 
@@ -66,8 +53,6 @@
                             <span onclick="remitem(this)" class="btn btn-danger">حذف</span>
                     </div>
                 @endforeach
-
-
                 @error('files')
                     <span class="helper">
                         {{ $message }}
@@ -76,10 +61,7 @@
             </div>
 
 
-
-
             <div class="mb-3 border p-1">
-
             <label class="form-lable"> طرق التوصيل</label>
                 <select class="form-select select2 select2-hidden-accessible  " id="devValue">
                     @foreach ($dev as $item)
@@ -89,13 +71,10 @@
                 <span class="btn btn-success p-1" onclick="addDev()"> اضافة </span>
 
             <div id="dev">
-                @foreach ($delv as $key => $item)
-
-
-                <div class="mb-1 input-group w-25"><span class="form-control">{{ $item->delivery->name }}</span>
-                    <input hidden="" value="{{ $item->delivery->id }}" name="devs[]">
+                @foreach ($services->deliveries as $item)
+                <div class="mb-1 input-group w-25"><span class="form-control">{{ $item->name }}</span>
+                    <input hidden="" value="{{ $item->id }}" name="devs[]">
                     <span onclick="remitem(this)" class="btn btn-danger">حذف</span></div>
-          
                 @endforeach
                 @error('dev')
                     <span class="helper">
@@ -105,27 +84,20 @@
             </div>
             </div>
 
-
-
             <div class="mb-3 border p-1">
-
                 <label class="form-lable"> طرق الدفع</label>
-
                 <select class="form-select select2 select2-hidden-accessible  " id="paymentValue">
-
                     @foreach ($pym as $item)
                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
-
                 </select>
-
             <span class="btn btn-success p-1" onclick="addpyment()"> اضافة</span>
             <div id="payment">
 
-                @foreach ($pay as $key => $item)
+                @foreach ($services->payments as $key => $item)
                 <div class="mb-1 input-group w-25">
-                    <span class="form-control">{{ $item->payment->name }}</span>
-                    <input hidden="" value="{{$item->payment->id}}" name="pys[]">
+                    <span class="form-control">{{ $item->name }}</span>
+                    <input hidden="" value="{{$item->id}}" name="pys[]">
                     <span onclick="remitem(this)" class="btn btn-danger">حذف</span>
                 </div>
 

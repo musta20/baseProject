@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ReportTtpe;
+use App\Enums\ReportType;
 use App\Models\order;
 use App\Models\Report;
 use App\Models\setting;
@@ -69,7 +69,7 @@ class ReportController extends Controller
     {
          $request->validate( $this->rule,$this->messages());
    
-        if ($request->reporttype == ReportTtpe::CASH->value) {
+        if ($request->reporttype == ReportType::CASH->value) {
 
             $reports = order::whereBetween('created_at', [$request->from, $request->to])
                 ->with('servicesNmae')->get();
@@ -92,13 +92,14 @@ class ReportController extends Controller
                 ->setOption('margin-top', '0mm')
                 ->setOption('margin-right', '0mm')
                 ->setOption('margin-left', '0mm')->save(storage_path('app/public/pdf/') . $filename, true);
-            Report::create(["type" => $request->type, "reporttype" => ReportTtpe::CASH->value, "from" => $request->from, "to" => $request->from, "file" => $filename]);
+
+            Report::create(["type" => $request->type, "reporttype" => ReportType::CASH->value, "from" => $request->from, "to" => $request->from, "file" => $filename]);
             return $pdf->inline();
         }
 
 
 
-        if ($request->reporttype == ReportTtpe::ORDER->value) {
+        if ($request->reporttype == ReportType::ORDER->value) {
             if ($request->type == '6') {
                 $reports = order::whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
             } else {
@@ -117,7 +118,7 @@ class ReportController extends Controller
                 ->setOption('margin-top', '0mm')
                 ->setOption('margin-right', '0mm')
                 ->setOption('margin-left', '0mm')->save(storage_path('app/public/pdf/') . $filename, true);
-            Report::create(["type" => $request->type, "reporttype" => ReportTtpe::ORDER->value, "from" => $request->from, "to" => $request->from, "file" => $filename]);
+            Report::create(["type" => $request->type, "reporttype" => ReportType::ORDER->value, "from" => $request->from, "to" => $request->from, "file" => $filename]);
             return $pdf->inline();
         }
     }
@@ -157,7 +158,7 @@ class ReportController extends Controller
 
         Report::create([
             "type" => 1,
-            "reporttype" =>ReportTtpe::BILL->value,
+            "reporttype" =>ReportType::BILL->value,
             "to" => $order->name,
             "from" => "none",
             "file" => $filename
@@ -207,7 +208,7 @@ class ReportController extends Controller
 
         Report::create([
             "type" => 0,
-            "reporttype" => ReportTtpe::BILL->value,
+            "reporttype" => ReportType::BILL->value,
             "to" => $order->name,
             "from" => "none",
             "file" => $filename
@@ -249,7 +250,7 @@ class ReportController extends Controller
     }
     public function billReportView()
     {     $orderReport = Report::
-        where('reporttype', ReportTtpe::BILL->value)
+        where('reporttype', ReportType::BILL->value)
         ->paginate(10);
         return view('admin.report.bills', ['orderReport' => $orderReport]);
     }
@@ -260,20 +261,20 @@ class ReportController extends Controller
         if ($request->from && $request->to) {
             if ($request->type) {
                 $orderReport = Report::where('type', $request->type)
-                    ->where('reporttype', ReportTtpe::BILL->value)->whereBetween('created_at', [$request->from, $request->to])
+                    ->where('reporttype', ReportType::BILL->value)->whereBetween('created_at', [$request->from, $request->to])
                     ->paginate(10);
                 
             } else {
-                $orderReport = Report::where('reporttype', ReportTtpe::BILL->value)->whereBetween('created_at', [$request->from, $request->to])
+                $orderReport = Report::where('reporttype', ReportType::BILL->value)->whereBetween('created_at', [$request->from, $request->to])
                     ->paginate(10);
                  
             }
         } else {
             if (isset($request->type)) {
                 $orderReport = Report::where('type', $request->type)
-                    ->where('reporttype',  ReportTtpe::BILL->value)->latest()->paginate(10);
+                    ->where('reporttype',  ReportType::BILL->value)->latest()->paginate(10);
             } else {
-                $orderReport = Report::where('reporttype',  ReportTtpe::BILL->value)->latest()->paginate(10);
+                $orderReport = Report::where('reporttype',  ReportType::BILL->value)->latest()->paginate(10);
             }
         }
         if($orderReport->isEmpty())
@@ -343,7 +344,7 @@ public function postCreateBill(Request $request)
 
     public function cashReport()
     {
-        $orderReport = Report::where('reporttype',  ReportTtpe::CASH->value)->latest()->paginate(10);
+        $orderReport = Report::where('reporttype',  ReportType::CASH->value)->latest()->paginate(10);
 
         return view('admin.report.cash', ['orderReport' => $orderReport]);
     }

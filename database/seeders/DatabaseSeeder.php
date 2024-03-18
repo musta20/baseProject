@@ -22,13 +22,14 @@ class DatabaseSeeder extends Seeder
         clientsSeeder::class,
         deliverySeeder::class,
         paymentSeeder::class,
+        categorySeeder::class,
+
         servicesSeeder::class,
         orderSeeder::class,
         MessageSeeder::class,
         reportSeeder::class,
         taskSeeder::class,
         NotifySalesSeeder::class,
-        categorySeeder::class,
         NotifyTypeSeeder::class,
       ]);
       // \App\Models\Tasks::factory(10)->create();

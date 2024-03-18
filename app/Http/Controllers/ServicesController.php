@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use App\Models\delivery;
-use App\Models\dev_to_serv;
 use App\Models\payment;
-use App\Models\pym_to_serv;
 use App\Models\RequiredFiles;
 use App\Models\services;
 use Illuminate\Http\Request;
@@ -19,7 +17,7 @@ class ServicesController extends Controller
         "name" => "required|string|max:100|min:3",
         "price" => "required|integer|digits_between:1,10",
         "icon" => "required|string|max:255|min:3",
-        "cat_id" => "required|integer|digits_between:1,10"
+        "category_id" => "required"
     ];
 
     /**
@@ -90,43 +88,31 @@ class ServicesController extends Controller
     {
         $data = $request->validate($this->rule, $this->messages());
 
+        
+        
         $services = services::create([
             "name" => $data["name"],
             "price" => $data["price"],
             "icon" => $data["icon"],
-            "cat_id" => $data["cat_id"],
+            "category_id" => $data["category_id"],
         ]);
 
         if($request['files']){
-
-            foreach ($request['files'] as  $value) {
-            
-            RequiredFiles::create([
-                'type' => 0,
-                "name" => $value,
-                "service_id" => $services->id
-            ]);
-        }
-        }
-        //pys
-
-        if($request['pys']){
-            foreach ($request['pys'] as  $value) {
-                pym_to_serv::create([
-                "payment_id" => $value,
-                "service_id" => $services->id
-            ]);
-        }
+                foreach ($request['files'] as  $value) {
+                RequiredFiles::create([
+                    'type' => 0,
+                    "name" => $value,
+                    "service_id" => $services->id
+                ]);
+            }
         }
 
-        if($request['devs']){
-            foreach ($request['devs'] as  $value) {
-                dev_to_serv::create([
-                "delivery_id" => $value,
-                "service_id" => $services->id
-            ]);
-        }
-        }
+
+        $services->payments()->sync($request['pys']);
+
+       $services->deliveries()->sync($request['devs']);
+
+   
 
 
 
@@ -144,19 +130,19 @@ class ServicesController extends Controller
     public function show($id)
     {
         $services = services::find($id);
+    //    / dd($services );
         $cat = category::get();
-        $catmy = category::find($services->cat_id);
-        $filesInput = RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
 
+        $filesInput = RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
         $dev = delivery::get();
         $pym = payment::get();
 
-        $pay = pym_to_serv::where('service_id',$services->id)->with('pym')->get();
 
-        $delv = dev_to_serv::where('service_id',$services->id)->with('dev')->get();
-        
+        return view("admin.services.edit",  [
+            'pym'=>$pym,
+            'dev'=>$dev,
+         'services' => $services, "cat" => $cat, 'filesInput' => $filesInput]);
 
-        return view("admin.services.edit",  ['pym'=>$pym,'dev'=>$dev,'delv'=>$delv,'pay'=>$pay,'catmy' => $catmy, 'services' => $services, "cat" => $cat, 'filesInput' => $filesInput]);
     }
 
     /**
@@ -181,34 +167,23 @@ class ServicesController extends Controller
 
         $data = $request->validate($this->rule, $this->messages());
 
+
         $services = services::find($id);
 
         $services->name = $request->name;
         $services->price = $request->price;
         $services->icon = $request->icon;
 
-        $services->cat_id = $request->cat_id;
+        $services->category_id = $request->category_id;
 
         $services->save();
 
 
 
         RequiredFiles::where('type', 0)->where('service_id',  $services->id)->delete();
-        dev_to_serv::where('service_id',  $services->id)->delete();
-        pym_to_serv::where('service_id',  $services->id)->delete();
+ 
 
-
-/*         $i = 0;
-        while (isset($request["files-" . $i])) {
-            RequiredFiles::create([
-                'type' => 0,
-                "name" => $request["files-" . $i],
-                "service_id" => $services->id
-            ]);
-            $i = $i + 1;
-        } */
-
-
+    
         if($request['files']){
 
             foreach ($request['files'] as  $value) {
@@ -220,32 +195,9 @@ class ServicesController extends Controller
             ]);
         }
         }
-        //pys
+        $services->payments()->sync($request['pys']);
 
-        if($request['pys']){
-            foreach ($request['pys'] as  $value) {
-                pym_to_serv::create([
-                "payment_id" => $value,
-                "service_id" => $services->id
-            ]);
-        }
-        }
-
-        if($request['devs']){
-            foreach ($request['devs'] as  $value) {
-                dev_to_serv::create([
-                "delivery_id" => $value,
-                "service_id" => $services->id
-            ]);
-        }
-        }
-
-
-
-
-
-
-
+        $services->deliveries()->sync($request['devs']);
 
         return redirect('/admin/Services/')->with('messages', 'تم تعديل العنصر');
     }

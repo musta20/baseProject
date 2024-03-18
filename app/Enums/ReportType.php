@@ -4,7 +4,7 @@ namespace App\Enums;
 
 
 
-enum ReportTtpe: string
+enum ReportType: string
 {
     case CASH = 'CASH';
     case ORDER = 'ORDER';

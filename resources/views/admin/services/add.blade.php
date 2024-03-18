@@ -34,12 +34,12 @@
 
             <div class="mb-3">
                 <label class="form-label"> التصنيف</label>
-                <select class="form-select select2 select2-hidden-accessible" name="cat_id">
+                <select class="form-select select2 select2-hidden-accessible" name="category_id">
                     @foreach ($cat as $item)
                         <option value="{{ $item->id }}">{{ $item->title }}</option>
                     @endforeach
                 </select>
-                @error('cat_id')
+                @error('category_id')
                     <span class="helper">
                         {{ $message }}
                     </span>

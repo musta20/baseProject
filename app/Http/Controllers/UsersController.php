@@ -19,7 +19,7 @@ class UsersController extends Controller
         "email" => "unique:users|required|email|max:255|min:3",
         "password" => "required|string|max:25|min:6",
         "name" => "required|string|max:100|min:3",
-        "role" => "required|integer|digits_between:1,3",
+        "role" => "required",
         'img' => 'max:2048|mimes:jpg,jpeg,png'
 
     ];
@@ -27,7 +27,7 @@ class UsersController extends Controller
     public $UpDateRule =  [
         "email" => "required|email|max:255|min:3",
         "name" => "required|string|max:100|min:3",
-        "role" => "required|integer|digits_between:1,3",
+        "role" => "required",
         'img' => 'max:2048|mimes:jpg,jpeg,png'
 
     ];
@@ -158,7 +158,7 @@ class UsersController extends Controller
 
         $user = User::create($user);
 
-        $user->givePermissionTo('edit articles');
+     //   $user->givePermissionTo('edit articles');
 
         return redirect('/admin/Users')->with('messages', 'تم إضافة المستخدم');
     }
@@ -204,13 +204,13 @@ public function addpermison()
     public function store(Request $request)
     {
         $user = $request->validate($this->Rule, $this->messages());
-       // $slide->img =  $request->file('img')->store('logo','public');
-    if($request->hasFile('img'))
+
+        if($request->hasFile('img'))
     {
         $$user['img'] =  $request->file('img')->store('userimg','public');
     }
-        // $user = $request->all();
-        $user['password'] = Hash::make($request->password);
+
+    $user['password'] = Hash::make($request->password);
 
         $role= Role::findById($request['role']);
 
@@ -262,7 +262,7 @@ public function addpermison()
             [
                 'email' => 'unique:users,email,' . $id,
                 "name" => "required|string|max:100|min:3",
-                "role" => "required|integer|digits_between:1,3"
+                "role" => "required"
             ],
             $this->messages()
         );
@@ -270,13 +270,11 @@ public function addpermison()
         {
             $user->img =  $request->file('img')->store('userimg','public');
         }
-       // dd($request->password);
+
         if ($request->password) {
             $request->validate($this->PasswordRule, $this->messages());
             $user->password =  Hash::make($request->password);
         }
-
-        //$user->
 
         $user->name =  $request->name;
         $user->email =  $request->email;
@@ -301,26 +299,21 @@ public function addpermison()
 
     public function addPerm(Request $request)
     {
-      //  dd($request->all());
         $allRolToP =$request->all();
         $removed = array_shift($allRolToP);
-     //  dd($allRolToP);
 
         foreach ( $allRolToP as $key=>$va ) {
-           // dd($allRolToP);
+           
           $toRole=json_decode($key);
-          $Role=Role::findById($toRole->permRole->role);
-          $perm=Permission::findById($toRole->permRole->perm);
+
+          $Role=Role::find($toRole->permRole->role);
+          $perm=Permission::find($toRole->permRole->perm);
 
           if($va){
             
-   
           $Role->givePermissionTo($perm);
 
-          
           }else{
-
-            
 
             $Role->revokePermissionTo($perm);
 

@@ -86,7 +86,7 @@ class mainSite extends Controller
 
         "majer" => "required|string|max:100|min:3",
 
-        "job_id" => "required|numeric|max:100|min:1",
+        "job_id" => "required",
         "about" => "required|string|max:100|min:3",
         'cv' => 'required|max:2048|mimes:pdf',
 
@@ -394,7 +394,7 @@ class mainSite extends Controller
 
     public function services($id)
     {
-        $services  = services::where('cat_id', $id)->get();
+        $services  = services::where('category_id', $id)->get();
 
         return view('services', ['services' => $services]);
     }

@@ -121,7 +121,6 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
         Route::post('postMyNotifyTask/{id}', [TasksController::class,'postMyNotifyTask']);
 
 
-        Route::get('showmysale/{type}', [TasksController::class,'showmysale']);
         Route::get('editmysale/{type}', [TasksController::class,'editmysale']);
         Route::post('postmysale/{id}', [TasksController::class,'postmysale']);
 

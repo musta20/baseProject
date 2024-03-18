@@ -31,17 +31,17 @@
                 @foreach ($perm as $key1 =>  $permName)
                 <td>
                    
-                    @if ($roleName->hasPermissionTo($permName->id))
+                    @if ($roleName->hasPermissionTo($permName))
 
                     <input type="checkbox" checked hidden 
                     value="0" 
-                    name=<?php echo '{"permRole":{"role":'.$roleName->id.',"perm":'.$permName->id.'}}';?>
+                    name=<?php echo '{"permRole":{"role":"'.$roleName->id.'","perm":"'.$permName->id.'"}}';?>
                     >
 
 
                     <input type="checkbox" 
                     checked
-                     name=<?php echo '{"permRole":{"role":'.$roleName->id.',"perm":'.$permName->id.'}}';?>
+                     name=<?php echo '{"permRole":{"role":"'.$roleName->id.'","perm":"'.$permName->id.'"}}';?>
                      value="1">
                     
                      @else
@@ -50,11 +50,11 @@
 
                     <input type="checkbox" checked hidden 
                     value="0" 
-                    name=<?php echo '{"permRole":{"role":'.$roleName->id.',"perm":'.$permName->id.'}}';?>
+                    name=<?php echo '{"permRole":{"role":"'.$roleName->id.'","perm":"'.$permName->id.'"}}';?>
                     >
                     <input type="checkbox" 
                      onchange="chek(this)"
-                     name=<?php echo '{"permRole":{"role":'.$roleName->id.',"perm":'.$permName->id.'}}';?>
+                     name=<?php echo '{"permRole":{"role":"'.$roleName->id.'","perm":"'.$permName->id.'"}}';?>
                     value="0">
                     
                      @endif

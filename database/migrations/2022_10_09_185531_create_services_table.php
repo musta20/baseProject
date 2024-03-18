@@ -19,10 +19,12 @@ class CreateServicesTable extends Migration
             $table->string("name");
             
             $table->integer("price");
-            $table->integer("cat_id");
-            $table->text("des")->nullable();
-            $table->string("icon");
 
+            $table->foreignUuid("category_id")->references("id")->on("category")->onDelete("cascade");
+
+            $table->text("des")->nullable();
+
+            $table->string("icon");
 
             $table->timestamps();
         });

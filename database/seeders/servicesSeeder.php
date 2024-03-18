@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\category;
 use App\Models\delivery;
 use App\Models\payment;
 use App\Models\services;
@@ -25,6 +26,7 @@ class servicesSeeder extends Seeder
         $payment = payment::get();
         $delivery = delivery::get();
 
+        $category = category::get();
         foreach ($services as $key) {
 
 
@@ -34,7 +36,7 @@ class servicesSeeder extends Seeder
                  
             $item = collect($key);
 
-            services::factory()
+            services::factory()->for($category->random())
             ->hasAttached(
                 $payment->random(2),
             )

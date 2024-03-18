@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ReportTtpe;
+use App\Enums\ReportType;
 use App\Models\Files;
 use App\Models\job_app;
 use App\Models\order;
@@ -80,7 +80,7 @@ class SearchController extends Controller
                 break;
 
             case '3':
-                $resault = Report::where('type', 0)->where('reporttype',  ReportTtpe::BILL->value)->where('id', $request->keyword)->first();
+                $resault = Report::where('type', 0)->where('reporttype',  ReportType::BILL->value)->where('id', $request->keyword)->first();
                 if(!$resault)
                 {
                     return view('admin.search.index', ['resault' => true]);

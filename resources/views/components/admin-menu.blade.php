@@ -156,10 +156,7 @@
                                                                 <a href="{{ url('/admin/showMyNotifyTask/1') }}">
                                                                     تنبيهات</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="{{ url('/admin/showmysale/1') }}">
-                                                                    مهام المبيعات</a>
-                                                            </li>
+                                               
 
                                                         </ul>
                                                     </div>
