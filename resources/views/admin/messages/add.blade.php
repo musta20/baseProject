@@ -16,7 +16,7 @@
 
         <div class="p-1 w-75">
             <div class=" px-3 pt-3 pb-0">
-                <form method="POST" action="{{ url('/admin/Messages') }}">
+                <form method="POST" action="{{ route('admin.Messages.store') }}">
                     @csrf
                     <div class="mb-2">
                         <label for="msgto" class="form-label">الى</label>

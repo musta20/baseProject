@@ -125,7 +125,7 @@ class NumbersController extends Controller
 
         $number->save();
 
-        return redirect('/admin/Number/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Number.index')->with('messages','تم تعديل العنصر');
 
         
         }

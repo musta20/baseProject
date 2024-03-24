@@ -22,9 +22,9 @@
                     <td>{{ $item->job->title }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td class="cellControll">
-                        <a href="{{ url('/admin/JobApp/' . $item->id) }}">
+                        <a href="{{ route('admin.JobApp.edit' , $item->id) }}">
                             <i class="mdi mdi-pencil"></i></a>
-                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.JobApp.destroy' , $item->id) }}'))" href="#"><i
                                 class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
@@ -33,22 +33,7 @@
         {{ $alljopapp->links('admin.pagination.custom') }}
 
 
-        <script>
-            function showModel(e) {
 
-                return `<form method='POST' 
-        
-        action='{{ url('/admin/JobApp/${e.id}') }}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.name}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-
-            }
         </script>
 
         <x-model-box></x-model-box>

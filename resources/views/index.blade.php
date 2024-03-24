@@ -22,8 +22,9 @@
       </div>
   @endforeach
 </div>
+@vite(['js/lib/index.min.js','js/lib/autoPlay.min.js','js/lib/slids.js','sadana/style/mainContact.css'])
 
-    <link rel="stylesheet" href="{{asset('sadana/style/mainContact.css')}}" />
+    {{-- <link rel="stylesheet" href="{{asset('sadana/style/mainContact.css')}}" /> --}}
 
 </section>
 @endif
@@ -131,10 +132,9 @@
 {{-- {{ include_once 'inc/contact.php'; }}
  --}}
 
-
-<script src="{{asset('js/lib/index.min.js')}}"></script>
-<script src="{{asset('js/lib/autoPlay.min.js')}}"></script>
-<script src="{{asset('js/lib/slids.js')}}"></script>
+{{-- <script src="{{}}"></script>
+<script src="{{asset('')}}"></script>
+<script src="{{asset('')}}"></script> --}}
 
 
 </x-layout>

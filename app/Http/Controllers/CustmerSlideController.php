@@ -2,42 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeCustmerSlideRequest;
+use App\Http\Requests\updateCustmerSlideRequest;
 use App\Models\CustmerSlide;
-use Illuminate\Http\Request;
 
 class CustmerSlideController extends Controller
 {
 
 
-    public $rule = [
-       // "img" => "required|string|max:255|min:3",
-       //'file' => ['required','mimes:pdf,docx','max:2048'],
-       'img' => 'required|max:2048|mimes:jpg,jpeg,png',
-        "url" => "required|string|max:255|min:3",
-    ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            
-            'url.required' => 'يجب كتابة الرابط ',
-            'url.string' => 'يجب ان يكون الرابط نص فقط',
-            "url.max" => "يجب ان لا يزيد عنوان الرابط  25 حرف",
-            "url.min" => "يجب ان لا يقل عنوان الرابط  3 حرف",
-
-
-            'img.max' => 'اقصى حجم للصورة يجب تن الا يتعدى 24م ب',
-            "img.mimes" => "jpg,jpeg,png يجب ان تكون الصورة من نوع ",
-        ];
-    }
-
-    
     /**
      * Display a listing of the resource.
      *
@@ -67,9 +39,8 @@ class CustmerSlideController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeCustmerSlideRequest $request)
     {
-        $data = $request->validate( $this->rule,$this->messages());
         
         $data['img'] =  $request->file('img')->store('Slide','public');
 
@@ -84,9 +55,8 @@ class CustmerSlideController extends Controller
      * @param  \App\Models\CustmerSlide  $custmerSlide
      * @return \Illuminate\Http\Response
      */
-    public function show( $id)
+    public function show(CustmerSlide $slide)
     {
-        $slide = CustmerSlide::find($id);
         return view("admin.setting.CustmerSlide.edit",  ['slide' => $slide] );
     }
 
@@ -108,11 +78,8 @@ class CustmerSlideController extends Controller
      * @param  \App\Models\CustmerSlide  $custmerSlide
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(updateCustmerSlideRequest $request,CustmerSlide $slide)
     {
-        $data = $request->validate( $this->rule,$this->messages());
-
-        $slide = CustmerSlide::find($id);
 
         $slide->img = $request->file('img')->store('Slide','public');
 
@@ -120,7 +87,7 @@ class CustmerSlideController extends Controller
 
         $slide->save();
 
-        return redirect('/admin/CustmerSlide/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.CustmerSlide.index')->with('messages','تم تعديل العنصر');
     }
 
     /**
@@ -129,10 +96,9 @@ class CustmerSlideController extends Controller
      * @param  \App\Models\CustmerSlide  $custmerSlide
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(CustmerSlide $slide)
     {
-        $slide = CustmerSlide::find($id);
         $slide->delete();
-        return redirect('/admin/CustmerSlide/')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.CustmerSlide.index')->with('messages','تم حذف العنصر');
     }
 }

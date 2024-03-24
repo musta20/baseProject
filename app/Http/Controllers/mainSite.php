@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactSupport;
+use App\Http\Requests\saveJobRequest;
+use App\Http\Requests\saveOrderRequest;
+use App\Http\Requests\sendContactRequest;
 use App\Models\category;
 use App\Models\clients;
 use App\Models\CustmerSlide;
-use App\Models\delivery;
 use App\Models\dev_to_serv;
 use App\Models\Files;
 use App\Models\job_app;
@@ -15,14 +16,13 @@ use App\Models\jobs;
 use App\Models\message;
 use App\Models\numbers;
 use App\Models\order;
-use App\Models\payment;
 use App\Models\pym_to_serv;
 use App\Models\RequiredFiles;
 use App\Models\services;
 use App\Models\setting;
 use App\Models\slide;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class mainSite extends Controller
 {
@@ -237,11 +237,11 @@ class mainSite extends Controller
         return view('contact',['setting'=>$setting]);
     }
 
-    public function SendContact(Request $request)
+    public function SendContact(sendContactRequest $request)
     {
-        $data = $request->validate($this->ContactRule, $this->ContactmMssages());
+        //$data = $request->validate($this->ContactRule, $this->ContactmMssages());
      
-        $msg= "<br>".$data['lname']."<br>".$data['fname']."<br>".$data['msg'];
+        $msg= "<br>".$request['lname']."<br>".$request['fname']."<br>".$request['msg'];
 
 
         message::create([
@@ -254,14 +254,13 @@ class mainSite extends Controller
 
     $newmsg  = [];
 
-    $newmsg['lname'] = $data['lname'];
-    $newmsg['fname'] = $data['fname'];
-    $newmsg['msg'] = $data['email'].'<br> '.$data['msg'];
+    $newmsg['lname'] = $request['lname'];
+    $newmsg['fname'] = $request['fname'];
+    $newmsg['msg'] = $request['email'].'<br> '.$request['msg'];
+
    // Mail::to($data['email'])->send(new ContactSupport($newmsg));
 
-       // return view('contact',['setting'=>$setting]);
-
-       return redirect('contact/')->with('messages', ' تم ارسال الرسالة ');
+       return redirect()->route('contact')->with('messages', ' تم ارسال الرسالة ');
 
     }
 
@@ -274,12 +273,12 @@ class mainSite extends Controller
     public function CheckOrderStatus(Request $request)
     {
         if (!isset($request->code)) {
-            return redirect('CheckStatus/')->withErrors('يجب كتابة رقم الطلب');
+            return redirect()->route('CheckStatus')->withErrors('يجب كتابة رقم الطلب');
         }
         $order  = order::where('code', $request->code)->first();
 
         if (!$order) {
-            return redirect('CheckStatus/')->withErrors('رقم الطلب غير صحيح   ');
+            return redirect()->route('CheckStatus')->withErrors('رقم الطلب غير صحيح   ');
         }
 
         switch ($order->status) {
@@ -303,7 +302,7 @@ class mainSite extends Controller
                 break;
         }
 
-        return redirect('CheckStatus/')->with('messages', ' حالة الطلب : '.$o_status.' ');
+        return redirect()->route('CheckStatus')->with('messages', ' حالة الطلب : '.$o_status.' ');
     }
 
 
@@ -315,43 +314,43 @@ class mainSite extends Controller
 
 
 
-    public function SaveOrder(Request $request, $id)
+    public function SaveOrder(saveOrderRequest $request,services  $services )
     {
-        $data = $request->validate($this->rule, $this->messages());
+      //  $data = $request->validate($this->rule, $this->messages());
 
         $imgRoule = [];
 
-        $files = RequiredFiles::where('type', 0)->where('service_id', $id)->get();
-        foreach ($files as $key => $value) {
+        //$files = $services->files;  // RequiredFiles::where('type', 0)->where('service_id', $id)->get();
+        foreach ($services->files as $key => $value) {
             $imgRoule[$key] = 'required|max:2048|mimes:jpg,jpeg,png';
         }
 
-        $request->validate($imgRoule, [
-            'required' => 'الرجاء ارفاق الملف',
-            'max' => 'حجم الملف يجب ان لا يتعدى 20 مب',
-            'mimes' => 'نوع الملف يجب ان يكون jpg,jpeg,png',
-        ]);
+        // $request->validate($imgRoule, [
+        //     'required' => 'الرجاء ارفاق الملف',
+        //     'max' => 'حجم الملف يجب ان لا يتعدى 20 مب',
+        //     'mimes' => 'نوع الملف يجب ان يكون jpg,jpeg,png',
+        // ]);
 
 
 
 
 
-        $services  = services::find($id);
+      //  $services  = services::find($id);
         $uuidCode = rand(235164, 64655454);
         $order =  order::create([
-            'title' => $data['title'],
-            'name' => $data['name'],
-            'des' => $data['des'],
-            'phone' => $data['phone'],
+            'title' => $request['title'],
+            'name' => $request['name'],
+            'des' => $request['des'],
+            'phone' => $request['phone'],
             'approve_time' => 0,
             'adress' => 0,
             'files' => 0,
             'service_id' => $services->id,
-            'email' => $data['email'],
-            'receipt' => $data['receipt'],
-            'cash' => $data['cash'],
-            'count' => $data['count'],
-            'time' => $data['time'],
+            'email' => $request['email'],
+            'receipt' => $request['receipt'],
+            'cash' => $request['cash'],
+            'count' => $request['count'],
+            'time' => $request['time'],
             'ip' => $request->ip(),
             'payed' => 0,
             'status' => 0,
@@ -360,7 +359,7 @@ class mainSite extends Controller
         ]);
 
 
-        foreach ($files as $key => $value) {
+        foreach ($services->files as $key => $value) {
             $filename =    $request->file($key)->store('order', 'public');
             Files::create([
                 "name" => $filename,
@@ -369,21 +368,15 @@ class mainSite extends Controller
             ]);
         }
 
-
-        // $files = RequiredFiles::where('type',0)->where('service_id',$services->id)->get();
-        // dd( $files );
-        // return view('order',['services'=>$services,'files'=>$files]);    
-        return redirect('order/' . $services->id)->with('messages', '  تم ارسال الطلب رقم : ' . $uuidCode);
+        return redirect()->route('order' , $services->id)->with('messages', '  تم ارسال الطلب رقم : ' . $uuidCode);
     }
 
 
-    public function order($id)
+    public function order(services $services)
     {
-        $services  = services::find($id);
-        $files = RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
-        // dd( $files );
-/*         $payment = payment::get();
-        $cash =  delivery::get(); */
+        //$services  = services::find($id);
+        $files = $services->files; //RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
+
 
         $payment = pym_to_serv::where('service_id',$services->id)->with('pym')->get();
 
@@ -392,9 +385,9 @@ class mainSite extends Controller
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
     }
 
-    public function services($id)
+    public function services(category $category)
     {
-        $services  = services::where('category_id', $id)->get();
+        $services  = $category->services; //services::where('category_id', $id)->get();
 
         return view('services', ['services' => $services]);
     }
@@ -408,35 +401,34 @@ class mainSite extends Controller
         return view('job', ['jobs' => $jobs, 'jobcity' => $jobcity]);
     }
 
-    public function SaveJobs(Request $request)
+    public function SaveJobs(saveJobRequest $request)
     {
 
-        $data = $request->validate($this->Jobrule, $this->JobMessages());
         $filename = $request->file('cv')->store('cv', 'public');
-        $uuidCode = rand(235164, 64655454);
+        $uuidCode =Str::uuid();
 
         job_app::create([
-            'name' => $data['name'],
+            'name' => $request['name'],
             'cv' => $filename,
-            'email' => $data['email'],
+            'email' => $request['email'],
 
-            'phone' => $data['phone'],
-            'cert' => $data['cert'],
+            'phone' => $request['phone'],
+            'cert' => $request['cert'],
 
-            'exp' => $data['exp'],
-            'exp_des' => $data['exp_des'],
+            'exp' => $request['exp'],
+            'exp_des' => $request['exp_des'],
 
-            'city' => $data['city'],
-            'job_city' => $data['job_city'],
-            'majer' => $data['majer'],
+            'city' => $request['city'],
+            'job_city' => $request['job_city'],
+            'majer' => $request['majer'],
 
             'code' => $uuidCode,
-            'job_id' => $data['job_id'],
-            'about' => $data['about']
+            'job_id' => $request['job_id'],
+            'about' => $request['about']
 
 
         ]);
 
-        return redirect('jobs/')->with('messages', '  تم ارسال الطلب رقم : ' . $uuidCode);
+        return redirect()->route('jobs')->with('messages', '  تم ارسال الطلب رقم : ' . $uuidCode);
     }
 }

@@ -2,51 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeCategoryRequest;
+use App\Http\Requests\updateCategoryRequest;
 use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-
-    public $rule = [
-        "title" => "required|string|max:100|min:3",
-
-        "des" => "required|string|max:255|min:3",
-        
-        "icon" => "required|string|max:255|min:3",
-    ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'يجب كتابة العنوان ',
-            'name.string' => 'يجب ان يكون العنوان نص فقط',
-            "name.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "name.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'des.required' => 'يجب كتابة الوصف ',
-            'des.string' => 'يجب ان يكون الوصف نص فقط',
-            "des.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
-            "des.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'icon.required' => 'يجب إضافة  ايقونة ',
-            'icon.string' => 'يجب ان يكون الايقونة نص فقط',
-            "icon.max" => "يجب ان لا يزيد  الايقونة عن 255 حرف",
-            "icon.min" => "يجب ان لا يقل الايقونة النص عن 3 حرف",
-
-
-        ];
-    }
-
-
-
+ 
     /**
      * Display a listing of the resource.
      *
@@ -76,41 +40,29 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeCategoryRequest  $request)
     {
 
-    $data = $request->validate( $this->rule,$this->messages());
 
-    category::create($data);
+    category::create($request);
    
-    return redirect('/admin/Category/create')->with('messages','تم إضافة البيانات');
+    return redirect()->route('admin.Category.create')->with('messages','تم إضافة البيانات');
 
     }
-
+    
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(category $category)
     {
 
-        $category = category::find($id);
         return view("admin.category.edit",  ['category' => $category] );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        dd($id);
 
-    }
 
     /**
      * Update the specified resource in storage.
@@ -119,19 +71,17 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(updateCategoryRequest $request,Category $category)
     {
 
-        $request->validate( $this->rule,$this->messages());
-        $category = category::find($id);
+        $category->update([
+        "title"=>$request->title,
+        "des"=>$request->des,
+        "icon"=>$request->icon,
+        ]);
 
-        $category->title=$request->title;
-        $category->des=$request->des;
-        $category->icon=$request->icon;
-
-        $category->save();
-
-        return redirect('/admin/Category/')->with('messages','تم تعديل العنصر');
+        
+        return redirect()->route('admin.Category.index')->with('messages','تم تعديل العنصر');
 
         
         }
@@ -142,11 +92,9 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(category $category )
     {
-      
-       $category = category::find($id);
        $category->delete();
-       return redirect('/admin/Category/')->with('messages','تم حذف العنصر');
+       return redirect()->route('admin.Category.index')->with('messages','تم حذف العنصر');
     }
 }

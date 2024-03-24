@@ -8,11 +8,13 @@
 <x-card-message />
 <div class="page-title p-1" >
 
-<a href="{{url('/admin/Services/create')}}" class="btn btn-success">إضافة خدمة</a>
+<a href="{{route('admin.Services.create')}}" class="btn btn-success">إضافة خدمة</a>
 
 </div>
 
 <table class="table  table-striped table-centered mb-0">
+   
+    {!! $filterBox !!}
     <thead class="table-dark">        
         <tr>
             <th>#</th>
@@ -31,8 +33,8 @@
             <i class="{{$item->icon}}"></i>
        </td> --}}
        <td class="table-action">
-        <a  href="{{url('/admin/Services/'.$item->id)}}"><i class="mdi mdi-pencil"></i></a>
-            <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#">
+        <a  href="{{route('admin.Services.edit',$item->id)}}"><i class="mdi mdi-pencil"></i></a>
+            <a onclick="OpenDeleteModel(showModel('{{ $item->name }}','{{ route('admin.Services.destroy' , $item->id) }}'))" href="#">
                 <i class="mdi mdi-delete"></i></a>
         </td>
         </tr>
@@ -41,23 +43,6 @@
         {{$allServices->links('admin.pagination.custom')}}
 
 
-        <script>
-  function showModel(e) {
-
-   return `<form method='POST' 
-        
-        action='{{url('/admin/Services/${e.id}')}}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.name}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-    
-  }
-</script>
 
 <x-model-box></x-model-box>
 

@@ -46,10 +46,9 @@ class JobAppController extends Controller
      * @param  \App\Models\job_app  $job_app
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(job_app $job)
     {
         
-            $job = job_app::with('job')->find($id);
     
             return view("admin.jobs.jobApp.show",  ['job' => $job]);
     }
@@ -83,9 +82,8 @@ class JobAppController extends Controller
      * @param  \App\Models\job_app  $job_app
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(job_app $job_app)
     {
-        $job_app = job_app::find($id);
         $job_app->delete();
         return redirect('/admin/JobApp')->with('messages','تم حذف العنصر');
     }

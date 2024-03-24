@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeDeliveryRequest;
+use App\Http\Requests\updateDeliveryRequest;
 use App\Models\delivery;
 use Illuminate\Http\Request;
 
@@ -14,29 +16,13 @@ class DeliveryController extends Controller
      */
 
 
-    public $rule = [
-        "name" => "required|string|max:100|min:3",
-
-    ];
-
+  
     /**
      * Get the error messages for the defined validation rules.
      *
      * @return array
      */
 
-    public function messages()
-    {
-        return [
-            'name.required' => 'يجب كتابة العنوان ',
-            'name.string' => 'يجب ان يكون العنوان نص فقط',
-            "name.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "name.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-
-
-        ];
-    }
 
     public function index()
     {
@@ -62,13 +48,12 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeDeliveryRequest $request)
     {
-        $data = $request->validate( $this->rule,$this->messages());
 
-        delivery::create($data);
+        delivery::create($request);
        
-        return redirect('/admin/Delivery')->with('messages','تم إضافة البيانات');
+        return redirect()->route('admin.Delivery.index')->with('messages','تم إضافة البيانات');
     }
 
     /**
@@ -77,9 +62,8 @@ class DeliveryController extends Controller
      * @param  \App\Models\delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(delivery $delivery)
     {
-        $delivery = delivery::find($id);
         return view("admin.order.delivery.edit",  ['delivery' => $delivery] );
     }
 
@@ -101,17 +85,14 @@ class DeliveryController extends Controller
      * @param  \App\Models\delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(updateDeliveryRequest $request,delivery $delivery)
     {
-        $data = $request->validate( $this->rule,$this->messages());
-        $delivery = delivery::find($id);
 
         $delivery->name=$request->name;
 
-
         $delivery->save();
 
-        return redirect('/admin/Delivery/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Delivery.index')->with('messages','تم تعديل العنصر');
     }
 
     /**
@@ -120,10 +101,9 @@ class DeliveryController extends Controller
      * @param  \App\Models\delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(delivery $delivery)
     {
-        $delivery = delivery::find($id);
         $delivery->delete();
-        return redirect('/admin/Delivery/')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.Delivery.index')->with('messages','تم حذف العنصر');
     }
 }

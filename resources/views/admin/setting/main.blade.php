@@ -2,7 +2,7 @@
 @section('content')
     <section class="boxs border">
 
-        <a href="{{url('/admin/basic')}}" >
+        <a href="{{route('admin.basic')}}" >
             <i class="fa-solid fa-list fa-2x"></i>
             <h3> إعداد الموقع الاساسية</h3>
         </a>

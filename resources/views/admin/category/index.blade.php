@@ -5,7 +5,7 @@
 <x-card-message />
 <div class="page-title p-1" >
 
-<a href="{{url('/admin/Category/create')}}" class="btn btn-success">إضافة تصنيف</a>
+<a href="{{route('admin.Category.create')}}" class="btn btn-success">إضافة تصنيف</a>
 </div>
 
 <table class="table  table-striped table-centered mb-0">
@@ -25,9 +25,9 @@
             <i class="{{$item->icon}}"></i>
         </td> --}}
         <td class="table-action">
-            <a  href="{{url('/admin/Category/'.$item->id)}}">
+            <a  href="{{route('admin.Category.edit',$item->id)}}">
                 <i class="mdi mdi-pencil"></i></a>
-            <a onclick="OpenDeleteModel(showModel({{$item}}))" href="#">
+            <a onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Category.destroy',$item->id)}}'))" href="#">
                 <i class="mdi mdi-delete"></i></a>
         </td>
         </tr>
@@ -36,23 +36,6 @@
         {{$allcategory->links('admin.pagination.custom')}}
 
 
-        <script>
-  function showModel(e) {
-
-   return `<form method='POST' 
-        
-        action='{{url('/admin/Category/${e.id}')}}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.title}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-    
-  }
-</script>
 
 <x-model-box></x-model-box>
 

@@ -11,10 +11,10 @@
             <div class="Box" data-wow-duration="1s" data-wow-delay="0.2s">
                     <i class="{{$item->icon}} fa-2x" ></i>
                     <h3 class=" ">
-                        <a href="{{url('order/'.$item->id)}}">
+                        <a href="{{route('order',$item->id)}}">
                         {{$item->name}}</a>
                     </h3>
-                    <a href="{{url('order/'.$item->id)}}" class="btn">طلب</a>
+                    <a href="{{route('order',$item->id)}}" class="btn">طلب</a>
             </div>
             
             @endforeach

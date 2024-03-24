@@ -122,7 +122,7 @@
                                                 لا يوجد
                                             @endif
                                             @foreach (getNotif()['task'] as $item)
-                                                <a href="{{ url('/admin/MainTask') }}"
+                                                <a href="{{ route('admin.admin.MainTask') }}"
                                                     class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                                     <div class="card-body">
                                                         {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>   
@@ -461,14 +461,14 @@
                                     </div>
 
                                     <!-- item-->
-                                    <a href="{{ url('admin/Users/' . auth()->user()->id . '/edit') }}"
+                                    <a href="{{ route('admin.Users.edit',  auth()->user()->id ) }}"
                                         class="dropdown-item notify-item">
                                         <i class="mdi mdi-account-circle me-1"></i>
                                         <span>حسابي </span>
                                     </a>
 
                                     <!-- item-->
-                                    <a href="{{ url('/admin/basic') }}" class="dropdown-item notify-item">
+                                    <a href="{{ route('admin.basic') }}" class="dropdown-item notify-item">
                                         <i class="mdi mdi-account-edit me-1"></i>
                                         <span>إعداد الموقع</span>
                                     </a>

@@ -37,8 +37,7 @@
                 <td>{{ __($item->description) }}</td>
                 <td>{{ $item->created_at }}</td>
                 <td>
-                    <a href="/admin/Logs/{{ $item->id }}">عرض</a>
-
+                    <a href="{{route('admin.Logs.show',$item->id) $item->id }}">عرض</a>
                 </td>
             </tr>
         @endforeach
@@ -50,7 +49,7 @@
 
                 return `<form method='POST' 
         
-        action='{{ url('/admin/Order/${e.id}') }}' >
+        action='{{ route('admin.Order.destroy','${e.id}') }}' >
         @method('DELETE')
         @csrf
         <div class='formLaple' >

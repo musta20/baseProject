@@ -8,7 +8,7 @@
 
 
     <form method="POST" class="w-75" enctype="multipart/form-data"
-action="{{url('/admin/CustmerSlide/'.$slide->id)}}">
+action="{{route('admin.CustmerSlide.update',$slide->id)}}">
     @csrf
     @method('PUT')
 

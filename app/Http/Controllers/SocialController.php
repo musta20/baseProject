@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeSocialRequest;
 use App\Models\social;
 use Illuminate\Http\Request;
 
@@ -71,12 +72,12 @@ class SocialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeSocialRequest $request)
     {
 
-        $data = $request->validate( $this->rule,$this->messages());
+     //   $data = $request->validate( $this->rule,$this->messages());
 
-        social::create($data);
+        social::create($request);
        
         return redirect('/admin/Social')->with('messages','تم إضافة البيانات');
 
@@ -88,9 +89,8 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(social $social)
     {
-        $social = social::find($id);
         return view("admin.setting.social.edit",  ['social' => $social] );
     }
 
@@ -112,20 +112,17 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(storeSocialRequest $request,social $social)
     {
     
 
-
-        $data = $request->validate( $this->rule,$this->messages());
-        $social = social::find($id);
 
         $social->img=$request->img;
         $social->url=$request->url;
 
         $social->save();
 
-        return redirect('/admin/Social/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Social.index')->with('messages','تم تعديل العنصر');
 
     }
 
@@ -135,10 +132,9 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(social $social)
     {
-        $social = social::find($id);
         $social->delete();
-        return redirect('/admin/Social/')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.Social.index')->with('messages','تم حذف العنصر');
     }
 }

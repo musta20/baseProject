@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ReportType;
+use App\Http\Requests\showPdfReportRequest;
+use App\Http\Requests\storeReportRequest;
 use App\Models\order;
 use App\Models\Report;
 use App\Models\setting;
@@ -14,26 +16,7 @@ use PDF;
 
 class ReportController extends Controller
 {
-    public $rule = [
-        "from" => "required|date",
-        "to" => "required|date",
-
-    ];
-
-    public function messages()
-    {
-        return [
-            'from.required' => 'يجب اختيار التاريخ',
-            'from.date' => 'يجب ان تكون القيمة  تاريخ',
- 
-
-            'to.required' => 'يجب اختيار التاريخ',
-            'to.date' => 'يجب ان تكون القيمة تاريخ',
-
-
-        ];
-    }
-
+    
 
     /**
      * Display a listing of the resource.
@@ -65,10 +48,10 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeReportRequest $request)
     {
-         $request->validate( $this->rule,$this->messages());
-   
+
+        
         if ($request->reporttype == ReportType::CASH->value) {
 
             $reports = order::whereBetween('created_at', [$request->from, $request->to])
@@ -175,10 +158,9 @@ class ReportController extends Controller
 
 
 
-    public function Billprint($id)
+    public function Billprint(order $order)
     {
         $setting = setting::first();
-        $order = order::with('servicesNmae')->find($id);
 
         if (!$order->first()) {
             return Redirect::back()->with('messages', 'غير موجود ');
@@ -218,9 +200,9 @@ class ReportController extends Controller
     }
 
 
-    public function showPdfReport(Request $request)
+    public function showPdfReport(showPdfReportRequest $request)
     {
-        $request->validate( $this->rule,$this->messages());
+        //$request->validate( $this->rule,$this->messages());
  
         if ($request->type == 1) {
             $reports = order::whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
@@ -254,9 +236,9 @@ class ReportController extends Controller
         ->paginate(10);
         return view('admin.report.bills', ['orderReport' => $orderReport]);
     }
-    public function billReport(Request $request)
+    public function billReport(showPdfReportRequest $request)
     {
-        $request->validate( $this->rule,$this->messages());
+      //  $request->validate( $this->rule,$this->messages());
 
         if ($request->from && $request->to) {
             if ($request->type) {
@@ -381,9 +363,8 @@ public function postCreateBill(Request $request)
      * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Report $file )
     {
-        $file = Report::find($id);
         $file->delete();
         return  Redirect::back()->with('messages', 'تم حذف العنصر');
 

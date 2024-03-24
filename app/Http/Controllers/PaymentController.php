@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storePaymentRequest;
+use App\Http\Requests\updatePaymentRequest;
 use App\Models\payment;
 use Illuminate\Http\Request;
 
@@ -62,13 +64,13 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storePaymentRequest $request)
     {
-        $data = $request->validate( $this->rule,$this->messages());
 
-        payment::create($data);
+        
+        payment::create($request);
        
-        return redirect('/admin/Payment')->with('messages','تم إضافة البيانات');
+        return redirect()->route('admin.Payment.index')->with('messages','تم إضافة البيانات');
     }
 
     /**
@@ -77,9 +79,8 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(payment $payment)
     {
-        $payment = payment::find($id);
         return view("admin.order.payment.edit",  ['payment' => $payment] );
     }
 
@@ -101,17 +102,18 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(updatePaymentRequest $request,payment  $payment)
     {
-        $data = $request->validate( $this->rule,$this->messages());
-        $payment = payment::find($id);
+       // $data = $request->validate( $this->rule,$this->messages());
+
+        //$payment = payment::find($id);
 
         $payment->name=$request->name;
 
 
         $payment->save();
 
-        return redirect('/admin/Payment/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Payment.index')->with('messages','تم تعديل العنصر');
 
     }
 
@@ -121,10 +123,10 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(payment $payment)
     {
-        $payment = payment::find($id);
+      //  $payment = payment::find($id);
         $payment->delete();
-        return redirect('/admin/Payment/')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.Payment.index')->with('messages','تم حذف العنصر');
     }
 }

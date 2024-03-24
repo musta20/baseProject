@@ -7,7 +7,7 @@
         <x-card-message></x-card-message>
 
 
-        <form method="POST" action="{{ url('/admin/Category') }}">
+        <form method="POST" action="{{ route('admin.Category.store') }}">
             @csrf
             <div class="formLaple">
                 <label>عنوان التصنيف</label>

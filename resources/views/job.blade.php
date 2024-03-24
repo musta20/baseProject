@@ -3,7 +3,7 @@
     <section class="mainPage">
 
 
-        <form method="POST" class="colorTexetFooter" action="{{url('/SaveJobs')}}" enctype="multipart/form-data">
+        <form method="POST" class="colorTexetFooter" action="{{route('SaveJobs')}}" enctype="multipart/form-data">
         
             @csrf
 

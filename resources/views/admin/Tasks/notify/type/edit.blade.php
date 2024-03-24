@@ -4,7 +4,7 @@
     <x-admin-contaner>
         <x-card-message></x-card-message>
 
-        <form method="POST" action="{{ url('/admin/NotifyType/' . $NotifyType->id) }}">
+        <form method="POST" action="{{ route('admin.NotifyType.update' , $NotifyType->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/TasksNotify') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.TasksNotify.index') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
 

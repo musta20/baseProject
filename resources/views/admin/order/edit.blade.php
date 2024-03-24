@@ -23,7 +23,7 @@
         <div class="row">
             <x-card-message></x-card-message>
             <div class="col-xxl-8 col-xl-7">
-                <form method="POST" action="{{ url('/admin/Order/' . $order->id) }}">
+                <form method="POST" action="{{ route('admin.Order.update' , $order->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card d-block">

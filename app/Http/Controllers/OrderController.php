@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\updateOrderRequest;
 use App\Mail\OrderStatus;
 use App\Models\delivery;
 use App\Models\Files;
@@ -93,63 +94,6 @@ class OrderController extends Controller
         //
     }
 
-    public function seedAllOrderList()
-    {
-        $payment_way = array("فاتورة", "تحويل بنكي", "عند التسليم", "كاش ");
-        $delevryway = array("استلام من الفرع", "ارسال للايميل", "ارسال للواتساب", "توصيل ");
-
-
-        foreach ($delevryway as $value) {
-            $item = delivery::where('name', $value)->first();;
-            if (!$item) {
-                delivery::create(["name" => $value]);
-            }
-        }
-
-        foreach ($payment_way as $value) {
-            $item = payment::where('name', $value)->first();;
-            if (!$item) {
-                payment::create(["name" => $value]);
-            }
-        }
-
-
-        $cars = array(
-            " الخرج | Al-Kharag",
-            "الدوادمي | Al-Dawadmi",
-            "الجبيل | Jubail",
-            "الاحساء | Al-Ahsa",
-            "الخبر | Khobar",
-            "المجمعة | Al-Majmaah",
-            "تبوك | Tabuk",
-            "الجوف | Al-jouf ",
-            "الظهران| Dhahran",
-            "جازان | Jizan",
-            "نجران | Najran",
-            "ابها | Abha",
-            "عسير | Asser",
-            "الباحة | Al-Baha",
-            "الطائف | Taif",
-            "ينبع | Yanbu",
-            "مكة المكرمة  | Makkah",
-            "المدينة المنورة | Medina",
-            "حفر الباطن | Hafar Al-batin",
-            "الدمام | Dammam",
-            "حائل | Hail",
-            "القصيم | Qassim",
-            "الرياض | Riyadh"
-        );
-
-        foreach ($cars as $value) {
-            $item = job_city::where('name', $value)->first();;
-            if (!$item) {
-                job_city::create(["name" => $value]);
-            }
-        }
-
-        return "job city seeded";
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -167,9 +111,9 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(order $order)
     {
-        $order = order::with('servicesNmae')->with('delivery')->with('payment')->find($id);
+        //$order = order::with('servicesNmae')->with('delivery')->with('payment')->find($id);
 
         $order->price = $order->count * $order->servicesNmae->price;
 
@@ -224,11 +168,11 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateOrderRequest $request,order $order)
     {
-        $data = $request->validate($this->rule, $this->messages());
+        // $data = $request->validate($this->rule, $this->messages());
 
-        $order  = order::find($id);
+        // $order  = order::find($id);
 
         if ($request->time) {
             $order->time = $request->time;
@@ -256,7 +200,7 @@ class OrderController extends Controller
            // Mail::to($order->email)->send(new OrderStatus(($order)));
         }
 
-        return redirect('/admin/showOrderList/' . $order->status);
+        return redirect()->route('admin.showOrderList' , $order->status);
     }
 
     /**
@@ -265,9 +209,9 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(order $order)
     {
-        $order  = order::find($id);
+       // $order  = order::find($id);
         $order->status=4;
         $order->save();
         return  Redirect::back()->with('messages', 'تم حذف العنصر');

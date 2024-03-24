@@ -7,7 +7,7 @@
         <x-card-message></x-card-message>
 
 
-        <form method="POST" class='w-75' action="{{ url('/admin/Number/' . $number->id) }}">
+        <form method="POST" class='w-75' action="{{ route('admin.Number.update' , $number->id) }}">
             @csrf
             @method('PUT')
 

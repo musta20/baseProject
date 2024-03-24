@@ -7,7 +7,7 @@
     <x-card-message></x-card-message>
 
 
-    <form method="POST" class="w-75" action="{{url('/admin/Category/'.$category->id)}}">
+    <form method="POST" class="w-75" action="{{route('admin.Category.update',$category->id)}}">
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -58,7 +58,7 @@
             <button type="submit" class="btn btn-primary">
                 <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-            <a type="button" href="{{ url('admin/Category') }}" class="btn btn-light">الغاء</a>
+            <a type="button" href="{{ route('admin.Category.index') }}" class="btn btn-light">الغاء</a>
         </div>
     </div>
 </form>

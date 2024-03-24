@@ -7,7 +7,7 @@
         <x-card-message></x-card-message>
 
 
-        <form method="POST" class="w-75" action="{{ url('/admin/NotifyType') }}">
+        <form method="POST" class="w-75" action="{{ route('admin.NotifyType.store') }}">
             @csrf
 
             
@@ -34,7 +34,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/TasksNotify') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.TasksNotify') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
 

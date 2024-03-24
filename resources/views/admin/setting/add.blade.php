@@ -7,7 +7,7 @@
 
     <h3>التصنيفات</h3>
 </div>
-<form method="POST" action="{{url('/admin/Category')}}">
+<form method="POST" action="{{route('admin.Category.store')}}">
     @csrf
     <div class="formLaple" >
         <label>عنوان التصنيف</label>

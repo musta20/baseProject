@@ -1,5 +1,5 @@
 <section class="mainPage">
-    <form id="" class="contact-form" method="POST" action="{{ url('/SendContact') }}">
+    <form id="" class="contact-form" method="POST" action="{{ route('SendContact') }}">
         @csrf
         @if (session()->has('messages'))
             <div class="alert alert-success">

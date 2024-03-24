@@ -49,9 +49,10 @@
                             @default
                         @endswitch
                     </td>
+             
 
                     <td class="cellControll">
-                        <a href="{{ url('/admin/ShowTask/' . $item->id) }}"><i class="mdi mdi-pencil"></i></a>
+                        <a href="{{ route('admin.admin.ShowTask' , $item->id) }}"><i class="mdi mdi-pencil"></i></a>
                     </td>
                 </tr>
             @endforeach

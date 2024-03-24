@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeJobRequest;
+use App\Http\Requests\updateJobRequest;
 use App\Models\job_city;
 use App\Models\jobs;
 use Illuminate\Http\Request;
@@ -10,11 +12,6 @@ class JobsController extends Controller
 {
 
 
-    public $rule = [
-        "title" => "required|string|max:100|min:3",
-        "des" => "required|string|max:255|min:3",
-        "job_cities_id" =>"required",
-    ];
 
     /**
      * Get the error messages for the defined validation rules.
@@ -22,27 +19,6 @@ class JobsController extends Controller
      * @return array
      */
 
-    public function messages()
-    {
-        return [
-            'title.required' => 'يجب كتابة العنوان ',
-            'title.string' => 'يجب ان يكون العنوان نص فقط',
-            "title.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "title.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'des.required' => 'يجب كتابة الوصف ',
-            'des.string' => 'يجب ان يكون الوصف نص فقط',
-            "des.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
-            "des.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'job_cities_id.required' => 'يجب إضافة  ايقونة ',
-            'job_cities_id.string' => 'يجب ان يكون الايقونة نص فقط',
-            "job_cities_id.max" => "يجب ان لا يزيد  الايقونة عن 255 حرف",
-            "job_cities_id.min" => "يجب ان لا يقل الايقونة النص عن 3 حرف",
-
-
-        ];
-    }
 
 
     /**
@@ -89,14 +65,12 @@ class JobsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeJobRequest $request)
     {
-       // dd($request);
 
-    $data = $request->validate( $this->rule,$this->messages());
-    jobs::create($data);
+    jobs::create($request);
    
-    return redirect('/admin/Jobs')->with('messages','تم إضافة البيانات');
+    return redirect()->route('admin.Jobs.index')->with('messages','تم إضافة البيانات');
 
     }
 
@@ -106,10 +80,9 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function show( $id)
+    public function show(jobs $jobs)
     {
         $jobCity = job_city::get();
-        $jobs = jobs::find($id);
         $currentcity = job_city::find($jobs->job_cities_id);
 
         return view("admin.jobs.edit",  ['jobs' => $jobs,"currentcity"=>$currentcity,"jobCity"=>$jobCity] );
@@ -133,20 +106,16 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(updateJobRequest $request,jobs $jobs)
     {
         
-
-        $data = $request->validate( $this->rule,$this->messages());
-        $jobs = jobs::find($id);
-
         $jobs->title=$request->title;
         $jobs->des=$request->des;
         $jobs->job_cities_id=$request->job_cities_id;
 
         $jobs->save();
 
-        return redirect('/admin/Jobs/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Jobs.index')->with('messages','تم تعديل العنصر');
 
     }
 
@@ -156,11 +125,10 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(jobs $jobs)
     {
-        $jobs = jobs::find($id);
         $jobs->delete();
-        return redirect('/admin/Jobs/')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.Jobs.index')->with('messages','تم حذف العنصر');
 
     }
 }

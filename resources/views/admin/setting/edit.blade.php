@@ -7,7 +7,7 @@
 
     <h3>التصنيفات</h3>
 </div>
-<form method="POST" action="{{url('/admin/Category/'.$category->id)}}">
+<form method="POST" action="{{route('admin.Category.update',$category->id)}}">
     @csrf
     @method('PUT')
     <div class="formLaple" >

@@ -5,10 +5,10 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
     <a href="/">الرئيسية</a>
-    <a href="/CheckStatus">الإستعلام</a>
-    <a href="/category">الخدمات</a>
-    <a href="/contact">تواصل معنا</a>
-    <a href="/jobs">الوظائف</a>
+    <a href="{{route('CheckStatus')}}">الإستعلام</a>
+    <a href="{{route('category')}}">الخدمات</a>
+    <a href="{{route('contact')}}">تواصل معنا</a>
+    <a href="{{route('jobs')}}">الوظائف</a>
 </div>
 
 <head>
@@ -51,10 +51,10 @@
 
 
                 <a href="/">الرئيسية</a>
-                <a href="/CheckStatus">الإستعلام</a>
-                <a href="/category">الخدمات</a>
-                <a href="/contact">تواصل معنا</a>
-                <a href="/jobs">التوظيف</a>
+                <a href="{{route('CheckStatus')}}">الإستعلام</a>
+                <a href="{{route('category')}}">الخدمات</a>
+                <a href="{{route('contact')}}">تواصل معنا</a>
+                <a href="{{route('jobs')}}">التوظيف</a>
             </div>
             <div></div>
         </div>

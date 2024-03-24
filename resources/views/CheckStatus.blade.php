@@ -5,7 +5,7 @@
     <section class="services">
         <div class="contentServices">
                                 <form method="POST"
-                                action="{{url('/CheckOrderStatus')}}"
+                                action="{{route('CheckOrderStatus')}}"
                                 class="colorTexetFooter">
                                 @if (session()->has('messages'))
                                 <div class="alert alert-success">

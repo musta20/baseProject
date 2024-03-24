@@ -17,14 +17,14 @@
                     <td>{{ $item->id }}</td>
                     <td>{{__($item->name) }}</td>
                     <td class="table-action">
-                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->NAME }}','{{ route('admin.removerole.destroy' , $item->id) }}'))" href="#"><i
                                 class="mdi  mdi-delete"></i></a>
                     </td>
                 </tr>
             @endforeach
         </table>
         <hr>
-        <form method="POST" class="p-1 w-75" action="{{ url('/admin/addrole') }}">
+        <form method="POST" class="p-1 w-75" action="{{ route('admin.addrole') }}">
             @csrf
             <h3>إضافة </h3>
             <hr>
@@ -52,23 +52,7 @@
 
         </div>
 
-        <script>
-            function showModel(e) {
-
-                return `<form method='POST' 
-        
-        action='{{ url('admin/rmrole/${e.id}') }}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.name}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-
-            }
-        </script>
+   
 
         <x-model-box></x-model-box>
 

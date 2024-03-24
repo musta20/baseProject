@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Conserns\Withfilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +13,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class services extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
+    use HasFactory , LogsActivity , HasUlids , Withfilter;
 
     protected $guarded = [];
 
@@ -21,8 +22,12 @@ class services extends Model
     protected static $logAttributes = ['name','price','des'];
 
     protected static $logName = 'services';
+    
+    protected static $filterFiled ="ss";
 
-
+    protected static $filterByRelation = ['category'];
+    protected static $searchField = ['name','des'];
+    
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults();

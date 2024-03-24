@@ -86,11 +86,8 @@ class SettingController extends Controller
      */
     public function setting(Request $request)
     {
-        //dd($request);
         $setting = setting::first();
-        //,  ['allServices' => $allServices]
-
-      //  dd($setting );
+ 
 
         return view("admin.setting.index",["setting"=>$setting ]);
 
@@ -149,7 +146,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate($this->rule,$this->messages());
+     //   $data = $request->validate($this->rule,$this->messages());
 
         $setting= setting::find($id);
 
@@ -176,7 +173,7 @@ class SettingController extends Controller
         $setting->save();
 
 
-        return redirect('/admin/basic')->with('messages','تم تعديل البيانات');
+        return redirect()->admin('admin.basic')->with('messages','تم تعديل البيانات');
         
         //
     }

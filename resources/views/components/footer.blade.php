@@ -20,17 +20,17 @@
                                     <a href="/">
                                         الرئيسية                                    
                                     </a>
-                                    <a href="/category">
+                                    <a href="{{route('category')}}">
                                         خدماتنا
                                     </a>
-                                    <a href="/contact">
+                                    <a href="{{route('contact')}}">
                                         تواصل معنا
                                     </a>
 
-                                    <a href="/jobs">
+                                    <a href="{{route('jobs')}}">
                                         التوظيف
                                     </a>
-                                    <a href="/CheckStatus">
+                                    <a href="{{route('CheckStatus')}}">
                                         الإستعلام
                                     </a>
                                 </span>

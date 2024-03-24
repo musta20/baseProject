@@ -30,7 +30,7 @@ class permissionSeeder extends Seeder
         $Employee = Permission::create(['name' => 'Employee']);
         $Reviews = Permission::create(['name' => 'Reviews']);
         $task = Permission::create(['name' => 'Task']);
-       // $TaskMangment = Permission::create(['name' => 'TaskMangment']);
+        $TaskMangment = Permission::create(['name' => 'TaskMangment']);
         $Report = Permission::create(['name' => 'Report']);
 
 
@@ -61,5 +61,6 @@ class permissionSeeder extends Seeder
         $Admin->givePermissionTo($Employee);
         $Admin->givePermissionTo($Reviews);
         $Admin->givePermissionTo($task);
+        $Admin->givePermissionTo($TaskMangment);
     }
 }

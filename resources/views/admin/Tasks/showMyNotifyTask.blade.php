@@ -56,7 +56,7 @@
                     <td>{{ $item->duration }}</td>
                     <td>{{ $item->exp }}</td>
                     <td class="table-action">
-                        <a href="{{ url('/admin/editMyNotifyTask/' . $item->id ) }}"><i class="mdi mdi-pencil"></i></a>
+                        <a href="{{ route('admin.editMyNotifyTask' , $item->id ) }}"><i class="mdi mdi-pencil"></i></a>
                     </td>
                 </tr>
             @endforeach

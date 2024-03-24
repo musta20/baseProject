@@ -9,8 +9,7 @@ class SlideController extends Controller
 {
     public $rule = [
         "title" => "required|string|max:255|min:3",
-       // "img" => "required|string|max:255|min:3",
-       //'file' => ['required','mimes:pdf,docx','max:2048'],
+
        'img' => 'required|max:2048|mimes:jpg,jpeg,png',
         "des" => "required|string|max:255|min:3",
         "url" => "required|string|max:255|min:3",
@@ -139,7 +138,7 @@ class SlideController extends Controller
 
         $slide->save();
 
-        return redirect('/admin/Slide/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Slide.index')->with('messages','تم تعديل العنصر');
 
 
     }

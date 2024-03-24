@@ -6,7 +6,7 @@
     <x-admin-contaner>
         <x-card-message></x-card-message>
         <div class="page-title p-1" >
-            <a href="{{ url('/admin/NotifyType/create') }}" class="btn btn-success"> اضافة تصنيف</a>
+            <a href="{{ route('admin.NotifyType.create') }}" class="btn btn-success"> اضافة تصنيف</a>
 
         </div>
 
@@ -26,7 +26,7 @@
                     <td>{{$item->id}}</td>
 
                     <td>
-                        <a href="{{ url('/admin/TasksNotify/' . $item->id) }}">
+                        <a href="{{ route('admin.TasksNotify.edit' , $item->id) }}">
 
                             {{ $item->name }}
                         </a>
@@ -34,10 +34,10 @@
                     </td>
 
                     <td class="table-action">
-                        <a href="{{ url('/admin/NotifyType/' . $item->id ) }}"><i
+                        <a href="{{ route('admin.NotifyType.edit' , $item->id ) }}"><i
                                 class="mdi mdi-pencil"></i></a>
                                 <br>
-                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.NotifyType.destroy' , $item->id) }}'))" href="#"><i
                                 class="mdi mdi-delete"></i></a>
                     </td>
 
@@ -47,23 +47,7 @@
         </table>
 
 
-        <script>
-            function showModel(e) {
-          
-             return `<form method='POST' 
-                  
-                  action='{{url('/admin/NotifyType/${e.id}')}}' >
-                  @method('DELETE')
-                  @csrf
-                  <div class='formLaple' >
-                      <label> هل انت متأكد من حذف العنصر</label>
-                      <h3>${e.name}</h3>
-                      <button type='submit' class='btn btn-Danger' >حذف</button>
-                  </div>
-                  </form>`
-              
-            }
-          </script>
+    
     </x-admin-contaner>
     <x-model-box></x-model-box>
 

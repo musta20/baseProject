@@ -46,7 +46,7 @@
                     <tr>
                 </table>
 
-                <form method="POST" action="{{ url('/admin/Clients/' . $client->id) }}">
+                <form method="POST" action="{{ route('admin.Clients.update' , $client->id) }}">
                     @csrf
                     @method('PUT')
 

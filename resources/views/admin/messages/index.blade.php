@@ -21,7 +21,7 @@
         <div class="page-aside-left">
             <div class="d-grid">
                 <a type="button" class="btn btn-danger" 
-                href="{{ url('/admin/Messages/create') }}"
+                href="{{ route('admin.Messages.create') }}"
                 > ارسال رسالة</a>
             </div>
             <div class="email-menu-list mt-3">
@@ -136,11 +136,11 @@
                             <ul class="list-inline">
                  
                                 <li class="list-inline-item">
-                                    <a  onclick="OpenDeleteModel(showModel({{ $item }}))" href="javascript: void(0);">
+                                    <a  onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Messages.destroy' , $item->id) }}')))" href="javascript: void(0);">
                                         <i class="mdi mdi-delete email-action-icons-item"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="{{ url('/admin/Messages/' . $item->id) }}" href="javascript: void(0);">
+                                    <a href="{{ route('admin.Messages.show' , $item->id) }}" href="javascript: void(0);">
                                         <i class="mdi mdi-email-mark-as-unread email-action-icons-item"></i></a>
                                 </li>
                            
@@ -161,23 +161,7 @@
 
         {{ $Messages->links('admin.pagination.custom') }}
 
-        <script>
-            function showModel(e) {
 
-                return `<form method='POST' 
-        
-        action='{{ url('/admin/Messages/${e.id}') }}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.title}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-
-            }
-        </script>
     </x-admin-contaner>
     <x-model-box></x-model-box>
 

@@ -63,9 +63,8 @@ class LogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Activity $log)
     {
-        $log = Activity::find($id);
         return view("admin.Logs.show",  ['log' => $log] );
 
     }

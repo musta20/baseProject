@@ -1,20 +1,11 @@
 <x-admin-layout>
-
-
-
     <x-admin-contaner>
-
-
-
-
-
-
         <div class="row">
             <x-card-message></x-card-message>
 
             <div class="col-xxl-8 col-xl-7">
                 <!-- project card -->
-                <form method="POST" action="{{ url('/admin/EditTask/' . $task->id) }}">
+                <form method="POST" action="{{ route('admin.admin.EditTask' , $task->id) }}">
                     @csrf
                 <div class="card d-block">
                     <div class="card-body">
@@ -60,7 +51,11 @@
                 
                 
                                 </select>
-                
+                                @error('status')
+                                <span class="helper">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                                 @error('user_id')
                                     <span class="helper">
                                         {{ $message }}

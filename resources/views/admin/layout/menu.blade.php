@@ -1,29 +1,29 @@
 <nav>
         @can('Massages')
-        <a href="{{url('/admin/AllMessages')}}">الرسائل</a>
+        <a href="{{route()->route('admin.AllMessages')}}">الرسائل</a>
         @endcan
        
         @can('Report')
-        <a href="{{url('/admin/Reportmain')}}">التقارير</a>
+        <a href="{{route('admin.Reportmain')}}">التقارير</a>
         @endcan
         
         @can('Users')
-        <a href="{{url('/admin/Users')}}">الموظفين</a>
+        <a href="{{route('admin.Users.index')}}">الموظفين</a>
         @endcan
         
 
         @can('TaskMangment')
-        <a href="{{url('/admin/MenuTask')}}">إدارة المهام</a>
+        <a href="{{route('admin.admin.MenuTask')}}">إدارة المهام</a>
         @endcan
 
 
         @can('Task')
-        <a href="{{url('/admin/MainTask')}}">المهام</a>
+        <a href="{{route('admin.admin.MainTask')}}">المهام</a>
         @endcan
 
         @can('Category/Services')
-        <a href="{{url('/admin/Services')}}">الخدمات</a>
-        <a href="{{url('/admin/Category')}}">التصنيفات</a>
+        <a href="{{route('admin.Services.index')}}">الخدمات</a>
+        <a href="{{route('admin.Category.index')}}">التصنيفات</a>
         @endcan
         
 
@@ -32,15 +32,15 @@
         @endcan
 
         @can('Order')
-        <a href="{{url('/admin/Order')}}">الطلبات</a>
+        <a href="{{route('admin.Order.index')}}">الطلبات</a>
         @endcan
 
         @can('Setting')
-        <a href="{{url('/admin/Setting')}}">إعداد الموقع</a>
+        <a href="{{route('admin.Setting')}}">إعداد الموقع</a>
         @endcan
 
         @can('jobs')
-        <a href="{{url('/admin/main')}}">التوظيف</a>
+        <a href="{{route('admin.main')}}">التوظيف</a>
         @endcan
 
         @can('Logs')

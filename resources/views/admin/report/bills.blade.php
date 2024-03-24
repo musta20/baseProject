@@ -2,7 +2,7 @@
     <h3> الفواتير المصدرة</h3>
     <hr>
     <x-admin-contaner>
-        <form method="GET" class="D-flex w-25" action="{{ url('/admin/billReport') }}">
+        <form method="GET" class="D-flex w-25" action="{{ route('admin.billReport') }}">
             <div class="mb-3">
                 نوع الفاتورة
                 <select class="form-select select2 select2-hidden-accessible" name="type">
@@ -75,7 +75,7 @@
                     <td class="cellControll">
                         <a target="_blank" href="{{ url('storage/pdf/' . $item->file) }}"><i
                                 class="mdi mdi-pencil"></i></a>
-                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Report.destroy' , $item->id) }}'))" href="#"><i
                                 class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
@@ -83,23 +83,7 @@
         </table>
         {{ $orderReport->links('admin.pagination.custom') }}
 
-        <script>
-            function showModel(e) {
 
-                return `<form method='POST' 
-        
-        action='{{ url('/admin/Report/${e.id}') }}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.id}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-
-            }
-        </script>
 
         <x-model-box></x-model-box>
 

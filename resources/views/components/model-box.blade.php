@@ -1,4 +1,5 @@
 
+@vite('resources/css/model.css')
 <div id="OpenDeleteModel" class="modal">
 
     <!-- Modal content -->
@@ -18,105 +19,34 @@
   </div>
 
 
-  <style>
-    .btn-Danger{
 
-    --ct-btn-color: #fff;
-    --ct-btn-bg: #fa5c7c;
-    --ct-btn-border-color: #fa5c7c;
-    --ct-btn-hover-color: #fff;
-    --ct-btn-hover-bg: #d54e69;
-    --ct-btn-hover-border-color: #c84a63;
-    --ct-btn-focus-shadow-rgb: 251,116,144;
-    --ct-btn-active-color: #fff;
-    --ct-btn-active-bg: #c84a63;
-    --ct-btn-active-border-color: #bc455d;
-    --ct-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --ct-btn-disabled-color: #fff;
-    --ct-btn-disabled-bg: #fa5c7c;
-    --ct-btn-disabled-border-color: #fa5c7c;
-    }
-
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  /* Modal Content */
-  /* Add Animation */
-  /* The Close Button */
-}
-.modal .modal-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s;
-}
-@-webkit-keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-@keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-.modal .close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.modal .close:hover,
-.modal .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-.modal .modal-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 1em;
-  background-color: #3a444e;
-  color: white;
-}
-.modal .modal-body {
-  padding: 2px 16px;
-}
-.modal .modal-footer {
-  padding: 2px 16px;
-  background-color: #4dd0e1;
-  color: white;
-}
-
-  </style>
 
   <script>
+
+
+ function showModel(name, uri) {
+return `<form method='POST' 
+            action='${uri}' >
+            @method('DELETE')
+            @csrf
+            <div class='formLaple' >
+            <label> هل انت متأكد من حذف العنصر</label>
+            <h3>${name}</h3>
+            <button type='submit' class='btn btn-Danger' >حذف</button>
+            </div>
+        </form>`
+
+}
+
+
+
+
+
+
+
+
+
+
     function OpenDeleteModel(e) {
 
         let span = document.getElementsByClassName("close")[0];
@@ -131,7 +61,7 @@
         
     }
     
-    // When the user clicks anywhere outside of the modal, close it
+
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";

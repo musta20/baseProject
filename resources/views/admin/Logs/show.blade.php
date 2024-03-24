@@ -46,7 +46,7 @@
             function showModel(e) {
                 return `
    <form method='POST' 
-        action='{{ url('/admin/Order/${e.id}') }}' >
+        action='{{ route('admin.Order.destroy','${e.id}') }}' >
         @method('DELETE')
         @csrf
         <div class='formLaple' >

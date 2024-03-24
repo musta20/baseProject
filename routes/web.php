@@ -7,7 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SlideController;
-use App\Http\Controllers\ContactController;
+//use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CustmerSlideController;
 use App\Http\Controllers\NumbersController;
 use App\Http\Controllers\SocialController;
@@ -20,11 +20,9 @@ use App\Http\Controllers\LogsController;
 
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\mainSite;
-use App\Http\Controllers\NotifySalesController;
 use App\Http\Controllers\NotifyTypeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\SalesTypeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasksNotifyController;
@@ -50,21 +48,21 @@ Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.a
 }); */
 
 Route::get('/',[mainSite::class, 'index']);
-Route::get('/category',[mainSite::class, 'category']);
-Route::get('/services/{id}',[mainSite::class, 'services']);
-Route::get('/order/{id}',[mainSite::class, 'order']);
-Route::post('/SaveOrder/{id}',[mainSite::class, 'SaveOrder']);
-Route::get('/jobs',[mainSite::class, 'job']);
+Route::get('/category',[mainSite::class, 'category'])->name('category');
+Route::get('/services/{services}',[mainSite::class, 'services'])->name('service');
+Route::get('/order/{order}',[mainSite::class, 'order'])->name('order');
+Route::post('/SaveOrder/{services}',[mainSite::class, 'SaveOrder'])->name('SaveOrder');
+Route::get('/jobs',[mainSite::class, 'job'])->name('jobs');
 
-Route::get('/contact',[mainSite::class, 'contact']);
-Route::post('/SendContact',[mainSite::class, 'SendContact']);
+Route::get('/contact',[mainSite::class, 'contact'])->name('contact');
+Route::post('/SendContact',[mainSite::class, 'SendContact'])->name('SendContact');
 
-Route::get('/CheckStatus',[mainSite::class, 'CheckStatus']);
-Route::post('/CheckOrderStatus',[mainSite::class, 'CheckOrderStatus']);
+Route::get('/CheckStatus',[mainSite::class, 'CheckStatus'])->name('CheckStatus');
+Route::post('/CheckOrderStatus',[mainSite::class, 'CheckOrderStatus'])->name('CheckOrderStatus');
 
 
 
-Route::post('/SaveJobs',[mainSite::class, 'SaveJobs']);
+Route::post('/SaveJobs',[mainSite::class, 'SaveJobs'])->name('SaveJobs');
 
 
 Route::get('/test', function () {
@@ -102,9 +100,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     Route::post('search',[SearchController::class,'search']);
     Route::get('Search', function () {
-        return view('admin.search.index');
-        //        return redirect('admin/MainTask');
-
+        return view('admin.search.index'); 
     });
 });
     
@@ -112,17 +108,17 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
     Route::group(['middleware' => ['permission:Task']], function () {
 
         Route::get('MainTask', [TasksController::class, 'MainTask'])->name('admin.MainTask');
-        Route::get('ShowTask/{id}', [TasksController::class, 'ShowTask'])->name('admin.ShowTask');
-        Route::post('EditTask/{id}', [TasksController::class, 'EditTask'])->name('admin.EditTask');
+        Route::get('ShowTask/{task}', [TasksController::class, 'ShowTask'])->name('admin.ShowTask');
+        Route::post('EditTask/{task}', [TasksController::class, 'EditTask'])->name('admin.EditTask');
 
 
-        Route::get('showMyNotifyTask/{type}', [TasksController::class,'showMyNotifyTask']);
-        Route::get('editMyNotifyTask/{type}', [TasksController::class,'editMyNotifyTask']);
-        Route::post('postMyNotifyTask/{id}', [TasksController::class,'postMyNotifyTask']);
+        Route::get('showMyNotifyTask/{type}', [TasksController::class,'showMyNotifyTask'])->name('showMyNotifyTask');
+        Route::get('editMyNotifyTask/{type}', [TasksController::class,'editMyNotifyTask'])->name('editMyNotifyTask');
+        Route::post('postMyNotifyTask/{id}', [TasksController::class,'postMyNotifyTask'])->name('postMyNotifyTask');
 
 
-        Route::get('editmysale/{type}', [TasksController::class,'editmysale']);
-        Route::post('postmysale/{id}', [TasksController::class,'postmysale']);
+        // Route::get('editmysale/{type}', [TasksController::class,'editmysale']);
+        // Route::post('postmysale/{id}', [TasksController::class,'postmysale']);
 
 
 
@@ -131,23 +127,13 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     Route::group(['middleware' => ['permission:TaskMangment']], function () {
 
-        Route::resource('Task', TasksController::class);
+        Route::resource('Task', TasksController::class);  
         
-        Route::resource('NotifySales', NotifySalesController::class);
+       // Route::resource('NotifySales', NotifySalesController::class);
         
-        Route::resource('SalesType', SalesTypeController::class);
+        //Route::resource('SalesType', SalesTypeController::class);
 
         Route::resource('TasksNotify', TasksNotifyController::class);
-
-
-
-
-
-
-
-
-
-
 
 
         
@@ -159,12 +145,14 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
 
     Route::group(['middleware' => ['permission:Massages']], function () {
+        
+        ///stoped here
 
         Route::resource('Messages', MessageController::class);
 
-        Route::get('inbox/{type}', [MessageController::class, 'inbox'])->name('admin.inbox');
+        Route::get('inbox/{type}', [MessageController::class, 'inbox'])->name('inbox');
 
-        Route::get('AllMessages/', [MessageController::class, 'main'])->name('admin.AllMessages');
+        Route::get('AllMessages/', [MessageController::class, 'main'])->name('AllMessages');
     });
 
 
@@ -176,20 +164,20 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
         
         Route::resource('Slide', SlideController::class);
 
-        Route::resource('Contact', ContactController::class);
+        //Route::resource('Contact', ContactController::class);
 
         Route::resource('Number', NumbersController::class);
 
         Route::resource('Social', SocialController::class);
 
-        Route::get('basic/', [SettingController::class, 'setting'])->name('admin.basic');
+        Route::get('basic/', [SettingController::class, 'setting'])->name('basic');
     });
 
     Route::group(['middleware' => ['permission:Logs']], function () {
 
         Route::resource('Logs', LogsController::class);
 
-        Route::get('LogsList/{id}', [LogsController::class, 'LogsList'])->name('admin.LogsList');
+        Route::get('LogsList/{id}', [LogsController::class, 'LogsList'])->name('LogsList');
 
     });
 
@@ -212,7 +200,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Jobs', JobsController::class);
 
-        Route::get('main/', [JobsController::class, 'main'])->name('admin.main');
+        Route::get('main/', [JobsController::class, 'main'])->name('main');
     });
 
     Route::group(['middleware' => ['permission:Reviews']], function () {
@@ -223,15 +211,15 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     Route::group(['middleware' => ['permission:Order']], function () {
 
-        Route::get('showOrderList/{type}', [OrderController::class, 'showOrderList'])->name('admin.showOrderList');
+        Route::get('showOrderList/{type}', [OrderController::class, 'showOrderList'])->name('showOrderList');
 
         Route::resource('Order', OrderController::class);
 
-        Route::get('Billprint/{id}', [ReportController::class, 'Billprint'])->name('Report.Billprint');
+        Route::get('Billprint/{id}', [ReportController::class, 'Billprint'])->name('Billprint');
 
-        Route::get('BillInnerPrint/{id}', [ReportController::class, 'BillInnerPrint'])->name('Report.BillInnerPrint');
+        Route::get('BillInnerPrint/{id}', [ReportController::class, 'BillInnerPrint'])->name('BillInnerPrint');
 
-        Route::get('seedAllOrderList/', [OrderController::class, 'seedAllOrderList'])->name('admin.seedAllOrderList');
+       // Route::get('seedAllOrderList/', [OrderController::class, 'seedAllOrderList'])->name('seedAllOrderList');
     });
 
 
@@ -239,23 +227,23 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Users', UsersController::class);
 
-        Route::delete('rmrole/{id}', [UsersController::class, 'rmrole'])->name('admin.rmrole');
+        Route::delete('removerole/{id}', [UsersController::class, 'rmrole'])->name('removerole');
 
-        Route::post('addrole/', [UsersController::class, 'addrole'])->name('admin.addrole');
+        Route::post('addrole/', [UsersController::class, 'addrole'])->name('addrole');
 
-        Route::get('indexrole/', [UsersController::class, 'indexrole'])->name('admin.indexrole');
+        Route::get('indexrole/', [UsersController::class, 'indexrole'])->name('indexrole');
 
-        Route::get('perm/', [UsersController::class, 'Perm'])->name('admin.perm');
+        Route::get('perm/', [UsersController::class, 'Perm'])->name('perm');
 
-        Route::post('addPerm/', [UsersController::class, 'addPerm'])->name('admin.addPerm');
+        Route::post('addPerm/', [UsersController::class, 'addPerm'])->name('addPerm');
 
-        Route::get('UsersList/', [UsersController::class, 'UsersList'])->name('admin.UsersList');
+        Route::get('UsersList/', [UsersController::class, 'UsersList'])->name('UsersList');
 
-        Route::get('addpermison/', [UsersController::class, 'addpermison'])->name('admin.addpermison');
+        //Route::get('addpermison/', [UsersController::class, 'addpermison'])->name('addpermison');
 
         //Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 
-        Route::post('createUser/', [UsersController::class, 'createUser'])->name('admin.createUser');
+        Route::post('createUser/', [UsersController::class, 'createUser'])->name('createUser');
     });
 
 
@@ -263,25 +251,25 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     Route::group(['middleware' => ['permission:Report']], function () {
 
-        Route::get('showPdfReport/', [ReportController::class, 'showPdfReport'])->name('Report.showPdfReport');
+        Route::get('showPdfReport/', [ReportController::class, 'showPdfReport'])->name('showPdfReport');
 
-        Route::get('Reportmain/', [ReportController::class, 'main'])->name('Report.main');
+        Route::get('Reportmain/', [ReportController::class, 'main'])->name('main');
 
         Route::resource('Report', ReportController::class);
 
-        Route::get('orderReport/', [ReportController::class, 'orderReport'])->name('Report.orderReport');
+        Route::get('orderReport/', [ReportController::class, 'orderReport'])->name('orderReport');
 
-        Route::get('billReportView/', [ReportController::class, 'billReportView'])->name('Report.billReportView');
-        Route::get('billReport/', [ReportController::class, 'billReport'])->name('Report.billReport');
+        Route::get('billReportView/', [ReportController::class, 'billReportView'])->name('billReportView');
+        Route::get('billReport/', [ReportController::class, 'billReport'])->name('billReport');
 
-        Route::get('cashReport/', [ReportController::class, 'cashReport'])->name('Report.cashReport');
+        Route::get('cashReport/', [ReportController::class, 'cashReport'])->name('cashReport');
 
 
        // printCreateBill
 
         
         Route::post('postCreateBill/', [ReportController::class, 'postCreateBill'])->name('Report.postCreateBill');
-        Route::get('createBill/', [ReportController::class, 'createBill'])->name('Report.createBill');
+        Route::get('createBill/', [ReportController::class, 'createBill'])->name('createBill');
 
 
         

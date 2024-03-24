@@ -86,14 +86,10 @@ class SearchController extends Controller
                     return view('admin.search.index', ['resault' => true]);
 
                 }
-                // $filename = 'invoice' . sprintf('%04d', $order->id) . '.pdf';
-               // dd($resault->file);
-              // $rt=storage_path('app/public/pdf/'.$resault->name);
-              // dd($rt);
-             //   $path = Storage::path('pdf/'.$resault->name);
+
+                
                 return redirect('/storage/pdf/'.$resault->file);
-             //   dd($path);
-                // return view('admin.search.index', ['resault' => $resault, 'type' => $request->type]);
+
                 break;
 
             default:

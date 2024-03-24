@@ -7,11 +7,11 @@
 <x-card-message />
 <div class="page-title p-1" >
 
-<a href="{{url('/admin/indexrole')}}" class="btn btn-success">  اضافة / حذف  : وظيفي</a>
+<a href="{{route('admin.indexrole')}}" class="btn btn-success">  اضافة / حذف  : وظيفي</a>
 
 </div>
 
-<form method="POST" class="overflow-scroll"  action="{{url('/admin/addPerm')}}">
+<form method="POST" class="overflow-scroll"  action="{{route('admin.addPerm')}}">
     @csrf    
     <table  class="table table-striped  table-centered mb-0 ">
         <thead class="table-dark">        

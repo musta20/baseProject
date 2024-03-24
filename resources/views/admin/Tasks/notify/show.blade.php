@@ -8,7 +8,7 @@
         <x-card-message />
         <div class=" p-1">
 
-            <a href="{{ url('/admin/TasksNotify/create') }}" class="btn btn-success"> اضافة سجل</a>
+            <a href="{{ route('admin.TasksNotify.create') }}" class="btn btn-success"> اضافة سجل</a>
 
 
         </div>
@@ -41,9 +41,9 @@
                     <td>{{ $item->duration }}</td>
 
                     <td class="table-action">
-                        <a href="{{ url('/admin/TasksNotify/' . $item->id . '/edit') }}"><i
+                        <a href="{{ route('admin.TasksNotify.edit',$item->id) }}"><i
                                 class="mdi mdi-pencil"></i></a>
-                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->name }}','{{ route('admin.TasksNotify.destroy' , $item->id) }}'))" href="#"><i
                                 class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
@@ -51,23 +51,7 @@
         </table>
         {{ $alltask->links('admin.pagination.custom') }}
 
-        <script>
-            function showModel(e) {
 
-                return `<form method='POST' 
-        
-        action='{{ url('/admin/TasksNotify/${e.id}') }}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.name}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-
-            }
-        </script>
 
         <x-model-box></x-model-box>
 

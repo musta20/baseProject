@@ -6,7 +6,7 @@
     <x-card-message></x-card-message>
 
 <form method="POST" class="w-75" enctype="multipart/form-data"
-action="{{url('/admin/Slide/'.$slide->id)}}">
+action="{{route('admin.Slide.update',$slide->id)}}">
     @csrf
     @method('PUT')
     <div class="mb-3" >

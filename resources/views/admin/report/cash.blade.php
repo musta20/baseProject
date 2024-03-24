@@ -3,7 +3,8 @@
     <hr>
     <x-admin-contaner>
 
-        <form method="POST" target="_blank" class="D-flex w-25" action="{{ url('/admin/Report') }}">
+        <form method="POST" target="_blank" class="D-flex w-25"
+         action="{{ route('admin.Report.store') }}">
             @csrf
             <input hidden name="reporttype" value="CASH" />
 
@@ -92,7 +93,7 @@
                     <td class="cellControll">
                         <a target="_blank" href="{{ url('storage/pdf/' . $item->file) }}"><i
                                 class="mdi mdi-pencil"></i></a>
-                        <a onclick="OpenDeleteModel(showModel({{ $item }}))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->id }}','{{ route('admin.Report.destroy' , $item->id) }}'))" href="#"><i
                                 class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>
@@ -100,23 +101,7 @@
         </table>
         {{ $orderReport->links('admin.pagination.custom') }}
         </section>
-        <script>
-            function showModel(e) {
 
-                return `<form method='POST' 
-        
-        action='{{ url('/admin/Report/${e.id}') }}' >
-        @method('DELETE')
-        @csrf
-        <div class='formLaple' >
-            <label> هل انت متأكد من حذف العنصر</label>
-            <h3>${e.id}</h3>
-            <button type='submit' class='btn btn-Danger' >حذف</button>
-        </div>
-        </form>`
-
-            }
-        </script>
 
         <x-model-box></x-model-box>
 

@@ -4,7 +4,7 @@
     <x-admin-contaner>
         <x-card-message />
         
-        <form method="POST" class="w-75" enctype="multipart/form-data" action="{{ url('/admin/Setting/' . $setting->id) }}">
+        <form method="POST" class="w-75" enctype="multipart/form-data" action="{{ route('admin.Setting' , $setting->id) }}">
             @csrf
             @method('PUT')
 
@@ -187,7 +187,7 @@
                   <button type="submit" class="btn btn-primary">
                       <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                  <a type="button" href="{{ url('admin/basic') }}" class="btn btn-light">الغاء</a>
+                  <a type="button" href="{{ route()->route('admin.basic') }}" class="btn btn-light">الغاء</a>
               </div>
           </div>
         </form>
@@ -197,7 +197,7 @@
 
                 return `<form method='POST' 
         
-        action='{{ url('/admin/Category/${e.id}') }}' >
+        action='{{ route('admin.Category.destroy','${e.id}') }}' >
         @method('DELETE')
         @csrf
         <div class='formLaple' >

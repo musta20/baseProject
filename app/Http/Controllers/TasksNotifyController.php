@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeTaskNotifyRequest;
+use App\Http\Requests\updateTaskNotifyRequest;
 use App\Models\NotifyType;
 use App\Models\TasksNotify;
 use App\Models\User;
@@ -46,7 +48,7 @@ class TasksNotifyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeTaskNotifyRequest $request)
     {
 
        // dd();
@@ -78,7 +80,7 @@ class TasksNotifyController extends Controller
         ]);
 
 
-        return redirect('/admin/TasksNotify/' . $tasksNotify->type)->with('messages', 'تم اضافة العنصر');
+        return redirect()->route('admin.TasksNotify.show' , $tasksNotify->type)->with('messages', 'تم اضافة العنصر');
     }
 
     /**
@@ -105,9 +107,8 @@ class TasksNotifyController extends Controller
      * @param  \App\Models\TasksNotify  $tasksNotify
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TasksNotify $tasksNotify)
     {
-        $tasksNotify  = TasksNotify::find($id);
 
         return view('admin.Tasks.notify.edit', ["tasksNotify" => $tasksNotify]);
     }
@@ -119,9 +120,9 @@ class TasksNotifyController extends Controller
      * @param  \App\Models\TasksNotify  $tasksNotify
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateTaskNotifyRequest $request,TasksNotify $tasksNotify)
     {
-        $tasksNotify  = TasksNotify::find($id);
+       // $tasksNotify  = TasksNotify::find($id);
 
         $tasksNotify->name  =  $request->name;
         $tasksNotify->number  =  $request->number;
@@ -130,7 +131,7 @@ class TasksNotifyController extends Controller
 
         $tasksNotify->save();
 
-        return redirect('/admin/TasksNotify/' . $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
+        return redirect()->route('admin.TasksNotify' , $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
     }
 
     /**
@@ -139,15 +140,15 @@ class TasksNotifyController extends Controller
      * @param  \App\Models\TasksNotify  $tasksNotify
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TasksNotify $tasksNotify)
     {
-        $tasksNotify = TasksNotify::find($id);
+       // $tasksNotify = TasksNotify::find($id);
           //  ->where('from', Auth::user()->id);
 
         $theType =  $tasksNotify->type;
 
         $tasksNotify->delete();
 
-        return redirect('/admin/TasksNotify/' . $theType)->with('messages', 'تم حذف العنصر');
+        return redirect()->route('admin.TasksNotify' , $theType)->with('messages', 'تم حذف العنصر');
     }
 }

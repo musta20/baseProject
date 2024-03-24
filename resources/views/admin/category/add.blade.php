@@ -7,7 +7,7 @@
         <x-card-message></x-card-message>
 
 
-        <form method="POST" class="w-75" action="{{ url('/admin/Category') }}">
+        <form method="POST" class="w-75" action="{{ route('admin.Category.store') }}">
             @csrf
             <div class="mb-3">
                 <label  class="form-label">عنوان التصنيف</label>
@@ -49,7 +49,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
         
-                    <a type="button" href="{{ url('admin/Category') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ url('admin.Category.index') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
 

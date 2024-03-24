@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\postNotifyTask;
+use App\Http\Requests\storeTaskRequest;
+use App\Http\Requests\EditTaskRequest;
+use App\Http\Requests\updateTaskRequest;
 use App\Models\Files;
 use App\Models\NotifySales;
 use App\Models\NotifyType;
@@ -31,9 +34,7 @@ class TasksController extends Controller
     public $rule = [
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
-        // "user_id" => "required|string|max:255|min:3",
         "user_id" => "required|integer",
-
         "start" => "required|date",
         "end" =>   'required|date|after:start'
     ];
@@ -93,8 +94,11 @@ class TasksController extends Controller
         return view('admin.Tasks.index', ['alltask' => $alltask]);
     }
 
-    public function MainTask()
+    public function MainTask(Request $request)
     {
+        //dd($request->filter);
+
+
         $alltask = Tasks::where('user_id', Auth::user()->id)->latest()->paginate(10);
 
         Tasks::where('user_id',Auth::user()->id)->update(['isread' => 1]);
@@ -102,17 +106,17 @@ class TasksController extends Controller
         return view('admin.Tasks.MainTask', ['alltask' => $alltask]);
     }
 
-    public function ShowTask($id)
+    public function ShowTask(Tasks $task)
     {
-        $task = Tasks::find($id);
-
+       // $task = Tasks::find($id);
+        //dd($task);
         $files = Files::where('type', 0)->where('typeid', $task->id)->get();
 
         if ($task->user_id == Auth::user()->id) {
             return view('admin.Tasks.ShowTask', ['task' => $task, "files" => $files]);
         }
 
-        return redirect('/admin/Task')->with('messages', 'حدث خطاء');
+        return redirect()->route('admin.Task.index')->with('messages', 'حدث خطاء');
     }
 
 
@@ -123,9 +127,8 @@ class TasksController extends Controller
      * @param  Integer  $id
      * @return \Illuminate\Http\Response
      */
-    public function EditTask(Request $request, $id)
+    public function EditTask(EditTaskRequest $request,Tasks $task)
     {
-        $task = Tasks::find($id);
 
         if ($task->user_id == Auth::user()->id) {
             
@@ -138,7 +141,7 @@ class TasksController extends Controller
         }
 
 
-        return redirect('/admin/MainTask')->with('messages', 'تم تعديل البيانات');
+        return redirect()->route('admin.admin.MainTask')->with('messages', 'تم تعديل البيانات');
     }
 
 
@@ -169,13 +172,13 @@ class TasksController extends Controller
 
 
     //
-    public function postMyNotifyTask(Request $request,$id)
+    public function postMyNotifyTask(postNotifyTask $request,TasksNotify $tasksNotify)
     {
 
-       $data = $request->validate($this->ruleNotfy, $this->messages());
+     //  $data = $request->validate($this->ruleNotfy, $this->messages());
        $date = Carbon::createFromFormat('Y-m-d', $request->issueAt);
        $endMonth = $date->addDays(30 * $request->duration)->format('Y-m-d');
-       $tasksNotify = TasksNotify::find($id);
+       //$tasksNotify = TasksNotify::find($id);
 
        if(Auth::user()->id != $tasksNotify->user_id)
        {
@@ -187,13 +190,13 @@ class TasksController extends Controller
        $tasksNotify->exp = $endMonth;
        $tasksNotify->save();
 
-       return redirect('/admin/showMyNotifyTask/' . $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
+       return redirect()->route('admin.showMyNotifyTask' , $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
     }
     
 
-    public function editMyNotifyTask( $id)
+    public function editMyNotifyTask(TasksNotify $task)
     {
-        $task =TasksNotify::find($id);
+        //$task =TasksNotify::find($id);
 
 
         if(Auth::user()->id != $task->user_id)
@@ -230,17 +233,17 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeTaskRequest $request)
     {
 
-        
-        $data = $request->validate($this->rule, $this->messages());
-        $data['isdone'] = 0;
-        $data['isread'] = 0;
-        $data['boss_id'] = Auth::user()->id;
+       // $data = $request->validate($this->rule, $this->messages());
 
-        $task =  Tasks::create($data);
-        $user =  User::find($task->user_id);
+        $request['isdone'] = 0;
+        $request['isread'] = 0;
+        $request['boss_id'] = Auth::user()->id;
+
+        $task =  Tasks::create($request);
+        //$user =  User::find($task->user_id);
 
       //  Mail::to($user->email)->send(new TasksMail(($task)));
 /* 
@@ -266,7 +269,7 @@ class TasksController extends Controller
         }
 
 
-        return redirect('/admin/Task')->with('messages', 'تم إضافة البيانات');
+        return redirect()->route('admin.Task.index')->with('messages', 'تم إضافة البيانات');
     }
 
     /**
@@ -285,7 +288,7 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tasks $task)
     {
         //task
 
@@ -293,8 +296,6 @@ class TasksController extends Controller
         /// $data['isdone']=0;
         //  $data['boss_id']=Auth::user()->id;
         $users = User::get();
-
-        $task = Tasks::with('user')->find($id);
 
         return view('admin.Tasks.edit', ["task" => $task, "users" => $users]);
     }
@@ -306,18 +307,19 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
-    {        $task = Tasks::find($id);
+    public function update(updateTaskRequest $request,Tasks  $task)
+    {        
+        //$task = Tasks::find($id);
 
   
-        $data = $request->validate($this->ruleUPDATE, $this->messages());
+       // $data = $request->validate($this->ruleUPDATE, $this->messages());
    
-        $task->title=$data['title'];
-        $task->des=$data['des'];
-        $task->user_id=$data['user_id'];
-        $task->start=$data['start'];
-        $task->end=$data['end'];
-        $task->isdone=$data['isdone'];
+        $task->title=$request['title'];
+        $task->des=$request['des'];
+        $task->user_id=$request['user_id'];
+        $task->start=$request['start'];
+        $task->end=$request['end'];
+        $task->isdone=$request['isdone'];
        // $task =  Tasks::create($data);
         //$user =  User::find($task->user_id);
         $task->save();
@@ -338,7 +340,7 @@ class TasksController extends Controller
         }
 
 
-        return redirect('/admin/Task')->with('messages', 'تم إضافة البيانات');
+        return redirect()->route('admin.Task.index')->with('messages', 'تم إضافة البيانات');
     }
 
     /**

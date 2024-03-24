@@ -9,7 +9,7 @@
 
 
 
-        <form method="POST" class="w-75" action="{{ url('/admin/Payment/' . $payment->id) }}">
+        <form method="POST" class="w-75" action="{{ route('admin.Payment.update' . $payment->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -33,7 +33,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/Payment') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.Payment.index') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
         </form>

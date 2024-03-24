@@ -150,10 +150,10 @@
                                                     <div class="collapse" id="SidebarMyTask">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/MainTask') }}">المهام الداخلية </a>
+                                                                <a href="{{ route('admin.admin.MainTask') }}">المهام الداخلية </a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/showMyNotifyTask/1') }}">
+                                                                <a href="{{ route('admin.showMyNotifyTask',1) }}">
                                                                     تنبيهات</a>
                                                             </li>
                                                
@@ -182,7 +182,7 @@
                                                                 <a href="{{ url('/admin/inbox/1') }}">الرسائل المرسلة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/Messages/create') }}">انشاء
+                                                                <a href="{{ route('admin.Messages.create') }}">انشاء
                                                                     رسالة</a>
                                                             </li>
 
@@ -203,14 +203,13 @@
                                                     <div class="collapse" id="sidebarEmail">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/Task') }}">مهام داخلية</a>
+                                                                <a href="{{ route('admin.Task.index') }}">مهام داخلية</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/TasksNotify') }}">التنبيهات</a>
+                                                                <a href="{{ url('admin.TasksNotify.index') }}">التنبيهات</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/NotifySales') }}">مهام
-                                                                    المبيعات</a>
+                                                               
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -234,30 +233,34 @@
                                                     <div class="collapse" id="sidebarEcommerce">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/showOrderList/0') }}"> طلبات
+                                                                <a href="{{route('admin.showOrderList',0)}}" >
                                                                     جديدة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/showOrderList/1') }}">طلبات
+                                                                <a href="{{route('admin.showOrderList',1)}}" >
                                                                     مستلمة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/showOrderList/2') }}">طلبات
+                                                                <a href="{{route('admin.showOrderList',2)}}" >
+                                                                    طلبات
                                                                     مكتملة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/showOrderList/3') }}">طلبات
+                                                                <a href="{{route('admin.showOrderList',3)}}" >
+                                                                    طلبات
                                                                     مسلمة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/showOrderList/4') }}">طلبات
+                                                                <a href="{{route('admin.showOrderList',4)}}" >
+                                                                    طلبات
+
                                                                     ملغية</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/Payment') }}">ادارة طرق الدفع</a>
+                                                                <a href="{{ route('admin.Payment.index') }}">ادارة طرق الدفع</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/Delivery') }}">ادارة طرق
+                                                                <a href="{{ route('admin.Delivery.index') }}">ادارة طرق
                                                                     التوصيل</a>
                                                             </li>
 
@@ -287,10 +290,10 @@
                                                     <div class="collapse" id="sidebarProjects">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/Services') }}">الخدمات</a>
+                                                                <a href="{{ route('admin.Services.index') }}">الخدمات</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/Category') }}">التصنيفات</a>
+                                                                <a href="{{ route('admin.Category.index') }}">التصنيفات</a>
                                                             </li>
 
 
@@ -320,18 +323,18 @@
                                                     <div class="collapse" id="ReportMangment">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/orderReport') }}">تقارير
+                                                                <a href="{{ report('admin.report.orderReport') }}">تقارير
                                                                     العمليات</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/cashReport') }}">تقارير
+                                                                <a href="{{ route('admin.cashReport') }}">تقارير
                                                                     الحسابات</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/billReportView') }}">الفواتير</a>
+                                                                <a href="{{ route('admin.billReportView') }}">الفواتير</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/createBill') }}">انشاء فاتورة
+                                                                <a href="{{ route('admin.createBill') }}">انشاء فاتورة
                                                                     عميل</a>
                                                             </li>
                                                         </ul>
@@ -351,13 +354,13 @@
                                                     <div class="collapse" id="JobMangemnt">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/Jobs') }}">جميع الوظائف</a>
+                                                                <a href="{{ route('admin.Jobs.index') }}">جميع الوظائف</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/JobApp') }}">طلبات التوظيف</a>
+                                                                <a href="{{ route('admin.JobApp.index') }}">طلبات التوظيف</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/JobCity') }}">مناطق التوظيف</a>
+                                                                <a href="{{ route('admin.JobCity.index') }}">مناطق التوظيف</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -376,13 +379,13 @@
                                                     <div class="collapse" id="userMangement">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/perm') }}">ادارة الصلاحيات</a>
+                                                                <a href="{{ route('admin.perm') }}">ادارة الصلاحيات</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/UsersList') }}">جميع الموظفين</a>
+                                                                <a href="{{ route('admin.UsersList') }}">جميع الموظفين</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ url('/admin/Users/create') }}">اضافة موظف
+                                                                <a href="{{ route('admin.Users.create') }}">اضافة موظف
                                                                     جديد</a>
                                                             </li>
                                                         </ul>
@@ -402,7 +405,7 @@
                                                     <div class="collapse" id="SettingSideBar">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ url('/admin/basic') }}">اعداد الموقع
+                                                                <a href="{{ route('admin.basic') }}">اعداد الموقع
                                                                     الاساسبة</a>
                                                             </li>
                                                             <li>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createUserRequest;
+use App\Http\Requests\loginRequest;
+use App\Http\Requests\updateUserRequest;
 use App\Models\setting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -91,7 +94,7 @@ class UsersController extends Controller
 
     public function UsersList()
     {
-        $locale = App::currentLocale();
+       // $locale = App::currentLocale();
 
         $Users = User::latest()->with('roles')->paginate(10);
         $allRole = Role::all();
@@ -129,15 +132,15 @@ class UsersController extends Controller
         return redirect('/admin');
     }
 
-    public function login(Request $request)
+    public function login(loginRequest $credentials)
     {
 
+      //  $credentials = $request->validate($this->LogInRule, $this->messages());
 
-        // dd(  $this->Rule );
-        $credentials = $request->validate($this->LogInRule, $this->messages());
-        //   dd( $credentials );
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+      
+
+        if ($credentials->authenticate()) {
+            $credentials->session()->regenerate();
 
             return redirect()->intended('admin');
         }
@@ -148,28 +151,25 @@ class UsersController extends Controller
     }
 
 
-    public function createUser(Request $request)
+    public function createUser(createUserRequest $request)
     {
 
-        $user = $request->validate($this->Rule, $this->messages());
+        //$user = $request->validate($this->Rule, $this->messages());
 
         // $user = $request->all();
-        $user['password'] = Hash::make($request->password);
+        $request['password'] = Hash::make($request->password);
 
-        $user = User::create($user);
+        $user = User::create($request);
 
      //   $user->givePermissionTo('edit articles');
 
-        return redirect('/admin/Users')->with('messages', 'تم إضافة المستخدم');
+        return redirect()->route('admin.Users.index')->with('messages', 'تم إضافة المستخدم');
     }
 public function addpermison()
 {
-  //  Permission::create(['name' => 'Logs']);
-  //  Permission::create(['name' => 'Employee']);
- //  Permission::create(['name' => 'Reviews']);
+
  $TaskMangment = Permission::create(['name' => 'Search']);
- //$Admin = Role::create(['name' => $this->ADMIN]);
- //$Admin->givePermissionTo($TaskMangment);
+
 
     return "new perm added";
 }
@@ -219,7 +219,7 @@ public function addpermison()
         $user->assignRole( $role);
    
 
-        return redirect('/admin/UsersList')->with('messages', 'تم إضافة المستخدم');
+        return redirect()->route('admin.UsersList')->with('messages', 'تم إضافة المستخدم');
     }
 
     /**
@@ -239,9 +239,9 @@ public function addpermison()
      * @param  \App\Models\users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+
         $role = Role::get()->reverse();
 
         return view("admin.users.edit",  ['user' => $user, 'role' => $role]);
@@ -254,18 +254,10 @@ public function addpermison()
      * @param  \App\Models\users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateUserRequest $request,User $user)
     {
-        $user  = User::find($id);
 
-        $request->validate(
-            [
-                'email' => 'unique:users,email,' . $id,
-                "name" => "required|string|max:100|min:3",
-                "role" => "required"
-            ],
-            $this->messages()
-        );
+      
         if($request->hasFile('img'))
         {
             $user->img =  $request->file('img')->store('userimg','public');
@@ -294,7 +286,7 @@ public function addpermison()
 
         $user->save();
 
-        return redirect('/admin/UsersList')->with('messages', 'تم تعديل الموظف');
+        return redirect()->route('admin.UsersList')->with('messages', 'تم تعديل الموظف');
     }
 
     public function addPerm(Request $request)
@@ -321,7 +313,7 @@ public function addpermison()
             
         }
 
-        return redirect('/admin/perm')->with('messages', 'تعديل الصلاحيات');
+        return redirect()->route('admin.perm')->with('messages', 'تعديل الصلاحيات');
 
     }
 
@@ -333,17 +325,17 @@ public function addpermison()
         return view("admin.users.role.index",['role'=>$role]);
     }
     
-    public function rmrole($id)
+    public function rmrole(Role $role)
     {
-        $role =Role::findById($id);
+        
       //  $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
       //  Role::create(['name' => $role['role']]);
       if( $role->name ==$this->ADMIN){
-        return redirect('/admin/perm')->with('messages', 'لا يمكن حذف المدير   ');
+        return redirect()->route('admin.perm')->with('messages', 'لا يمكن حذف المدير   ');
 
       }
       $role->delete();
-        return redirect('/admin/perm')->with('messages', 'تم حذ العنصر ');
+        return redirect()->route('admin.perm')->with('messages', 'تم حذ العنصر ');
 
     }
 
@@ -351,7 +343,7 @@ public function addpermison()
     {
         $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
         Role::create(['name' => $role['role']]);
-        return redirect('/admin/perm')->with('messages', 'تم اضافة الصلاحية');
+        return redirect()->route('admin.perm')->with('messages', 'تم اضافة الصلاحية');
 
     }
     public function Perm()
@@ -370,10 +362,9 @@ public function addpermison()
      * @param  \App\Models\User  $users
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::find($id);
         $user->delete();
-        return redirect('/admin/UsersList/')->with('messages', 'تم حذف العنصر');
+        return redirect()->route('admin.UsersList')->with('messages', 'تم حذف العنصر');
     }
 }

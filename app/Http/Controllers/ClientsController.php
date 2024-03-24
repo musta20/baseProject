@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\updateClientRequest;
 use App\Models\clients;
 use Illuminate\Http\Request;
 
@@ -16,22 +17,12 @@ class ClientsController extends Controller
 
    
 
-    public function messages()
-    {
-        return [
-            'status.required' => 'يجب تحديد حالة الطلب ',
-            'status.integer' => 'يجب ان تكون الحالة رقم  فقط',
-            "status.digits_between" => "  الرقم بين 1-2",
-
-            
-        ];
-    }
+ 
 
 
 
     public function index()
     {
-        //where('israted',2)->
         $client = clients::latest()->paginate(10);
         return view("admin.client.index",['client'=>$client]);
 
@@ -75,9 +66,8 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit(clients $client)
     {
-        $client = clients::find($id);
         return view("admin.client.edit",['client'=>$client]);
 
     }
@@ -89,17 +79,14 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(updateClientRequest $request,clients $clint)
     {
         
-        $data = $request->validate( [ "status" => "required|integer|digits_between:1,2"],$this->messages());
-        $clint = clients::find($id);
-
         $clint->status=$request->status;
 
         $clint->save();
 
-        return redirect('/admin/Clients/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Clients.index')->with('messages','تم تعديل العنصر');
 
     }
 
@@ -109,10 +96,9 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(clients $client)
     {
-        $category = clients::find($id);
-        $category->delete();
-        return redirect('/admin/Clients/')->with('messages','تم حذف العنصر');
+        $client->delete();
+        return redirect()->route('admin.Clients.index')->with('messages','تم حذف العنصر');
     }
 }

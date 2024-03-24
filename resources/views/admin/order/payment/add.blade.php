@@ -7,7 +7,7 @@
         <x-card-message></x-card-message>
 
 
-        <form method="POST"  class="w-75" action="{{ url('/admin/Payment') }}">
+        <form method="POST"  class="w-75" action="{{ route('admin.Payment.store') }}">
             @csrf
             <div class="mb-3">
                 <label class="form-label" >الاسم </label>
@@ -28,7 +28,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/Payment') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.Payment.index') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
 

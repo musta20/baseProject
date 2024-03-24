@@ -5,7 +5,7 @@
         <x-card-message></x-card-message>
 
 
-        <form method="POST" enctype="multipart/form-data" action="{{ url('/admin/Task') }}">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('admin.Task.index') }}">
             @csrf
 
             <div class="modal-body p-4">
@@ -93,7 +93,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                        <a type="button" href="{{ url('admin/Task') }}" class="btn btn-light">الغاء</a>
+                        <a type="button" href="{{ route('admin.Task.index') }}" class="btn btn-light">الغاء</a>
                     </div>
                 </div>
             </div>

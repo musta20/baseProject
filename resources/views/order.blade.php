@@ -2,7 +2,7 @@
     <script src="{{ asset('js/lib/jquery-3.6.1.slim.min.js') }}"></script>
     <section class="mainPage">
         <form id="checkout-form" enctype="multipart/form-data" method="POST"
-            action="{{ url('/SaveOrder/' . $services->id) }}" class="colorTexetFooter">
+            action="{{ route('SaveOrder' , $services->id) }}" class="colorTexetFooter">
             @csrf
             <h3>تقديم الطلب</h3>
 

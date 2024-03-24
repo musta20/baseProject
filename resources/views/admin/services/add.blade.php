@@ -6,7 +6,7 @@
     <x-admin-contaner>
         <x-card-message></x-card-message>
 
-        <form method="POST" class="w-75" action="{{ url('/admin/Services') }}">
+        <form method="POST" class="w-75" action="{{ route('admin.Services.store') }}">
             @csrf
 
             <div class="mb-3">
@@ -135,7 +135,7 @@
                 <div class="px-3 pb-3">
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
-                    <a type="button" href="{{ url('admin/Services') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.Services.index') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
 

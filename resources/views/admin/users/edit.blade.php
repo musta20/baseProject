@@ -5,7 +5,8 @@
 
         <x-card-message></x-card-message>
 
-        <form method="POST" enctype="multipart/form-data" class="w-75" action="{{ url('/admin/Users/' . $user->id) }}">
+        <form method="POST" enctype="multipart/form-data" class="w-75"
+         action="{{ route('admin.Users.update' , $user->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -105,7 +106,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/UsersList') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.UsersList') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
         </form>

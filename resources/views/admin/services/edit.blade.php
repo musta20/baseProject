@@ -5,7 +5,7 @@
     <hr>
     <x-admin-contaner>
         <x-card-message></x-card-message>
-        <form method="POST" class="w-75" action="{{ url('/admin/Services/' . $services->id) }}">
+        <form method="POST" class="w-75" action="{{ route('admin.Services.update' , $services->id) }}">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -155,7 +155,7 @@
                     <button type="submit" class="btn btn-primary">
                         <i class="mdi mdi-send me-1"></i> حفظ</button>
 
-                    <a type="button" href="{{ url('admin/Services') }}" class="btn btn-light">الغاء</a>
+                    <a type="button" href="{{ route('admin.Services.index') }}" class="btn btn-light">الغاء</a>
                 </div>
             </div>
         </form>

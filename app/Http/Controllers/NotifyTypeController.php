@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeNotifyTypeRequest;
 use App\Models\NotifyType;
 use App\Models\TasksNotify;
 use Illuminate\Http\Request;
@@ -63,14 +64,14 @@ class NotifyTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeNotifyTypeRequest $request)
     {
                 
-    $data = $request->validate( $this->rule,$this->messages());
+    //    $data = $request->validate( $this->rule,$this->messages());
 
-    NotifyType::create($data);
+    NotifyType::create($request);
    
-    return redirect('/admin/TasksNotify')->with('messages','تم إضافة البيانات');
+    return redirect()->route('admin.TasksNotify.index')->with('messages','تم إضافة البيانات');
 
     }
 
@@ -80,9 +81,9 @@ class NotifyTypeController extends Controller
      * @param  \App\Models\NotifyType  $notifyType
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(NotifyType $NotifyType)
     {
-        $NotifyType = NotifyType::find($id);
+
         return view("admin.Tasks.notify.type.edit",  ['NotifyType' => $NotifyType] );
     }
 
@@ -104,17 +105,14 @@ class NotifyTypeController extends Controller
      * @param  \App\Models\NotifyType  $notifyType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(storeNotifyTypeRequest $request,NotifyType $NotifyType)
     {
-        $data = $request->validate( $this->rule,$this->messages());
-        $NotifyType = NotifyType::find($id);
 
         $NotifyType->name=$request->name;
 
-
         $NotifyType->save();
 
-        return redirect('/admin/TasksNotify/')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.TasksNotify.index')->with('messages','تم تعديل العنصر');
     }
 
     /**
@@ -123,16 +121,15 @@ class NotifyTypeController extends Controller
      * @param  \App\Models\NotifyType  $
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy(NotifyType $NotifyType)
     {
-        $NotifyType = NotifyType::find($id);
       $task=  TasksNotify::where('type',$NotifyType->id)->get();
 
       if(!$task->isEmpty()){
-        return redirect('/admin/TasksNotify/')->with('messages','  هذا العنصر مستخدم . لايمكنك حذفه');
+        return redirect()->route('admin.TasksNotify.index')->with('messages','  هذا العنصر مستخدم . لايمكنك حذفه');
 
       }
         $NotifyType->delete();
-        return redirect('/admin/TasksNotify/')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.TasksNotify.index')->with('messages','تم حذف العنصر');
     }
 }

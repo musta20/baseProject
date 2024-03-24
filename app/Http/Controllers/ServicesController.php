@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeSevicesRequest;
+use App\Http\Requests\updateSevicesRequest;
 use App\Models\category;
 use App\Models\delivery;
 use App\Models\payment;
@@ -12,13 +14,6 @@ use Illuminate\Http\Request;
 class ServicesController extends Controller
 {
 
-
-    public $rule = [
-        "name" => "required|string|max:100|min:3",
-        "price" => "required|integer|digits_between:1,10",
-        "icon" => "required|string|max:255|min:3",
-        "category_id" => "required"
-    ];
 
     /**
      * Get the error messages for the defined validation rules.
@@ -48,7 +43,6 @@ class ServicesController extends Controller
     }
 
 
-
     /**
      * Display a listing of the resource.
      *
@@ -56,10 +50,11 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        //
-        //Services
-        $allServices = services::paginate(10);
-        return view("admin.services.index",  ['allServices' => $allServices]);
+
+        $allServices = services::Filter()->paginate(20);
+       
+        $filterBox = services::showFilter();
+        return view("admin.services.index",  ['allServices' => $allServices,'filterBox'=>$filterBox]);
     }
 
     /**
@@ -84,17 +79,17 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(storeSevicesRequest $request)
     {
-        $data = $request->validate($this->rule, $this->messages());
+       // $data = $request->validate($this->rule, $this->messages());
 
         
         
         $services = services::create([
-            "name" => $data["name"],
-            "price" => $data["price"],
-            "icon" => $data["icon"],
-            "category_id" => $data["category_id"],
+            "name" => $request["name"],
+            "price" => $request["price"],
+            "icon" => $request["icon"],
+            "category_id" => $request["category_id"],
         ]);
 
         if($request['files']){
@@ -116,7 +111,7 @@ class ServicesController extends Controller
 
 
 
-        return redirect('/admin/Services')->with('messages', 'تم إضافة البيانات');
+        return redirect()->route('admin.services.index')->with('messages', 'تم إضافة البيانات');
     }
 
 
@@ -127,9 +122,9 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(services $services)
     {
-        $services = services::find($id);
+       // $services = services::find($id);
     //    / dd($services );
         $cat = category::get();
 
@@ -162,16 +157,13 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateSevicesRequest $request,services $services)
     {
 
-        $data = $request->validate($this->rule, $this->messages());
-
-
-        $services = services::find($id);
-
         $services->name = $request->name;
+
         $services->price = $request->price;
+
         $services->icon = $request->icon;
 
         $services->category_id = $request->category_id;
@@ -179,11 +171,8 @@ class ServicesController extends Controller
         $services->save();
 
 
-
         RequiredFiles::where('type', 0)->where('service_id',  $services->id)->delete();
  
-
-    
         if($request['files']){
 
             foreach ($request['files'] as  $value) {
@@ -195,11 +184,12 @@ class ServicesController extends Controller
             ]);
         }
         }
+        
         $services->payments()->sync($request['pys']);
 
         $services->deliveries()->sync($request['devs']);
 
-        return redirect('/admin/Services/')->with('messages', 'تم تعديل العنصر');
+        return redirect()->route('admin.Services.index')->with('messages', 'تم تعديل العنصر');
     }
 
     /**
@@ -208,10 +198,9 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(services $services )
     {
-        $services = services::find($id);
         $services->delete();
-        return redirect('/admin/Services/')->with('messages', 'تم حذف العنصر');
+        return redirect()->route('admin.Services.index')->with('messages', 'تم حذف العنصر');
     }
 }

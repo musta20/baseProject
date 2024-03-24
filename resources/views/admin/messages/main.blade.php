@@ -2,7 +2,7 @@
 @section('content')
     <section class="boxs border">
 
-        <a href="{{url('/admin/Messages/create')}}" >
+        <a href="{{route('admin.Messages.create')}}" >
             <i class="fa-solid fa-list fa-2x"></i>
             <h3>إنشاء رسالة </h3>
         </a>
