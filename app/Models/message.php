@@ -14,9 +14,6 @@ class message extends Model
 
     protected $guarded = [];
 
-    protected static $logAttributes = ['from','to','title', 'message'];
-
-    protected static $logName = 'message';
   
     protected $table = "message";
 
@@ -28,7 +25,8 @@ class message extends Model
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['from','to','title', 'message'])->useLogName('message');
+        ;
     }
     
     public function toUser()

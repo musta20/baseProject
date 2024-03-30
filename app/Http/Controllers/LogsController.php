@@ -28,8 +28,8 @@ class LogsController extends Controller
 
         $AllLogs = Activity::where('causer_id',$id)->paginate(8);
         $users = User::get();
-        $name =  User::find($id);
-        return view("admin.Logs.list",  ['AllLogs' => $AllLogs,'users'=>$users,'name'=>$name->name] );
+        $user =  User::find($id);
+        return view("admin.Logs.list",  ['AllLogs' => $AllLogs,'users'=>$users,'user'=>$user] );
     }
 
 
@@ -63,9 +63,9 @@ class LogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Activity $log)
+    public function show(Activity $Log)
     {
-        return view("admin.Logs.show",  ['log' => $log] );
+        return view("admin.Logs.show",  ['log' => $Log] );
 
     }
 

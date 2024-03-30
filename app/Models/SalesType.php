@@ -15,14 +15,10 @@ class SalesType extends Model
     protected $guarded = [];
 
 
-    protected static $logAttributes = ['name'];
-
-    protected static $logName = 'SalesType';
-
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logonly(['name'])->useLogName('SalesType');
     }
 
 }

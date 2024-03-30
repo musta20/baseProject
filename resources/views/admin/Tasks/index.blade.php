@@ -1,75 +1,73 @@
-<x-admin-layout>
-
-    <h3> المهام </h3>
-<hr>
-    <x-admin-contaner>
-
-        <x-card-message />
-
-        <a href="{{ route('admin.Task.create') }}" class="btn btn-success btn-sm ms-3"> اسناد مهمة</a>
+<x-admin.layout>
+    <div class="px-5  pt-5">
+        <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
+            <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
+                <h3>جميع المهام :</h3>
+            </span>
+            <a href="{{ route('admin.Task.create') }}"
+                class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                اسناد مهمة</a>
 
         </div>
-        <table class="table  table-striped table-centered mb-0">
-            <thead class="table-dark">
+        <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
+            {{-- {!! $filterBox !!} --}}
 
-            <tr>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            العنوان</th>
+                        <th scope="col" class="px-6 py-3">
+                            الموظف</th>
 
-                <th>#</th>
-                <th>العنوان</th>
-                <th>الموظف</th>
-                <th>البداية </th>
-                <th>الانتهاء </th>
-                <th>الحالة</th>
-                <th>التحكم</th>
+                        <th scope="col" class="px-6 py-3">
+                            تاريخ البداية 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            
+                            تاريخ الانتهاء
+                        </th>
+                        <th scope="col" class="px-6 py-3">الحالة</th>
+                        <th scope="col" class="px-6 py-3">التحكم</th>
 
-            </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($alltask as $item)
+                    <tr class="bg-white border-b  hover:bg-gray-50 ">
+               
 
-            </thead>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $item->title }}</td>
 
+                        <td scope="col" class="px-6 py-3">
+                            {{ $item->user->name }}</td>
 
-            @foreach ($alltask as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $item->start }}</td>
+                        <td scope="col" class="px-6 py-3">
+                            {{ $item->end }}</td>
+                        <td scope="col" class="px-6 py-3">
+                       
+                           {{__('messages.'.$option[$item->isdone]->name)}}
+                           
+                        </td>
 
-                    <td>{{ $item->title }}</td>
+                        <td scope="col" class="gap-2 flex px-6 py-3">
+                            <a href="{{ route('admin.Task.edit' , $item->id) }}">
+                                تعديل</a>
+                            <br>
+                            <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Task.destroy', $item->id) }}'))"
+                                href="#">
+                            حذف
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $alltask->links() }}
 
-                    <td>{{ $item->user->name }}</td>
-
-                    <td>{{ $item->start }}</td>
-                    <td>{{ $item->end }}</td>
-                    <td>
-                        @switch($item->isdone)
-                            @case(0)
-                                لم يستلم المعهمة بعد
-                            @break
-
-                            @case(1)
-                                بداء العمل عليها
-                            @break
-
-                            @case(2)
-                                انجز جزئي للمهمة
-                            @break
-
-                            @default
-                        @endswitch
-                    </td>
-
-                    <td class="table-action">
-                        <a href="{{ route('admin.Task.edit' , $item->id) }}"><i
-                                class="mdi mdi-pencil"></i></a>
-                                <br>
-                        <a onclick="OpenDeleteModel(showModel({{ $item->title }},'{{ route('admin.Task.destroy', $item->id) }}'))" href="#"><i
-                                class="mdi mdi-delete"></i></a>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-        {{ $alltask->links('admin.pagination.custom') }}
-
-
-
-        <x-model-box></x-model-box>
-
-    </x-admin-contaner>
-</x-admin-layout>
+        </div>
+    </div>
+</x-admin.layout>

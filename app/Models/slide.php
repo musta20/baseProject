@@ -17,12 +17,10 @@ class slide extends Model
 
     protected $table = "slide";
 
-    protected static $logAttributes = ['des','url','title','img'];
 
-    protected static $logName = 'services';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['des','url','title','img'])->useLogName('services');
     }
 }

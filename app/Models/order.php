@@ -18,15 +18,12 @@ class order extends Model
     protected $table = "order";
 
 
-    protected static $logAttributes = ['status','payed','img'];
-
-    protected static $logName = 'order';
 
     protected static $recordEvents = ['updated'];
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['status','payed','img'])->useLogName('order');
     }
 
     public function servicesNmae()

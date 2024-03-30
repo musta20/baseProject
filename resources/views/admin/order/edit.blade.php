@@ -1,25 +1,8 @@
 <x-admin-layout>
-
     <h3>بيانات الطلب</h3>
-
     <x-admin-contaner>
         <x-card-message></x-card-message>
 
-
-
-        <script>
-            function selectpay(t) {
-                // console.log(t)
-                const payed = document.getElementById('payed');
-
-                if (t.value == 1 || t.value == 2) {
-                    payed.hidden = false;
-                } else {
-
-                }
-
-            }
-        </script>
         <div class="row">
             <x-card-message></x-card-message>
             <div class="col-xxl-8 col-xl-7">
@@ -31,9 +14,7 @@
                             <div class="dropdown card-widgets">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="mdi mdi-send me-1"></i> حفظ</button>
-
                             </div> <!-- end dropdown-->
-
                             <div class="form-check float-start">
 
                                 <label class="form-label"> تغيير حالة الطلب</label>
@@ -105,12 +86,14 @@
                                 @if ($order->still)
                                     <label class="form-label"> اضافة مبلغ مدفوع</label>
 
-                                    <input class="form-control" id="payed" placeholder="المبلغ " name="cost"
+                                    <input class="form-control" id="payed"
+                                     placeholder="المبلغ " name="cost"
                                         type="number" />
                                 @elseif(!$order->still)
                                     <label class="form-label"> اضافة مبلغ مدفوع</label>
 
-                                    <input class="form-control" id="payed" hidden placeholder="المبلغ "
+                                    <input class="form-control" id="payed" 
+                                    hidden placeholder="المبلغ "
                                         name="cost" type="number" />
                                 @endif
                                 @error('cost')
@@ -123,13 +106,7 @@
 
 
                             </div> <!-- end form-check-->
-
                             <!-- end form-check-->
-
-
-
-
-
                             <div class="clearfix"></div>
 
                             <h3 class="mt-3">{{ $order->title }}</h3>
@@ -281,7 +258,8 @@
                             <div class="row">
                                 <div class="col-6">
                                     <!-- assignee -->
-                                    <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> العدد </p>
+                                    <p class="mt-2 mb-1 text-muted fw-bold 
+                                    font-12 text-uppercase"> العدد </p>
                                     <div class="d-flex">
                                         {{-- <img src="assets/images/users/avatar-9.jpg" 
                             alt="Arya S" class="rounded-circle me-2" height="24"> --}}
@@ -296,9 +274,11 @@
 
                                 <div class="col-6">
                                     <!-- start due date -->
-                                    <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> تاريخ الاعنماد </p>
+                                    <p class="mt-2 mb-1 text-muted fw-bold font-12 text-u
+                                    ppercase"> تاريخ الاعنماد </p>
                                     <div class="d-flex">
-                                        <i class="uil uil-schedule font-18 text-success me-1"></i>
+                                        <i class="uil uil-schedule font-18 text-succe
+                                        ss me-1"></i>
                                         <div>
                                             <h5 class="mt-1 font-14">
                                                 @if ($order->approve_time)
@@ -316,7 +296,8 @@
                             <div class="row">
                                 <div class="col-6">
                                     <!-- assignee -->
-                                    <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> المبلغ المستحق
+                                    <p class="mt-2 mb-1 text-muted fw-bold font-
+                                    12 text-uppercase"> المبلغ المستحق
                                     </p>
                                     <div class="d-flex">
                                         {{-- <img src="assets/images/users/avatar-9.jpg" 
@@ -332,7 +313,8 @@
 
                                 <div class="col-6">
                                     <!-- start due date -->
-                                    <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> المبلغ المدفوع
+                                    <p class="mt-2 mb-1 text-muted fw-bold font-12 t
+                                    ext-uppercase"> المبلغ المدفوع
                                     </p>
                                     <div class="d-flex">
                                         <div>
@@ -433,3 +415,13 @@
 
     </x-admin-contaner>
 </x-admin-layout>
+<script>
+    function selectpay(t) {
+        // console.log(t)
+        const payed = document.getElementById('payed');
+
+        if (t.value == 1 || t.value == 2) {
+            payed.hidden = false;
+        } 
+    }
+</script>

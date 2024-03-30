@@ -17,13 +17,10 @@ class numbers extends Model
 
     protected $table = "numbers";
 
-    protected static $logAttributes = ['title','number','img'];
-
-    protected static $logName = 'numbers';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['title','number','img'])->useLogName('numbers');
     }
 
 }

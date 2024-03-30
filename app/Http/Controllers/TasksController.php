@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TaskStatus;
 use App\Http\Requests\postNotifyTask;
 use App\Http\Requests\storeTaskRequest;
 use App\Http\Requests\EditTaskRequest;
@@ -34,7 +35,7 @@ class TasksController extends Controller
     public $rule = [
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
-        "user_id" => "required|integer",
+        "user_id" => "required",
         "start" => "required|date",
         "end" =>   'required|date|after:start'
     ];
@@ -45,7 +46,7 @@ class TasksController extends Controller
         "title" => "required|string|max:100|min:3",
         "des" => "required|string|max:255|min:3",
         // "user_id" => "required|string|max:255|min:3",
-        "user_id" => "required|integer",
+        "user_id" => "required",
         "isdone" => "required|integer",
 
         "start" => "required|date",
@@ -90,20 +91,28 @@ class TasksController extends Controller
      */
     public function index()
     {
+        $option = TaskStatus::cases();
+
         $alltask = Tasks::latest()->with('user')->paginate(10);
-        return view('admin.Tasks.index', ['alltask' => $alltask]);
+        return view('admin.Tasks.index', ['alltask' => $alltask,
+    'option'=>$option
+    ]);
     }
 
     public function MainTask(Request $request)
     {
         //dd($request->filter);
+        $filterBox = Tasks::showFilter();
 
-
-        $alltask = Tasks::where('user_id', Auth::user()->id)->latest()->paginate(10);
+        $option = TaskStatus::cases();
+        $alltask = Tasks::Filter()->where('user_id', Auth::user()->id)->latest()->paginate(10);
 
         Tasks::where('user_id',Auth::user()->id)->update(['isread' => 1]);
 
-        return view('admin.Tasks.MainTask', ['alltask' => $alltask]);
+        return view('admin.Tasks.MainTask', [
+        'alltask' => $alltask,
+        'option'=>$option,
+        'filterBox'=>$filterBox]);
     }
 
     public function ShowTask(Tasks $task)
@@ -111,10 +120,16 @@ class TasksController extends Controller
        // $task = Tasks::find($id);
         //dd($task);
         $files = Files::where('type', 0)->where('typeid', $task->id)->get();
+        $option = TaskStatus::cases();
 
         if ($task->user_id == Auth::user()->id) {
-            return view('admin.Tasks.ShowTask', ['task' => $task, "files" => $files]);
+            return view('admin.Tasks.ShowTask', ['task' => $task, "files" => $files,
+        
+            'option'=>$option 
+        ]);
         }
+
+        $option = TaskStatus::cases();
 
         return redirect()->route('admin.Task.index')->with('messages', 'حدث خطاء');
     }
@@ -141,7 +156,7 @@ class TasksController extends Controller
         }
 
 
-        return redirect()->route('admin.admin.MainTask')->with('messages', 'تم تعديل البيانات');
+        return redirect()->route('admin.admin.MainTask')->with('OkToast', 'تم تعديل البيانات');
     }
 
 
@@ -237,13 +252,23 @@ class TasksController extends Controller
     {
 
        // $data = $request->validate($this->rule, $this->messages());
+       //dd($task);
 
-        $request['isdone'] = 0;
-        $request['isread'] = 0;
-        $request['boss_id'] = Auth::user()->id;
+       
+        User::findorfail($request['user_id']);
+        $task =  Tasks::create([
+            "title" => $request['title'],
+            "des" => $request['des'],
+            "user_id" => $request['user_id'],
+            "start" => $request['start'],
+            "end" => $request['end'],
+            "isdone" => 0,
+            "isread" =>0,
+            "boss_id" =>  Auth::user()->id,
 
-        $task =  Tasks::create($request);
+        ]);
         //$user =  User::find($task->user_id);
+        
 
       //  Mail::to($user->email)->send(new TasksMail(($task)));
 /* 
@@ -288,16 +313,16 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tasks $task)
+    public function edit(Tasks $Task)
     {
         //task
-
         // $data = $request->validate( $this->rule,$this->messages());
         /// $data['isdone']=0;
         //  $data['boss_id']=Auth::user()->id;
         $users = User::get();
 
-        return view('admin.Tasks.edit', ["task" => $task, "users" => $users]);
+        $option = TaskStatus::cases();
+        return view('admin.Tasks.edit', ["task" => $Task,'option'=>$option, "users" => $users]);
     }
 
     /**
@@ -311,7 +336,6 @@ class TasksController extends Controller
     {        
         //$task = Tasks::find($id);
 
-  
        // $data = $request->validate($this->ruleUPDATE, $this->messages());
    
         $task->title=$request['title'];

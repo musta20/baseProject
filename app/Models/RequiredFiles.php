@@ -15,14 +15,10 @@ class RequiredFiles extends Model
     protected $guarded = [];
 
 
-    protected static $logAttributes = ['name','service_id','type'];
-
-    protected static $logName = 'RequiredFiles';
-
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['name','service_id','type'])->useLogName('requiredfiles');
     }
 
 

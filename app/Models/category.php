@@ -18,13 +18,11 @@ class category extends Model
 
     protected $table = "category";
 
-    protected static $logAttributes = ['title', 'des'];
 
-    protected static $logName = 'category';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['title', 'des'])->useLogName('category');
     }
 
 }

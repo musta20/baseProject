@@ -21,7 +21,7 @@ class TasksFactory extends Factory
             'boss_id' => User::factory()->create()->id,
             
             'des' => $this->faker->paragraph(),
-            'title' => $this->faker->word(),
+            'title' => $this->faker->name(),
 
             'start' => $this->faker->dateTimeInInterval('-1 week', '+1 days'),
 

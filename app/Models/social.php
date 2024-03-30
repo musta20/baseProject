@@ -17,13 +17,11 @@ class social extends Model
 
     protected $table = "social";
 
-    protected static $logAttributes = ['url','img'];
 
-    protected static $logName = 'social';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logonly(['url','img'])->useLogName('social');
     }
 
 

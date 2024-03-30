@@ -15,13 +15,9 @@ class NotifyType extends Model
     protected $guarded = [];
 
 
-    protected static $logAttributes = ['name'];
-
-    protected static $logName = 'NotifyType';
-
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logonly(['name'])->useLogName('NotifyType');
     }
 
 }

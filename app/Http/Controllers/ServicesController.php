@@ -51,10 +51,10 @@ class ServicesController extends Controller
     public function index()
     {
 
-        $allServices = services::Filter()->paginate(20);
+        $allServices = services::Filter()->paginate(10);
        
-        $filterBox = services::showFilter();
-        return view("admin.services.index",  ['allServices' => $allServices,'filterBox'=>$filterBox]);
+        // $filterBox = services::showFilter();
+        return view("admin.services.index",  ['allServices' => $allServices]);
     }
 
     /**
@@ -68,9 +68,9 @@ class ServicesController extends Controller
 
         $pay = payment::get();
 
-        $delv = delivery::get();
+        $dev = delivery::get();
 
-        return view("admin.services.add", ["cat" => $cat, "delv" => $delv, "pay" => $pay]);
+        return view("admin.services.add", ["cat" => $cat, "dev" => $dev, "pym" => $pay]);
     }
 
     /**
@@ -126,17 +126,7 @@ class ServicesController extends Controller
     {
        // $services = services::find($id);
     //    / dd($services );
-        $cat = category::get();
-
-        $filesInput = RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
-        $dev = delivery::get();
-        $pym = payment::get();
-
-
-        return view("admin.services.edit",  [
-            'pym'=>$pym,
-            'dev'=>$dev,
-         'services' => $services, "cat" => $cat, 'filesInput' => $filesInput]);
+    
 
     }
 
@@ -146,8 +136,23 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function edit(services $services)
+    public function edit(services $Service)
     {
+
+        $cat = category::get();
+        $filesInput = RequiredFiles::where('type', 0)->where('service_id', $Service->id)->get();
+        $dev = delivery::get();
+        $pym = payment::get();
+
+
+        return view("admin.services.newedit",  [
+            'pym'=>$pym,
+            'dev'=>$dev,
+            'services' => $Service, 
+            "cat" => $cat, 
+            'filesInput' => $filesInput]);
+
+
     }
 
     /**

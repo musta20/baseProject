@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus as EnumsOrderStatus;
+use App\Enums\PayStatus;
 use App\Http\Requests\updateOrderRequest;
 use App\Mail\OrderStatus;
 use App\Models\delivery;
@@ -63,19 +65,19 @@ class OrderController extends Controller
     {
         $AllOrder = order::where('status', $type)->paginate(10);
         switch ($type) {
-            case 0:
+            case EnumsOrderStatus::NEW_ORDER->value:
                 $title = "الطلبات الجديدة";
                 break;
-            case 1:
+            case EnumsOrderStatus::ORDER_RECEIVED->value:
                 $title = "الطلبات  المسلتلمة";
                 break;
-            case 2:
+            case EnumsOrderStatus::COMPLETED_ORDER->value:
                 $title = "الطلبات المكتملة";
                 break;
-            case 3:
+            case EnumsOrderStatus::DELIVERED_ORDER->value:
                 $title = "الطلبات المسلمة";
                 break;
-            case 4:
+            case EnumsOrderStatus::CANCLED_ORDER->value:
                 $title = "الطلبات الملغية";
                 break;
             default:
@@ -111,43 +113,11 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(order $order)
+    public function show(order $Order)
     {
         //$order = order::with('servicesNmae')->with('delivery')->with('payment')->find($id);
 
-        $order->price = $order->count * $order->servicesNmae->price;
-
-        $order->ServiceName = $order->servicesNmae->name; //still
-
-        $order->still = $order->price - $order->payed;   //still
-
-        $files = Files::where('type', 1)->where('typeid', $order->id)->get();
-
-
-        switch ($order->status) {
-            case 0:
-                $order->status_order = "قيد الانتظار";
-                break;
-            case 1:
-                $order->status_order = "جاري العمل عليه";
-                break;
-            case 2:
-                $order->status_order = "جاهز للتسليم";
-                break;
-            case 3:
-                $order->status_order = " تم تسليمه";
-                break;
-            case 4:
-                $order->status_order = " ملغي";
-                break;
-            default:
-                # code...
-                break;
-        }
-
-
-
-        return view("admin.order.edit",  ['order' =>  $order, "files" => $files]);
+     
     }
 
     /**
@@ -156,9 +126,45 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(order $order)
+    public function edit(order $Order)
     {
-        //
+        $Order->price = $Order->count * $Order->servicesNmae->price;
+
+        $Order->ServiceName = $Order->servicesNmae->name; //still
+
+        $Order->still = $Order->price - $Order->payed;   //still
+
+        $files = Files::where('type', 1)->where('typeid', $Order->id)->get();
+
+
+        switch ($Order->status) {
+            case 0:
+                $Order->status_order = "قيد الانتظار";
+                break;
+            case 1:
+                $Order->status_order = "جاري العمل عليه";
+                break;
+            case 2:
+                $Order->status_order = "جاهز للتسليم";
+                break;
+            case 3:
+                $Order->status_order = " تم تسليمه";
+                break;
+            case 4:
+                $Order->status_order = " ملغي";
+                break;
+            default:
+                break;
+        }
+
+        $statusOrder = EnumsOrderStatus::cases();
+        $PayStatus = PayStatus::cases();
+        
+        
+        return view("admin.order.newedit",  [
+            "statusOrder"=>$statusOrder,
+            "PayStatus"=>$PayStatus,
+            'order' =>  $Order, "files" => $files]);
     }
 
     /**
@@ -168,39 +174,39 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(updateOrderRequest $request,order $order)
+    public function update(updateOrderRequest $request,order $Order)
     {
         // $data = $request->validate($this->rule, $this->messages());
 
         // $order  = order::find($id);
 
         if ($request->time) {
-            $order->time = $request->time;
+            $Order->time = $request->time;
         }
 
         if ($request->cost) {
-            $order->payed = $order->payed + $request->cost;
+            $Order->payed = $Order->payed + $request->cost;
         }
 
         $send = false;
 
-        if ($order->status != $request->status) {
+        if ($Order->status != $request->status) {
             $send = true;
         }
 
-        $order->status = $request->status;
+        $Order->status = $request->status;
 
         if ($request->status == 1) {
-            $order->approve_time = date('d-m-y h:i:s');
+            $Order->approve_time = date('d-m-y h:i:s');
         }
 
-        $order->save();
+        $Order->save();
 
         if ($send) {
            // Mail::to($order->email)->send(new OrderStatus(($order)));
         }
 
-        return redirect()->route('admin.showOrderList' , $order->status);
+        return redirect()->route('admin.showOrderList' , $Order->status)->with('Oktoast', 'تم تعديل العنصر');
     }
 
     /**

@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\storeCategoryRequest;
 use App\Http\Requests\updateCategoryRequest;
 use App\Models\category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+
 
 class CategoryController extends Controller
 {
@@ -59,7 +58,11 @@ class CategoryController extends Controller
     public function show(category $category)
     {
 
-        return view("admin.category.edit",  ['category' => $category] );
+    }
+
+    public function edit(category $Category){
+        return view("admin.category.edit",  ['category' => $Category] );
+
     }
 
 

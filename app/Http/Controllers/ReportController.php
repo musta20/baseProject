@@ -25,7 +25,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('admin.report.index');
+        return view('admin.report.main');
     }
 
     public function main()
@@ -228,6 +228,7 @@ class ReportController extends Controller
     public function orderReport()
     {
         $orderReport = Report::latest()->paginate(10);
+        
         return view('admin.report.order', ['orderReport' => $orderReport]);
     }
     public function billReportView()

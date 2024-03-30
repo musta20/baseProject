@@ -15,14 +15,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasUlids,Notifiable , HasRoles , LogsActivity;
 
-
-    protected static $logAttributes = ['name','email'];
-
-    protected static $logName = 'User';
     
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logonly(['name','email'])->useLogName('User');
     }
 
     /**

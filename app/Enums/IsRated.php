@@ -4,7 +4,7 @@ namespace App\Enums;
 
 
 
-enum Status: int
+enum IsRated: int
 {
     case NOTRATED = 0;
     case RATED = 1;

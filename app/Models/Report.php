@@ -14,13 +14,10 @@ class Report extends Model
 
     protected $guarded = [];
 
-    protected static $logAttributes = ['reporttype'];
-
-    protected static $logName = 'Report';
     
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['reporttype'])->useLogName('report');
     }
 
 }

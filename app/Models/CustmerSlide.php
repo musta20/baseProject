@@ -16,6 +16,5 @@ class CustmerSlide extends Model
 
     protected static $logAttributes = ['url','img'];
 
-    protected static $logName = 'CustmerSlide';
 
 }

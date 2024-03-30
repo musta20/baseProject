@@ -323,7 +323,7 @@
                                                     <div class="collapse" id="ReportMangment">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ report('admin.report.orderReport') }}">تقارير
+                                                                <a href="{{ route('admin.Report.index') }}">تقارير
                                                                     العمليات</a>
                                                             </li>
                                                             <li>
@@ -359,9 +359,7 @@
                                                             <li>
                                                                 <a href="{{ route('admin.JobApp.index') }}">طلبات التوظيف</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="{{ route('admin.JobCity.index') }}">مناطق التوظيف</a>
-                                                            </li>
+                                                       
                                                         </ul>
                                                     </div>
                                                 </li>

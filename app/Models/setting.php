@@ -17,7 +17,6 @@ class setting extends Model
 
  
 
-    protected static $logName = 'setting';
 
 
     /**
@@ -37,7 +36,7 @@ class setting extends Model
             ->logOnly([
                 'title', 'des', 'keyword', 'map', 'terms', 'phone', 
                 'adress', 'email', 'billterm', 'footer', 'footertext'
-            ]);
+            ])->useLogName('setting');
         }
 
 

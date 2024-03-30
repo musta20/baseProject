@@ -14,15 +14,13 @@ class delivery extends Model
 
     protected $guarded = [];
 
-    protected static $logAttributes = ['name'];
 
-    protected static $logName = 'delivery';
 
     protected $table= 'delivery';
  
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['name'])->useLogName('delivery');
     }
 
 }

@@ -1,48 +1,68 @@
-<x-admin-layout>
+<x-admin.layout>
+    <div class="px-5  pt-5">
+        <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
+            <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
+                <h3>وسائل التوصيل :</h3>
+            </span>
+            <a href="{{ route('admin.Delivery.create') }}"
+                class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                إضافة </a>
 
-    <h3>اراء العملاء </h3>
+        </div>
+        <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
+            {{-- {!! $filterBox !!} --}}
 
-    <hr>
-    <x-admin-contaner>
-        <x-card-message />
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        
+                        <th scope="col" class="px-6 py-3">
+                            الاسم</th>
+                            <th scope="col" class="px-6 py-3">
+                                الحالة</th>
+
+                            <th scope="col" class="px-6 py-3">
+                                التعليق</th>
+    
+                        <th scope="col" class="px-6 py-3">التحكم</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($client as $item)
+                    <tr class="bg-white border-b  hover:bg-gray-50 ">
+               
+
+                   
+
+                        <td scope="col" class="px-6 py-3">
+                            {{ $item->name }}</td>
+
+                            <td scope="col" class="px-6 py-3">
+                                {{ $item->status ==1 ? 'مخفي' : 'غير مخفي' }}</td>
+
+                            <td scope="col" class="px-6 w-3/5 py-3">
+                                {{ $item->des }}</td>
+                
+
+                        <td scope="col" class="gap-2 flex px-6 py-3">
+                            <a href="{{ route('admin.Clients.edit' , $item->id) }}">
+                                تعديل</a>
+                            <br>
+                            <a onclick="OpenDeleteModel(showModel('{{ $item->name }}','{{ route('admin.Clients.destroy', $item->id) }}'))"
+                                href="#">
+                            حذف
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $client->links() }}
+
+        </div>
+    </div>
+</x-admin.layout>
 
 
-        <table class="table  table-striped table-centered mb-0">
-            <thead class="table-dark">
-                <tr>
-                    <th>#</th>
-                    <th>الاسم</th>
-                    <th>التعليق</th>
-                    <th>التحكم</th>
-                </tr>
-            </thead>
 
-
-            @foreach ($client as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-
-
-                    <td>{{ $item->name }}</td>
-
-                    <td>{{ $item->des }}</td>
-
-                    <td class="table-action">
-                        <a href="{{ route('admin.Clients.edit' , $item->id ) }}"><i
-                                class="mdi mdi-pencil"></i></a>
-                        <a onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Clients.destroy',$item->id)}}'))" href="#"><i
-                                class="mdi mdi-delete"></i></a>
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-        {{ $client->links('admin.pagination.custom') }}
-
-
-  
-
-        <x-model-box></x-model-box>
-
-
-    </x-admin-contaner>
-</x-admin-layout>

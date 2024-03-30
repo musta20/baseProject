@@ -16,13 +16,12 @@ class clients extends Model
     
     protected static $logAttributes = ['status'];
 
-    protected static $logName = 'clients';
 
     protected static $logOnlyDirty = true;
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['status'])->useLogName('clients');
     }
 
 }

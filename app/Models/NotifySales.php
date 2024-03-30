@@ -15,10 +15,6 @@ class NotifySales extends Model
     protected $guarded = [];
 
 
-    protected static $logAttributes = ['name'];
-
-    protected static $logName = 'NotifySales';
-
     public function user()
     {
         return $this->belongsTo(User::class,'user_id','id');
@@ -32,7 +28,8 @@ class NotifySales extends Model
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['name'])->useLogName('NotifySales');
+;
     }
 
 

@@ -42,6 +42,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
 
+Route::get('testlocal', function () {
+    
+    return view('testlocal');
+});
+
 /* Route::get('/admin2', function ()
 {
    return view('dash.index');
@@ -91,9 +96,8 @@ Route::post('login/', [UsersController::class, 'login'])->name('admin.login');
 Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], function () {
 
     Route::get('/', function () {
-        return view('dash.index');
-        //        return redirect('admin/MainTask');
-
+         return view('dash.index');
+            //   return redirect('admin/MainTask');
     });
 
     Route::group(['middleware' => ['permission:Search']], function () {
@@ -260,6 +264,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
         Route::get('orderReport/', [ReportController::class, 'orderReport'])->name('orderReport');
 
         Route::get('billReportView/', [ReportController::class, 'billReportView'])->name('billReportView');
+        
         Route::get('billReport/', [ReportController::class, 'billReport'])->name('billReport');
 
         Route::get('cashReport/', [ReportController::class, 'cashReport'])->name('cashReport');

@@ -1,10 +1,70 @@
+
+<x-admin.layout>
+    <div class="px-5  pt-5">
+        <div method="POST" >
+            @csrf
+            <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
+                <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600"> إنشاء فاتورة</span>
+              
+            </div>
+            <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
+                <form class="mx-auto w-1/2  " method="POST" action="{{ route('admin.Report.postCreateBill') }}">
+                    @csrf
+
+
+
+                    <div class=" p-3 text-slate-800 ">
+                        <x-admin.input-card  label=" اسم العميل " name="name" placeholder="اسم العميل"  />
+                    </div>
+
+                    <div class=" p-3 text-slate-800 ">
+                        <x-admin.input-card name="email" placeholder="عنوان البريد الالكتروني" label="البريد الالكتروني" />
+
+                    </div>
+
+
+                    <div class=" p-3 text-slate-800 ">
+                        <x-admin.input-card name="phone" placeholder="رقم الهاتف" label=" هاتف العميل " />
+
+                       
+                    </div>
+
+                    <span class="flex gap-5" >
+
+                        <x-admin.input-card name="code" placeholder=" كود المنتج" label=" كود المنتج " />
+                        <x-admin.input-card name="des" placeholder=" الوصف" label=" الوصف  " />
+                        <x-admin.input-card name="price" placeholder=" السعر" label=" السعر   " />
+                        <x-admin.input-card name="count"  placeholder=" العدد" label=" الكمية  " />
+                       
+
+                    </span>
+                    <x-admin.input-card name="price" placeholder=" المبلغ" label=" المبلغ  " />
+
+                    <hr>
+                    <button type="submit" 
+                        class="bg-blue-500 my-4 flex gap-2 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                
+                          
+                        أنشاء</button>
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</x-admin.layout>
+{{-- 
 <x-admin-layout>
     <h3>إضافة وظيفة</h3>
     <hr>
     <x-admin-contaner>
         <x-card-message></x-card-message>
 
-        <form method="POST" class="w-75" action="{{ route('admin.postCreateBill') }}">
+        <form method="POST" class="w-75" action="{{ route('admin.Report.postCreateBill') }}">
             @csrf
 
             <div class="mb-3">
@@ -114,4 +174,4 @@
 
 
     </x-admin-contaner>
-</x-admin-layout>
+</x-admin-layout> --}}

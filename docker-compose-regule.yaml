@@ -31,7 +31,7 @@ services:
             context: ./docker/php
             dockerfile: Dockerfile
             args:
-                user: sammy
+                user: musta
                 uid: 1000
         depends_on:
             - mariadb

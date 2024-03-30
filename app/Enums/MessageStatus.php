@@ -4,7 +4,7 @@ namespace App\Enums;
 
 
 
-enum Status: int
+enum MessageStatus: int
 {
     case READ = 1;
     case UNREAD = 0;

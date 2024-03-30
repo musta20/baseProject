@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommentStatus;
 use App\Http\Requests\updateClientRequest;
 use App\Models\clients;
 use Illuminate\Http\Request;
@@ -66,9 +67,10 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function edit(clients $client)
+    public function edit(clients $Client)
     {
-        return view("admin.client.edit",['client'=>$client]);
+        $statusoption = CommentStatus::cases();
+        return view("admin.client.edit",[ "statusoption" => $statusoption, 'client'=>$Client]);
 
     }
 
@@ -79,12 +81,11 @@ class ClientsController extends Controller
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function update(updateClientRequest $request,clients $clint)
+    public function update(updateClientRequest $request,clients $Client)
     {
-        
-        $clint->status=$request->status;
+        $Client->status=$request->status;
 
-        $clint->save();
+        $Client->save();
 
         return redirect()->route('admin.Clients.index')->with('messages','تم تعديل العنصر');
 

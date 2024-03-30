@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\storePaymentRequest;
 use App\Http\Requests\updatePaymentRequest;
 use App\Models\payment;
-use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -68,9 +67,11 @@ class PaymentController extends Controller
     {
 
         
-        payment::create($request);
+        payment::create([
+            'name' => $request->name,
+        ]);
        
-        return redirect()->route('admin.Payment.index')->with('messages','تم إضافة البيانات');
+        return redirect()->route('admin.Payment.index')->with('oKToas','تم إضافة البيانات');
     }
 
     /**
@@ -81,7 +82,6 @@ class PaymentController extends Controller
      */
     public function show(payment $payment)
     {
-        return view("admin.order.payment.edit",  ['payment' => $payment] );
     }
 
     /**
@@ -90,9 +90,10 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(payment $payment)
+    public function edit(payment $Payment)
     {
-        //
+        return view("admin.order.payment.edit",  ['payment' => $Payment] );
+
     }
 
     /**
@@ -102,16 +103,16 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(updatePaymentRequest $request,payment  $payment)
+    public function update(updatePaymentRequest $request,payment  $Payment)
     {
        // $data = $request->validate( $this->rule,$this->messages());
 
         //$payment = payment::find($id);
 
-        $payment->name=$request->name;
+        $Payment->name=$request->name;
 
 
-        $payment->save();
+        $Payment->save();
 
         return redirect()->route('admin.Payment.index')->with('messages','تم تعديل العنصر');
 
@@ -123,10 +124,10 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(payment $payment)
+    public function destroy(payment $Payment)
     {
       //  $payment = payment::find($id);
-        $payment->delete();
+        $Payment->delete();
         return redirect()->route('admin.Payment.index')->with('messages','تم حذف العنصر');
     }
 }

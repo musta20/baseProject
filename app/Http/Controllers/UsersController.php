@@ -239,12 +239,12 @@ public function addpermison()
      * @param  \App\Models\users  $users
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $User)
     {
 
         $role = Role::get()->reverse();
 
-        return view("admin.users.edit",  ['user' => $user, 'role' => $role]);
+        return view("admin.users.edit",  ['user' => $User, 'role' => $role]);
     }
 
     /**

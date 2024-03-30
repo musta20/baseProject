@@ -90,6 +90,7 @@ class MessageController extends Controller
     public function create()
     {
         $users = User::get();
+
         return view("admin.messages.add",['Users'=>$users] );
 
     }
@@ -129,15 +130,16 @@ class MessageController extends Controller
      * @param  \App\Models\message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(message $message)
+    public function show(message $Message)
     {
-
-        if($message->from != Auth::user()->id And $message->to !=Auth::user()->id)
+       
+        
+        if($Message->from != Auth::user()->id And $Message->to !=Auth::user()->id)
         {
             return redirect()->route('admin.inbox',1)->with('messages','حدث خطء ');
         }
 
-        return view("admin.messages.show",  ['message' =>$message ] );
+        return view("admin.messages.show",  ['message' =>$Message ] );
     }
 
     /**
@@ -169,11 +171,10 @@ class MessageController extends Controller
      * @param  \App\Models\message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(message $msg)
+    public function destroy(message $Message)
     {
-        $msg->delete();
+        $Message->delete();
         return redirect()->route('admin.inbox',1)->with('messages',' تم حذف الرسالة ');
 
-        //
     }
 }

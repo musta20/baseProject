@@ -13,12 +13,10 @@ class TasksNotify extends Model
     use HasFactory , LogsActivity , HasUlids;
     protected $guarded = [];
 
-    protected static $logName = 'TasksNotify';
 
-    protected static $logAttributes = ['type','user_id','name','number','issueAt','duration'];
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logonly(['type','user_id','name','number','issueAt','duration'])->useLogName('tasknotify');
     }
 
     public function user()

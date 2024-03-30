@@ -1,39 +1,44 @@
-<x-admin-layout>
+<x-admin.layout>
 
-    <h3>اضافة طريقة توصيل </h3>
-    <hr>
-    <x-admin-contaner>
-        <x-card-message></x-card-message>
 
-        <form method="POST" class="w-75" action="{{ route('admin.Delivery.store') }}">
+
+
+    <div class="px-5  pt-5">
+        <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
+            <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
+                <h3>اضاقة وسيلة توصيل</h3>
+            </span>
+            <a 
+            href="{{ route('admin.Delivery.index') }}"
+            
+            class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+
+            الغاء</a>
+
+        </div>
+        <form method="POST" class="w-full mx-auto" action="{{ route('admin.Delivery.store') }}" class="flex gap-2">
+           
             @csrf
+            <div class=" p-3 bg-slate-100 w-full mx-auto rounded-md border border-gray-300 ">
 
-            <div class="mb-3">
-                <label class="form-label" > الاسم </label>
-                <input class="form-control" name="name" placeholder="عنوان التصنيف" />
-
-                @error('name')
-                    <span class="helper">
-                        {{ $message }}
-                    </span>
-                @enderror
-
-            </div>
-
-
-
-         
-            <div class="mb-3">
-
-                <div class="px-3 pb-3">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="mdi mdi-send me-1"></i> حفظ</button>
-
-                    <a type="button" href="{{ route('admin.Delivery.index') }}" class="btn btn-light">الغاء</a>
+                <div class="flex gap-3 ">
+                    <x-admin.input-card name="name" label="الاسم" />
                 </div>
+                <hr>
+                <br>
+                <button type="submit" 
+                class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+
+                حفظ</button>
+            
             </div>
+           
+      
 
 
+
+     
         </form>
-    </x-admin-contaner>
-</x-admin-layout>
+    </div>
+
+</x-admin.layout>

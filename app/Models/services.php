@@ -19,18 +19,16 @@ class services extends Model
 
     protected $table = "services";
 
-    protected static $logAttributes = ['name','price','des'];
-
-    protected static $logName = 'services';
     
     protected static $filterFiled ="ss";
 
     protected static $filterByRelation = ['category'];
+    
     protected static $searchField = ['name','des'];
     
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['name','price','des'])->useLogName('services');
     }
 
     public function category(){
@@ -44,7 +42,6 @@ class services extends Model
     }
 
     public function files(): HasMany{
-
 
         return $this->hasMany(RequiredFiles::class, 'service_id', 'id');
     }

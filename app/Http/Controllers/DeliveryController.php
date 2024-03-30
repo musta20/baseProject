@@ -51,7 +51,9 @@ class DeliveryController extends Controller
     public function store(storeDeliveryRequest $request)
     {
 
-        delivery::create($request);
+        delivery::create([
+            'name' => $request->name
+        ]);
        
         return redirect()->route('admin.Delivery.index')->with('messages','تم إضافة البيانات');
     }
@@ -64,7 +66,6 @@ class DeliveryController extends Controller
      */
     public function show(delivery $delivery)
     {
-        return view("admin.order.delivery.edit",  ['delivery' => $delivery] );
     }
 
     /**
@@ -73,9 +74,10 @@ class DeliveryController extends Controller
      * @param  \App\Models\delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function edit(delivery $delivery)
+    public function edit(delivery $Delivery)
     {
-        //
+        return view("admin.order.delivery.edit",  ['delivery' => $Delivery] );
+
     }
 
     /**

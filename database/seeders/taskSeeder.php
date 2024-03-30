@@ -21,7 +21,7 @@ class taskSeeder extends Seeder
         
         foreach ($users as $user) {
 
-            Tasks::factory(3)->withManger($Mangers->random())->for($user)->create();
+            Tasks::factory(5)->withManger($Mangers->random())->for($user)->create();
        
         }
         

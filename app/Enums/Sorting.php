@@ -11,6 +11,7 @@ enum Sorting:string
     case DESC = 'DESC';
     case ASC = 'ASC';
     case OlDEST = 'OlDEST';
+    case EQULE = 'EQULE';
 
     
 }

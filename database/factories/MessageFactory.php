@@ -17,7 +17,7 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => $this->faker->word(),
+            "title" => $this->faker->name(),
             "isred" => rand(0,1),
             "message"=> $this->faker->sentence()
       

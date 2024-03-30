@@ -15,13 +15,11 @@ class jobs extends Model
 
     protected $table = "jobs";
 
-    protected static $logAttributes = ['title','des', 'job_cities_id'];
 
-    protected static $logName = 'jobs';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['title', 'des','job_cities_id'])->useLogName('jobs');
     }
 
 }

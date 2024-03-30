@@ -1,7 +1,5 @@
 <x-admin-layout>
-
     <h3>تعديل الخدمة</h3>
-
     <hr>
     <x-admin-contaner>
         <x-card-message></x-card-message>
@@ -136,7 +134,8 @@
 
             <div class="mb-3">
                 <label class="form-label"> السعر</label>
-                <input class="form-control" name="price" placeholder=" السعر" cols="30" rows="10"
+                <input class="form-control" name="price" placeholder=" السعر" 
+                cols="30" rows="10"
                     value="{{ $services->price }}" />
 
 

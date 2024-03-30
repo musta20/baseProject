@@ -3,6 +3,7 @@ namespace App\Models\Conserns;
 
 use App\Enums\Sorting;
 use App\Enums\PublishStatus;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use InvalidArgumentException;
 
@@ -28,12 +29,17 @@ trait Withfilter{
     {
 
 
-        $relation = request('rel');
+        $relation = request()->query()['rel'] ?? null;
         
-        $orderType = request('orderType');
+        $orderType = request()->query()['orderType'] ?? null;
 
-        $filed = request('filed'); 
+        $filed = request()->query()['filed'] ?? null;
 
+        $value = request()->query()['value'] ?? null;
+
+        $searchTerm = request()->query()['search'] ?? null;
+
+        
         $realTable =  $this->filterByRelation[request('realTable')] ?? null;
 
         if ($relation && $realTable) {
@@ -45,9 +51,20 @@ trait Withfilter{
             });
 
         }
+        if ($searchTerm) {
+
+            $query = DB::table(self::getTable())->where(function ($query) use ($searchTerm) {
+                foreach (self::$searchField as $columnName) {
+                    $query->orWhere($columnName, 'like', "%{$searchTerm}%");
+                }
+            });
+        }
 
 
         switch ($orderType) {
+            case Sorting::EQULE->value:
+                $query->where($filed, $value);
+                break;
             case Sorting::DESC->value:
                 $query->orderBy($filed, 'desc');
                 break;
@@ -55,10 +72,10 @@ trait Withfilter{
                 $query->orderBy($filed);
                 break;
             case Sorting::NEWEST->value:
-                $query->orderBy('created_at', 'desc');
+                $query->orderBy($filed, 'desc');
                 break;
             case Sorting::OlDEST->value:
-                $query->orderBy('created_at');
+                $query->orderBy($filed);
                 break;
         }
 

@@ -17,7 +17,7 @@ class MessageSeeder extends Seeder
         $users = User::get();
         foreach ($users as $user) {
 
-            message::factory(2)->create(["from" => $user->id, "to" => $users->random()->id]);
+            message::factory(5)->create(["from" => $user->id, "to" => $users->random()->id]);
         }
     }
 }

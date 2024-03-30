@@ -1,10 +1,8 @@
 
 <x-layout>
-
 @if (!$slides->isEmpty())
 <section dir="ltr" class="swiper-container2">
     <div class="swiper-wrapper swiper-wrapper2">
-
   @foreach ($slides as $item)
     <div class="swiper-slide swiper-slide2">
           <div class="content">
@@ -98,12 +96,17 @@
         </div>
     </div>
 
-    <p class="ourClintText">شهادات عملائنا</p>
+    <p class="ourClintText">شهادات عملائنا
+        {{__('NOT_ASSINED')}}
+
+
+    </p>
 </section>
 @if(!$custmerSlide->isEmpty())
 
 <section class="ourCustmer">
     <h3>عملاؤنا</h3>
+
     <p>
         نقترب من فكرك، نرى بعينك، ونتبنى توجهك لنصنع التغيير معًا ! بإتباع نهج متميز ودقيق، نسعى معًا لإحداث نقلــة غير
         مسبقة في عالم التسويق الرقمي جنبًا إلى جنب مع شركاء نجاحنا، نعتز بكم ونسعى لنتألق معكم.

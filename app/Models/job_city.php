@@ -14,11 +14,9 @@ class job_city extends Model
 
     protected $guarded = [];
 
-    protected static $logAttributes = ['name'];
 
-    protected static $logName = 'job_city';
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults();
+        return LogOptions::defaults()->logOnly(['name'])->useLogName('job_city');
     }
 }
