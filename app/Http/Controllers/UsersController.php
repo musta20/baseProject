@@ -18,65 +18,7 @@ use Illuminate\Support\Facades\App;
 class UsersController extends Controller
 {
 
-    public $Rule =  [
-        "email" => "unique:users|required|email|max:255|min:3",
-        "password" => "required|string|max:25|min:6",
-        "name" => "required|string|max:100|min:3",
-        "role" => "required",
-        'img' => 'max:2048|mimes:jpg,jpeg,png'
-
-    ];
-
-    public $UpDateRule =  [
-        "email" => "required|email|max:255|min:3",
-        "name" => "required|string|max:100|min:3",
-        "role" => "required",
-        'img' => 'max:2048|mimes:jpg,jpeg,png'
-
-    ];
-
-    public $PasswordRule =  [
-        "password" => "required|string|max:25|min:6"
-    ];
-
-
-    public $LogInRule =  [
-        "email" => "required|email|max:255|min:3",
-        "password" => "required|string|max:25|min:6",
-    ];
-
-
-
-    public function messages()
-    {
-        return [
-
-
-            'role.required' => 'يجب  تحديد الصلاحية ',
-            'role.integer' => 'يجب ان تكون الصلاحية رقم',
-            "role.digits_between" => "الصلاحية يجب ان تكون بين 1-3",
-
-            'email.required' => ' يجب كتابة البريد الالكتروني ',
-            'email.email' => ' ليس بريد الالكتروني',
-            "email.unique" => " بريد الالكتروني مسجل مسبقا",
-            "email.max" => " يجب ان لا يزيد بريد الالكتروني  عن 25 حرف ",
-            "email.min" => " يجب ان لا يقل بريد الالكتروني عن 3 حرف ",
-
-            'password.required' => 'يجب كتابة كلمة المرور ',
-            'password.string' => 'يجب ان يكون كلمة المرور نص فقط',
-            "password.max" => "يجب ان لا يزيد  كلمة المرور عن 25 حرف",
-            "password.min" => "يجب ان لا يقل  كلمة المرور عن 3 حرف",
-
-            'name.required' => 'يجب كتابة الاسم ',
-            'name.string' => 'يجب ان يكون الاسم نص فقط',
-            "name.max" => "يجب ان لا يزيد الاسم  عن 25 حرف",
-            "name.min" => "يجب ان لا يقل الاسم عن 3 حرف",
-
-            'img.mimes' => 'الملف يجب ان يكون صورة فقط',
-            "img.max" => "يجب ان لا يزيد   عن 25 م",
-        ];
-    }
-
+    
 
 
     /**
@@ -96,9 +38,16 @@ class UsersController extends Controller
     {
        // $locale = App::currentLocale();
 
-        $Users = User::latest()->with('roles')->paginate(10);
-        $allRole = Role::all();
-        return view("admin.users.index", ['Users' => $Users,'allRole'=>$allRole]);
+       $allRole = Role::all();
+
+        $filterBox=User::showFilter(realData: $allRole, relType: 'roles', relName: 'الصلاحية');
+
+        $Users = User::Filter()->with('roles')->requestPaginate();
+
+        return view("admin.users.index", [
+        'Users' => $Users,
+        'filterBox'=>$filterBox,
+        'allRole'=>$allRole]);
     }
     /**
      * Show the form for creating a new resource.
@@ -135,7 +84,6 @@ class UsersController extends Controller
     public function login(loginRequest $credentials)
     {
 
-      //  $credentials = $request->validate($this->LogInRule, $this->messages());
 
       
 
@@ -159,11 +107,15 @@ class UsersController extends Controller
         // $user = $request->all();
         $request['password'] = Hash::make($request->password);
 
-        $user = User::create($request);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
 
      //   $user->givePermissionTo('edit articles');
 
-        return redirect()->route('admin.Users.index')->with('messages', 'تم إضافة المستخدم');
+        return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
     }
 public function addpermison()
 {
@@ -219,7 +171,7 @@ public function addpermison()
         $user->assignRole( $role);
    
 
-        return redirect()->route('admin.UsersList')->with('messages', 'تم إضافة المستخدم');
+        return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
     }
 
     /**
@@ -254,39 +206,39 @@ public function addpermison()
      * @param  \App\Models\users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(updateUserRequest $request,User $user)
+    public function update(updateUserRequest $request,User $User)
     {
 
       
         if($request->hasFile('img'))
         {
-            $user->img =  $request->file('img')->store('userimg','public');
+            $User->img =  $request->file('img')->store('userimg','public');
         }
 
         if ($request->password) {
             $request->validate($this->PasswordRule, $this->messages());
-            $user->password =  Hash::make($request->password);
+            $User->password =  Hash::make($request->password);
         }
 
-        $user->name =  $request->name;
-        $user->email =  $request->email;
+        $User->name =  $request->name;
+        $User->email =  $request->email;
         $roles = Role::all();
 
-       if( $user->hasAnyRole($roles)){
-        $user->removeRole($user->getRoleNames()[0]);
+       if( $User->hasAnyRole($roles)){
+        $User->removeRole($User->getRoleNames()[0]);
        }
         foreach ($roles as $item) {
 
            if($item->id == $request['role']) {
-            $user->assignRole($item->name);
+            $User->assignRole($item->name);
 
            }
         }
 
 
-        $user->save();
+        $User->save();
 
-        return redirect()->route('admin.UsersList')->with('messages', 'تم تعديل الموظف');
+        return redirect()->route('admin.UsersList')->with('OkToast', 'تم تعديل الموظف');
     }
 
     public function addPerm(Request $request)
@@ -313,7 +265,7 @@ public function addpermison()
             
         }
 
-        return redirect()->route('admin.perm')->with('messages', 'تعديل الصلاحيات');
+        return redirect()->route('admin.perm')->with('OkToast', 'تعديل الصلاحيات');
 
     }
 
@@ -331,11 +283,11 @@ public function addpermison()
       //  $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
       //  Role::create(['name' => $role['role']]);
       if( $role->name ==$this->ADMIN){
-        return redirect()->route('admin.perm')->with('messages', 'لا يمكن حذف المدير   ');
+        return redirect()->route('admin.perm')->with('OkToast', 'لا يمكن حذف المدير   ');
 
       }
       $role->delete();
-        return redirect()->route('admin.perm')->with('messages', 'تم حذ العنصر ');
+        return redirect()->route('admin.perm')->with('OkToast', 'تم حذ العنصر ');
 
     }
 
@@ -343,7 +295,7 @@ public function addpermison()
     {
         $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
         Role::create(['name' => $role['role']]);
-        return redirect()->route('admin.perm')->with('messages', 'تم اضافة الصلاحية');
+        return redirect()->route('admin.perm')->with('OkToast', 'تم اضافة الصلاحية');
 
     }
     public function Perm()
@@ -365,6 +317,6 @@ public function addpermison()
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.UsersList')->with('messages', 'تم حذف العنصر');
+        return redirect()->route('admin.UsersList')->with('OkToast', 'تم حذف العنصر');
     }
 }

@@ -260,7 +260,7 @@ class mainSite extends Controller
 
    // Mail::to($data['email'])->send(new ContactSupport($newmsg));
 
-       return redirect()->route('contact')->with('messages', ' تم ارسال الرسالة ');
+       return redirect()->route('contact')->with('OkToast', ' تم ارسال الرسالة ');
 
     }
 
@@ -302,7 +302,7 @@ class mainSite extends Controller
                 break;
         }
 
-        return redirect()->route('CheckStatus')->with('messages', ' حالة الطلب : '.$o_status.' ');
+        return redirect()->route('CheckStatus')->with('OkToast', ' حالة الطلب : '.$o_status.' ');
     }
 
 
@@ -368,7 +368,7 @@ class mainSite extends Controller
             ]);
         }
 
-        return redirect()->route('order' , $services->id)->with('messages', '  تم ارسال الطلب رقم : ' . $uuidCode);
+        return redirect()->route('order' , $services->id)->with('OkToast', '  تم ارسال الطلب رقم : ' . $uuidCode);
     }
 
 
@@ -429,6 +429,6 @@ class mainSite extends Controller
 
         ]);
 
-        return redirect()->route('jobs')->with('messages', '  تم ارسال الطلب رقم : ' . $uuidCode);
+        return redirect()->route('jobs')->with('OkToast', '  تم ارسال الطلب رقم : ' . $uuidCode);
     }
 }

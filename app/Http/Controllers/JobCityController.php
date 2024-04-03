@@ -10,16 +10,6 @@ use Illuminate\Http\Request;
 class JobCityController extends Controller
 {
 
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +44,7 @@ class JobCityController extends Controller
         
     job_city::create($request);
    
-    return redirect('/admin/JobCity')->with('messages','تم إضافة البيانات');
+    return redirect('/admin/JobCity')->with('OkToast','تم إضافة البيانات');
 
     }
 
@@ -84,7 +74,7 @@ class JobCityController extends Controller
 
         $job_city->save();
 
-        return redirect('/admin/JobCity/')->with('messages','تم تعديل العنصر');
+        return redirect('/admin/JobCity/')->with('OkToast','تم تعديل العنصر');
 
     }
 
@@ -97,6 +87,6 @@ class JobCityController extends Controller
     public function destroy(job_city $job_city)
     {
         $job_city->delete();
-        return redirect('/admin/JobCity/')->with('messages','تم حذف العنصر');
+        return redirect('/admin/JobCity/')->with('OkToast','تم حذف العنصر');
     }
 }

@@ -30,7 +30,7 @@ class updateCategoryRequest extends FormRequest
 
             "des" => ["required","string","max:255","min:3"]
             ,
-            "icon" => ["required","string","max:255","min:3"]
+            "icon" => ["nullable","string","max:255","min:3"]
         ];
     }
 }

@@ -11,16 +11,27 @@ class CustmerSlideController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Display a paginated listing of the Custmer Slide resources.
+     *
+     * This function retrieves the latest Custmer Slide resources
+     * and renders the 'admin.setting.CustmerSlide.index' view,
+     * passing the retrieved resources as data.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        // Retrieve the latest Custmer Slide resources with pagination
         $CustmerSlide = CustmerSlide::latest()->paginate(10);
 
-        return view("admin.setting.CustmerSlide.index",  ['CustmerSlide' => $CustmerSlide]);
+        // Render the 'admin.setting.CustmerSlide.index' view
+        // and pass the retrieved resources as data
+        return view(
+            "admin.setting.CustmerSlide.index",
+            ['CustmerSlide' => $CustmerSlide]
+        );
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -34,19 +45,22 @@ class CustmerSlideController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Custmer Slide in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  storeCustmerSlideRequest  $request The request containing the Custmer Slide data
+     * @return \Illuminate\Http\Response Redirects to '/admin/CustmerSlide' with a success message
      */
     public function store(storeCustmerSlideRequest $request)
     {
-        
+        // Retrieve the uploaded image and store it in the 'Slide' directory of the 'public' disk
         $data['img'] =  $request->file('img')->store('Slide','public');
 
+        // Create a new Custmer Slide resource with the retrieved data
         CustmerSlide::create($data);
 
-        return redirect('/admin/CustmerSlide')->with('messages','تم إضافة البيانات');
+        // Redirect to the '/admin/CustmerSlide' route with a success message
+        return redirect('/admin/CustmerSlide')->with('OkToast','تم إضافة البيانات');
+
     }
 
     /**
@@ -72,24 +86,25 @@ class CustmerSlideController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified CustmerSlide resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CustmerSlide  $custmerSlide
-     * @return \Illuminate\Http\Response
+     * @param  updateCustmerSlideRequest  $request The request containing the Custmer Slide data
+     * @param  CustmerSlide  $slide The Custmer Slide to be updated
+     * @return \Illuminate\Http\Response Redirects to '/admin/CustmerSlide' with a success message
      */
-    public function update(updateCustmerSlideRequest $request,CustmerSlide $slide)
+    public function update(updateCustmerSlideRequest $request, CustmerSlide $slide)
     {
+        // Retrieve the uploaded image from the request and update the Custmer Slide in a single query
+        $slide->update([
+            'img' => $request->file('img')->store('Slide', 'public'),
+            'url' => $request->url,
+        ]);
 
-        $slide->img = $request->file('img')->store('Slide','public');
-
-        $slide->url=$request->url;
-
-        $slide->save();
-
-        return redirect()->route('admin.CustmerSlide.index')->with('messages','تم تعديل العنصر');
+        // Redirect to the Custmer Slide index page with a success message
+        return redirect()
+            ->route('admin.CustmerSlide.index')
+            ->with('OkToast', 'تم تعديل العنصر');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -98,7 +113,10 @@ class CustmerSlideController extends Controller
      */
     public function destroy(CustmerSlide $slide)
     {
-        $slide->delete();
-        return redirect()->route('admin.CustmerSlide.index')->with('messages','تم حذف العنصر');
+        // Use the delete method directly on the model to avoid any additional queries
+        return $slide->delete() ? 
+            redirect()->route('admin.CustmerSlide.index')->with('OkToast','تم حذف العنصر') : 
+            redirect()->route('admin.CustmerSlide.index')->with('ErrorToast','حدث خطأ أثناء حذف العنصر');
+
     }
 }

@@ -11,7 +11,8 @@
                 اضافة / حذف : وظيفي</a>
 
         </div>
-        <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
+        <form  method="POST" action="{{ route('admin.addPerm') }}" class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
+            @csrf
             {{-- {!! $filterBox !!} --}}
             <table class="w-full  h-60 text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -79,7 +80,7 @@
                     type="submit">حفظ</button>
 
             </div>
-        </div>
+        </form>
     </div>
     <script>
         function chek(input)

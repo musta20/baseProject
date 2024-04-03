@@ -24,7 +24,7 @@ class storeSevicesRequest extends FormRequest
         return [
             "name" => ["required","string","max:100","min:3"],
             "price" => ["required","integer","digits_between:1,10"],
-            "icon" => ["required","string","max:255","min:3"],
+            "icon" => ["nullable","string","max:255","min:3"],
             "category_id" => "required"
         ];
     }

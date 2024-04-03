@@ -28,10 +28,15 @@ class JobsController extends Controller
      */
     public function index()
     {
-        //
-        $alljobs = jobs::latest()->paginate(10);
+        $filterBox=jobs::showFilter();
+
+        $alljobs = jobs::latest()->requestPaginate();
         
-        return view("admin.jobs.index",  ['alljobs' => $alljobs] );
+        return view("admin.jobs.index",  [
+        'alljobs' => $alljobs
+        ,'filterBox'=>$filterBox
+
+        ] );
 
     }
 
@@ -54,8 +59,9 @@ class JobsController extends Controller
     public function create()
     {
         $jobCity = job_city::get();
-
-        return view("admin.jobs.add",['jobCity'=>$jobCity]);
+        return view("admin.jobs.add",['jobCity'=>$jobCity
+    
+    ]);
 
     }
 
@@ -68,9 +74,13 @@ class JobsController extends Controller
     public function store(storeJobRequest $request)
     {
 
-    jobs::create($request);
+    jobs::create([
+        "title"=>$request->title,
+        "des"=>$request->des,
+        "job_cities_id"=>$request->job_cities_id,
+    ]);
    
-    return redirect()->route('admin.Jobs.index')->with('messages','تم إضافة البيانات');
+    return redirect()->route('admin.Jobs.index')->with('OkToast','تم إضافة البيانات');
 
     }
 
@@ -94,9 +104,12 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function edit(jobs $jobs)
+    public function edit(jobs $Job)
     {
-        //
+        $jobCity = job_city::get();
+     
+        
+        return view("admin.jobs.edit",  ['Jobs' => $Job,"jobCity"=>$jobCity] );
     }
 
     /**
@@ -106,16 +119,16 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function update(updateJobRequest $request,jobs $jobs)
+    public function update(updateJobRequest $request,jobs $Job)
     {
-        
-        $jobs->title=$request->title;
-        $jobs->des=$request->des;
-        $jobs->job_cities_id=$request->job_cities_id;
 
-        $jobs->save();
+        $Job->title=$request->title;
+        $Job->des=$request->des;
+        $Job->job_cities_id=$request->job_cities_id;
 
-        return redirect()->route('admin.Jobs.index')->with('messages','تم تعديل العنصر');
+        $Job->save();
+
+        return redirect()->route('admin.Jobs.index')->with('OkToast','تم تعديل العنصر');
 
     }
 
@@ -125,10 +138,10 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jobs $jobs)
+    public function destroy(jobs $Job)
     {
-        $jobs->delete();
-        return redirect()->route('admin.Jobs.index')->with('messages','تم حذف العنصر');
+        $Job->delete();
+        return redirect()->route('admin.Jobs.index')->with('OkToast','تم حذف العنصر');
 
     }
 }

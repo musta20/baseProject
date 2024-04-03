@@ -11,7 +11,7 @@
 
         </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
-            {{-- {!! $filterBox !!} --}}
+            {!! $filterBox !!}
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
@@ -32,14 +32,16 @@
                         <td scope="col" class="px-6 py-3">
                             {{ $item->title }}</td>
 
-
-
+                            <td scope="col" class="px-6 py-3">
+                                {{ $item->des }}</td>
+                                <td scope="col" class="px-6 py-3">
+                                    {{ $item->city->name }}</td>
 
                         <td scope="col" class="px-6  flex gap-3 py-3">
-                            <a href="{{ route('admin.Jobs.index' , $item->id) }}">
+                            <a href="{{ route('admin.Jobs.edit' , $item->id) }}">
                                تعديل
                             </a>
-                            <a  onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Jobs.destroy',$item->id)}}'))" 
+                            <a href="#" onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Jobs.destroy',$item->id)}}'))" 
                                 >
                                 حذف
                             </a>

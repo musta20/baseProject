@@ -18,7 +18,7 @@ class CreateCategoryTable extends Migration
 
             $table->string("title");
             $table->mediumText("des");
-            $table->string("icon");
+            $table->string("icon")->nullable();
             
             $table->timestamps();
         });

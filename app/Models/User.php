@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Sorting;
+use App\Models\Conserns\Withfilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasUlids,Notifiable , HasRoles , LogsActivity;
+    use HasApiTokens, HasFactory, HasUlids,Notifiable , HasRoles , LogsActivity , Withfilter;
 
     
     public function getActivitylogOptions(): LogOptions
@@ -32,6 +34,30 @@ class User extends Authenticatable
         'password',
         'admin'
     ];
+
+
+
+
+    protected static $filterFiled = [
+        [
+            "lable" => "الاقدم",
+            "orderType" => Sorting::ASC, 
+            "value" => 0, 
+            "name" => "created_at"
+        ],
+      
+        [
+            "lable" => "الاحدث",
+            "orderType" => Sorting::NEWEST, 
+            "value" => 3, 
+            "name" => "created_at"
+        ],
+    
+    
+    ];
+
+    protected static $filterByRelation = 'user';
+    protected static $searchField = ['name', 'email'];
 
 
 /*     public function message()

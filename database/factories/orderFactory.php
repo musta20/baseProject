@@ -16,7 +16,6 @@ class orderFactory extends Factory
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            // 'empy_id' => rand(1,9),
             'phone' =>  rand(100000,1000000),
             'des' => $this->faker->paragraph(),
             'title' => $this->faker->word(),

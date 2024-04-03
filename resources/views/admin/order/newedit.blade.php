@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-5 w-1/2">
 
-                            <x-admin.select-input name="status" :selected="$order->status" :options="$statusOrder"
+                            <x-admin.select-input name="isdone" :selected="$order->status" :options="$statusOrder"
                                 label="حالة الطلب" />
                         </div>
                     </div>
@@ -83,15 +83,26 @@
                         </div>
                     </div>
 
-
-
-
                     <div class="mb-5 w-full">
                         <label class="px-1 py-2 text-sm font-bold">التفاصيل : </label>
                         <br>
 
                         <br>{{ $order->des }}
                     </div>
+
+
+
+
+
+
+
+
+                </div>
+                <div class=" p-3 bg-slate-100 w-1/2 rounded-md border border-gray-300 ">
+                    <div class="px-2 py-3">
+
+
+           
 
                     <div class="flex gap-3   ">
                         <div class="mb-5 w-1/2">
@@ -154,15 +165,6 @@
                             {{ $order->still }}
                         </div>
                     </div>
-
-
-
-
-
-
-                </div>
-                <div class=" p-3 bg-slate-100 w-1/2 rounded-md border border-gray-300 ">
-                    <div class="col-xxl-4 col-xl-5">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-3">المرفقات</h5>

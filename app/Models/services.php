@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Sorting;
 use App\Models\Conserns\Withfilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,12 +20,44 @@ class services extends Model
 
     protected $table = "services";
 
-    
-    protected static $filterFiled ="ss";
-
     protected static $filterByRelation = ['category'];
     
     protected static $searchField = ['name','des'];
+
+
+    protected static $filterFiled = [
+        [
+            "lable" => " السعر:الاعلى الى الاقل",
+            "orderType" => Sorting::ASC, 
+            "value" => 6, 
+            "name" => "price"
+        ],
+        [
+            "lable" => " السعر:الاقل الى الاعلى",
+            "orderType" => Sorting::DESC, 
+            "value" => 5, 
+            "name" => "price"
+        ],
+        [
+            "lable" => "الاقدم",
+            "orderType" => Sorting::ASC, 
+            "value" => 0, 
+            "name" => "created_at"
+        ],
+      
+        [
+            "lable" => "الاحدث",
+            "orderType" => Sorting::NEWEST, 
+            "value" => 3, 
+            "name" => "created_at"
+        ],
+    
+    
+    ];
+
+
+    
+
     
     public function getActivitylogOptions(): LogOptions
     {

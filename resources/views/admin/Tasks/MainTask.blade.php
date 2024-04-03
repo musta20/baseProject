@@ -1,5 +1,13 @@
 <x-admin.layout>
+
     <div class="px-5  pt-5">
+        <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
+            <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
+                <h3>جميع المهام :</h3>
+            </span>
+         
+
+        </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
             {!! $filterBox !!}
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">

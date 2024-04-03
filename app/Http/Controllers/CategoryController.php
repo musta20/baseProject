@@ -11,55 +11,73 @@ class CategoryController extends Controller
 {
  
     /**
-     * Display a listing of the resource.
+     * Display a paginated listing of the category resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        // Retrieve the latest categories from the database, paginated with 10 items per page.
+        // The result is passed to the view "admin.category.index".
+        // The view receives the variable name "allcategory" and its value is the paginated category collection.
         $allcategory = category::latest()->paginate(10);
 
-        return view("admin.category.index",  ['allcategory' => $allcategory] );
+        return view("admin.category.index", ['allcategory' => $allcategory]);
+
+
     }
+
+
+
     /**
-     * Show the form for creating a new resource.
+     * Display the form for creating a new category.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
-        return view("admin.category.add" );
+        // This function renders the view "admin.category.add" which is used to create a new category.
+        // The view is returned and does not receive any variables.
+        
+        // Render the "admin.category.add" view.
+        return view("admin.category.add");
+
 
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\storeCategoryRequest  $request The request object containing the category data.
+     * @return \Illuminate\Http\Response Redirects to the index page with a success message.
      */
     public function store(storeCategoryRequest  $request)
     {
+        // Create a new category using the data from the request.
+        
+        // Extract the data from the request.
+        $data = [
+            "title"=>$request->title,
+            "des"=>$request->des,
+            "icon"=>$request->icon,
+        ];
+        
+        // Create a new category using the extracted data.
+        category::create($data);
+        
+        // Redirect to the index page with a success message.
+        return redirect()->route('admin.Category.index')->with('OkToast','تم إضافة البيانات');
 
+    }    
 
-    category::create($request);
-   
-    return redirect()->route('admin.Category.create')->with('messages','تم إضافة البيانات');
-
-    }
     
+
     /**
-     * Display the specified resource.
+     * edit function - A description of the entire PHP function.
      *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
+     * @param category $Category description
+     * @return view
      */
-    public function show(category $category)
-    {
-
-    }
-
     public function edit(category $Category){
         return view("admin.category.edit",  ['category' => $Category] );
 
@@ -74,30 +92,33 @@ class CategoryController extends Controller
      * @param  \App\Models\category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(updateCategoryRequest $request,Category $category)
+    public function update(updateCategoryRequest $request,Category $Category)
     {
 
-        $category->update([
+        $Category->update([
         "title"=>$request->title,
         "des"=>$request->des,
         "icon"=>$request->icon,
         ]);
 
         
-        return redirect()->route('admin.Category.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Category.index')->with('OkToast','تم تعديل العنصر');
 
         
         }
 
+
     /**
-     * Remove the specified resource from storage.
+     * Delete a category from storage.
      *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\category  $Category The category to be deleted.
+     * @return \Illuminate\Http\Response A redirect response to the admin category index page with a success message.
      */
-    public function destroy(category $category )
+    public function destroy(category $Category)
     {
-       $category->delete();
-       return redirect()->route('admin.Category.index')->with('messages','تم حذف العنصر');
+        // Delete the specified category from storage.
+        $Category->delete() ;
+          return   redirect()->route('admin.Category.index')->with('OkToast', 'تم حذف العنصر') ;
     }
+
 }

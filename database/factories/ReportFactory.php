@@ -15,9 +15,11 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            'type' => rand(0,1),
-            'reporttype' =>  ReportType::BILL->value,
+            'type' => rand(0,6),
+            'reporttype' =>  ReportType::getRandom()->value,
             'file' => rand(1,4),
+            'created_at' => $this->faker->dateTimeInInterval('-1 week', '+1 days'),
+
             'from' => $this->faker->dateTimeInInterval('-3 week', '+1 days'),
             'to' => $this->faker->dateTimeInInterval('-3 week', '+1 days'),
         ];

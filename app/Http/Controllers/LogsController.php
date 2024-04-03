@@ -16,20 +16,22 @@ class LogsController extends Controller
     public function index()
     {
         //AllLogs
-        $AllLogs = Activity::latest()->paginate(8);
+        $filterBox = Activity::showFilter();
+        $AllLogs = Activity::Filter()->RequestPaginate();
         $users = User::get();
 
-        return view("admin.Logs.index",  ['AllLogs' => $AllLogs,'users'=>$users] );
+        return view("admin.Logs.index",  ['AllLogs' => $AllLogs,'filterBox' => $filterBox,'users'=>$users] );
     }
 
     public function LogsList($id)
     {
         //AllLogs LogsList
+        $filterBox = Activity::showFilter();
 
-        $AllLogs = Activity::where('causer_id',$id)->paginate(8);
+        $AllLogs = Activity::Filter()->where('causer_id',$id)->RequestPaginate();
         $users = User::get();
         $user =  User::find($id);
-        return view("admin.Logs.list",  ['AllLogs' => $AllLogs,'users'=>$users,'user'=>$user] );
+        return view("admin.Logs.list",  ['AllLogs' => $AllLogs,'filterBox' => $filterBox,'users'=>$users,'user'=>$user] );
     }
 
 

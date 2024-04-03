@@ -10,7 +10,7 @@ class SlideController extends Controller
     public $rule = [
         "title" => "required|string|max:255|min:3",
 
-       'img' => 'required|max:2048|mimes:jpg,jpeg,png',
+       'img' => 'max:2048|mimes:jpg,jpeg,png',
         "des" => "required|string|max:255|min:3",
         "url" => "required|string|max:255|min:3",
     ];
@@ -86,11 +86,11 @@ class SlideController extends Controller
     {
         $data = $request->validate( $this->rule,$this->messages());
         
-        $data['img'] =  $request->file('img')->store('logo','public');
+        $data['img'] =  $request->file('img')->store('Slide');
 
         slide::create($data);
 
-        return redirect('/admin/Slide')->with('messages','تم إضافة البيانات');
+        return redirect('/admin/Slide')->with('OkToast','تم إضافة البيانات');
     }
 
     /**
@@ -111,9 +111,10 @@ class SlideController extends Controller
      * @param  \App\Models\slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function edit(slide $slide)
+    public function edit(slide $Slide)
     {
-        //
+        return view("admin.setting.slide.edit",  ['slide' => $Slide] );
+
     }
 
     /**
@@ -125,20 +126,26 @@ class SlideController extends Controller
      */
     public function update(Request $request,$id)
     {
-        
-        $data = $request->validate( $this->rule,$this->messages());
+
+        $data = $request->validate($this->rule,$this->messages());
 
         $slide = slide::find($id);
 
         $slide->title=$request->title;
+        
         $slide->des=$request->des;
-        $slide->img =  $request->file('img')->store('logo','public');
+
+        if ($request->hasFile('img')) {
+
+            $slide->img =  $request->file('img')->store('Slide');
+
+        }
 
         $slide->url=$request->url;
 
         $slide->save();
 
-        return redirect()->route('admin.Slide.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Slide.index')->with('OkToast','تم تعديل العنصر');
 
 
     }
@@ -153,6 +160,6 @@ class SlideController extends Controller
     {
         $slide = slide::find($id);
         $slide->delete();
-        return redirect('/admin/Slide /')->with('messages','تم حذف العنصر');
+        return redirect('/admin/Slide /')->with('OkToast','تم حذف العنصر');
     }
 }

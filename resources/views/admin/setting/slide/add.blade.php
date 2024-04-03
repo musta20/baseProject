@@ -25,15 +25,10 @@
 
                     <div class=" p-3 text-slate-800 ">
                         <div class="form-label">
-                            <label> الصورة</label>
-                            <input class="form-control" value="{{ old('img') }}" type="file" name="img"
+                            <x-admin.input-card class="form-control"  type="file" name="img"
                                 placeholder=" الصورة" />
             
-                            @error('img')
-                                <span class="helper">
-                                    {{ $message }}
-                                </span>
-                            @enderror
+                        
                         </div>                         
                     </div>
                     <div class=" p-3 text-slate-800 ">

@@ -8,12 +8,12 @@
                     <h3>اضافة سيلايد</h3>
 
                 </span>
-                <a type="submit" href="{{ route('admin.inbox',2) }}"
+                <a type="submit" href="{{ route('admin.Slide.index') }}"
                     class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                     عودة</a>
             </div>
             <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
-                <form class="mx-auto w-1/2 "  method="POST" action="{{route('admin.Slide.update',$slide->id)}}">
+                <form class="mx-auto w-1/2 " enctype="multipart/form-data"  method="POST" action="{{route('admin.Slide.update',$slide->id)}}">
                     @csrf
                     @method('PUT')
 
@@ -30,19 +30,12 @@
 
                     <div class=" p-3 text-slate-800 ">
                         <div class="form-label">
-                            <label> الصورة</label>
-                            <input class="form-control" 
-                            
-                            value="{{$slide->img}}"
-                            type="file" name="img"
-                            
-                                placeholder=" الصورة" />
-            
-                            @error('img')
-                                <span class="helper">
-                                    {{ $message }}
-                                </span>
-                            @enderror
+                            <img src="{{asset('storage/'.$slide->img)}}" alt="" width="100" height="100">
+
+                           
+                            <x-admin.input-card type="file" name="img"
+                            placeholder=" الصورة" />
+                
                         </div>                         
                     </div>
                     <div class=" p-3 text-slate-800 ">

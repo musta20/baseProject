@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         deliverySeeder::class,
         paymentSeeder::class,
         categorySeeder::class,
-
+        cityseeder::class,
         servicesSeeder::class,
         orderSeeder::class,
         MessageSeeder::class,

@@ -4,12 +4,10 @@
             @csrf
             <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
                 <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600"> اعداد الموقغ</span>
-                <a type="submit" href="{{ route('admin.inbox',2) }}"
-                    class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                    عودة</a>
+           
             </div>
             <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
-                <form enctype="multipart/form-data" action="{{ route('admin.Setting.update' , $setting->id) }}">
+                <form enctype="multipart/form-data" method="POST" action="{{ route('admin.Setting.update' , $setting->id) }}">
                     @csrf
                     @method('PUT')
 
@@ -18,7 +16,7 @@
 
 
                     @if ($setting->logo)
-                    <img width="80" src="{{url('storage/'.$setting->logo)}}">
+                    <img width="80" src="{{asset('storage/'.$setting->logo)}}">
                     @endif
 
 
@@ -39,8 +37,10 @@
                             <x-admin.textarea-card value="{{ $setting->map }}"  label="رابط موقع جوجل " name="map"
                                 placeholder="رابط موقع جوجل " />
 
+
                             <x-admin.textarea-card value="{{ $setting->keyword }}"  label="  كلمات مفتاحية" name="keyword"
                                 placeholder="  كلمات مفتاحية" />
+                                
 
                             <x-admin.textarea-card value="{{ $setting->copyright }}" name="copyright"
                                 placeholder="حقوق النشر"  label="حقوق النشر" />
@@ -49,10 +49,15 @@
                                 placeholder=" شروط الفاتورة"   label=" شروط الفاتورة" />
 
 
+            <x-admin.input-card value="{{ $setting->adress }}" name="adress"
+                                placeholder="العنوان"  label="العنوان" />
 
+                                
                             <x-admin.input-card value="{{ $setting->email }}" name="email"
                                 placeholder="البريد الالكتروني"  label="البريد الالكتروني" />
 
+                                <x-admin.input-card value="{{ $setting->footer }}" name="footer"
+                                    placeholder="اسفل الصفحة"  label="اسفل الصفحة" />
                             <x-admin.input-card value="{{ $setting->weekwork }}" placeholder="مواعيد العمل"
                                 name="weekwork" label="مواعيد العمل " />
 

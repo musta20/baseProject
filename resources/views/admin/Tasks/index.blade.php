@@ -10,7 +10,7 @@
 
         </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
-            {{-- {!! $filterBox !!} --}}
+            {!! $filterBox !!}
 
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">

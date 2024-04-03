@@ -3,33 +3,59 @@ namespace App\Models\Conserns;
 
 use App\Enums\Sorting;
 use App\Enums\PublishStatus;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use InvalidArgumentException;
 
 trait Withfilter{
 
-
-   // protected array $filterFiled= [];
-
-    protected array $relationName = [];
-
     protected string $defaultSimpleView  = 'components.filter';
 
-
-    public static function ShowFilter($view = null)
+    public static function ShowFilter($view = null,$relType=null,$relName = null,Collection $realData = null)
     {
+
         return view($view ?: "components.filter", [
-            'filterFiled' => self::$filterFiled
+            'filterFiled' => self::$filterFiled,
+            'realData' => $realData,
+            'relName' => $relName,
+            'relType' => $relType
         ]);
     }
 
+
+
+    public static function ShowCustomFilter($filterFiled = null,$view = null,$relType=null,$relName = null,Collection $realData = null)
+    {
+
+        return view($view ?: "components.filter", [
+            'filterFiled' => $filterFiled ?? self::$filterFiled,
+            'realData' => $realData,
+            'relName' => $relName,
+            'relType' => $relType
+        ]);
+    }
+
+
+
+    public static function scopeRequestPaginate($query){
+
+        $request = request();
+        $itemsPerPage = $request->itemsPerPage ?? 10;
+        
+        $request->validate([
+            'itemsPerPage' => 'nullable|integer|min:2|max:100'
+        ]);
+
+        return  $query->paginate($itemsPerPage);
+    }
 
     public function scopeFilter($query)    
     {
 
 
         $relation = request()->query()['rel'] ?? null;
+        $relationId = request()->query()['id'] ?? null;
         
         $orderType = request()->query()['orderType'] ?? null;
 
@@ -40,24 +66,24 @@ trait Withfilter{
         $searchTerm = request()->query()['search'] ?? null;
 
         
-        $realTable =  $this->filterByRelation[request('realTable')] ?? null;
 
-        if ($relation && $realTable) {
+        if ($relation ) {
+            $query->whereHas($relation, function ($query) use ( $relationId) {
 
-            $query->whereHas($realTable, function ($query) use ($relation) {
-
-                $query->where('id', $relation);
+                $query->where('id',  $relationId);
 
             });
 
         }
+
         if ($searchTerm) {
 
-            $query = DB::table(self::getTable())->where(function ($query) use ($searchTerm) {
+            $query->where(function ($query) use ($searchTerm) {
                 foreach (self::$searchField as $columnName) {
                     $query->orWhere($columnName, 'like', "%{$searchTerm}%");
                 }
             });
+
         }
 
 

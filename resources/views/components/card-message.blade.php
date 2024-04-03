@@ -1,4 +1,5 @@
 @if(session('OkToast'))
+
 <div  x-data="{loaded:true}">
   <div x-show="loaded"
     x-init="window.addEventListener('DOMContentLoaded', () => {setTimeout(() => loaded = false, 5000)})"

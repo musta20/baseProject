@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\saveMessageRequest;
 use App\Models\message;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,7 @@ class MessageController extends Controller
 {
 
 
-    public $rule = [
-       
-    ];
+    public $rule = [];
 
     /**
      * Get the error messages for the defined validation rules.
@@ -31,7 +30,7 @@ class MessageController extends Controller
             "title.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
             "title.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
 
-            "to.required"=>"يجب كتابة المستلم",
+            "to.required" => "يجب كتابة المستلم",
             'message.required' => 'يجب كتابة الرسالة ',
             'message.string' => 'يجب ان يكون الرسالة نص فقط',
             "message.max" => "يجب ان لا يزيد الرسالة  عن 255 حرف",
@@ -49,36 +48,43 @@ class MessageController extends Controller
      */
     public function index()
     {
-     
-  
     }
-    
+
 
     public function inbox($type)
     {
-        if(!$type){ redirect("/admin/AllMessages"); }
-
-        if($type==1){
-            
-            $Messages = message::where('from',Auth::user()->id)->with('toUser')->latest()->paginate(10);
       
-        }elseif($type==2){
-
-            message::where('to',Auth::user()->id)->update(['isred' => 1]);
-
-            $Messages = message::with('fromUser')->where('to',Auth::user()->id)->latest()->paginate(10);
-        }
- 
-        return view("admin.messages.index")->with('Messages', $Messages)->with('type', $type);
+        $users = User::all();
         
+      
 
+        if ($type == 1) {
+
+            $filterBox = message::ShowFilter(realData:$users,relType:'ToUser', relName:'المستلمين');
+
+            $Messages = message::Filter()->where('from', Auth::user()->id)->with('toUser')->latest()->RequestPaginate();
+
+        } elseif ($type == 2) {
+
+            $filterBox = message::ShowFilter(realData:$users,relType:'FromUser', relName:'مرسل من');
+
+            message::where('to', Auth::user()->id)->update(['isred' => 1]);
+
+            $Messages = message::Filter()->where('to', Auth::user()->id)->with('fromUser')->latest()->RequestPaginate();
+        }
+
+        
+        return view("admin.messages.index", [
+            'filterBox' => $filterBox,
+            'Messages' => $Messages,
+            'type' => $type
+        ]);
     }
 
 
     public function main()
     {
         return view("admin.messages.main");
-
     }
 
 
@@ -91,8 +97,7 @@ class MessageController extends Controller
     {
         $users = User::get();
 
-        return view("admin.messages.add",['Users'=>$users] );
-
+        return view("admin.messages.add", ['Users' => $users]);
     }
 
 
@@ -110,8 +115,7 @@ class MessageController extends Controller
      */
     public function store(saveMessageRequest $request)
     {
-     //   $data = $request->validate( $this->rule,$this->messages());
-
+        //   $data = $request->validate( $this->rule,$this->messages());
         message::create([
             'title' => $request['title'],
             'message' => $request['message'],
@@ -120,8 +124,8 @@ class MessageController extends Controller
             'isred' => 0,
 
         ]);
-       
-        return redirect()->route('admin.inbox',1)->with('messages','تم إرسال الرسالة');
+
+        return redirect()->route('admin.inbox', 1)->with('OkToast', 'تم إرسال الرسالة');
     }
 
     /**
@@ -132,14 +136,13 @@ class MessageController extends Controller
      */
     public function show(message $Message)
     {
-       
-        
-        if($Message->from != Auth::user()->id And $Message->to !=Auth::user()->id)
-        {
-            return redirect()->route('admin.inbox',1)->with('messages','حدث خطء ');
+
+
+        if ($Message->from != Auth::user()->id and $Message->to != Auth::user()->id) {
+            return redirect()->route('admin.inbox', 1)->with('OkToast', 'حدث خطء ');
         }
 
-        return view("admin.messages.show",  ['message' =>$Message ] );
+        return view("admin.messages.show",  ['message' => $Message]);
     }
 
     /**
@@ -174,7 +177,6 @@ class MessageController extends Controller
     public function destroy(message $Message)
     {
         $Message->delete();
-        return redirect()->route('admin.inbox',1)->with('messages',' تم حذف الرسالة ');
-
+        return redirect()->route('admin.inbox', 1)->with('OkToast', ' تم حذف الرسالة ');
     }
 }

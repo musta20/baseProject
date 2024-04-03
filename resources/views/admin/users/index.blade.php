@@ -14,7 +14,7 @@
 
         </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
-            {{-- {!! $filterBox !!} --}}
+            {!! $filterBox !!}
 
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
@@ -41,7 +41,7 @@
                             {{ $item->name }}</td>
 
                         <td scope="col" class="px-6 py-3">
-                            {{ $item->getRoleNames() }}</td>
+                            {{count( $item->getRoleNames() )? __( $item->getRoleNames()[0]): 'بدون صلاحية' }}</td>
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->email }}</td>
@@ -50,11 +50,9 @@
                         <td scope="col" class="gap-2 flex px-6 py-3">
                             @if ($item->hasAnyRole($allRole))
                             @if ($item->getRoleNames()[0] == 'مدير')
-                                <a href="{{ route('admin.Users.edit', $item->id ) }}"><i
-                                    class="mdi mdi-pencil"></i></a>
+                                <a href="{{ route('admin.Users.edit', $item->id ) }}">تعديل</a>
                             @else
-                                <a href="{{ route('admin.Users.edit', $item->id ) }}"><i
-                                    class="mdi mdi-pencil"></i></a>
+                                <a href="{{ route('admin.Users.edit', $item->id ) }}">تعديل</a>
                                 <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Users.destroy' , $item->id) }}'))" href="#">
                                     حذف</a>
                             @endif
@@ -62,7 +60,7 @@
                             <a href="{{ route('admin.Users.edit', $item->id ) }}">
                                 تعديل</a>
                             <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Users.destroy' , $item->id) }}'))" href="#">
-                                تعديل</a>
+                                حذف</a>
                         @endif
 
                         </td>

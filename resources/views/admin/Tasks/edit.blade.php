@@ -14,11 +14,11 @@
 
                     <div class="flex gap-3 w-full">
 
-                            <x-admin.select-input :selected="$task->isdone" :options="$option" name="status"
+                            <x-admin.select-input :selected="$task->isdone" :options="$option" name="isdone"
                                 label="تعديل حالة المهمة" />
 
 
-                                <x-admin.input-card for="title" value="{{$task->title}}" label="عنوان المهمة" />
+                                <x-admin.input-card name="title" value="{{$task->title}}" label="عنوان المهمة" />
 
 
                         </div>
@@ -28,8 +28,8 @@
                         <div class="flex gap-3   ">
                        
 
-                                    <x-admin.input-card for="title" type="date" value="{{$task->start}}" label="تاريخ بداية المهمة" />
-                                <x-admin.input-card for="title" type="date" value="{{$task->end}}"  label="تاريخ إنهاء المهمة" />
+                                    <x-admin.input-card name="start" type="date" value="{{$task->start}}" label="تاريخ بداية المهمة" />
+                                <x-admin.input-card name="end" type="date" value="{{$task->end}}"  label="تاريخ إنهاء المهمة" />
 
                         </div>
                         <div class="flex gap-3 w-full" >
@@ -40,12 +40,12 @@
 
                         <div class="flex gap-5 p-3 text-slate-800 ">
                         
-                                <x-admin.textarea-card     rows="4"
+                                <x-admin.textarea-card    name="des" rows="4"
                                 value="{{$task->des}}" label="تفاصيل المهمة" />
                         </div>
 
                     </div>
-                <div class=" p-3 bg-slate-100 w-1/2 rounded-md border border-gray-300 ">
+                <div class=" p-3 bg-slate-100 w-1/2 text-slate-600 rounded-md border border-gray-300 ">
                     <div class="col-xxl-4 col-xl-5">
                         <div class="card">
                             <div class="card-body">
@@ -55,7 +55,7 @@
 
                                 <!-- file preview template -->
                                 @php
-                                    $files = [];
+                                  
                                 @endphp
                                 <!-- end file preview template -->
                                 @if (!count($files))
@@ -63,23 +63,19 @@
                                 @endif
                                 @foreach ($files as $key => $item)
                                 <br>
-                                <a target="_blank" href="{{ url('/storage/' . $item->name) }}">
-                                    ملف {{ $key }}
-                                </a>
+                               
                                 <div class="card my-1 shadow-none border">
                                     <div class="p-2">
                                         <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-sm">
-                                                    <span class="avatar-title rounded">
-                                                        .ZIP
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col ps-0">
-                                                <a target="_blank" href="{{ url('/storage/' . $item->name) }}"
+                                         
+                                            <div class="flex gap-2 justify-between text-xs">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+                                                  </svg>
+                                                  
+                                                <a target="_blank" href="{{ asset('storage/task/    '.$item->name) }}"
                                                     class="text-muted fw-bold">
-                                                    رقم ملف {{ $key }}
+                                                    {{ $item->name }}
                                                 </a>
                                             </div>
                                             <div class="col-auto">

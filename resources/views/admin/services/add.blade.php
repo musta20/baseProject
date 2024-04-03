@@ -20,17 +20,15 @@
                         <x-admin.input-card name="name"  placeholder="عنوان الخدمة" label="عنوان الخدمة" />
                     </div>
 
-                    <div class="flex gap-3  ">
-                        <div class="mb-5 w-full">
-                            <button class="bg-blue-500 hover:bg-blue-400
-                             text-white font-bold py-2 px-4 border-b-4
-                              border-blue-700 hover:border-blue-500 rounded" onclick="addFile(event)">إضافة
-                                ملف</button>
-                            <hr class="my-3">
-                            <div id="files"></div>
-                    
+                    <div class="flex gap-3 w-full">
+                        <div class="mb-5 w-1/2">
+                            <x-admin.input-card placeholder=" السعر"  label="السعر" name="price" />
+                        </div>
+                        <div class="mb-5 w-1/2">
+
                         </div>
                     </div>
+          
 
 
 
@@ -86,14 +84,6 @@
                     </div>
 
 
-                    <div class="flex gap-3 w-full">
-                        <div class="mb-5 w-1/2">
-                            <x-admin.input-card placeholder=" السعر"  label="السعر" name="price" />
-                        </div>
-                        <div class="mb-5 w-1/2">
-
-                        </div>
-                    </div>
                 </div>
 
 
@@ -109,48 +99,19 @@
                                 <!-- Preview -->
                                 <div class="dropzone-previews mt-3" id="file-previews"></div>
 
-                                <!-- file preview template -->
-                                @php
-                                $files = [];
-                                @endphp
-                                <!-- end file preview template -->
-                                @if(!count($files))
-                                لايوجد مرفقات
-                                @endif
-
-                                @foreach ($files as $key => $item)
-                                <br>
-                                <a target="_blank" href="{{ url('/storage/' . $item->name) }}">
-                                    ملف {{ $key }}
-                                </a>
-                                <div class="card my-1 shadow-none border">
-                                    <div class="p-2">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <div class="avatar-sm">
-                                                    <span class="avatar-title rounded">
-                                                        .ZIP
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="col ps-0">
-                                                <a target="_blank" href="{{ url('/storage/' . $item->name) }}"
-                                                    class="text-muted fw-bold">
-                                                    رقم ملف {{ $key }}
-                                                </a>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!-- Button -->
-                                                <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
-                                                    <i class="ri-download-2-line"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                                <div class="flex gap-3  ">
+                                    <div class="mb-5 w-full">
+                                        <button class="bg-blue-500 hover:bg-blue-400
+                                         text-white font-bold py-2 px-4 border-b-4
+                                          border-blue-700 hover:border-blue-500 rounded" onclick="addFile(event)">إضافة
+                                            ملف</button>
+                                        <hr class="my-3">
+                                        <div id="files" class="w-1/2" ></div>
+                                
                                     </div>
                                 </div>
 
 
-                                @endforeach
 
 
                             </div>

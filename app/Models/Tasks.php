@@ -35,14 +35,14 @@ class Tasks extends Model
         [
             "lable" => "الاحدث",
             "orderType" => Sorting::NEWEST, 
-            "value" => 1, 
+            "value" => 3, 
             "name" => "created_at"
         ],
     
     
     ];
 
-    protected static $filterByRelation = [];
+    protected static $filterByRelation = 'user';
     protected static $searchField = ['title', 'des'];
 
 

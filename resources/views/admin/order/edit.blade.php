@@ -18,6 +18,7 @@
                             <div class="form-check float-start">
 
                                 <label class="form-label"> تغيير حالة الطلب</label>
+                                <x-admin.select-input :option="$orderStatus" selected="$order->status" />
                                 <select class="form-select select2 select2-hidden-accessible" name="status">
                                     @switch($order->status)
                                         @case('0')

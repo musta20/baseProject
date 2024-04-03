@@ -55,7 +55,7 @@ class DeliveryController extends Controller
             'name' => $request->name
         ]);
        
-        return redirect()->route('admin.Delivery.index')->with('messages','تم إضافة البيانات');
+        return redirect()->route('admin.Delivery.index')->with('OkToast','تم إضافة البيانات');
     }
 
     /**
@@ -94,7 +94,7 @@ class DeliveryController extends Controller
 
         $delivery->save();
 
-        return redirect()->route('admin.Delivery.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Delivery.index')->with('OkToast','تم تعديل العنصر');
     }
 
     /**
@@ -103,9 +103,9 @@ class DeliveryController extends Controller
      * @param  \App\Models\delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(delivery $delivery)
+    public function destroy(delivery $Delivery)
     {
-        $delivery->delete();
-        return redirect()->route('admin.Delivery.index')->with('messages','تم حذف العنصر');
+        $Delivery->delete();
+        return redirect()->route('admin.Delivery.index')->with('OkToast','تم حذف العنصر');
     }
 }

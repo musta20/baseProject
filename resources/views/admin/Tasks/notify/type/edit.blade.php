@@ -2,7 +2,6 @@
     <h3> تعديل بيانات السجل</h3>
     <hr>
     <x-admin-contaner>
-        <x-card-message></x-card-message>
 
         <form method="POST" action="{{ route('admin.NotifyType.update' , $NotifyType->id) }}">
             @csrf

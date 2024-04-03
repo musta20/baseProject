@@ -8,37 +8,7 @@ use App\Models\payment;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
-    public $rule = [
-        "name" => "required|string|max:100|min:3",
-
-    ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'يجب كتابة العنوان ',
-            'name.string' => 'يجب ان يكون العنوان نص فقط',
-            "name.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "name.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-
-
-        ];
-    }
-
+ 
     public function index()
     {
         $payment = payment::latest()->paginate(10);
@@ -71,7 +41,7 @@ class PaymentController extends Controller
             'name' => $request->name,
         ]);
        
-        return redirect()->route('admin.Payment.index')->with('oKToas','تم إضافة البيانات');
+        return redirect()->route('admin.Payment.index')->with('OkToast','تم إضافة البيانات');
     }
 
     /**
@@ -114,7 +84,7 @@ class PaymentController extends Controller
 
         $Payment->save();
 
-        return redirect()->route('admin.Payment.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Payment.index')->with('OkToast','تم تعديل العنصر');
 
     }
 
@@ -128,6 +98,6 @@ class PaymentController extends Controller
     {
       //  $payment = payment::find($id);
         $Payment->delete();
-        return redirect()->route('admin.Payment.index')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.Payment.index')->with('OkToast','تم حذف العنصر');
     }
 }

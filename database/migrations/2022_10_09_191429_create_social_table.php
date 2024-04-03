@@ -15,7 +15,7 @@ class CreateSocialTable extends Migration
     {
         Schema::create('social', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string("img");
+            $table->text("img");
             $table->string("url");
             $table->timestamps();
         });

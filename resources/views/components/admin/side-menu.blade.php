@@ -29,7 +29,7 @@
                 <span>المهام </span>
             </a>
         </li>
-        <li class="mb-1 text-sm">
+        <li class="mb-1 text-sm hidden">
             <a href="{{ route('admin.showMyNotifyTask',1) }}"
                 class="flex items-center p-2 gap-2 rounded hover:bg-slate-300">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -80,7 +80,12 @@
 
 
         @can('Order')
-        <li x-data="{ open: false }" class="mb-1 text-sm" x-data="{ open: false }">
+        @php
+            $url = request()->url();
+            $open = Str::contains($url, ['Delivery','Payment','admin/showOrderList', 'admin/order/edit', 'admin/order/create', 'admin/order/store']);
+        @endphp
+
+        <li  x-data="{ open: {{ $open ? 'true' : 'false' }} }"  class="mb-1 text-sm" >
             <button @click="open = !open" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -243,7 +248,11 @@
 
 
         @can('Report')
-        <li x-data="{ open: false }" class="mb-1 text-sm" x-data="{ open: false }">
+        @php
+        $url = request()->url();
+        $openReportMenu = Str::contains($url, ['admin/orderReport','admin/cashReport','admin/billReportView','admin/createBill']);
+          @endphp
+        <li x-data="{ open: {{$openReportMenu ? 'true' : 'false'}}  }" class="mb-1 text-sm" x-data="{ open: false }">
             <button @click="open = !open" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -315,7 +324,12 @@
 
 
         @can('jobs')
-        <li x-data="{ open: false }" class="mb-1 text-sm" x-data="{ open: false }">
+
+        @php
+        $url = request()->url();
+        $openJobsMenu = Str::contains($url, ['admin/Jobs','admin/JobApp']);
+          @endphp
+        <li x-data="{ open: {{ $openJobsMenu ? 'true' : 'false' }} }" class="mb-1 text-sm" x-data="{ open: false }">
             <button @click="open = !open" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -361,7 +375,13 @@
 
 
         @can('Users')
-        <li x-data="{ open: false }" class="mb-1 text-sm" x-data="{ open: false }">
+
+
+        @php
+        $url = request()->url();
+        $openJobsPerm = Str::contains($url, ['admin/perm','indexrole','admin/UsersList','admin/Users/create']);
+          @endphp
+        <li x-data="{ open: {{ $openJobsPerm ? 'true' : 'false' }} }" class="mb-1 text-sm" x-data="{ open: false }">
             <button @click="open = !open" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -415,9 +435,12 @@
 
 
 
-
+        @php
+        $url = request()->url();
+        $openSetting = Str::contains($url, ['admin/basic','admin/Slide','admin/Social']);
+          @endphp
         @can('Setting')
-        <li x-data="{ open: false }" class="mb-1 text-sm" x-data="{ open: false }">
+        <li x-data="{ open: {{ $openSetting ? 'true' : 'false' }} }" class="mb-1 text-sm" x-data="{ open: false }">
             <button @click="open = !open" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

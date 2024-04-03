@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Sorting;
+use App\Models\Conserns\Withfilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class message extends Model
 {
-    use HasFactory , LogsActivity,HasUlids;
+    use HasFactory , LogsActivity , HasUlids , Withfilter;
 
     protected $guarded = [];
 
@@ -18,10 +20,39 @@ class message extends Model
     protected $table = "message";
 
 
-/*     public function userable()
+
+
+    protected static $filterFiled = [
+        [
+            "lable" => "الاقدم",
+            "orderType" => Sorting::ASC, 
+            "value" => 0, 
+            "name" => "created_at"
+        ],
+        
+        [
+            "lable" => "الاحدث",
+            "orderType" => Sorting::NEWEST, 
+            "value" => 1, 
+            "name" => "created_at"
+        ],
+    
+    
+    ];
+
+    protected static $filterByRelation = ['toUser','fromUser'];
+
+    protected static $searchField = ['title', 'message'];
+
+
+
+    /*   
+        public function userable()
     {
         return $this->morphOne(User::class, 'userable');
-    } */
+    } 
+    
+    */
 
     public function getActivitylogOptions(): LogOptions
     {

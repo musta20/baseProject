@@ -12,7 +12,7 @@
         <form method="POST" class="w-full  bg-slate-100 rounded-md border border-gray-300" 
         action="{{ route('admin.Category.store') }}" class="flex gap-2">
             @csrf
-            @method('PUT')
+
             <div class=" p-3 mx-auto w-1/2  ">
                 <div class="flex gap-3">
                     <x-admin.input-card name="title"  label="الاسم" />
@@ -29,66 +29,3 @@
         </form>
     </div>
 </x-admin.layout>
-
-{{-- 
-<x-admin-layout>
-
-    <h3> اضافة تصنيف </h3>
-
-    <hr>
-    <x-admin-contaner>
-        <x-card-message></x-card-message>
-
-
-        <form method="POST" class="w-75" action="{{ route('admin.Category.store') }}">
-            @csrf
-            <div class="mb-3">
-                <label  class="form-label">عنوان التصنيف</label>
-                <input class="form-control" name="title" placeholder="عنوان التصنيف" />
-                @error('title')
-                    <span class="helper">
-                        {{ $message }}
-                    </span>
-                @enderror
-
-            </div>
-            <div class="mb-3">
-                <label class="form-label"> الايقونة</label>
-                <input class="form-control" name="icon" placeholder=" الايقونة" />
-                @error('icon')
-                    <span class="helper">
-                        {{ $message }}
-                    </span>
-                @enderror
-
-            </div>
-            <div class="mb-3">
-                <label  class="form-label"> الوصف</label>
-                <textarea class="form-control" name="des" placeholder=" الوصف" cols="30" rows="10"></textarea>
-
-                @error('des')
-                    <span class="helper">
-                        {{ $message }}
-                    </span>
-                @enderror
-
-            </div>
-
-
-    
-            <div class="mb-3">
-
-                <div class="px-3 pb-3">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="mdi mdi-send me-1"></i> حفظ</button>
-        
-                    <a type="button" href="{{ url('admin.Category.index') }}" class="btn btn-light">الغاء</a>
-                </div>
-            </div>
-
-        </form>
-
-
-
-    </x-admin-contaner>
-</x-admin-layout> --}}

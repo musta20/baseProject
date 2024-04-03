@@ -80,7 +80,7 @@ class TasksNotifyController extends Controller
         ]);
 
 
-        return redirect()->route('admin.TasksNotify.show' , $tasksNotify->type)->with('messages', 'تم اضافة العنصر');
+        return redirect()->route('admin.TasksNotify.show' , $tasksNotify->type)->with('OkToast', 'تم اضافة العنصر');
     }
 
     /**
@@ -131,7 +131,7 @@ class TasksNotifyController extends Controller
 
         $tasksNotify->save();
 
-        return redirect()->route('admin.TasksNotify' , $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
+        return redirect()->route('admin.TasksNotify' , $tasksNotify->type)->with('OkToast', 'تم تعديل العنصر');
     }
 
     /**
@@ -149,6 +149,6 @@ class TasksNotifyController extends Controller
 
         $tasksNotify->delete();
 
-        return redirect()->route('admin.TasksNotify' , $theType)->with('messages', 'تم حذف العنصر');
+        return redirect()->route('admin.TasksNotify' , $theType)->with('OkToast', 'تم حذف العنصر');
     }
 }

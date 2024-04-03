@@ -12,6 +12,7 @@
                 
             </div>
             <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
+           
                 <form class="mx-auto w-1/2 "  method="POST"method="POST" class="w-75" action="{{route('admin.Social.store')}}">
 
                     @csrf
@@ -19,6 +20,13 @@
                     {{--
                     <x-admin.input-card name="email" label="البريد الالكتروني" /> --}}
 
+                    
+                <div class=" p-3 text-slate-800 py-5" >
+                    <span class=" text-center text-slate-400 border  border-gray-300 px-4 py-1 rounded-lg text-sm">
+                        
+                        يجب اختيار ايقونة من نوع svg
+                        </span>
+                </div>
 
                     <div class=" p-3 text-slate-800 ">
                         <x-admin.input-card 

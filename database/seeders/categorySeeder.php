@@ -14,6 +14,7 @@ class categorySeeder extends Seeder
      */
     public function run(): void
     {
+
         $categorys = SeederData::$arabicCategories;
         $imagePath = storage_path() . '/Images/';
         $serviceImagePath = storage_path() . '/app/public/category/';

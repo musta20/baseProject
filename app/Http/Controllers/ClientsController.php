@@ -15,20 +15,28 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-   
-
- 
-
-
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $client = clients::latest()->paginate(10);
-        return view("admin.client.index",['client'=>$client]);
+        // Show the filter box for clients
+        $filterBox = clients::showFilter();
+
+        // Get the filtered clients and paginate the results
+        $client = clients::Filter()->latest()->RequestPaginate();
+
+        // Render the view for the index of clients
+        return view("admin.client.index",
+            [
+                'client' => $client,  // The paginated list of clients
+                'filterBox' => $filterBox, // The filter box for clients
+            ]
+        );
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -70,36 +78,41 @@ class ClientsController extends Controller
     public function edit(clients $Client)
     {
         $statusoption = CommentStatus::cases();
-        return view("admin.client.edit",[ "statusoption" => $statusoption, 'client'=>$Client]);
+        return view("admin.client.edit",[ "statusoption" => $statusoption,'client'=>$Client]);
 
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified client resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\clients  $clients
-     * @return \Illuminate\Http\Response
+     * @param  updateClientRequest  $request The request object containing the updated status
+     * @param  clients  $Client The client object to be updated
+     * @return \Illuminate\Http\Response Redirects to the index page with a success message
      */
-    public function update(updateClientRequest $request,clients $Client)
+    public function update(updateClientRequest $request, clients $Client)
     {
-        $Client->status=$request->status;
+        // Update the status of the client with the new status from the request
+        $Client->status = $request->status;
 
+        // Save the updated client object to the database
         $Client->save();
 
-        return redirect()->route('admin.Clients.index')->with('messages','تم تعديل العنصر');
+        // Redirect to the index page and display a success message
+        return redirect()
+            ->route('admin.Clients.index')
+            ->with('OkToast', 'تم تعديل العنصر');
 
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(clients $client)
+    public function destroy(clients $Client)
     {
-        $client->delete();
-        return redirect()->route('admin.Clients.index')->with('messages','تم حذف العنصر');
+        $Client->delete();
+        return redirect()->route('admin.Clients.index')->with('OkToast','تم حذف العنصر');
     }
 }

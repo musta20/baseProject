@@ -24,7 +24,7 @@ class updateOrderRequest extends FormRequest
         return [
             "time" =>[ "nullable","date"],
 
-            "status" => ["required","integer","max:4","min:1"]
+            "status" => ["required","integer","max:4","min:0"]
         ];
     }
 }

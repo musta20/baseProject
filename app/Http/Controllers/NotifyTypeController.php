@@ -71,7 +71,7 @@ class NotifyTypeController extends Controller
 
     NotifyType::create($request);
    
-    return redirect()->route('admin.TasksNotify.index')->with('messages','تم إضافة البيانات');
+    return redirect()->route('admin.TasksNotify.index')->with('OkToast','تم إضافة البيانات');
 
     }
 
@@ -112,7 +112,7 @@ class NotifyTypeController extends Controller
 
         $NotifyType->save();
 
-        return redirect()->route('admin.TasksNotify.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.TasksNotify.index')->with('OkToast','تم تعديل العنصر');
     }
 
     /**
@@ -126,10 +126,10 @@ class NotifyTypeController extends Controller
       $task=  TasksNotify::where('type',$NotifyType->id)->get();
 
       if(!$task->isEmpty()){
-        return redirect()->route('admin.TasksNotify.index')->with('messages','  هذا العنصر مستخدم . لايمكنك حذفه');
+        return redirect()->route('admin.TasksNotify.index')->with('OkToast','  هذا العنصر مستخدم . لايمكنك حذفه');
 
       }
         $NotifyType->delete();
-        return redirect()->route('admin.TasksNotify.index')->with('messages','تم حذف العنصر');
+        return redirect()->route('admin.TasksNotify.index')->with('OkToast','تم حذف العنصر');
     }
 }

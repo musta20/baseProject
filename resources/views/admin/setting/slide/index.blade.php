@@ -40,8 +40,7 @@
                             <td scope="col" class="px-6 py-3">
                                 {{ $item->des }}</td>
                             
-                            <td scope="col" class="px-6 py-3">
-                                {{ $item->price }}</td>
+                       
                                               
                                 <td scope="col" class="px-6 py-3">
                                     <a target="blank" href="{{url('storage/'.$item->img)}}" ><img width="100" src="{{url('storage/'.$item->img)}}" />

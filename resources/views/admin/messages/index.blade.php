@@ -10,7 +10,10 @@
             </span>
         </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
-            {{-- {!! $filterBox !!} --}}
+            
+            {!! $filterBox !!}
+
+            <hr>
             <div class=" flex p-2 justify-between">
                 <div class="">
                     <a type="button"
@@ -53,10 +56,13 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-
-
                         <th scope="col" class="px-6 py-3">
-                            المرسل
+                            @if ($type == 1)
+                            الى
+                            @else
+                           المرسل
+                            @endif
+                            
                         </th>
                         <th scope="col" class="px-6 py-3">
                             العنوان
@@ -65,13 +71,9 @@
                         <th scope="col" class="px-6 py-3">
                             التاريخ
                         </th>
-
-
                         <th scope="col" class="px-6 py-3">
-
                         </th>
                         <th scope="col" class="px-6 py-3">
-
                         </th>
                     </tr>
                 </thead>

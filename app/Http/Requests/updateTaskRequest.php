@@ -27,6 +27,9 @@ class updateTaskRequest extends FormRequest
             // "user_id" => "required|string|max:255|min:3",
             "user_id" => ["required"],
             "isdone" => ["required","integer"],
+            
+
+            // "attachment-*"=>["nullable","max:2048",'mimes:doc,pdf,jpg,jpeg,png'],
     
             "start" => ["required","date"],
             "end" =>   ['required','date','after:start']

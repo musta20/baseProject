@@ -12,7 +12,6 @@
 </head>
 
 <body class="bg-gray-100 flex w-full font-IBMPlex">
-    <x-card-message></x-card-message>
 
     <x-admin.side-menu />
     <main class="w-full">

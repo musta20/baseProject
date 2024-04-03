@@ -89,14 +89,25 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $option = TaskStatus::cases();
 
-        $alltask = Tasks::latest()->with('user')->paginate(10);
+        $users = User::all();
+
+
+        $filterBox = Tasks::showFilter(
+            realData:$users,
+            relType:'user',
+            relName:'المستخدمين',
+        );
+
+
+        $alltask = Tasks::Filter()->latest()->with('user')->RequestPaginate();
         return view('admin.Tasks.index', ['alltask' => $alltask,
-    'option'=>$option
-    ]);
+        'filterBox'=>$filterBox,
+            'option'=>$option
+            ]);
     }
 
     public function MainTask(Request $request)
@@ -105,6 +116,7 @@ class TasksController extends Controller
         $filterBox = Tasks::showFilter();
 
         $option = TaskStatus::cases();
+
         $alltask = Tasks::Filter()->where('user_id', Auth::user()->id)->latest()->paginate(10);
 
         Tasks::where('user_id',Auth::user()->id)->update(['isread' => 1]);
@@ -131,7 +143,7 @@ class TasksController extends Controller
 
         $option = TaskStatus::cases();
 
-        return redirect()->route('admin.Task.index')->with('messages', 'حدث خطاء');
+        return redirect()->route('admin.Task.index')->with('OkToast', 'حدث خطاء');
     }
 
 
@@ -205,7 +217,7 @@ class TasksController extends Controller
        $tasksNotify->exp = $endMonth;
        $tasksNotify->save();
 
-       return redirect()->route('admin.showMyNotifyTask' , $tasksNotify->type)->with('messages', 'تم تعديل العنصر');
+       return redirect()->route('admin.showMyNotifyTask' , $tasksNotify->type)->with('OkToast', 'تم تعديل العنصر');
     }
     
 
@@ -283,9 +295,18 @@ class TasksController extends Controller
         $i = 0;
 
         while ($request->hasFile('attachment-' . $i)) {
-            $filename =  $request->file('attachment-' . $i)->store('task', 'public');
-            Files::create([
-                "name" => $filename,
+
+            
+            $filenameName = time().rand(1,10000).'-'.$request->file('attachment-' . $i)->getClientOriginalName();
+            
+            
+            $request->validate([
+                'attachment-'.$i => 'required|file|mimes:doc,pdf,jpg,jpeg,png|max:2048',
+            ]);
+
+            $request->file('attachment-' . $i)->storeAs('task', $filenameName);
+                         Files::create([
+                "name" => $filenameName,
                 "typeid" => $task->id,
                 "type" => 0,
             ]);
@@ -294,7 +315,7 @@ class TasksController extends Controller
         }
 
 
-        return redirect()->route('admin.Task.index')->with('messages', 'تم إضافة البيانات');
+        return redirect()->route('admin.Task.index')->with('OkToast', 'تم إضافة البيانات');
     }
 
     /**
@@ -320,9 +341,9 @@ class TasksController extends Controller
         /// $data['isdone']=0;
         //  $data['boss_id']=Auth::user()->id;
         $users = User::get();
-
+        $files = Files::where('type', 0)->where('typeid', $Task->id)->get();
         $option = TaskStatus::cases();
-        return view('admin.Tasks.edit', ["task" => $Task,'option'=>$option, "users" => $users]);
+        return view('admin.Tasks.edit', ["task" => $Task,'files'=>$files,'option'=>$option, "users" => $users]);
     }
 
     /**
@@ -332,31 +353,34 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function update(updateTaskRequest $request,Tasks  $task)
+    public function update(updateTaskRequest $request,Tasks  $Task)
     {        
-        //$task = Tasks::find($id);
 
-       // $data = $request->validate($this->ruleUPDATE, $this->messages());
-   
-        $task->title=$request['title'];
-        $task->des=$request['des'];
-        $task->user_id=$request['user_id'];
-        $task->start=$request['start'];
-        $task->end=$request['end'];
-        $task->isdone=$request['isdone'];
-       // $task =  Tasks::create($data);
-        //$user =  User::find($task->user_id);
-        $task->save();
-      //  Mail::to($user->email)->send(new TasksMail(($task)));
-      Files::where("typeid", $task->id)->where("type", 0)->delete();
+
+       $Task->title=$request['title'];
+        $Task->des=$request['des'];
+        $Task->user_id=$request['user_id'];
+        $Task->start=$request['start'];
+        $Task->end=$request['end'];
+        $Task->isdone=$request['isdone'];
+  
+        
+        $Task->save();
+
+        Files::where("typeid", $Task->id)->where("type", 0)->delete();
 
         $i = 0;
 
         while ($request->hasFile('attachment-' . $i)) {
-            $filename =  $request->file('attachment-' . $i)->store('task', 'public');
+
+         
+
+            $filenameName = $request->file('attachment-' . $i)->getClientOriginalName();
+            
+             $request->file('attachment-' . $i)->store('task');
             Files::create([
-                "name" => $filename,
-                "typeid" => $task->id,
+                "name" => $filenameName,
+                "typeid" => $Task->id,
                 "type" => 0,
             ]);
 
@@ -364,7 +388,7 @@ class TasksController extends Controller
         }
 
 
-        return redirect()->route('admin.Task.index')->with('messages', 'تم إضافة البيانات');
+        return redirect()->route('admin.Task.index')->with('OkToast', 'تم تعديل البيانات');
     }
 
     /**
@@ -373,8 +397,9 @@ class TasksController extends Controller
      * @param  \App\Models\Tasks  $tasks
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tasks $tasks)
+    public function destroy(Tasks $Task)
     {
-        //
+        $Task->delete();
+        return redirect()->route('admin.Task.index')->with('OkToast', 'تم حذف البيانات');
     }
 }

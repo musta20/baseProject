@@ -2,7 +2,6 @@
     <h3> اضافة مدينة</h3>
     <hr>
     <x-admin-contaner>
-        <x-card-message></x-card-message>
 
         <form method="POST" class="w-75" action="{{ url('/admin/JobCity') }}">
             @csrf

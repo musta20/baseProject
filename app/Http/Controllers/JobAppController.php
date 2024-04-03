@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\job_app;
+use App\Models\jobs;
 use Illuminate\Http\Request;
 
 class JobAppController extends Controller
@@ -14,9 +15,11 @@ class JobAppController extends Controller
      */
     public function index()
     {
-        $alljopapp = job_app::latest()->with('job')->paginate(10);
+        $jobs = jobs::get();
+        $filterBox=job_app::showFilter(realData: $jobs, relType: 'jobs', relName: 'الوظيفة');
+        $alljopapp = job_app::Filter()->with('job')->requestPaginate();
 
-        return view("admin.jobs.jobApp.index",  ['alljopapp' => $alljopapp]);
+        return view("admin.jobs.jobApp.index",  ['alljopapp' => $alljopapp,'filterBox'=>$filterBox]);
     }
 
     /**
@@ -46,11 +49,9 @@ class JobAppController extends Controller
      * @param  \App\Models\job_app  $job_app
      * @return \Illuminate\Http\Response
      */
-    public function show(job_app $job)
+    public function show(job_app $JobApp)
     {
-        
-    
-            return view("admin.jobs.jobApp.show",  ['job' => $job]);
+            return view("admin.jobs.jobApp.show",  ['job' => $JobApp]);
     }
 
     /**
@@ -85,6 +86,6 @@ class JobAppController extends Controller
     public function destroy(job_app $job_app)
     {
         $job_app->delete();
-        return redirect('/admin/JobApp')->with('messages','تم حذف العنصر');
+        return redirect('/admin/JobApp')->with('OkToast','تم حذف العنصر');
     }
 }

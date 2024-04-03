@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CashReport;
+use App\Enums\OrderStatus;
 use App\Enums\ReportType;
+use App\Enums\Sorting;
 use App\Http\Requests\showPdfReportRequest;
 use App\Http\Requests\storeReportRequest;
 use App\Models\order;
@@ -59,7 +62,7 @@ class ReportController extends Controller
                 
                 if($reports->isEmpty())
                 {
-                    return Redirect::back()->with('messages', 'لا يوجد سجلات للتواريخ المذكورة');
+                    return Redirect::back()->with('ErorrToast', 'لا يوجد سجلات للتواريخ المذكورة');
                 }
 
             $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
@@ -91,7 +94,7 @@ class ReportController extends Controller
 
             if($reports->isEmpty())
             {
-                return Redirect::back()->with('messages', 'لا يوجد سجلات للتواريخ المذكورة');
+                return Redirect::back()->with('ErorrToast', 'لا يوجد سجلات للتواريخ المذكورة');
             }
 
             $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
@@ -112,13 +115,13 @@ class ReportController extends Controller
         $order = order::with('servicesNmae')->with('user')->with('delivery')->with('payment')->find($id);
 
         if (!$order) {
-            return Redirect::back()->with('messages', 'غير موجود ');
+            return Redirect::back()->with('OkToast', 'غير موجود ');
         }
 
 
         if ($order->payed == 0) {
 
-            return Redirect::back()->with('messages', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
+            return Redirect::back()->with('OkToast', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
         }
 
         $filename = 'InnerInvoice' . sprintf('%04d', $order->id) . '.pdf';
@@ -152,21 +155,15 @@ class ReportController extends Controller
 
 
 
-
-
-
-
-
-
     public function Billprint(order $order)
     {
         $setting = setting::first();
 
         if (!$order->first()) {
-            return Redirect::back()->with('messages', 'غير موجود ');
+            return Redirect::back()->with('OkToast', 'غير موجود ');
         }
         if ($order->payed == 0) {
-            return Redirect::back()->with('messages', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
+            return Redirect::back()->with('OkToast', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
         }
 
         $filename = 'invoice' . sprintf('%04d', $order->id) . '.pdf';
@@ -208,7 +205,7 @@ class ReportController extends Controller
             $reports = order::whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
             if($reports->isEmpty())
             {
-                return  Redirect::back()->with('messages', 'لا يوجد سجلات  ');
+                return  Redirect::back()->with('OkToast', 'لا يوجد سجلات  ');
             }
             return view('admin.pdf.report', ['from' => $request->from, 'to' => $request->to, 'reports' => $reports]);
         }
@@ -227,15 +224,56 @@ class ReportController extends Controller
 
     public function orderReport()
     {
-        $orderReport = Report::latest()->paginate(10);
+
+
+        // case  = 0;
+        // case ORDER_RECEIVED  = 1;
+        // case COMPLETED_ORDER  = 2;
+        // case DELIVERED_ORDER = 3;
+        // case CANCLED_ORDER = 4;
+
+        $filterBox = Report::ShowCustomFilter(filterFiled:[
+            [
+                "lable" =>"طلبات جديدة",
+                "orderType" => Sorting::EQULE, 
+                "value" => OrderStatus::NEW_ORDER->value, 
+                "name" => "type"
+            ],
+            [
+                "lable" =>"طلبات مستلمة",
+                "orderType" => Sorting::EQULE, 
+                "value" => OrderStatus::ORDER_RECEIVED->value, 
+                "name" => "type"
+            ]
+           
+        ]);
+
+        $orderReport = Report::Filter()->where('reporttype',  ReportType::ORDER->value)->RequestPaginate();
         
-        return view('admin.report.order', ['orderReport' => $orderReport]);
+        return view('admin.report.order', ['orderReport' => $orderReport, 'filterBox' => $filterBox]);
     }
     public function billReportView()
-    {     $orderReport = Report::
-        where('reporttype', ReportType::BILL->value)
-        ->paginate(10);
-        return view('admin.report.bills', ['orderReport' => $orderReport]);
+    {
+
+        $filterBox = Report::ShowCustomFilter(filterFiled:[
+            [
+                "lable" =>"فاتورة داخلية",
+                "orderType" => Sorting::EQULE, 
+                "value" => 1, 
+                "name" => "type"
+            ],
+            [
+                "lable" => "فاتورة زبون	"  ,
+                "orderType" => Sorting::EQULE, 
+                "value" => 0, 
+                "name" => "type"
+            ],
+        ]);
+
+        $orderReport = Report::Filter()->
+        where('reporttype', ReportType::BILL->value)->RequestPaginate();
+        return view('admin.report.bills', ['orderReport' => $orderReport,'filterBox' => $filterBox]);
+
     }
     public function billReport(showPdfReportRequest $request)
     {
@@ -262,15 +300,10 @@ class ReportController extends Controller
         }
         if($orderReport->isEmpty())
         {
-            return  Redirect::back()->with('messages', 'لا يوجد سجلات  ');
+            return  Redirect::back()->with('OkToast', 'لا يوجد سجلات  ');
         }
         return view('admin.report.bills', ['orderReport' => $orderReport]);
     }
-
-
-
-
-
 
 
 //
@@ -327,9 +360,29 @@ public function postCreateBill(Request $request)
 
     public function cashReport()
     {
-        $orderReport = Report::where('reporttype',  ReportType::CASH->value)->latest()->paginate(10);
+       
+        $filterBox = Report::ShowCustomFilter(filterFiled:[
+            [
+                "lable" =>"مدفوع بالكامل",
+                "orderType" => Sorting::EQULE, 
+                "value" => CashReport::FULLY_PAID->value, 
+                "name" => "type"
+            ],
+            [
+                "lable" =>"مدفوع جزئيا",
+                "orderType" => Sorting::EQULE, 
+                "value" => CashReport::PARTILY_PAYED->value, 
+                "name" => "type"
+            ],
+            [
+                "lable" =>"غير مدفوع",
+                "orderType" => Sorting::EQULE, 
+                "value" => CashReport::NOT_PAYED->value, 
+                "name" => "type"
+            ],
+        ]);        $orderReport = Report::Filter()->where('reporttype',  ReportType::CASH->value)->RequestPaginate(10);
 
-        return view('admin.report.cash', ['orderReport' => $orderReport]);
+        return view('admin.report.cash', ['orderReport' => $orderReport, 'filterBox' => $filterBox]);
     }
 
 
@@ -367,7 +420,7 @@ public function postCreateBill(Request $request)
     public function destroy(Report $file )
     {
         $file->delete();
-        return  Redirect::back()->with('messages', 'تم حذف العنصر');
+        return  Redirect::back()->with('OkToast', 'تم حذف العنصر');
 
         //
     }

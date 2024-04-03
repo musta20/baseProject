@@ -24,7 +24,7 @@ class CreateServicesTable extends Migration
 
             $table->text("des")->nullable();
 
-            $table->string("icon");
+            $table->string("icon")->nullable();
 
             $table->timestamps();
         });

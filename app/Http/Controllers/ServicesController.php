@@ -16,34 +16,6 @@ class ServicesController extends Controller
 
 
     /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'يجب كتابة العنوان ',
-            'name.string' => 'يجب ان يكون العنوان نص فقط',
-            "name.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "name.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'price.required' => 'يجب كتابة السعر ',
-            'price.integer' => 'يجب ان يكون السعر  رقم',
-            "price.digits_between" => "يجب ان لا يزيد السعر  عن 255 حرف",
-
-            'icon.required' => 'يجب إضافة  ايقونة ',
-            'icon.string' => 'يجب ان يكون الايقونة نص فقط',
-            "icon.max" => "يجب ان لا يزيد  الايقونة عن 255 حرف",
-            "icon.min" => "يجب ان لا يقل الايقونة النص عن 3 حرف",
-
-
-        ];
-    }
-
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -51,10 +23,12 @@ class ServicesController extends Controller
     public function index()
     {
 
-        $allServices = services::Filter()->paginate(10);
+        $services = category::get();
+        $filterBox = services::showFilter(realData:$services,relType:'category', relName:'التصنيف');
+        $allServices = services::Filter()->requestPaginate();
        
         // $filterBox = services::showFilter();
-        return view("admin.services.index",  ['allServices' => $allServices]);
+        return view("admin.services.index",  ['allServices' => $allServices, 'filterBox' => $filterBox]);
     }
 
     /**
@@ -111,7 +85,7 @@ class ServicesController extends Controller
 
 
 
-        return redirect()->route('admin.services.index')->with('messages', 'تم إضافة البيانات');
+        return redirect()->route('admin.Services.index')->with('OkToast', 'تم إضافة البيانات');
     }
 
 
@@ -162,39 +136,59 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(updateSevicesRequest $request,services $services)
+    public function update(updateSevicesRequest $request,services $Service)
     {
 
-        $services->name = $request->name;
 
-        $services->price = $request->price;
+        $Service->name = $request->name;
 
-        $services->icon = $request->icon;
+        $Service->price = $request->price;
 
-        $services->category_id = $request->category_id;
+        $Service->icon = $request->icon;
 
-        $services->save();
+        $Service->category_id = $request->category_id;
 
 
-        RequiredFiles::where('type', 0)->where('service_id',  $services->id)->delete();
+        $Service->save();
+
+        RequiredFiles::where('type', 0)->where('service_id',  $Service->id)->delete();
  
         if($request['files']){
 
             foreach ($request['files'] as  $value) {
-            
+            if($value){
             RequiredFiles::create([
                 'type' => 0,
                 "name" => $value,
-                "service_id" => $services->id
-            ]);
+                "service_id" => $Service->id
+            ]);}
         }
+        }
+
+        
+        //if ($request['pys']) {
+            
+          //  $Service->payments()->sync(array_unique($request['pys']));
+       // }
+
+       // if ($request['dev']) {
+        $pys = [];
+        if(!empty($request['pys'])) {
+            $pys = array_unique($request['pys']);
         }
         
-        $services->payments()->sync($request['pys']);
+        $dev = [];
+        if(!empty($request['dev'])) {
+            $dev = array_unique($request['dev']);
+        }
+        
+        $Service->payments()->sync($pys);
+        $Service->deliveries()->sync($dev);
 
-        $services->deliveries()->sync($request['devs']);
+           // $Service->deliveries()->sync(array_unique($request['dev']));
+       // }
 
-        return redirect()->route('admin.Services.index')->with('messages', 'تم تعديل العنصر');
+        return redirect()->route('admin.Services.index')->with('OkToast', 'تم تعديل العنصر');
     }
 
     /**
@@ -206,6 +200,6 @@ class ServicesController extends Controller
     public function destroy(services $services )
     {
         $services->delete();
-        return redirect()->route('admin.Services.index')->with('messages', 'تم حذف العنصر');
+        return redirect()->route('admin.Services.index')->with('OkToast', 'تم حذف العنصر');
     }
 }

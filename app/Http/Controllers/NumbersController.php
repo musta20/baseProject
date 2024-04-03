@@ -77,7 +77,7 @@ class NumbersController extends Controller
 
     numbers::create($data);
    
-    return redirect('/admin/Number')->with('messages','تم إضافة البيانات');
+    return redirect('/admin/Number')->with('OkToast','تم إضافة البيانات');
 
     }
 
@@ -125,7 +125,7 @@ class NumbersController extends Controller
 
         $number->save();
 
-        return redirect()->route('admin.Number.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Number.index')->with('OkToast','تم تعديل العنصر');
 
         
         }
@@ -141,6 +141,6 @@ class NumbersController extends Controller
 
        $number = numbers::find($id);
        $number->delete();
-       return redirect('/admin/Number')->with('messages','تم حذف العنصر');
+       return redirect('/admin/Number')->with('OkToast','تم حذف العنصر');
     }
 }

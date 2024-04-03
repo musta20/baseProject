@@ -6,43 +6,14 @@ use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
 use App\Http\Requests\updateOrderRequest;
 use App\Mail\OrderStatus;
-use App\Models\delivery;
 use App\Models\Files;
-use App\Models\job_city;
 use App\Models\order;
-use App\Models\payment;
 use App\Models\services;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class OrderController extends Controller
 {
-    public $rule = [
-        "time" => "nullable|date",
-        //"cost" => "integer|digits_between:1,10",
-        "status" => "required|integer|max:4|min:1"
-    ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'status.required' => 'يجب اختيار حالة الطلب ',
-            'status.min' => 'يجب اختيار حالة الطلب ',
-            'status.integer' => 'يجب ان يكون العنوان نص فقط',
-        ];
-    }
-
-    
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        
         $allorder = order::latest()->paginate(10);
 
         return view("admin.order.main",  ['allorder' => $allorder]);
@@ -63,7 +34,11 @@ class OrderController extends Controller
      */
     public function showOrderList($type)
     {
-        $AllOrder = order::where('status', $type)->paginate(10);
+        $services = services::all();
+        $filterBox = order::ShowFilter(realData:$services,relType:'services', relName:'الخدمة');
+
+        $AllOrder = order::Filter()->where('status', $type)->RequestPaginate();
+        
         switch ($type) {
             case EnumsOrderStatus::NEW_ORDER->value:
                 $title = "الطلبات الجديدة";
@@ -83,7 +58,8 @@ class OrderController extends Controller
             default:
                 break;
         }
-        return view("admin.order.index",  ['AllOrder' => $AllOrder, 'type' => $type, "title" => $title]);
+
+        return view("admin.order.index",  ['AllOrder' => $AllOrder, 'type' => $type, "title" => $title, "filterBox" => $filterBox]);
     }
 
     /**
@@ -160,7 +136,6 @@ class OrderController extends Controller
         $statusOrder = EnumsOrderStatus::cases();
         $PayStatus = PayStatus::cases();
         
-        
         return view("admin.order.newedit",  [
             "statusOrder"=>$statusOrder,
             "PayStatus"=>$PayStatus,
@@ -176,9 +151,6 @@ class OrderController extends Controller
      */
     public function update(updateOrderRequest $request,order $Order)
     {
-        // $data = $request->validate($this->rule, $this->messages());
-
-        // $order  = order::find($id);
 
         if ($request->time) {
             $Order->time = $request->time;
@@ -206,7 +178,7 @@ class OrderController extends Controller
            // Mail::to($order->email)->send(new OrderStatus(($order)));
         }
 
-        return redirect()->route('admin.showOrderList' , $Order->status)->with('Oktoast', 'تم تعديل العنصر');
+        return redirect()->route('admin.showOrderList' , $Order->status)->with('OkToast', 'تم تعديل العنصر');
     }
 
     /**
@@ -215,12 +187,11 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(order $order)
+    public function destroy(order $Order)
     {
-       // $order  = order::find($id);
-        $order->status=4;
-        $order->save();
-        return  Redirect::back()->with('messages', 'تم حذف العنصر');
+        $Order->status=4;
+        $Order->save();
+        return  Redirect::back()->with('OkToast', 'تم حذف العنصر');
 
     }
 }

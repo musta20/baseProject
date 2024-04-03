@@ -77,9 +77,12 @@ class SocialController extends Controller
 
      //   $data = $request->validate( $this->rule,$this->messages());
 
-        social::create($request);
+        social::create([
+            'img' => $request->img,
+            'url' => $request->url
+        ]);
        
-        return redirect('/admin/Social')->with('messages','تم إضافة البيانات');
+        return redirect('/admin/Social')->with('OkToast','تم إضافة البيانات');
 
     }
 
@@ -100,9 +103,10 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function edit(social $social)
+    public function edit(social $Social)
     {
         //
+        return view("admin.setting.social.edit",  ['social' => $Social] );
     }
 
     /**
@@ -112,17 +116,17 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function update(storeSocialRequest $request,social $social)
+    public function update(storeSocialRequest $request,social $Social)
     {
     
 
 
-        $social->img=$request->img;
-        $social->url=$request->url;
+        $Social->img=$request->img;
+        $Social->url=$request->url;
 
-        $social->save();
+        $Social->save();
 
-        return redirect()->route('admin.Social.index')->with('messages','تم تعديل العنصر');
+        return redirect()->route('admin.Social.index')->with('OkToast','تم تعديل العنصر');
 
     }
 
@@ -132,9 +136,9 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function destroy(social $social)
+    public function destroy(social $Social)
     {
-        $social->delete();
-        return redirect()->route('admin.Social.index')->with('messages','تم حذف العنصر');
+        $Social->delete();
+        return redirect()->route('admin.Social.index')->with('OkToast','تم حذف العنصر');
     }
 }

@@ -166,14 +166,24 @@ class SettingController extends Controller
         
         $setting->copyright = $request->copyright;
         $setting->weekwork = $request->weekwork;
+        
         if($request->hasFile('logo'))
         {
-            $setting->logo =  $request->file('logo')->store('logo','public');
+
+            
+            $request->validate([
+                'logo' => 'required|file|image|mimes:ico,png,svg|max:2048',
+            ]);
+
+            $file_extension = $request->file('logo')->getClientOriginalExtension();
+            $setting->logo =  $request->file('logo')->storeAs('logo', 'logo.'.$file_extension);
+            
+           // $setting->logo =  $request->file('logo')->storeAs('logo', 'logo.png');
         }
         $setting->save();
 
 
-        return redirect()->admin('admin.basic')->with('messages','تم تعديل البيانات');
+        return redirect()->route('admin.basic')->with('OkToast','تم تعديل البيانات');
         
         //
     }
