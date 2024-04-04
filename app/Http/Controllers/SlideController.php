@@ -160,6 +160,6 @@ class SlideController extends Controller
     {
         $slide = slide::find($id);
         $slide->delete();
-        return redirect('/admin/Slide /')->with('OkToast','تم حذف العنصر');
+        return redirect('/admin/Slide/')->with('OkToast','تم حذف العنصر');
     }
 }

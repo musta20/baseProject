@@ -1,11 +1,13 @@
 <?php
 
+use App\Enums\UserRole;
 use App\Models\CustmerSlide;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class CustmerSlideTest extends TestCase
+class CustmerSlideT extends TestCase
 {
  
     /**
@@ -13,6 +15,9 @@ class CustmerSlideTest extends TestCase
      */
     public function test_index_shows_paginated_customer_slides(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+        
         CustmerSlide::factory()->count(15)->create();
 
         $response = $this->get(route('admin.CustmerSlide.index'));
@@ -28,6 +33,9 @@ class CustmerSlideTest extends TestCase
      */
     public function test_store_creates_a_new_customer_slide(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         Storage::fake('public');
 
         $file = UploadedFile::fake()->image('test_image.jpg');
@@ -49,6 +57,9 @@ class CustmerSlideTest extends TestCase
      */
     public function test_update_modifies_a_customer_slide(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         Storage::fake('public');
 
         $slide = CustmerSlide::factory()->create();
@@ -71,6 +82,9 @@ class CustmerSlideTest extends TestCase
      */
     public function test_destroy_removes_a_customer_slide(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+        
         $slide = CustmerSlide::factory()->create();
 
         $response = $this->delete(route('admin.CustmerSlide.destroy', $slide));

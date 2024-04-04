@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NotifySales>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\payment>
  */
-class NotifySalesFactory extends Factory
+class paymentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +17,7 @@ class NotifySalesFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=>$this->faker->name(),
-            'count'=>rand(1,10),
-            'isDone'=>rand(0,1),
-            'type'=>1,
+            "name" => $this->faker->name(),
         ];
     }
 }

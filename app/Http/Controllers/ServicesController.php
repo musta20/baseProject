@@ -119,7 +119,7 @@ class ServicesController extends Controller
         $pym = payment::get();
 
 
-        return view("admin.services.newedit",  [
+        return view("admin.services.edit",  [
             'pym'=>$pym,
             'dev'=>$dev,
             'services' => $Service, 

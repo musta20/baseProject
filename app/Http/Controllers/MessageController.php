@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\saveMessageRequest;
 use App\Models\message;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,33 +11,6 @@ use Auth;
 
 class MessageController extends Controller
 {
-
-
-    public $rule = [];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'يجب كتابة العنوان ',
-            'title.string' => 'يجب ان يكون العنوان نص فقط',
-            "title.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "title.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            "to.required" => "يجب كتابة المستلم",
-            'message.required' => 'يجب كتابة الرسالة ',
-            'message.string' => 'يجب ان يكون الرسالة نص فقط',
-            "message.max" => "يجب ان لا يزيد الرسالة  عن 255 حرف",
-            "message.min" => "يجب ان لا يقل عنوان الرسالة عن 3 حرف",
-
-        ];
-    }
-
 
 
     /**
@@ -115,7 +87,6 @@ class MessageController extends Controller
      */
     public function store(saveMessageRequest $request)
     {
-        //   $data = $request->validate( $this->rule,$this->messages());
         message::create([
             'title' => $request['title'],
             'message' => $request['message'],

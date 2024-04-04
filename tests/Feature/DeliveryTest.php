@@ -1,7 +1,8 @@
 <?php
 
+use App\Enums\UserRole;
 use App\Models\delivery as Delivery;
-
+use App\Models\User;
 use Tests\TestCase;
 
 class DeliveryTest extends TestCase
@@ -11,6 +12,9 @@ class DeliveryTest extends TestCase
      */
     public function test_index_shows_paginated_deliveries(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         Delivery::factory()->count(15)->create();
 
         $response = $this->get(route('admin.Delivery.index'));
@@ -29,6 +33,9 @@ class DeliveryTest extends TestCase
      */
     public function test_store_creates_a_new_delivery(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         $data = [
             'name' => 'Test Delivery',
         ];
@@ -45,6 +52,9 @@ class DeliveryTest extends TestCase
      */
     public function test_edit_shows_delivery_details(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         $delivery = Delivery::factory()->create();
 
         $response = $this->get(route('admin.Delivery.edit', $delivery));
@@ -62,6 +72,9 @@ class DeliveryTest extends TestCase
      */
     public function test_update_modifies_a_delivery(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+        
         $delivery = Delivery::factory()->create();
 
         $data = [
@@ -79,6 +92,9 @@ class DeliveryTest extends TestCase
      */
     public function test_destroy_removes_a_delivery(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+        
         $delivery = Delivery::factory()->create();
 
         $response = $this->delete(route('admin.Delivery.destroy', $delivery));

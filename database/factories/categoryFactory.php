@@ -21,7 +21,6 @@ class categoryFactory extends Factory
             'title' => $this->faker->sentence,
             'des' => $this->faker->paragraph,
             'icon' => $this->faker->imageUrl(), // You might want to change this to a proper icon source
-
         ];
     }
 

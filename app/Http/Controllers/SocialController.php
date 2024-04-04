@@ -4,43 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeSocialRequest;
 use App\Models\social;
-use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
-
-
-    public $rule = [
-        "img" => "required|string|max:255|min:3",
-        "url" => "required|string|max:255|min:3"
-    ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'img.required' => 'يجب كتابة العنوان ',
-            'img.string' => 'يجب ان يكون العنوان نص فقط',
-            "img.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "img.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'url.required' => 'يجب كتابة الوصف ',
-            'url.string' => 'يجب ان يكون الوصف نص فقط',
-            "url.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
-            "url.min" => "يجب ان لا يقل عنوان النص عن 3 حرف"
-
-
-        ];
-    }
-
-
-
-
 
     /**
      * Display a listing of the resource.
@@ -75,7 +41,6 @@ class SocialController extends Controller
     public function store(storeSocialRequest $request)
     {
 
-     //   $data = $request->validate( $this->rule,$this->messages());
 
         social::create([
             'img' => $request->img,

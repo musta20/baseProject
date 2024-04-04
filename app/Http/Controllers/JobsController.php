@@ -90,12 +90,12 @@ class JobsController extends Controller
      * @param  \App\Models\jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function show(jobs $jobs)
+    public function show(jobs $Job)
     {
         $jobCity = job_city::get();
-        $currentcity = job_city::find($jobs->job_cities_id);
+        $currentcity = job_city::find($Job->job_cities_id);
 
-        return view("admin.jobs.edit",  ['jobs' => $jobs,"currentcity"=>$currentcity,"jobCity"=>$jobCity] );
+        return view("admin.jobs.edit",  ['Jobs' => $Job,"currentcity"=>$currentcity,"jobCity"=>$jobCity] );
     }
 
     /**

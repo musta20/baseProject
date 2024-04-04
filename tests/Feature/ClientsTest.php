@@ -1,7 +1,9 @@
 <?php
 
 use App\Enums\CommentStatus;
+use App\Enums\UserRole;
 use App\Models\clients;
+use App\Models\User;
 use Tests\TestCase;
 
 class ClientsTest extends TestCase
@@ -11,6 +13,9 @@ class ClientsTest extends TestCase
      */
     public function test_index_shows_filtered_and_paginated_clients(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+        
         clients::factory()->count(15)->create();
 
         $response = $this->get(route('admin.Clients.index'));
@@ -27,6 +32,9 @@ class ClientsTest extends TestCase
      */
     public function test_edit_shows_client_and_status_options(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         $client = clients::factory()->create();
 
         $response = $this->get(route('admin.Clients.edit', $client));
@@ -43,6 +51,9 @@ class ClientsTest extends TestCase
      */
     public function test_update_modifies_client_status(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
         $client = clients::factory()->create();
         $newStatus = CommentStatus::HIDDEN->value;
 
@@ -57,6 +68,9 @@ class ClientsTest extends TestCase
      */
     public function test_destroy_removes_a_client(): void
     {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+        
         $client = clients::factory()->create();
 
         $response = $this->delete(route('admin.Clients.destroy', $client));

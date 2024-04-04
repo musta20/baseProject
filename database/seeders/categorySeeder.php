@@ -26,7 +26,7 @@ class categorySeeder extends Seeder
 
         Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
 
-            category::factory()->withImage( $productMediaImage )->create([
+            category::factory()->create([
                 "title"=> $cat,
                 "des"=>$cat
             ]);

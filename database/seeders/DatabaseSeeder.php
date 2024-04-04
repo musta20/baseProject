@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
         MessageSeeder::class,
         reportSeeder::class,
         taskSeeder::class,
-        NotifySalesSeeder::class,
         NotifyTypeSeeder::class,
       ]);
       // \App\Models\Tasks::factory(10)->create();

@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\delivery;
+use App\Models\payment;
+use App\Models\services;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -26,10 +29,12 @@ class orderFactory extends Factory
             'approve_time' => "none",
             'adress' => $this->faker->address(),
             'files' => rand(1,4),
+            'service_id' => services::factory()->create()->id,
             'payed' => rand(1,4),
             'status' => rand(0,4),
             'code' => rand(4000,5000),
-            'service_id' => rand(1,4),
+            'delivery_id' => delivery::factory()->create()->id,
+            'payment_id' => payment::factory()->create()->id,
             'created_at' => $this->faker->dateTimeInInterval('-1 week', '+1 days'),
         ];
     }

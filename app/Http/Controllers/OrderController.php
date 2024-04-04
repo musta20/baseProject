@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
 use App\Http\Requests\updateOrderRequest;
-use App\Mail\OrderStatus;
 use App\Models\Files;
 use App\Models\order;
 use App\Models\services;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends Controller
 {
@@ -56,6 +57,7 @@ class OrderController extends Controller
                 $title = "الطلبات الملغية";
                 break;
             default:
+                abort(Response::HTTP_NOT_FOUND);
                 break;
         }
 
@@ -136,7 +138,7 @@ class OrderController extends Controller
         $statusOrder = EnumsOrderStatus::cases();
         $PayStatus = PayStatus::cases();
         
-        return view("admin.order.newedit",  [
+        return view("admin.order.edit",  [
             "statusOrder"=>$statusOrder,
             "PayStatus"=>$PayStatus,
             'order' =>  $Order, "files" => $files]);

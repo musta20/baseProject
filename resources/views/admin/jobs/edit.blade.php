@@ -17,6 +17,7 @@
 
 
                     <div class=" p-3 text-slate-800 ">
+
                         <x-admin.input-card label="المسمى الوظيفي" value="{{ $Jobs->title }}"  placeholder="المسمى الوظيفي" name="title"  />
                     </div>
 
