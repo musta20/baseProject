@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Create the symlink
+ln -s /var/www/baseProject/storage/app/public /var/www/baseProject/public/storage
+
+# Run the main container command
+exec "$@"
+
+#RUN ln -s /var/www/$PROJECT_NAME/storage/app/public /var/www/$PROJECT_NAME/public/storage

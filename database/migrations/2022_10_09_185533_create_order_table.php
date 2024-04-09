@@ -21,7 +21,7 @@ class CreateOrderTable extends Migration
             $table->foreignUlid("user_id")->nullable()->references("id")->on("users")->onDelete("cascade");
 
             $table->bigInteger("phone");
-            $table->text("des");
+            $table->text("des")->nullable();
             $table->string("title");
             $table->foreignUlid("delivery_id")->nullable()->references("id")->on("delivery")->onDelete("cascade");
             $table->foreignUlid("payment_id")->nullable()->references("id")->on("payments")->onDelete("cascade");;

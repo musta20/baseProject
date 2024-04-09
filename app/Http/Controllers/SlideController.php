@@ -84,11 +84,18 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate( $this->rule,$this->messages());
+        $request->validate( $this->rule,$this->messages());
         
-        $data['img'] =  $request->file('img')->store('Slide');
+        $imagename=  $request->file('img')->store('Slide');
 
-        slide::create($data);
+        slide::create(
+            [
+                "title" => $request['title'],
+                "des" => $request['des'],
+                "url" => $request['url'],
+                "img" => $imagename,
+            ]
+        );
 
         return redirect('/admin/Slide')->with('OkToast','تم إضافة البيانات');
     }

@@ -15,18 +15,16 @@ CleanTest:
 	php artisan test && rm -rf storage/tenant* &&  rm -rf storage/app/*
 
 fresh: 
-	rm -rf  storage/app/public/category/* && rm -rf storage/app/public/services/*  && php artisan migrate:fresh --seed 
-
+	make clearfiles && php artisan migrate:fresh --seed 
+#rm -rf  storage/app/public/category/* && rm -rf storage/app/public/services/* 
 # clear: && php artisan storage:link
 # php artisan cache:clear && php artisan config:clear &&  php artisan config:clear &&  composer dump-autoload -o && php artisan view:clear 
-
-
 
 clear: 
 	php artisan cache:clear && php artisan config:clear &&  php artisan config:clear &&  composer dump-autoload -o && php artisan view:clear 
 
 clearfiles: 
-		rm -rf  storage/app/public/category/* && rm -rf storage/app/public/services/* && rm -rf storage/app/public/pdf/*
+		rm -rf  storage/app/public/category/* && rm -rf storage/app/public/services/* && rm -rf storage/app/public/pdf/*  && rm -rf storage/app/public/task/* && rm -rf storage/app/public/Slide/*
 
 prod:
 	docker --file 'docker-compose-prod.yaml' start 

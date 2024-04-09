@@ -17,7 +17,6 @@ use App\Models\message;
 use App\Models\numbers;
 use App\Models\order;
 use App\Models\pym_to_serv;
-use App\Models\RequiredFiles;
 use App\Models\services;
 use App\Models\setting;
 use App\Models\slide;
@@ -26,205 +25,31 @@ use Illuminate\Support\Str;
 
 class mainSite extends Controller
 {
-    public $ContactRule = [
 
-        "phone" => "required|numeric|digits_between:10,10",
-        "email" => "required|email|max:100|min:3",
-        "fname" => "required|string|max:100|min:3",
-        "lname" => "required|string|max:100|min:3",
-        "msg" => "required|string|max:255|min:3",
-    ];
-
-    public function ContactmMssages()
-    {
-        return [
-
-            'phone.required' => 'يجب اضافة  رقم الجوال ',
-            'phone.integer' => 'الجوال رقم فقط',
-            "phone.digits_between" => "رقم الجوال يجب ان لايزيد عن 10 ارقام ",
-
-            'msg.required' => 'يجب اضافة الرسالة ',
-            'msg.string' => 'يجب ان يكون الرسالة نص فقط',
-            "msg.max" => "يجب ان لا يزيد الرسالة  عن 25 حرف",
-            "msg.min" => "يجب ان لا يقل الرسالة عن 3 حرف",
-
-            'fname.required' => 'يجب اضافة  الاسم ',
-            'fname.string' => 'يجب ان يكون الاسم نص فقط',
-            "fname.max" => "يجب ان لا الاسم  عن 25 حرف",
-            "fname.min" => "يجب ان لا يقل الاسم عن 3 حرف",
-
-            'lname.required' => 'يجب اضافة  الاسم ',
-            'lname.string' => 'يجب ان يكون الاسم نص فقط',
-            "lname.max" => "يجب ان لا الاسم  عن 25 حرف",
-            "lname.min" => "يجب ان لا يقل الاسم عن 3 حرف",
-
-
-
-            'email.required' => '  البريد الالكتروني مطلوب ',
-            'email.email' => 'قيمة المدخلة ليسة بريد الكتروني',
-            "email.max" => "يجب ان لا يزيدبريد الكتروني   عن 25 حرف",
-            "email.min" => "يجب ان لا يقل بريد الكتروني عن 3 حرف",
-
-
-        ];
-    }
-
-    
-
-    public $Jobrule = [
-
-        "phone" => "required|numeric|digits_between:10,10",
-        "email" => "required|email|max:100|min:3",
-        "name" => "required|string|max:100|min:3",
-
-        "cert" => "required|string|max:100|min:3",
-        "exp" => "required|numeric",
-        "exp_des" => "required|string|max:100|min:3",
-
-        "city" => "required|string|max:100|min:3",
-        "job_city" => "required|string|max:100|min:1",
-
-        "majer" => "required|string|max:100|min:3",
-
-        "job_id" => "required",
-        "about" => "required|string|max:100|min:3",
-        'cv' => 'required|max:2048|mimes:pdf',
-
-    ];
-
-    public function JobMessages()
-    {
-        return [
-
-            'phone.required' => 'يجب اضافة  رقم الجوال ',
-            'phone.numeric' => 'الجوال رقم فقط',
-            "phone.digits_between" => "رقم الجوال يجب ان لايزيد عن 10 ارقام ",
-
-            'exp_des.required' => 'يجب اضافة  تفاصيل الخيرة ',
-            'exp_des.string' => 'يجب ان يكون  تفاصيل الخيرة',
-            "exp_des.max" => "يجب ان لا يزيد تفاصيل الخيرة  عن 255 حرف",
-            "exp_des.min" => "يجب ان لا يقل تفاصيل الخيرة عن 3 حرف",
-
-            'exp.required' => 'يجب اضافة  عدد سنوات ',
-            'exp.numeric' => 'يجب ان يكون عدد سنوات  رقم',
-
-            'name.required' => 'يجب اضافة  الاسم ',
-            'name.string' => 'يجب ان يكون الاسم نص فقط',
-            "name.max" => "يجب ان لا الاسم  عن 25 حرف",
-            "name.min" => "يجب ان لا يقل الاسم عن 3 حرف",
-
-            'email.required' => '  البريد الالكتروني مطلوب ',
-            'email.email' => 'قيمة المدخلة ليسة بريد الكتروني',
-            "email.max" => "يجب ان لا يزيدبريد الكتروني   عن 25 حرف",
-            "email.min" => "يجب ان لا يقل بريد الكتروني عن 3 حرف",
-
-            'city.required' => 'يجب اضافة المدينة الاقامة  ',
-            'city.string' => 'يجب ان يكون المدينة نص فقط',
-            "city.max" => "يجب ان لا يزيد المدينة  عن 25 حرف",
-            "city.min" => "يجب ان لا يقل المدينة عن 3 حرف",
-
-            'majer.required' => 'يجب اضافة التحصص الدراسي  ',
-            'majer.string' => 'يجب ان يكون التحصص الدراسي نص فقط',
-            "majer.max" => "يجب ان لا يزيد التحصص  عن 25 حرف",
-            "majer.min" => "يجب ان لا يقل التحصص عن 3 حرف",
-
-            'about.required' => 'يجب اضافة تحدث عن نفسك   ',
-            'about.string' => 'يجب ان يكون تحدث عن نفسك نص فقط',
-            "about.max" => "يجب ان لا يزيد تحدث عن نفسك  عن 255 حرف",
-            "about.min" => "يجب ان لا  يقل تحدث عن نفسك عن 3 حرف",
-
-            'cv.required' => 'يجب ارفاق السيرة الذاتية',
-            'cv.max' => 'اقصى حجم  يجب ان لا يتعدى 24م ب',
-            "cv.mimes" => "pdf فقط يجب ان  يكون الملف من نوع ",
-        ];
-    }
-
-    public $rule = [
-        "count" => "integer|digits_between:1,50",
-        "receipt" => "integer|digits_between:1,10",
-        "cash" => "integer|digits_between:1,10",
-
-        "email" => "required|email|max:100|min:3",
-        "title" => "required|string|max:100|min:3",
-        "name" => "required|string|max:100|min:3",
-        //  "adress" => "required|string|max:255|min:3",
-
-        "time" => "required|date",
-        "name" => "required|string|max:100|min:3",
-        "des" => "required|string|max:255|min:5",
-        "phone" => "required|numeric|digits_between:10,10"
-    ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-
-            'phone.required' => 'يجب اضافة  رقم الجوال ',
-            'phone.integer' => 'الجوال رقم فقط',
-            "phone.digits_between" => "رقم الجوال يجب ان لايزيد عن 10 ارقام ",
-
-            'des.required' => 'يجب اضافة  الوصف ',
-            'des.string' => 'يجب ان يكون الوصف نص فقط',
-            "des.max" => "يجب ان لا يزيد الوصف  عن 25 حرف",
-            "des.min" => "يجب ان لا يقل الوصف عن 3 حرف",
-
-            'name.required' => 'يجب اضافة  الاسم ',
-            'name.string' => 'يجب ان يكون الاسم نص فقط',
-            "name.max" => "يجب ان لا الاسم  عن 25 حرف",
-            "name.min" => "يجب ان لا يقل الاسم عن 3 حرف",
-
-
-            /*             'adress.required' => 'يجب اضافة  العنوان ',
-            'adress.string' => 'يجب ان يكون العنوان نص فقط',
-            "adress.max" => "يجب ان لا العنوان  عن 25 حرف",
-            "adress.min" => "يجب ان لا يقل العنوان عن 3 حرف", */
-
-
-            'email.required' => '  البريد الالكتروني مطلوب ',
-            'email.email' => 'قيمة المدخلة ليسة بريد الكتروني',
-            "email.max" => "يجب ان لا يزيدبريد الكتروني   عن 25 حرف",
-            "email.min" => "يجب ان لا يقل بريد الكتروني عن 3 حرف",
-
-            'title.required' => 'يجب اضافة عنوان الطلب  ',
-            'title.string' => 'يجب ان يكون العنوان نص فقط',
-            "title.max" => "يجب ان لا العنوان  عن 25 حرف",
-            "title.min" => "يجب ان لا يقل العنوان عن 3 حرف",
-
-
-            'cash.required' => 'يجب اضافة طرق الدفع ',
-            'cash.integer' => 'يجب ان يكون العنوان نص فقط',
-
-
-            'receipt.required' => 'يجب اضافة طرق الدفع ',
-            'receipt.integer' => 'يجب ان يكون العنوان نص فقط',
-
-
-        ];
-    }
-
-    //
+ 
     public function index()
     {
         $slides = slide::get();
         $allNumberObjects = numbers::get();
-        $category = category::get();
+        $category = category::take(10)->get();
         $clints = clients::get();
         $custmerSlide = CustmerSlide::get();
 
-
+        $services = services::get()->take(10);
         return view('index', [
             'slides' => $slides,
             'allNumberObjects' => $allNumberObjects,
             'category' => $category,
             'custmerSlide' => $custmerSlide,
-            'clints' => $clints
+            'clints' => $clints,
+            'services' => $services
         ]);
+    }
+
+   public  function  term() {
+
+    return view('term');
+        
     }
     public function about()
     {
@@ -239,7 +64,6 @@ class mainSite extends Controller
 
     public function SendContact(sendContactRequest $request)
     {
-        //$data = $request->validate($this->ContactRule, $this->ContactmMssages());
      
         $msg= "<br>".$request['lname']."<br>".$request['fname']."<br>".$request['msg'];
 
@@ -308,7 +132,7 @@ class mainSite extends Controller
 
     public function category()
     {
-        $category = category::get();
+        $category = category::paginate(10);
         return view('category', ['category' => $category]);
     }
 
@@ -347,8 +171,8 @@ class mainSite extends Controller
             'files' => 0,
             'service_id' => $services->id,
             'email' => $request['email'],
-            'receipt' => $request['receipt'],
-            'cash' => $request['cash'],
+            'payment_id' => $request['payment_id'],
+            'delivery_id' => $request['delivery_id'],
             'count' => $request['count'],
             'time' => $request['time'],
             'ip' => $request->ip(),
@@ -382,11 +206,13 @@ class mainSite extends Controller
 
         $cash = dev_to_serv::where('service_id',$services->id)->with('dev')->get();
         
+        
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
     }
 
     public function services(category $category)
     {
+
         $services  = $category->services; //services::where('category_id', $id)->get();
 
         return view('services', ['services' => $services]);

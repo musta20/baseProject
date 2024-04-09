@@ -8,7 +8,7 @@
 
     @vite(['resources/assets/css/style.css', 'resources/assets/js/app.js'])
 
-    <title>AdminCSS</title>
+    <title>لوحة التحكم</title>
 </head>
 
 <body class="bg-gray-100 flex w-full font-IBMPlex">

@@ -13,13 +13,13 @@
                 <div class=" p-3 bg-slate-100 w-1/2 rounded-md border border-gray-300 ">
                     <div class="flex gap-3   ">
                         <div class="mb-5 w-1/2">
-                            <x-admin.select-input name="status" :selected="$order->still ? 1:0" :options="$PayStatus"
+                            <x-admin.select-input name="PayStatus" disabled :selected="$order->still ? 1:0" :options="$PayStatus"
                                 label="حالة الدفع" />
 
                         </div>
                         <div class="mb-5 w-1/2">
 
-                            <x-admin.select-input name="isdone" :selected="$order->status" :options="$statusOrder"
+                            <x-admin.select-input name="status" :selected="$order->status" :options="$statusOrder"
                                 label="حالة الطلب" />
                         </div>
                     </div>
@@ -68,6 +68,12 @@
 
 
                     <div class="flex gap-3   ">
+                        <div class="mb-5 w-1/2">
+                            <label class="px-1 py-2 text-sm font-bold"> رقم الطلب: </label>
+                            <br>
+                            {{ $order->code ?? 'عير محدد' }}
+
+                        </div>
                         <div class="mb-5 w-1/2">
                             <label class="px-1 py-2 text-sm font-bold"> اشراف الموظف:: </label>
                             <br>

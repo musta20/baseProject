@@ -33,13 +33,13 @@
                 </svg>
             </button>
 
-            <div x-show="open" x-transition
+            <div x-cloak x-show="open" x-transition
                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
 
                 <div class="py-1" role="none">
                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                    <a href="#" class="text-gray-700
+                    <a href="{{ route('admin.Users.edit', auth()->user()->id) }}" class="text-gray-700
                     hover:bg-slate-100
                     block px-4 py-2 text-sm
                     
@@ -88,7 +88,7 @@
                 @endif
                 
             </button>
-            <div x-show="open" x-transition
+            <div x-cloak x-show="open" x-transition
                 class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
 
@@ -146,10 +146,15 @@
             </label>
         </div>
     </div>
-    <div class="relative bg-gray-50 border-1 rounded-sm border-sate-400 text-gray-500 flex">
+    <form  
+    method="POST"
+    action="{{ route('admin.search') }}"
+    class="relative hidden bg-gray-50 border-1 rounded-sm border-sate-400 text-gray-500 flex">
+        @csrf
         <input type="search"
             class="relative m-0 block flex-auto rounded border-neutral-200 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-surface outline-none transition duration-200 ease-in-out placeholder:text-neutral-500 focus:z-[3] focus:border-primary focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:placeholder:text-neutral-200 dark:autofill:shadow-autofill dark:focus:border-primary"
             placeholder="Search" aria-label="Search" id="exampleFormControlInput2" aria-describedby="button-addon2" />
+            <input type="text" name="type" value="1" class="hidden">
         <button
             class="flex items-center whitespace-nowrap px-3 py-[0.25rem] text-surface dark:border-neutral-400 dark:text-white [&>svg]:h-5 [&>svg]:w-5"
             id="button-addon2">
@@ -159,5 +164,5 @@
                     d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
         </button>
-    </div>
+    </form>
 </nav>

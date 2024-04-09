@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\JobsController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasksNotifyController;
-
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +45,8 @@ Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.a
 
 Route::get('testlocal', function () {
     
-    return view('testlocal');
+    Artisan::call('storage:link');
+    return 'linked';
 });
 
 /* Route::get('/admin2', function ()
@@ -54,10 +56,13 @@ Route::get('testlocal', function () {
 
 Route::get('/',[mainSite::class, 'index']);
 Route::get('/category',[mainSite::class, 'category'])->name('category');
-Route::get('/services/{services}',[mainSite::class, 'services'])->name('service');
-Route::get('/order/{order}',[mainSite::class, 'order'])->name('order');
+Route::get('/services/{category}',[mainSite::class, 'services'])->name('services');
+Route::get('/order/{services}',[mainSite::class, 'order'])->name('order');
 Route::post('/SaveOrder/{services}',[mainSite::class, 'SaveOrder'])->name('SaveOrder');
 Route::get('/jobs',[mainSite::class, 'job'])->name('jobs');
+
+Route::get('/about',[mainSite::class, 'about'])->name('about');
+Route::get('/term',[mainSite::class, 'term'])->name('term');
 
 Route::get('/contact',[mainSite::class, 'contact'])->name('contact');
 Route::post('/SendContact',[mainSite::class, 'SendContact'])->name('SendContact');
@@ -95,14 +100,11 @@ Route::post('login/', [UsersController::class, 'login'])->name('admin.login');
 
 Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], function () {
 
-    Route::get('/', function () {
-         return view('dash.index');
-            //   return redirect('admin/MainTask');
-    });
+    Route::get('/', [adminController::class, 'index'])->name('index');
 
     Route::group(['middleware' => ['permission:Search']], function () {
 
-    Route::post('search',[SearchController::class,'search']);
+    Route::post('search',[SearchController::class,'search'])->name('search');
     Route::get('Search', function () {
         return view('admin.search.index'); 
     });

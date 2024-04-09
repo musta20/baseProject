@@ -1,38 +1,24 @@
 
 <x-layout>
 
+<section dir="rtl" class=" bg-slate-800  p-6 gap-3 items-center flex flex-col h-auto">
 
-    <section class="services">
-        <div class="contentServices">
-                                <form method="POST"
-                                action="{{route('CheckOrderStatus')}}"
-                                class="colorTexetFooter">
-                                @if (session()->has('messages'))
-                                <div class="alert alert-success">
-                                    <p><strong>{{ session('messages') }} </strong></p>
-                
-                                </div>
-                            @endif
-                
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <p><strong>حدث خطاء</strong></p>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-                                <h2 > الإستعلام عن حالة الطلب </h2>
+    <form class="w-3/6 rounded-lg flex flex-col items-center py-10 bg-slate-100 p-5"     method="POST"
+    action="{{route('CheckOrderStatus')}}">
 
-                                @csrf
+    @csrf
+    <div class="text-3xl mb-10 flex gap-2   ">
+        الإستعلام عن حالة الطلب      
+       </div>
+        <x-admin.input-card  type="number" id="o_code" name="code" placeholder="ادخل رقم الطلب *" />
+   
+        <hr class="my-3">
+        <button class="btn w-1/6">
+            استعلام
+        </button>
+    </form>
 
-    
-                                    <input class="input-form" type="number" id="o_code" name="code" placeholder="ادخل رقم الطلب *">
-                                  <br />
-                                    <button name="add" type="submit" class="btn" style="margin-right:15px;">استعلام</button>
-                                </form>
-                                </div>
-                                </section>
+
+</section>
+
 </x-layout>

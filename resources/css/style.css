@@ -1,38 +1,22 @@
-body {
-  margin: 0px;
-  height: 100vh;
+@config "../../tailwind.site.config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.btn {
+    @apply bg-sky-800 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-full;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 3em;
-  background-color: #00695c;
-}
-header .userBox {
-  border: 3px solid rgb(27, 12, 12);
-  border-radius: 0px 2em 0px 2em;
-}
+@layer base {
 
-.mainBody {
-  display: flex;
-}
+    @font-face {
+      font-family: "Noto";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('../font/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf');
+    }
 
-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  background-color: #82ada9;
 }
-nav div {
-  padding: 1em;
-}
-nav div a {
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.4s;
-  color: #00695c;
-}
-nav div a:hover {
-  color: #04423a;
-}/*# sourceMappingURL=style.css.map */

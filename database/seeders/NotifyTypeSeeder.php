@@ -15,10 +15,15 @@ class NotifyTypeSeeder extends Seeder
     {
 
         $notifytype = SeederData::$notifytype;
+
         foreach ($notifytype as $item) {
+
             NotifyType::create([
+
                 'name' => $item
+                
             ]);
+
         }
        
     }

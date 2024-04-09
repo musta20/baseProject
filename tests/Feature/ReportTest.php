@@ -11,7 +11,7 @@ use App\Models\Report;
 use App\Models\User;
 use Tests\TestCase;
 
-class ReportControllerTest extends TestCase
+class ReportTest extends TestCase
 {
     
         // Helper method to create and authenticate a user

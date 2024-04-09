@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createUserRequest;
 use App\Http\Requests\loginRequest;
 use App\Http\Requests\updateUserRequest;
-use App\Models\setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use  App\Models\Role;

@@ -40,7 +40,7 @@
                             {{ $item->created_at }}</td>
 
                         <td scope="col" class="px-6  flex gap-3 py-3">
-                            <a href="{{ route('admin.JobApp.edit' , $item->id) }}">
+                            <a href="{{ route('admin.JobApp.show' , $item->id) }}">
                                تعديل
                             </a>
                             <a  onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.JobApp.destroy' , $item->id) }}'))" 

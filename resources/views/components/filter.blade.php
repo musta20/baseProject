@@ -64,7 +64,7 @@
 
 
         <!-- Dropdown menu -->
-        <div x-show="openMenu" id="dropdownAction"
+        <div x-cloak  x-show="openMenu" id="dropdownAction"
             class="z-10 mt-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-30  ">
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
                 @foreach ([5,10,20,30,40,50] as $item)
@@ -98,7 +98,7 @@
 
 
         <!-- Dropdown menu -->
-        <div x-show="openMenu" id="dropdownAction"
+        <div x-cloak  x-show="openMenu" id="dropdownAction"
             class="z-10 mt-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44  ">
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
                 @foreach ($filterFiled as $item)
@@ -151,7 +151,7 @@
 
 
         <!-- Dropdown menu -->
-        <div x-show="openMenu" id="dropdownAction"
+        <div x-cloak  x-show="openMenu" id="dropdownAction"
             class="z-10 mt-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44  ">
             <ul class="py-1 text-sm text-gray-700 " aria-labelledby="dropdownActionButton">
                 @foreach ($realData as $item)

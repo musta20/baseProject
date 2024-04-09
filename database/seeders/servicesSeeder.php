@@ -6,7 +6,6 @@ use App\Models\category;
 use App\Models\delivery;
 use App\Models\payment;
 use App\Models\services;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Process;
 
@@ -32,7 +31,7 @@ class servicesSeeder extends Seeder
 
             $productMediaImage = collect(SeederData::$imageName)->random();
 
-            Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
+           // Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
                  
             $item = collect($key);
 

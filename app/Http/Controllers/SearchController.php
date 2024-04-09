@@ -12,8 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class SearchController extends Controller
 {
+    
     public function search(Request $request)
     {
+
 
         switch ($request->type) {
             case '1':

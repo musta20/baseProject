@@ -1,143 +1,107 @@
-
 <x-layout>
-@if (!$slides->isEmpty())
-<section dir="ltr" class="swiper-container2">
-    <div class="swiper-wrapper swiper-wrapper2">
-  @foreach ($slides as $item)
-    <div class="swiper-slide swiper-slide2">
-          <div class="content">
-              <h3>
-                  {{ $item->title }}
-              </h3>
-              <p>
-                  {{ $item->des }}
-              </p>
-              <button class="btn">
-                  <a class="a-btn" href="{{  $item->url }}">طلب الخدمة</a>
-              </button>
-          </div>
-          <img src="{{  url('storage/' . $item->img) }}" alt="Notebook" />
-      </div>
-  @endforeach
-</div>
-@vite(['js/lib/index.min.js','js/lib/autoPlay.min.js','js/lib/slids.js','sadana/style/mainContact.css'])
+    <x-Slide :slides="$slides" />
+    <x-services :services="$category" />
+    <section class=" px-36 flex justify-center border-t-3 bg-slate-100  flex-col py-5 w-full">
+        <div class="flex justify-end ">
+            <div class="w-1/2 ">
+                <div class="text-xl -z-20 -skew-x-12 w-1/2  h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
+                    من نحن</div>
+                <div class="  -skew-x-12  text-center p-10  w-10/12  text-base bg-white text-slate-800">
+                    [اسم مكتب المحاماة] هو مكتب محاماة رائد يقدم خدمات قانونية عالية الجودة في مختلف المجالات. نمتلك
+                    فريقًا من المحامين ذوي الخبرة والمهارة الذين يمتلكون المعرفة القانونية الواسعة والقدرة على
+                    التعامل مع مختلف القضايا القانونية.
 
-    {{-- <link rel="stylesheet" href="{{asset('sadana/style/mainContact.css')}}" /> --}}
+                    نلتزم بتقديم خدماتنا القانونية بأسعار معقولة، مع التركيز على احتياجات عملائنا ومصالحهم. نؤمن بأن
+                    لكل شخص الحق في الحصول على تمثيل قانوني متميز، ونعمل على تحقيق هذا الحق من خلال تقديم حلول
+                    قانونية مخصصة تناسب احتياجات كل عميل بشكل فردي.
 
-</section>
-@endif
+                    نضع احتياجات عملائنا في المقام الأول. نسعى إلى فهم احتياجات كل عميل بشكل كامل، ونحرص على إبقاء
+                    عملائنا على اطلاع دائم بتطورات قضيتهم، ونعمل على توفير جميع المعلومات التي يحتاجونها لاتخاذ
+                    القرارات الصائبة.
 
-<section class="achivment">
+                    نسعى إلى بناء علاقات قوية مع عملائنا مبنية على الثقة والاحترام المتبادل. نؤمن بأن العدالة حق
+                    للجميع، ونعمل على تحقيق هذا الحق من خلال تقديم خدمات قانونية متميزة لعملائنا.
 
- @foreach ($allNumberObjects  as $item)
- <div>
- <i class="{{ $item->img }}"></i> 
-  <p class="numerGo1">
-      {{ $item->number }}
-  </p>
-  <span>
-      {{ $item->title }}
-  </span>
-</div>
- @endforeach
-
-</section>
-
-<section class="services">
-    @foreach ($category as $item)
-    <div class="contentServices">
-{{--         <i class="fa fa-address-book" aria-hidden="true"></i>
- --}}
-        <h3>
-            <a href="services/{{  $item->id }}">{{  $item->title }}</a>
-        </h3>
-        <p class="">
-            {{  $item->des; }}
-        </p>
-        <center>
-            <a href="services/{{  $item->id }}" class="btn">عرض</a>
-        </center>
-    </div>
-    @endforeach
-</section>
-
-<section class="requestFree">
- {{--    {{
-     $setting->textcenter;
-    }} --}}
-</section>
-
-<section dir="ltr" class="ourlawer">
-    <div class="ourClint swiper-container4">
-        <div class="swiper-wrapper">
-
-@foreach ($clints as $item)
-    
-            <span class="oneCLinetRevew swiper-slide">
-                <span>
-                    {{  $item->name; }}
-                </span>
-                <span>{{  $item->des; }}</span>
-                <span>
-                    @php
-                    $i = 1;
-                    while ($i <= 5) {
-                        if ($item->rate >= $i) {
-                            echo "<span class='fa fa-star checkedStar'></span>";
-                        } else {
-                            echo "<span class='fa fa-star '></span>";
-                        }
-                        $i++;
-                    }
-                    @endphp
-                </span>
-            </span>
-            @endforeach
-        </div>
-    </div>
-
-    <p class="ourClintText">شهادات عملائنا
-        {{__('NOT_ASSINED')}}
-
-
-    </p>
-</section>
-@if(!$custmerSlide->isEmpty())
-
-<section class="ourCustmer">
-    <h3>عملاؤنا</h3>
-
-    <p>
-        نقترب من فكرك، نرى بعينك، ونتبنى توجهك لنصنع التغيير معًا ! بإتباع نهج متميز ودقيق، نسعى معًا لإحداث نقلــة غير
-        مسبقة في عالم التسويق الرقمي جنبًا إلى جنب مع شركاء نجاحنا، نعتز بكم ونسعى لنتألق معكم.
-    </p>
-
-    <div dir="ltr" class="swiper-container3   maskRight">
-        <div dir="ltr" class="swiper-wrapper swiper-wrapper3 ">
-
-@foreach ($custmerSlide as $item)
-    
-
-            <a href="{{  $item->url }}" class="swiper-slide" target="_blank">
-                <img width="150" src="{{ url( 'storage/' . $item->img) }}" alt="Notebook" />
-            </a>
-
-
-            @endforeach
-
+                    نهدف إلى أن نكون مكتب المحاماة المفضل للعملاء الذين يبحثون عن تمثيل قانوني متميز وفعال. </div>
+            </div>
         </div>
 
-    </div>
-</section>
+        <div class="flex justify-start ">
+            <div class="w-1/2 ">
+                <div class="text-xl -z-20 -skew-x-12 w-1/2  h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
+                    رؤيتنا</div>
+                <div class="  -skew-x-12  text-center p-10  w-10/12  text-base bg-white text-slate-800">
+                    في مكتب [اسم مكتب المحاماة]، نسعى إلى أن نكون مكتب المحاماة الرائد في تقديم خدمات قانونية متميزة
+                    في جميع أنحاء العالم.
 
-@endif
+                    نؤمن بأن العدالة حق للجميع، ونعمل على تحقيق هذا الحق من خلال تقديم خدمات قانونية عالية الجودة
+                    بأسعار معقولة.
 
-{{-- {{ include_once 'inc/contact.php'; }}
- --}}
+                    نسعى إلى بناء علاقات قوية مع عملائنا مبنية على الثقة والاحترام المتبادل.
 
-{{-- <script src="{{}}"></script>
-<script src="{{asset('')}}"></script>
-<script src="{{asset('')}}"></script> --}}
+                    نهدف إلى أن نكون مكتب المحاماة المفضل للعملاء الذين يبحثون عن تمثيل قانوني متميز وفعال.
+
+                    لتحقيق هذه الرؤية، نلتزم بما يلي:
+
+                    تقديم خدمات قانونية عالية الجودة بأسعار معقولة.
+                    التركيز على احتياجات عملائنا ومصالحهم.
+                    تطوير مهارات فريقنا من المحامين بشكل مستمر.
+                    استخدام أحدث التقنيات لتقديم خدماتنا القانونية بكفاءة وفعالية.
+                    المشاركة في المجتمع ومساعدة المحتاجين.
+                    نؤمن بأننا من خلال العمل الجاد والالتزام بمبادئنا، يمكننا أن نكون قوة إيجابية في العالم وأن
+                    نساعد في تحقيق العدالة للجميع.
+
+                    نهدف إلى أن نكون مكتب المحاماة الذي يختاره العملاء عندما يواجهون تحديات قانونية، ونؤمن بأننا
+                    يمكننا أن نقدم لهم الفرصة لتحقيق أفضل النتائج الممكنة.
 
 
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex justify-end ">
+            <div class="w-1/2 ">
+                <div class="text-xl -z-20 -skew-x-12 w-1/2  h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
+                    رسالتنا
+                </div>
+                <div class="  -skew-x-12  p-10 text-base w-10/12  bg-white text-slate-800 text-">
+                    في مكتب الراشد، نؤمن بأن لكل شخص الحق في الحصول على تمثيل قانوني متميز. نهدف إلى تقديم خدمات
+                    قانونية عالية الجودة لعملائنا، بغض النظر عن خلفيتهم أو ظروفهم.
+
+                    نلتزم بالتميز في كل ما نقوم به. نمتلك فريقًا من المحامين ذوي الخبرة والمهارة الذين يمتلكون
+                    المعرفة القانونية الواسعة والقدرة على التعامل مع مختلف القضايا القانونية.
+
+                    نضع احتياجات عملائنا في المقام الأول. نسعى إلى فهم احتياجات كل عميل بشكل كامل، ونعمل على توفير
+                    حلول قانونية مخصصة تناسب احتياجاته الفردية.
+
+                    نقدم خدماتنا القانونية بأسعار معقولة. ندرك أن تكاليف الخدمات القانونية يمكن أن تكون عبئًا على
+                    بعض العملاء، لذلك نسعى إلى تقديم خدماتنا بأسعار عادلة تتناسب مع إمكانياتهم.
+
+                    نؤمن بأهمية التواصل الفعال مع عملائنا. نحرص على إبقاء عملائنا على اطلاع دائم بتطورات قضيتهم،
+                    ونعمل على توفير جميع المعلومات التي يحتاجونها لاتخاذ القرارات الصائبة.
+
+                    نسعى إلى بناء علاقات قوية مع عملائنا مبنية على الثقة والاحترام المتبادل.
+
+                    نؤمن بأن العدالة حق للجميع، ونعمل على تحقيق هذا الحق من خلال تقديم خدمات قانونية متميزة
+                    لعملائنا.
+
+                    نهدف إلى أن نكون مكتب المحاماة المفضل للعملاء الذين يبحثون عن تمثيل قانوني متميز وفعال.
+
+                    نلتزم بتقديم خدمات قانونية عالية الجودة بأسعار معقولة، مع التركيز على احتياجات عملائنا ومصالحهم.
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </section>
+
+  <x-contact />
+    <section class="flex flex-col py-5 items-center ">
+        <h3 class="text-5xl  font-bold text-wrap py-5  mb-5 text-slate-600">عملائنا</h3>
+        <hr>
+        <x-brands />
+    </section>
 </x-layout>

@@ -57,7 +57,7 @@
                         </div>
                     </button>
 
-                    <ul class="list-unstyled topbar-menu float-end mb-0">
+                    <ul x-cloak class="list-unstyled topbar-menu float-end mb-0">
                         <li class="dropdown notification-list d-lg-none">
                             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown"
                                 href="https://coderthemes.com/hyper_2/saas/index-rtl.html#" role="button"

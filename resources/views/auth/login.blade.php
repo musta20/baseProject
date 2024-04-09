@@ -64,7 +64,7 @@
                 </div>
             </form>
             <div class="backLogin w-50">
-                <img class="fill" src="{{ asset('imgs/h.png') }}" />
+                <img class="fill" src="{{ asset('storage/logo/logo.png') }}" />
             </div>
         </main>
     </section>

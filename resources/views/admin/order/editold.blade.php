@@ -11,7 +11,7 @@
                     @method('PUT')
                     <div class="card d-block">
                         <div class="card-body">
-                            <div class="dropdown card-widgets">
+                            <div x-cloak class="dropdown card-widgets">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="mdi mdi-send me-1"></i> حفظ</button>
                             </div> <!-- end dropdown-->

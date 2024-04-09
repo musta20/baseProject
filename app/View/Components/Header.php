@@ -18,7 +18,6 @@ class Header extends Component
      */
     public function __construct()
     {
-        $this->setting = setting::first();
 
     }
 

@@ -8,9 +8,7 @@ use App\Http\Requests\storeTaskRequest;
 use App\Http\Requests\EditTaskRequest;
 use App\Http\Requests\updateTaskRequest;
 use App\Models\Files;
-use App\Models\NotifySales;
 use App\Models\NotifyType;
-use App\Models\SalesType;
 use App\Models\Tasks;
 use App\Models\TasksNotify;
 use App\Models\User;
@@ -20,70 +18,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
-
-    public $ruleNotfy = [
-
-        "duration" => "required|integer|min:1",
-        "issueAt" => "required|date",
-    ];
-
-
-    public $ruleisDone = [
-        "isDone" => "required|numeric",
-    ];
-
-    public $rule = [
-        "title" => "required|string|max:100|min:3",
-        "des" => "required|string|max:255|min:3",
-        "user_id" => "required",
-        "start" => "required|date",
-        "end" =>   'required|date|after:start'
-    ];
-
-
-
-    public $ruleUPDATE = [
-        "title" => "required|string|max:100|min:3",
-        "des" => "required|string|max:255|min:3",
-        // "user_id" => "required|string|max:255|min:3",
-        "user_id" => "required",
-        "isdone" => "required|integer",
-
-        "start" => "required|date",
-        "end" =>   'required|date|after:start'
-    ];
-    
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'يجب كتابة العنوان ',
-            'title.string' => 'يجب ان يكون العنوان نص فقط',
-            "title.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "title.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-            'des.required' => 'يجب كتابة الوصف ',
-            'des.string' => 'يجب ان يكون الوصف نص فقط',
-            "des.max" => "يجب ان لا يزيد الوصف  عن 255 حرف",
-            "des.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-
-            "duration.required" => "يجب اضافة المدة",
-            "issueAt.required" => "يجب اضافة تاريخ الاصدار",
-            "issueAt.date" => "يجب ان تكون القيمة تاريخ ",
-
-        
-
-
-        ];
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -112,7 +46,6 @@ class TasksController extends Controller
 
     public function MainTask(Request $request)
     {
-        //dd($request->filter);
         $filterBox = Tasks::showFilter();
 
         $option = TaskStatus::cases();
@@ -129,19 +62,15 @@ class TasksController extends Controller
 
     public function ShowTask(Tasks $task)
     {
-       // $task = Tasks::find($id);
-        //dd($task);
-        $files = Files::where('type', 0)->where('typeid', $task->id)->get();
-        $option = TaskStatus::cases();
 
         if ($task->user_id == Auth::user()->id) {
+            $files = Files::where('type', 0)->where('typeid', $task->id)->get();
+            $option = TaskStatus::cases();
             return view('admin.Tasks.ShowTask', ['task' => $task, "files" => $files,
-        
             'option'=>$option 
         ]);
         }
 
-        $option = TaskStatus::cases();
 
         return redirect()->route('admin.Task.index')->with('OkToast', 'حدث خطاء');
     }
@@ -202,10 +131,8 @@ class TasksController extends Controller
     public function postMyNotifyTask(postNotifyTask $request,TasksNotify $tasksNotify)
     {
 
-     //  $data = $request->validate($this->ruleNotfy, $this->messages());
        $date = Carbon::createFromFormat('Y-m-d', $request->issueAt);
        $endMonth = $date->addDays(30 * $request->duration)->format('Y-m-d');
-       //$tasksNotify = TasksNotify::find($id);
 
        if(Auth::user()->id != $tasksNotify->user_id)
        {

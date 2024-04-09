@@ -68,23 +68,11 @@ class SocialTest extends TestCase
 
         $socialLink = Social::factory()->create();
 
-        $response = $this->get('/admin/Social/' . $socialLink->id);
+        $response = $this->get('/admin/Social/' . $socialLink->id. '/edit');
 
         $response->assertStatus(200);
         $response->assertViewIs('admin.setting.social.edit');
         $response->assertViewHas('social', $socialLink);
-    }
-
-    public function test_authenticated_user_can_edit_a_social_link()
-    {
-        $this->authenticateUser();
-
-        $socialLink = Social::factory()->create();
-
-        $response = $this->get('/admin/Social/' . $socialLink->id . '/edit');
-
-        // The edit method is empty, so it should redirect to the show method
-        $response->assertRedirect('/admin/Social/' . $socialLink->id);
     }
 
     public function test_authenticated_user_can_update_a_social_link()

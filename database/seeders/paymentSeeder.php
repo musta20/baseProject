@@ -15,10 +15,13 @@ class paymentSeeder extends Seeder
     {
 
         $payments = SeederData::$payment;
+
         foreach ($payments as $value) {
+
             payment::create([
                 'name' => $value
             ]);
+            
         }
     }
 }
