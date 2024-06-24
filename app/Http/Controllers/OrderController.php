@@ -8,7 +8,6 @@ use App\Http\Requests\updateOrderRequest;
 use App\Models\Files;
 use App\Models\order;
 use App\Models\services;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,46 +21,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        
+
         $allorder = order::latest()->paginate(10);
 
-        return view("admin.order.main",  ['allorder' => $allorder]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showOrderList($type)
-    {
-        $services = services::all();
-        $filterBox = order::ShowFilter(realData:$services,relType:'services', relName:'الخدمة');
-
-        $AllOrder = order::Filter()->where('status', $type)->RequestPaginate();
-        
-        switch ($type) {
-            case EnumsOrderStatus::NEW_ORDER->value:
-                $title = "الطلبات الجديدة";
-                break;
-            case EnumsOrderStatus::ORDER_RECEIVED->value:
-                $title = "الطلبات  المسلتلمة";
-                break;
-            case EnumsOrderStatus::COMPLETED_ORDER->value:
-                $title = "الطلبات المكتملة";
-                break;
-            case EnumsOrderStatus::DELIVERED_ORDER->value:
-                $title = "الطلبات المسلمة";
-                break;
-            case EnumsOrderStatus::CANCLED_ORDER->value:
-                $title = "الطلبات الملغية";
-                break;
-            default:
-                abort(Response::HTTP_NOT_FOUND);
-                break;
-        }
-
-        return view("admin.order.index",  ['AllOrder' => $AllOrder, 'type' => $type, "title" => $title, "filterBox" => $filterBox]);
+        return view('admin.order.main', ['allorder' => $allorder]);
     }
 
     /**
@@ -77,7 +40,6 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -95,7 +57,6 @@ class OrderController extends Controller
     {
         //$order = order::with('servicesNmae')->with('delivery')->with('payment')->find($id);
 
-     
     }
 
     /**
@@ -114,22 +75,21 @@ class OrderController extends Controller
 
         $files = Files::where('type', 1)->where('typeid', $Order->id)->get();
 
-
         switch ($Order->status) {
             case 0:
-                $Order->status_order = "قيد الانتظار";
+                $Order->status_order = 'قيد الانتظار';
                 break;
             case 1:
-                $Order->status_order = "جاري العمل عليه";
+                $Order->status_order = 'جاري العمل عليه';
                 break;
             case 2:
-                $Order->status_order = "جاهز للتسليم";
+                $Order->status_order = 'جاهز للتسليم';
                 break;
             case 3:
-                $Order->status_order = " تم تسليمه";
+                $Order->status_order = ' تم تسليمه';
                 break;
             case 4:
-                $Order->status_order = " ملغي";
+                $Order->status_order = ' ملغي';
                 break;
             default:
                 break;
@@ -137,11 +97,11 @@ class OrderController extends Controller
 
         $statusOrder = EnumsOrderStatus::cases();
         $PayStatus = PayStatus::cases();
-        
-        return view("admin.order.edit",  [
-            "statusOrder"=>$statusOrder,
-            "PayStatus"=>$PayStatus,
-            'order' =>  $Order, "files" => $files]);
+
+        return view('admin.order.edit', [
+            'statusOrder' => $statusOrder,
+            'PayStatus' => $PayStatus,
+            'order' => $Order, 'files' => $files]);
     }
 
     /**
@@ -151,7 +111,7 @@ class OrderController extends Controller
      * @param  \App\Models\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(updateOrderRequest $request,order $Order)
+    public function update(updateOrderRequest $request, order $Order)
     {
 
         if ($request->time) {
@@ -177,10 +137,10 @@ class OrderController extends Controller
         $Order->save();
 
         if ($send) {
-           // Mail::to($order->email)->send(new OrderStatus(($order)));
+            // Mail::to($order->email)->send(new OrderStatus(($order)));
         }
 
-        return redirect()->route('admin.showOrderList' , $Order->status)->with('OkToast', 'تم تعديل العنصر');
+        return redirect()->route('admin.showOrderList', $Order->status)->with('OkToast', 'تم تعديل العنصر');
     }
 
     /**
@@ -191,9 +151,46 @@ class OrderController extends Controller
      */
     public function destroy(order $Order)
     {
-        $Order->status=4;
+        $Order->status = 4;
         $Order->save();
-        return  Redirect::back()->with('OkToast', 'تم حذف العنصر');
 
+        return Redirect::back()->with('OkToast', 'تم حذف العنصر');
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showOrderList($type)
+    {
+        $services = services::all();
+        // $filterBox = order::ShowFilter(realData:$services,relType:'services', relName:'الخدمة');
+
+        $AllOrder = order::where('status', $type)->Filter(); //->RequestPaginate();
+
+        switch ($type) {
+            case EnumsOrderStatus::NEW_ORDER->value:
+                $title = 'الطلبات الجديدة';
+                break;
+            case EnumsOrderStatus::ORDER_RECEIVED->value:
+                $title = 'الطلبات  المسلتلمة';
+                break;
+            case EnumsOrderStatus::COMPLETED_ORDER->value:
+                $title = 'الطلبات المكتملة';
+                break;
+            case EnumsOrderStatus::DELIVERED_ORDER->value:
+                $title = 'الطلبات المسلمة';
+                break;
+            case EnumsOrderStatus::CANCLED_ORDER->value:
+                $title = 'الطلبات الملغية';
+                break;
+            default:
+                abort(Response::HTTP_NOT_FOUND);
+                break;
+        }
+
+        return view('admin.order.index', ['AllOrder' => $AllOrder, 'type' => $type, 'title' => $title]);
     }
 }

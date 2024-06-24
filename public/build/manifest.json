@@ -1,0 +1,39 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-afw8rMQC.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/slide.css": {
+    "file": "assets/slide-DOJfzlBc.css",
+    "src": "resources/css/slide.css",
+    "isEntry": true
+  },
+  "resources/css/style.css": {
+    "file": "assets/style-CJq08KEf.css",
+    "src": "resources/css/style.css",
+    "isEntry": true
+  },
+  "resources/font/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf": {
+    "file": "assets/NotoNaskhArabic-SemiBold-DonZh-Rh.ttf",
+    "src": "resources/font/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DPlD8VmD.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/logo/brand2.png": {
+    "file": "assets/brand2-CDZxuRHZ.png",
+    "src": "resources/logo/brand2.png"
+  },
+  "resources/logo/logo.png": {
+    "file": "assets/logo-YlaaR9Hv.png",
+    "src": "resources/logo/logo.png"
+  },
+  "resources/logo/logo.svg": {
+    "file": "assets/logo-BpWMkgH-.svg",
+    "src": "resources/logo/logo.svg"
+  }
+}

@@ -2,32 +2,26 @@
 
 namespace Tests;
 
-
 use Database\Seeders\TestSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
+
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
-    use RefreshDatabase;
-
-    public $user;
+     use RefreshDatabase;
+     use CreatesApplication;
 
     protected function setUp(): void
     {
+
         parent::setUp();
 
+        $this->withoutVite();
+
+        $this->seed(TestSeeder::class);
 
 
-                (new TestSeeder())->run();
 
-
-                // $this->user = User::factory()->create();
-                // $this->user->assignRole(UserRole::Admin->value);
-                // $this->actingAs($this->user);
-
-        
     }
-
 }
