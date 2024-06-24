@@ -13,7 +13,6 @@ class pym_to_serv extends Model
 
     public function pym()
     {
-        return $this->belongsTo(payment::class,'payment_id','id');
+        return $this->belongsTo(payment::class, 'payment_id', 'id');
     }
-
 }

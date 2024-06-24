@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-
-
 enum FiledType: string
 {
     case TEXT = 'TEXT';
@@ -11,6 +9,3 @@ enum FiledType: string
     case FILE = 'FILE';
 
 }
-
-
-?>

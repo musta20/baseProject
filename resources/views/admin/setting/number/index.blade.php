@@ -15,7 +15,7 @@
 
         </div>
         <table class="table  table-striped table-centered mb-0">
-            <thead class="table-dark">            
+            <thead class="table-dark">
                 <tr>
                 <th>#</th>
                 <th>الصورة</th>

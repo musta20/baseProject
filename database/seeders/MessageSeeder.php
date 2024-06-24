@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\message;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MessageSeeder extends Seeder
@@ -17,7 +16,7 @@ class MessageSeeder extends Seeder
         $users = User::get();
         foreach ($users as $user) {
 
-            message::factory(5)->create(["from" => $user->id, "to" => $users->random()->id]);
+            message::factory(5)->create(['from' => $user->id, 'to' => $users->random()->id]);
         }
     }
 }

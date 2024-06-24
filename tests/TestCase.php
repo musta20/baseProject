@@ -6,11 +6,10 @@ use Database\Seeders\TestSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-
 abstract class TestCase extends BaseTestCase
 {
-     use RefreshDatabase;
-     use CreatesApplication;
+    use CreatesApplication;
+    use RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -20,8 +19,6 @@ abstract class TestCase extends BaseTestCase
         $this->withoutVite();
 
         $this->seed(TestSeeder::class);
-
-
 
     }
 }

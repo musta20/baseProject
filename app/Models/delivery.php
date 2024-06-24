@@ -10,17 +10,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class delivery extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
+    use HasFactory , HasUlids , LogsActivity;
 
     protected $guarded = [];
 
+    protected $table = 'delivery';
 
-
-    protected $table= 'delivery';
- 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logOnly(['name'])->useLogName('delivery');
     }
-
 }

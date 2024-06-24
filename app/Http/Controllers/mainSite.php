@@ -25,8 +25,6 @@ use Illuminate\Support\Str;
 
 class mainSite extends Controller
 {
-
- 
     public function index()
     {
         $slides = slide::get();
@@ -36,21 +34,24 @@ class mainSite extends Controller
         $custmerSlide = CustmerSlide::get();
 
         $services = services::get()->take(10);
+
         return view('index', [
             'slides' => $slides,
             'allNumberObjects' => $allNumberObjects,
             'category' => $category,
             'custmerSlide' => $custmerSlide,
             'clints' => $clints,
-            'services' => $services
+            'services' => $services,
         ]);
     }
 
-   public  function  term() {
+    public function term()
+    {
 
-    return view('term');
-        
+        return view('term');
+
     }
+
     public function about()
     {
         return view('about');
@@ -59,35 +60,34 @@ class mainSite extends Controller
     public function contact()
     {
         $setting = setting::first();
-        return view('contact',['setting'=>$setting]);
+
+        return view('contact', ['setting' => $setting]);
     }
 
     public function SendContact(sendContactRequest $request)
     {
-     
-        $msg= "<br>".$request['lname']."<br>".$request['fname']."<br>".$request['msg'];
 
+        $msg = '<br>' . $request['lname'] . '<br>' . $request['fname'] . '<br>' . $request['msg'];
 
         message::create([
-            'from'=>1,
-            'to'=>1,
-            'title'=>"طلب دعم فني",
-            'isred'=>0,
-            'message'=>$msg,
-    ]);
+            'from' => 1,
+            'to' => 1,
+            'title' => 'طلب دعم فني',
+            'isred' => 0,
+            'message' => $msg,
+        ]);
 
-    $newmsg  = [];
+        $newmsg = [];
 
-    $newmsg['lname'] = $request['lname'];
-    $newmsg['fname'] = $request['fname'];
-    $newmsg['msg'] = $request['email'].'<br> '.$request['msg'];
+        $newmsg['lname'] = $request['lname'];
+        $newmsg['fname'] = $request['fname'];
+        $newmsg['msg'] = $request['email'] . '<br> ' . $request['msg'];
 
-   // Mail::to($data['email'])->send(new ContactSupport($newmsg));
+        // Mail::to($data['email'])->send(new ContactSupport($newmsg));
 
-       return redirect()->route('contact')->with('OkToast', ' تم ارسال الرسالة ');
+        return redirect()->route('contact')->with('OkToast', ' تم ارسال الرسالة ');
 
     }
-
 
     public function CheckStatus()
     {
@@ -96,12 +96,12 @@ class mainSite extends Controller
 
     public function CheckOrderStatus(Request $request)
     {
-        if (!isset($request->code)) {
+        if (! isset($request->code)) {
             return redirect()->route('CheckStatus')->withErrors('يجب كتابة رقم الطلب');
         }
-        $order  = order::where('code', $request->code)->first();
+        $order = order::where('code', $request->code)->first();
 
-        if (!$order) {
+        if (! $order) {
             return redirect()->route('CheckStatus')->withErrors('رقم الطلب غير صحيح   ');
         }
 
@@ -122,25 +122,23 @@ class mainSite extends Controller
                 $o_status = ' مرفوض ';
                 break;
             default:
-                # code...
+                // code...
                 break;
         }
 
-        return redirect()->route('CheckStatus')->with('OkToast', ' حالة الطلب : '.$o_status.' ');
+        return redirect()->route('CheckStatus')->with('OkToast', ' حالة الطلب : ' . $o_status . ' ');
     }
-
 
     public function category()
     {
         $category = category::paginate(10);
+
         return view('category', ['category' => $category]);
     }
 
-
-
-    public function SaveOrder(saveOrderRequest $request,services  $services )
+    public function SaveOrder(saveOrderRequest $request, services $services)
     {
-      //  $data = $request->validate($this->rule, $this->messages());
+        //  $data = $request->validate($this->rule, $this->messages());
 
         $imgRoule = [];
 
@@ -155,13 +153,9 @@ class mainSite extends Controller
         //     'mimes' => 'نوع الملف يجب ان يكون jpg,jpeg,png',
         // ]);
 
-
-
-
-
-      //  $services  = services::find($id);
+        //  $services  = services::find($id);
         $uuidCode = rand(235164, 64655454);
-        $order =  order::create([
+        $order = order::create([
             'title' => $request['title'],
             'name' => $request['name'],
             'des' => $request['des'],
@@ -178,52 +172,47 @@ class mainSite extends Controller
             'ip' => $request->ip(),
             'payed' => 0,
             'status' => 0,
-            'code' => $uuidCode
+            'code' => $uuidCode,
 
         ]);
 
-
         foreach ($services->files as $key => $value) {
-            $filename =    $request->file($key)->store('order', 'public');
+            $filename = $request->file($key)->store('order', 'public');
             Files::create([
-                "name" => $filename,
-                "typeid" =>  $order->id,
-                "type" => 1,
+                'name' => $filename,
+                'typeid' => $order->id,
+                'type' => 1,
             ]);
         }
 
-        return redirect()->route('order' , $services->id)->with('OkToast', '  تم ارسال الطلب رقم : ' . $uuidCode);
+        return redirect()->route('order', $services->id)->with('OkToast', '  تم ارسال الطلب رقم : ' . $uuidCode);
     }
-
 
     public function order(services $services)
     {
         //$services  = services::find($id);
         $files = $services->files; //RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
 
+        $payment = pym_to_serv::where('service_id', $services->id)->with('pym')->get();
 
-        $payment = pym_to_serv::where('service_id',$services->id)->with('pym')->get();
+        $cash = dev_to_serv::where('service_id', $services->id)->with('dev')->get();
 
-        $cash = dev_to_serv::where('service_id',$services->id)->with('dev')->get();
-        
-        
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
     }
 
     public function services(category $category)
     {
 
-        $services  = $category->services; //services::where('category_id', $id)->get();
+        $services = $category->services; //services::where('category_id', $id)->get();
 
         return view('services', ['services' => $services]);
     }
-
-
 
     public function job()
     {
         $jobs = jobs::get();
         $jobcity = job_city::get();
+
         return view('job', ['jobs' => $jobs, 'jobcity' => $jobcity]);
     }
 
@@ -231,7 +220,7 @@ class mainSite extends Controller
     {
 
         $filename = $request->file('cv')->store('cv', 'public');
-        $uuidCode =Str::uuid();
+        $uuidCode = Str::uuid();
 
         job_app::create([
             'name' => $request['name'],
@@ -250,8 +239,7 @@ class mainSite extends Controller
 
             'code' => $uuidCode,
             'job_id' => $request['job_id'],
-            'about' => $request['about']
-
+            'about' => $request['about'],
 
         ]);
 

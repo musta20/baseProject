@@ -65,7 +65,7 @@
                                     @if ($order->still)
                                         <option value="1"> تم دفع جزء من المبلغ </option>
                                         <option value="0"> تم دفع كامل المبلغ</option>
-                                    @elseif(!$order->still)
+                                    @elseif (!$order->still)
                                         <option value="0"> تم دفع كامل المبلغ</option>
                                         <option value="1"> تم دفع جزء من المبلغ </option>
                                     @endif
@@ -90,10 +90,10 @@
                                     <input class="form-control" id="payed"
                                      placeholder="المبلغ " name="cost"
                                         type="number" />
-                                @elseif(!$order->still)
+                                @elseif (!$order->still)
                                     <label class="form-label"> اضافة مبلغ مدفوع</label>
 
-                                    <input class="form-control" id="payed" 
+                                    <input class="form-control" id="payed"
                                     hidden placeholder="المبلغ "
                                         name="cost" type="number" />
                                 @endif
@@ -117,7 +117,7 @@
                                     <!-- assignee -->
                                     <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> مقدم الطلب</p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                             alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -150,7 +150,7 @@
                                     <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase">
                                         حالة الطلب </p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                             alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -199,7 +199,7 @@
                                     <!-- assignee -->
                                     <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> الموظف </p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                                 alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -230,7 +230,7 @@
                                     <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase"> طريقة الاستلام
                                     </p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                                 alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -259,10 +259,10 @@
                             <div class="row">
                                 <div class="col-6">
                                     <!-- assignee -->
-                                    <p class="mt-2 mb-1 text-muted fw-bold 
+                                    <p class="mt-2 mb-1 text-muted fw-bold
                                     font-12 text-uppercase"> العدد </p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                             alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -301,7 +301,7 @@
                                     12 text-uppercase"> المبلغ المستحق
                                     </p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                                 alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -334,7 +334,7 @@
                                     <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase">
                                         المبلغ المتبقي </p>
                                     <div class="d-flex">
-                                        {{-- <img src="assets/images/users/avatar-9.jpg" 
+                                        {{-- <img src="assets/images/users/avatar-9.jpg"
                                 alt="Arya S" class="rounded-circle me-2" height="24"> --}}
                                         <div>
                                             <h5 class="mt-1 font-14">
@@ -423,6 +423,6 @@
 
         if (t.value == 1 || t.value == 2) {
             payed.hidden = false;
-        } 
+        }
     }
 </script>

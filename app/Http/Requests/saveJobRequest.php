@@ -22,22 +22,22 @@ class saveJobRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "phone" => ["required","numeric","digits_between:10,10"],
-            "email" =>[ "required","email","max:100","min:3"],
-            "name" => ["required","string","max:100","min:3"],
-    
-            "cert" => ["required","string","max:100","min:3"],
-            "exp" => ["required","numeric"],
-            "exp_des" => ["required","string","max:100","min:3"],
-    
-            "city" => ["required","string","max:100","min:3"],
-            "job_city" => "required|string|max:100|min:1",
-    
-            "majer" => ["required","string","max:100","min:3"],
-    
-            "job_id" => ["required"],
-            "about" => ["required","string","max:100","min:3"],
-            'cv' => ["required","max:2048","mimes:pdf"],
+            'phone' => ['required', 'numeric', 'digits_between:10,10'],
+            'email' => ['required', 'email', 'max:100', 'min:3'],
+            'name' => ['required', 'string', 'max:100', 'min:3'],
+
+            'cert' => ['required', 'string', 'max:100', 'min:3'],
+            'exp' => ['required', 'numeric'],
+            'exp_des' => ['required', 'string', 'max:100', 'min:3'],
+
+            'city' => ['required', 'string', 'max:100', 'min:3'],
+            'job_city' => 'required|string|max:100|min:1',
+
+            'majer' => ['required', 'string', 'max:100', 'min:3'],
+
+            'job_id' => ['required'],
+            'about' => ['required', 'string', 'max:100', 'min:3'],
+            'cv' => ['required', 'max:2048', 'mimes:pdf'],
         ];
     }
 }

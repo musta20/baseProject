@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ sprintf('%04d', $order->id)}}</title>
+    <title>{{ sprintf('%04d', $order->id) }}</title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
                 <img width="150" src={{ $dataUri }} />
                 <h3 class="title ">فاتورة</h3>
                 <p>
-                    مؤسسة سليمان باسم الدلالي للخدمات الطلابية 
+                    مؤسسة سليمان باسم الدلالي للخدمات الطلابية
 -                    {{ $setting->adress }}
                 </p>
             </div>

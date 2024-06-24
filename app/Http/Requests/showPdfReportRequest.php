@@ -22,9 +22,9 @@ class showPdfReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "from" => "required|date",
-            "to" => "required|date",
-            "type" => "required",
+            'from' => 'required|date',
+            'to' => 'required|date',
+            'type' => 'required',
         ];
     }
 }

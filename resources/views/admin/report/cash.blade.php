@@ -6,9 +6,9 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>تقارير الحسابات</h3>
             </span>
-            <form method="POST" 
+            <form method="POST"
             {{-- target="_blank"  --}}
-            class="flex gap-2 " 
+            class="flex gap-2 "
             action="{{ route('admin.Report.store') }}">
                 @csrf
                 <input hidden name="reporttype" value="ORDER" />
@@ -50,7 +50,7 @@
                 @foreach ($orderReport as $item)
                 <tr class="bg-white border-b  hover:bg-gray-50 ">
                         <td scope="col" class="px-6 py-3">
-                            {{__("messages.".App\Enums\CashReport::getname($item->type))}}
+                            {{ __("messages.".App\Enums\CashReport::getname($item->type)) }}
                         </td>
 
                             <td scope="col" class="px-6 py-3">
@@ -69,7 +69,7 @@
                                 حذف
                               </a>
                     </td>
-                   
+
                     </td>
                     </tr>
                     @endforeach

@@ -3,13 +3,13 @@
     <script src="{{ asset('Dashboard/chart.min.js') }}"></script>
     <script src="{{ asset('Dashboard/apexcharts.min.js') }}"></script>
     <script src="{{ asset('Dashboard/jquery-jvectormap-1.2.2.min.js') }}"></script>
-   
+
     <div class="px-5  pt-5">
 
         <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
-           
+
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600" > نظرة عامة</span>
-           
+
         </div>
 
 
@@ -43,7 +43,7 @@
             </div>
 
         </div>
-{{-- 
+{{--
             <div class="row">
                 <br>
                 <div class="col-12">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-   
+
             </div> --}}
 
 
@@ -124,8 +124,8 @@
 'myChart'
 --}}                <script>
                 function drawFunction(dataArray,lable,id,bgc,bc) {
-                    
-                
+
+
                 const labels = [
                     'السبت',
                     'الاحد',
@@ -143,7 +143,7 @@
 
 
 
-                let count = dataArray.reduce(add, 0); 
+                let count = dataArray.reduce(add, 0);
                 const data = {
                     labels: labels,
                     datasets: [{

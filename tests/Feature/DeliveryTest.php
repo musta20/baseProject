@@ -9,8 +9,10 @@ class DeliveryTest extends TestCase
 {
     /**
      * Test listing deliveries.
+     *
+     * @test
      */
-    public function test_index_shows_paginated_deliveries(): void
+    public function index_shows_paginated_deliveries(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -30,8 +32,10 @@ class DeliveryTest extends TestCase
 
     /**
      * Test creating a new delivery.
+     *
+     * @test
      */
-    public function test_store_creates_a_new_delivery(): void
+    public function store_creates_a_new_delivery(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -49,8 +53,10 @@ class DeliveryTest extends TestCase
 
     /**
      * Test editing a delivery.
+     *
+     * @test
      */
-    public function test_edit_shows_delivery_details(): void
+    public function edit_shows_delivery_details(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -69,12 +75,14 @@ class DeliveryTest extends TestCase
 
     /**
      * Test updating a delivery.
+     *
+     * @test
      */
-    public function test_update_modifies_a_delivery(): void
+    public function update_modifies_a_delivery(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         $delivery = Delivery::factory()->create();
 
         $data = [
@@ -89,20 +97,20 @@ class DeliveryTest extends TestCase
 
     /**
      * Test deleting a delivery.
+     *
+     * @test
      */
-    public function test_destroy_removes_a_delivery(): void
+    public function destroy_removes_a_delivery(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         $delivery = Delivery::factory()->create();
 
         $response = $this->delete(route('admin.Delivery.destroy', $delivery));
 
         $response->assertRedirect(route('admin.Delivery.index'));
-        
+
         $this->assertDatabaseMissing('delivery', ['id' => $delivery->id]);
     }
 }
-
-?>

@@ -22,12 +22,12 @@ class createUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => "unique:users|required|email|max:255|min:3",
-            "password" => "required|string|max:25|min:6",
-            "name" => "required|string|max:100|min:3",
-            "role" => "required",
-            'img' => 'max:2048|mimes:jpg,jpeg,png'
-    
+            'email' => 'unique:users|required|email|max:255|min:3',
+            'password' => 'required|string|max:25|min:6',
+            'name' => 'required|string|max:100|min:3',
+            'role' => 'required',
+            'img' => 'max:2048|mimes:jpg,jpeg,png',
+
         ];
     }
 }

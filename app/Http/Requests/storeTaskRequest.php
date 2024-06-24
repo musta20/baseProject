@@ -22,13 +22,12 @@ class storeTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required","string","max:100","min:3"],
-            "des" => ["required","string","max:255","min:3"],
-            "user_id" => ["required"],
+            'title' => ['required', 'string', 'max:100', 'min:3'],
+            'des' => ['required', 'string', 'max:255', 'min:3'],
+            'user_id' => ['required'],
 
-
-            "start" => ["required","date"],
-            "end" =>   ["required","date","after:start"]
+            'start' => ['required', 'date'],
+            'end' => ['required', 'date', 'after:start'],
         ];
     }
 }

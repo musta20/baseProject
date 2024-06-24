@@ -1,3 +1,3 @@
 <div>
-    {{$resault->id}}
+    {{ $resault->id }}
 </div>

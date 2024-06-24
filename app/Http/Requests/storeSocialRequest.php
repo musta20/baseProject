@@ -22,8 +22,8 @@ class storeSocialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "img" => "required|string|max:1000|min:3",
-            "url" => "required|string|max:255|min:3"
+            'img' => 'required|string|max:1000|min:3',
+            'url' => 'required|string|max:255|min:3',
         ];
     }
 }

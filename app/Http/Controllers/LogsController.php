@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Activity;
+
 class LogsController extends Controller
 {
     /**
@@ -19,23 +20,8 @@ class LogsController extends Controller
         $AllLogs = Activity::Filter()->RequestPaginate();
         $users = User::get();
 
-        return view("admin.Logs.index",  ['AllLogs' => $AllLogs,'filterBox' => $filterBox,'users'=>$users] );
+        return view('admin.Logs.index', ['AllLogs' => $AllLogs, 'filterBox' => $filterBox, 'users' => $users]);
     }
-
-    public function LogsList($id)
-    {
-        //AllLogs LogsList
-        $filterBox = Activity::showFilter();
-
-        $AllLogs = Activity::Filter()->where('causer_id',$id)->RequestPaginate();
-        $users = User::get();
-        $user =  User::find($id);
-        return view("admin.Logs.list",  ['AllLogs' => $AllLogs,'filterBox' => $filterBox,'users'=>$users,'user'=>$user] );
-    }
-
-
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -50,7 +36,6 @@ class LogsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -66,7 +51,7 @@ class LogsController extends Controller
      */
     public function show(Activity $Log)
     {
-        return view("admin.Logs.show",  ['log' => $Log] );
+        return view('admin.Logs.show', ['log' => $Log]);
 
     }
 
@@ -84,7 +69,6 @@ class LogsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -102,5 +86,17 @@ class LogsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function LogsList($id)
+    {
+        //AllLogs LogsList
+        $filterBox = Activity::showFilter();
+
+        $AllLogs = Activity::Filter()->where('causer_id', $id)->RequestPaginate();
+        $users = User::get();
+        $user = User::find($id);
+
+        return view('admin.Logs.list', ['AllLogs' => $AllLogs, 'filterBox' => $filterBox, 'users' => $users, 'user' => $user]);
     }
 }

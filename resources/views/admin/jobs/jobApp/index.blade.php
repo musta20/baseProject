@@ -13,7 +13,7 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                     
+
 
                         <th scope="col" class="px-6 py-3">الاسم</th>
 
@@ -33,7 +33,7 @@
                         </td>
 
                         <td scope="col" class="px-6 py-3">
-                            {{ $item->job->title}}
+                            {{ $item->job->title }}
                         </td>
 
                         <td scope="col" class="px-6 py-3">
@@ -43,7 +43,7 @@
                             <a href="{{ route('admin.JobApp.show' , $item->id) }}">
                                تعديل
                             </a>
-                            <a  onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.JobApp.destroy' , $item->id) }}'))" 
+                            <a  onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.JobApp.destroy' , $item->id) }}'))"
                                 href="#"
                                 >
                                 حذف
@@ -58,7 +58,7 @@
         </div>
     </div>
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
     <h3>طلبات التوظيف</h3>
     <hr>

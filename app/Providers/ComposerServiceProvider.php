@@ -13,7 +13,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         view()->composer(
-            "*",
+            '*',
             'App\Http\ViewComposers\LayoutComposers'
         );
     }

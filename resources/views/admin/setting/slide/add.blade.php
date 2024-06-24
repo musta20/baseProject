@@ -3,7 +3,7 @@
         <div method="POST"  >
             @csrf
             <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
-                <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600"> 
+                <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                     <h3>اضافة سيلايد</h3>
 
                 </span>
@@ -27,9 +27,9 @@
                         <div class="form-label">
                             <x-admin.input-card class="form-control"  type="file" name="img"
                                 placeholder=" الصورة" />
-            
-                        
-                        </div>                         
+
+
+                        </div>
                     </div>
                     <div class=" p-3 text-slate-800 ">
                         <x-admin.textarea-card   value="{{ old('des') }}" label="الوصف"  name="des" placeholder=" الوصف"    />
@@ -42,10 +42,10 @@
 
 
                     <hr>
-                    <button type="submit" 
+                    <button type="submit"
                         class="bg-blue-500 my-4 flex gap-2 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                       
-                          
+
+
                         حفظ</button>
                 </form>
 
@@ -58,7 +58,7 @@
 
 
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
     <h3>اضافة سيلايد</h3>
     <hr>

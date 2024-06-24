@@ -5,7 +5,7 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>الوظائف</h3>
             </span>
-            <a href="{{ route('admin.Jobs.create') }}" 
+            <a href="{{ route('admin.Jobs.create') }}"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 إضافة وظيفة</a>
 
@@ -15,7 +15,7 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                     
+
 
                         <th scope="col" class="px-6 py-3">المسمى الوظيفي</th>
 
@@ -41,7 +41,7 @@
                             <a href="{{ route('admin.Jobs.edit' , $item->id) }}">
                                تعديل
                             </a>
-                            <a href="#" onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Jobs.destroy',$item->id)}}'))" 
+                            <a href="#" onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Jobs.destroy',$item->id) }}'))"
                                 >
                                 حذف
                             </a>
@@ -61,7 +61,7 @@
 
 
 
-{{-- 
+{{--
 <x-admin-layout>
     <h3> الوظائف</h3>
     <hr>
@@ -87,7 +87,7 @@
                     <td>{{ $item->des }}</td>
                     <td class="table-action">
                         <a href="{{ route('admin.Jobs.index' , $item->id) }}"><i class="mdi mdi-pencil"></i></a>
-                        <a onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Jobs.destroy',$item->id)}}'))" href="#"><i
+                        <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Jobs.destroy',$item->id) }}'))" href="#"><i
                                 class="mdi mdi-delete"></i></a>
                     </td>
                 </tr>

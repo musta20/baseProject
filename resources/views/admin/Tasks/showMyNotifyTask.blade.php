@@ -10,18 +10,18 @@
 
                 <label class="form-label"> اختر نوع السجلات </label>
                 <div class="flex py-2 gap-3 w-2/6">
-                <select 
+                <select
                 class=" shadow-sm bg-gray-50 pr-10  border
                 text-gray-900 text-sm rounded-lg focus:ring-blue-500
                focus:border-blue-500 block w-full p-2.5 "
-                
+
                 id="type">
                     @foreach ($NotifyType as $item)
                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
-        
-                <button onclick="goToPage()" 
+
+                <button onclick="goToPage()"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
                 >عرض</button>
             </div>
@@ -30,7 +30,7 @@
                 function goToPage() {
                     let type = document.getElementById('type');
                     window.location.href = '/admin/showMyNotifyTask/' + type.value;
-    
+
                 }
             </script>
         </div>

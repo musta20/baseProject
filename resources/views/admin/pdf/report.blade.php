@@ -17,7 +17,7 @@
                 الى
                 {{ $to }}
             </h3>
-<span> 
+<span>
             <h3>
                 نوع التقرير :
                 @switch($type)

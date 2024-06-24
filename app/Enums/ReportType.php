@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-
-
 enum ReportType: string
 {
     case CASH = 'CASH';
@@ -14,10 +12,7 @@ enum ReportType: string
     {
         $cases = self::cases();
         $randomIndex = rand(0, count($cases) - 1);
+
         return $cases[$randomIndex];
     }
-
 }
-
-
-?>

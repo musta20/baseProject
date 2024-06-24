@@ -32,7 +32,7 @@
             <div class="swiper-slide">
                 <img src=" https://tiny-swiper.js.org/img/logo.svg" />
             </div>
-           
+
         </div>
         <div class="swiper-plugin-pagination"></div>
     </div>
@@ -52,8 +52,8 @@
         autoplay: {
             delay: 5000
             },
-   
-          
+
+
           plugins: [SwiperPluginAutoPlay]
         });
     </script>

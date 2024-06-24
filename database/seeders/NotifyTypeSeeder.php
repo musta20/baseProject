@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\NotifyType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class NotifyTypeSeeder extends Seeder
@@ -20,11 +19,11 @@ class NotifyTypeSeeder extends Seeder
 
             NotifyType::create([
 
-                'name' => $item
-                
+                'name' => $item,
+
             ]);
 
         }
-       
+
     }
 }

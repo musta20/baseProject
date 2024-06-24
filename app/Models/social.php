@@ -10,20 +10,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class social extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
-
+    use HasFactory , HasUlids , LogsActivity;
 
     protected $guarded = [];
 
-    protected $table = "social";
-
-
+    protected $table = 'social';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logonly(['url','img'])->useLogName('social');
+        return LogOptions::defaults()->logonly(['url', 'img'])->useLogName('social');
     }
-
-
-
 }

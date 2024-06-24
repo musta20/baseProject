@@ -22,17 +22,16 @@ class updateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required","string","max:100","min:3"],
-            "des" => ["required","string","max:255","min:3"],
+            'title' => ['required', 'string', 'max:100', 'min:3'],
+            'des' => ['required', 'string', 'max:255', 'min:3'],
             // "user_id" => "required|string|max:255|min:3",
-            "user_id" => ["required"],
-            "isdone" => ["required","integer"],
-            
+            'user_id' => ['required'],
+            'isdone' => ['required', 'integer'],
 
             // "attachment-*"=>["nullable","max:2048",'mimes:doc,pdf,jpg,jpeg,png'],
-    
-            "start" => ["required","date"],
-            "end" =>   ['required','date','after:start']
+
+            'start' => ['required', 'date'],
+            'end' => ['required', 'date', 'after:start'],
         ];
     }
 }

@@ -19,7 +19,7 @@
             @method('PUT')
             <div class=" p-3 bg-slate-100 w-full mx-auto rounded-md border border-gray-300 ">
 
-               
+
                     <div class="mx-auto w-1/2 gap-3 ">
                         <div class="flex gap-3 ">
                             <label>الاسم</label>
@@ -32,7 +32,7 @@
 
                             {{ $client->des }}
 
-                      
+
                         </div>
                         <div class="flex gap-3 ">
                             <label>التقييم</label>
@@ -40,13 +40,13 @@
                             {{ $client->rate }}
 
                         </div>
-                     
 
 
-                    
+
+
                     <div class="flex gap-3 pt-5">
 
-                        <x-admin.select-input :options="$statusoption" name="status" selected="{{$client->status}}"
+                        <x-admin.select-input :options="$statusoption" name="status" selected="{{ $client->status }}"
                             label="الحالة" />
                     </div>
                     <hr>

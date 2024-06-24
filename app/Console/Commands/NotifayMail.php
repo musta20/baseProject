@@ -40,15 +40,14 @@ class NotifayMail extends Command
     public function handle()
     {
 
-  /*       $tasks = TasksNotify::with('user')->whereMonth('exp',Carbon::now()->month())
-            ->whereYear('exp', Carbon::now()->year())
-            ->get();
+        /*       $tasks = TasksNotify::with('user')->whereMonth('exp',Carbon::now()->month())
+                  ->whereYear('exp', Carbon::now()->year())
+                  ->get();
 
-            foreach ($tasks  as $value) {
-               //mail::
-            }
+                  foreach ($tasks  as $value) {
+                     //mail::
+                  }
  */
-
 
         return 0;
     }

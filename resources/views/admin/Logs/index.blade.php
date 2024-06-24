@@ -46,7 +46,7 @@
         </div>
     </div>
     <script>
-        
+
         function goToUser() {
             const users = document.getElementById('users')
 

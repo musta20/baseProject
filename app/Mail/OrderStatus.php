@@ -5,7 +5,6 @@ namespace App\Mail;
 use App\Models\clients;
 use App\Models\order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
@@ -14,19 +13,12 @@ class OrderStatus extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+    protected $order;
+
     public function __construct(order $order)
     {
         $this->order = $order;
     }
-
-
-
-    protected $order;
 
     /**
      * Build the message.
@@ -35,30 +27,30 @@ class OrderStatus extends Mailable
      */
     public function build()
     {
-        
-        $ratingCode=false;
+
+        $ratingCode = false;
 
         switch ($this->order->status) {
             case 0:
                 $img = 'banana.png';
-                $status =  ' قيد الانتظار ';
+                $status = ' قيد الانتظار ';
                 break;
             case 1:
                 $img = 'banana2.png';
-                $status =  ' جاري العمل عليه ';
+                $status = ' جاري العمل عليه ';
                 break;
             case 2:
                 $img = 'banana3.png';
-                $status =  ' جاهز للتسليم ';
+                $status = ' جاهز للتسليم ';
                 break;
             case 3:
                 $img = 'banana4.png';
                 $status = ' تم التسليم';
-                $ratingCode =  clients::create([
+                $ratingCode = clients::create([
                     'name' => $this->order->name,
                     'israted' => 0,
                     'status' => 0,
-                    'token' => uniqid()
+                    'token' => uniqid(),
                 ]);
 
                 break;
@@ -70,7 +62,7 @@ class OrderStatus extends Mailable
                 $img = 'banana.png';
                 $status = 'تحت التنفيذ';
         }
-        $bill = "";
+        $bill = '';
 
         if ($this->order->payed) {
             $bill = $this->order->id;
@@ -80,14 +72,15 @@ class OrderStatus extends Mailable
             Mail::to('admin@chessfor.org')->send(new OrderStatus(($this->order)));
 
         }
+
         return $this->from('info@chessfor.org', 'admin')
-        ->subject('حالة الطلب')
-        ->view('mail.OrderStatus')
-        ->with([
+            ->subject('حالة الطلب')
+            ->view('mail.OrderStatus')
+            ->with([
                 'img' => $img,
                 'status' => $status,
                 'bill' => $bill,
-                'ratingCode' => $ratingCode
+                'ratingCode' => $ratingCode,
             ]);
     }
 }

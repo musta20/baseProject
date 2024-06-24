@@ -1,7 +1,7 @@
 <x-layout>
 
-    <form method="POST" class="colorTexetFooter" action="{{route('SaveJobs')}}" enctype="multipart/form-data">
-        
+    <form method="POST" class="colorTexetFooter" action="{{ route('SaveJobs') }}" enctype="multipart/form-data">
+
         @csrf
 
     <section dir="rtl" class="py-10 mx-auto w-4/6 h-auto ">
@@ -21,7 +21,7 @@
             <x-admin.input-card name="exp" label="عدد سنوات الخبرة" placeholder="عدد سنوات الخبرة - اكتب صفر في حالة عدم وجود خبرة" />
             <x-admin.input-card name="majer" placeholder="التخصص" label="التخصص الدراسي" />
         </div>
-    
+
         <x-admin.textarea-card name="exp_des" placeholder="الخبرة  - اكتب لايوجد في حالة عدم وجود خبرة" cols="30" rows="5" label="الخبرة" />
         <div class="mb-5 flex gap-2">
             <x-admin.select-input name="job_id" :options="$jobs" label="الوظيفة المرغوبة " />

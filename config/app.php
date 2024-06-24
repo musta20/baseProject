@@ -55,7 +55,6 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL'),
-    
 
     /*
     |--------------------------------------------------------------------------
@@ -178,8 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        App\Providers\ComposerServiceProvider::class
-
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 

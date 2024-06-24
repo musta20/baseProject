@@ -40,7 +40,7 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
 
@@ -48,7 +48,7 @@ return [
         'task' => [
             'driver' => 'local',
             'root' => storage_path('app/public/task'),
-            'url' => env('APP_URL').'/task',
+            'url' => env('APP_URL') . '/task',
             'visibility' => 'public',
             'throw' => false,
 

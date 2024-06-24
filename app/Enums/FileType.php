@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-
-
 enum FileType: string
 {
     case IMAGE = 'IMAGE';
@@ -11,6 +9,3 @@ enum FileType: string
     case DOC = 'DOC';
 
 }
-
-
-?>

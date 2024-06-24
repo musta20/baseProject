@@ -8,15 +8,10 @@ use Tests\TestCase;
 
 class SlideTest extends TestCase
 {
-
-    protected function authenticateUser()
-    {
-        $user = User::factory()->withRole(UserRole::Admin->value)->create();
-        $this->actingAs($user);
-        return $user;
-    }
-
-    public function test_authenticated_user_can_view_slides_list()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_view_slides_list()
     {
         $this->authenticateUser();
 
@@ -29,14 +24,20 @@ class SlideTest extends TestCase
         // ... (Assert view name and data)
     }
 
-    public function test_unauthenticated_user_cannot_view_slides_list()
+    /**
+     * @test
+     */
+    public function unauthenticated_user_cannot_view_slides_list()
     {
         $response = $this->get('/admin/Slide');
 
         $response->assertRedirect('/login');
     }
 
-    public function test_authenticated_user_can_access_create_slide_form()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_access_create_slide_form()
     {
         $this->authenticateUser();
 
@@ -46,7 +47,10 @@ class SlideTest extends TestCase
         // ... (Assert view name)
     }
 
-    public function test_authenticated_user_can_create_a_slide()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_create_a_slide()
     {
         $this->authenticateUser();
 
@@ -65,7 +69,10 @@ class SlideTest extends TestCase
         // ... (Assert image storage)
     }
 
-    public function test_authenticated_user_can_view_a_slide()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_view_a_slide()
     {
         $this->authenticateUser();
 
@@ -78,7 +85,10 @@ class SlideTest extends TestCase
         $response->assertViewHas('slide', $slide);
     }
 
-    public function test_authenticated_user_can_edit_a_slide()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_edit_a_slide()
     {
         $this->authenticateUser();
 
@@ -91,7 +101,10 @@ class SlideTest extends TestCase
         $response->assertViewHas('slide', $slide);
     }
 
-    public function test_authenticated_user_can_update_a_slide()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_update_a_slide()
     {
         $this->authenticateUser();
 
@@ -110,7 +123,10 @@ class SlideTest extends TestCase
         $this->assertDatabaseHas('slide', ['title' => 'Updated Title']);
     }
 
-    public function test_authenticated_user_can_delete_a_slide()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_delete_a_slide()
     {
         $this->authenticateUser();
 
@@ -123,8 +139,13 @@ class SlideTest extends TestCase
         $this->assertDatabaseMissing('slide', ['id' => $slide->id]);
     }
 
+    protected function authenticateUser()
+    {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
+        return $user;
+    }
+
     // ... (Additional tests for updating with image uploads, error scenarios, etc.)
 }
-
-
-?>

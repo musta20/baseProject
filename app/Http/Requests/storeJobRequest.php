@@ -22,9 +22,9 @@ class storeJobRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => ["required","string","max:100","min:3"],
-            "des" => ["required","string","max:255","min:3"],
-            "job_cities_id" =>["required","exists:job_cities,id"],
+            'title' => ['required', 'string', 'max:100', 'min:3'],
+            'des' => ['required', 'string', 'max:255', 'min:3'],
+            'job_cities_id' => ['required', 'exists:job_cities,id'],
         ];
     }
 }

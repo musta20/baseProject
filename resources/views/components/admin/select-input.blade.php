@@ -13,26 +13,26 @@
     $class = $errors->has($name) ? '!border-red-500' : 'border-gray-300';
     @endphp
 
-    <select     
+    <select
 
     name="{{ $name }}" {{ $disabled ? 'disabled' : '' }}   {!!
         $attributes->merge(["class"=>"shadow-sm bg-gray-50 pr-10 $class border
      text-gray-900 text-sm rounded-lg focus:ring-blue-500
     focus:border-blue-500 block w-full p-2.5 "]) !!}  >
-   
+
         @foreach ($options as $key => $value)
-        
+
         @if ($options instanceof  Illuminate\Support\Collection )
         <option @if ($selected == $value->id) selected @endif value="{{ $value->id }}">{{ __($value->name ?? $value->title) }}</option>
 
         @else
-        <option @if ($selected == $value->value) selected @endif value="{{ $value->value  }}">{{ __('messages.'.$value->name) }}</option>
+        <option @if ($selected == $value->value) selected @endif value="{{ $value->value }}">{{ __('messages.'.$value->name) }}</option>
 
         @endif
         @endforeach
     </select>
-   
-   
+
+
 
     <x-input-error :messages="$errors->get($name)" class="pt-1" />
 

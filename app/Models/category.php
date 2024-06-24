@@ -12,25 +12,20 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class category extends Model
 {
-    use HasFactory , LogsActivity, HasUlids , Withfilter;
-
+    use HasFactory , HasUlids, LogsActivity , Withfilter;
 
     protected $guarded = [];
 
-    protected $table = "category";
-
-
+    protected $table = 'category';
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logOnly(['title', 'des'])->useLogName('category');
     }
 
-
-    public function services ():HasMany
+    public function services(): HasMany
     {
 
-        return $this->hasMany(services::class,'category_id');
+        return $this->hasMany(services::class, 'category_id');
     }
-
 }

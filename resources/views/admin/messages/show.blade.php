@@ -11,7 +11,7 @@
             </div>
                 <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
                     <form class=" mx-5">
-                    
+
 
                         <div class="flex gap-3 w-full   ">
                             <div class="flex gap-5 p-3 text-slate-800 ">
@@ -22,7 +22,7 @@
                             </div>
 
                             <div class="flex gap-5 p-3 text-slate-800 ">
-                                
+
                             </div>
                         </div>
 
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="flex gap-5 p-3 text-slate-800 ">
-                                
+
                             </div>
                         </div>
 

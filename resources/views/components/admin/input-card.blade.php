@@ -11,14 +11,14 @@
         {{ $label }}
     </label>
     @php
-    
+
         $class = $errors->has($name) ? '!border-red-500' : 'border-gray-300';
     @endphp
 
-   
-    <input 
+
+    <input
     {{-- value="{{old($name,$oldVale)}}" --}}
-    
+
     name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} id="password" {!!
         $attributes->merge(["class"=>"shadow-sm bg-gray-50  $class border
      text-gray-900 text-sm rounded-lg focus:ring-blue-500

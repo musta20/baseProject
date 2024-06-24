@@ -4,12 +4,12 @@
     @auth
     <div class="userBox">
         {{ auth()->user()->name }}
-    <a href="{{url('/logout')}}">تسجيل الخروج</a>
+    <a href="{{ url('/logout') }}">تسجيل الخروج</a>
     </div>
     <div class="userBox">
-        {{getNotif()['all']}}
+        {{ getNotif()['all'] }}
     </div>
-    
+
     @else
         <div class="userBox">المدير</div>
 

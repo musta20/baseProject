@@ -7,18 +7,18 @@
 
     <h3>التصنيفات</h3>
 </div>
-<form method="POST" action="{{route('admin.Category.update',$category->id)}}">
+<form method="POST" action="{{ route('admin.Category.update',$category->id) }}">
     @csrf
     @method('PUT')
     <div class="formLaple" >
         <label>عنوان التصنيف</label>
         <input class="form-input"
-        value="{{$category->title}}"
+        value="{{ $category->title }}"
         name="title" placeholder="عنوان التصنيف" />
 
         @error('title')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -26,12 +26,12 @@
     <div class="formLaple" >
         <label> الايقونة</label>
         <input class="form-input"
-        value="{{$category->icon}}"
+        value="{{ $category->icon }}"
 
         name="icon" placeholder=" الايقونة" />
         @error('icon')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -40,12 +40,12 @@
         <label> الوصف</label>
         <textarea class="form-input"
         name="des" placeholder=" الوصف" cols="30" rows="10">
-        {{$category->des}}
+        {{ $category->des }}
     </textarea>
 
         @error('des')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -58,5 +58,5 @@
 </div>
 </form>
 </section>
-    
+
 @endsection

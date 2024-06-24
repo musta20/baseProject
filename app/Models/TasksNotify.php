@@ -10,24 +10,21 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class TasksNotify extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
+    use HasFactory , HasUlids , LogsActivity;
     protected $guarded = [];
-
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logonly(['type','user_id','name','number','issueAt','duration'])->useLogName('tasknotify');
+        return LogOptions::defaults()->logonly(['type', 'user_id', 'name', 'number', 'issueAt', 'duration'])->useLogName('tasknotify');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function from()
     {
-        return $this->belongsTo(User::class,'from','id');
+        return $this->belongsTo(User::class, 'from', 'id');
     }
-
-
 }

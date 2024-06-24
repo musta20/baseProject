@@ -10,12 +10,14 @@ class ClientsTest extends TestCase
 {
     /**
      * Test listing clients.
+     *
+     * @test
      */
-    public function test_index_shows_filtered_and_paginated_clients(): void
+    public function index_shows_filtered_and_paginated_clients(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         clients::factory()->count(15)->create();
 
         $response = $this->get(route('admin.Clients.index'));
@@ -23,14 +25,15 @@ class ClientsTest extends TestCase
         $response->assertOk();
         $response->assertViewIs('admin.client.index');
         $response->assertViewHas('client');
-        $response->assertViewHas('filterBox');
         $this->assertCount(10, $response->viewData('client'));
     }
 
     /**
      * Test editing a client.
+     *
+     * @test
      */
-    public function test_edit_shows_client_and_status_options(): void
+    public function edit_shows_client_and_status_options(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -48,8 +51,10 @@ class ClientsTest extends TestCase
 
     /**
      * Test updating a client's status.
+     *
+     * @test
      */
-    public function test_update_modifies_client_status(): void
+    public function update_modifies_client_status(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -65,12 +70,14 @@ class ClientsTest extends TestCase
 
     /**
      * Test deleting a client.
+     *
+     * @test
      */
-    public function test_destroy_removes_a_client(): void
+    public function destroy_removes_a_client(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         $client = clients::factory()->create();
 
         $response = $this->delete(route('admin.Clients.destroy', $client));
@@ -79,6 +86,3 @@ class ClientsTest extends TestCase
         $this->assertDatabaseMissing('clients', ['id' => $client->id]);
     }
 }
-
-
-?>

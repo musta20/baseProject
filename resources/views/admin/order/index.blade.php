@@ -4,7 +4,7 @@
     <div class="px-5  pt-5">
         <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
-                <h3>{{$title}}</h3>
+                <h3>{{ $title }}</h3>
             </span>
             {{-- <a href="{{ route('admin.Task.create') }}"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
@@ -29,7 +29,7 @@
                             </th>
                             @endif
                         <th scope="col" class="px-6 py-3">
-                            تاريخ الاعتماد 
+                            تاريخ الاعتماد
                         </th>
                         <th scope="col" class="px-6 py-3">التحكم</th>
                     </tr>
@@ -53,7 +53,7 @@
                             غير معتد بعد
                             @else
                             {{ $item->approve_time }}
-                              @endif    
+                              @endif
                         </td>
                         <td scope="col" class="px-6  flex gap-3 py-3">
                             <a href="{{ route('admin.Order.edit' , $item->id) }}">
@@ -72,7 +72,7 @@
         </div>
     </div>
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
 
     <x-admin-contaner>

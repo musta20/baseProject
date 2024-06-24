@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Process;
 
@@ -19,18 +18,17 @@ class categorySeeder extends Seeder
         // $imagePath = storage_path() . '/Images/';
         // $serviceImagePath = storage_path() . '/app/public/category/';
 
-
         foreach ($categorys as $cat) {
 
-        // $productMediaImage =   collect(SeederData::$imageName)->random();
+            // $productMediaImage =   collect(SeederData::$imageName)->random();
 
-        // Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
+            // Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
 
             category::factory()->create([
-                "title"=> $cat,
-                "des"=>$cat
+                'title' => $cat,
+                'des' => $cat,
             ]);
         }
-       
+
     }
 }

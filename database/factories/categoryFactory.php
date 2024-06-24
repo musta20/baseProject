@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,11 +23,9 @@ class categoryFactory extends Factory
         ];
     }
 
+    public function withImage($image): Factory
+    {
+        return $this->state(fn (array $attributes) => ['icon' => $image]);
 
-
-    public function withImage($image): Factory{
-        return $this->state(fn (array $attributes) => ['icon' =>$image]);
-
- 
     }
 }

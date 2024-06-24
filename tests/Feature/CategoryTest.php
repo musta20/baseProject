@@ -9,16 +9,16 @@ use Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-
-
     /**
      * Test listing categories.
+     *
+     * @test
      */
-    public function test_index_shows_paginated_categories(): void
+    public function index_shows_paginated_categories(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         category::factory()->count(15)->create();
 
         $response = $this->get(route('admin.Category.index'));
@@ -31,8 +31,10 @@ class CategoryTest extends TestCase
 
     /**
      * Test creating a new category.
+     *
+     * @test
      */
-    public function test_store_creates_a_new_category(): void
+    public function store_creates_a_new_category(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -51,8 +53,10 @@ class CategoryTest extends TestCase
 
     /**
      * Test updating a category.
+     *
+     * @test
      */
-    public function test_update_modifies_a_category(): void
+    public function update_modifies_a_category(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -73,12 +77,14 @@ class CategoryTest extends TestCase
 
     /**
      * Test deleting a category.
+     *
+     * @test
      */
-    public function test_destroy_removes_a_category(): void
+    public function destroy_removes_a_category(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         $category = category::factory()->create();
 
         $response = $this->delete(route('admin.Category.destroy', $category));

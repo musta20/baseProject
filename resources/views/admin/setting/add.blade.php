@@ -7,7 +7,7 @@
 
     <h3>التصنيفات</h3>
 </div>
-<form method="POST" action="{{route('admin.Category.store')}}">
+<form method="POST" action="{{ route('admin.Category.store') }}">
     @csrf
     <div class="formLaple" >
         <label>عنوان التصنيف</label>
@@ -15,7 +15,7 @@
 
         @error('title')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -23,10 +23,10 @@
     <div class="formLaple" >
         <label> الايقونة</label>
         <input class="form-input" name="icon" placeholder=" الايقونة" />
-        
+
         @error('icon')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -37,7 +37,7 @@
 
         @error('des')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -50,5 +50,5 @@
 </div>
 </form>
 </section>
-    
+
 @endsection

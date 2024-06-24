@@ -14,16 +14,15 @@ class taskSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        $users = User::get(); 
-        $Mangers = User::role(UserRole::Manager->value)->get(); 
 
-        
+        $users = User::get();
+        $Mangers = User::role(UserRole::Manager->value)->get();
+
         foreach ($users as $user) {
 
             Tasks::factory(5)->withManger($Mangers->random())->for($user)->create();
-       
+
         }
-        
+
     }
 }

@@ -7,7 +7,6 @@ use App\Models\social;
 
 class SocialController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +15,10 @@ class SocialController extends Controller
     public function index()
     {
         $allsocial = social::latest()->paginate(10);
+
         // dd( $allcategory);
         //Services
-         return view("admin.setting.social.index",  ['allsocial' => $allsocial] );
+        return view('admin.setting.social.index', ['allsocial' => $allsocial]);
     }
 
     /**
@@ -28,7 +28,7 @@ class SocialController extends Controller
      */
     public function create()
     {
-        return view("admin.setting.social.add" );
+        return view('admin.setting.social.add');
 
     }
 
@@ -41,25 +41,23 @@ class SocialController extends Controller
     public function store(storeSocialRequest $request)
     {
 
-
         social::create([
             'img' => $request->img,
-            'url' => $request->url
+            'url' => $request->url,
         ]);
-       
-        return redirect('/admin/Social')->with('OkToast','تم إضافة البيانات');
+
+        return redirect('/admin/Social')->with('OkToast', 'تم إضافة البيانات');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
     public function show(social $social)
     {
-        return view("admin.setting.social.edit",  ['social' => $social] );
+        return view('admin.setting.social.edit', ['social' => $social]);
     }
 
     /**
@@ -71,7 +69,7 @@ class SocialController extends Controller
     public function edit(social $Social)
     {
         //
-        return view("admin.setting.social.edit",  ['social' => $Social] );
+        return view('admin.setting.social.edit', ['social' => $Social]);
     }
 
     /**
@@ -81,17 +79,15 @@ class SocialController extends Controller
      * @param  \App\Models\social  $social
      * @return \Illuminate\Http\Response
      */
-    public function update(storeSocialRequest $request,social $Social)
+    public function update(storeSocialRequest $request, social $Social)
     {
-    
 
-
-        $Social->img=$request->img;
-        $Social->url=$request->url;
+        $Social->img = $request->img;
+        $Social->url = $request->url;
 
         $Social->save();
 
-        return redirect()->route('admin.Social.index')->with('OkToast','تم تعديل العنصر');
+        return redirect()->route('admin.Social.index')->with('OkToast', 'تم تعديل العنصر');
 
     }
 
@@ -104,6 +100,7 @@ class SocialController extends Controller
     public function destroy(social $Social)
     {
         $Social->delete();
-        return redirect()->route('admin.Social.index')->with('OkToast','تم حذف العنصر');
+
+        return redirect()->route('admin.Social.index')->with('OkToast', 'تم حذف العنصر');
     }
 }

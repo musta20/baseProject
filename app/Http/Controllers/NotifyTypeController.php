@@ -5,36 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\storeNotifyTypeRequest;
 use App\Models\NotifyType;
 use App\Models\TasksNotify;
-use Illuminate\Http\Request;
 
 class NotifyTypeController extends Controller
 {
-
-
-
     public $rule = [
-        "name" => "required|string|max:100|min:3",
+        'name' => 'required|string|max:100|min:3',
 
     ];
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-
-    public function messages()
-    {
-        return [
-            'name.required' => 'يجب كتابة العنوان ',
-            'name.string' => 'يجب ان يكون العنوان نص فقط',
-            "name.max" => "يجب ان لا يزيد عنوان النص عن 25 حرف",
-            "name.min" => "يجب ان لا يقل عنوان النص عن 3 حرف",
-
-
-
-        ];
-    }
 
     /**
      * Display a listing of the resource.
@@ -45,7 +22,7 @@ class NotifyTypeController extends Controller
     {
         $NotifyType = NotifyType::latest()->paginate(10);
 
-        return view("admin.Tasks.notify.type.index",  ['NotifyType' => $NotifyType] );
+        return view('admin.Tasks.notify.type.index', ['NotifyType' => $NotifyType]);
     }
 
     /**
@@ -55,7 +32,7 @@ class NotifyTypeController extends Controller
      */
     public function create()
     {
-        return view("admin.Tasks.notify.type.add");
+        return view('admin.Tasks.notify.type.add');
     }
 
     /**
@@ -66,12 +43,12 @@ class NotifyTypeController extends Controller
      */
     public function store(storeNotifyTypeRequest $request)
     {
-                
-    //    $data = $request->validate( $this->rule,$this->messages());
 
-    NotifyType::create($request);
-   
-    return redirect()->route('admin.TasksNotify.index')->with('OkToast','تم إضافة البيانات');
+        //    $data = $request->validate( $this->rule,$this->messages());
+
+        NotifyType::create($request);
+
+        return redirect()->route('admin.TasksNotify.index')->with('OkToast', 'تم إضافة البيانات');
 
     }
 
@@ -84,13 +61,12 @@ class NotifyTypeController extends Controller
     public function show(NotifyType $NotifyType)
     {
 
-        return view("admin.Tasks.notify.type.edit",  ['NotifyType' => $NotifyType] );
+        return view('admin.Tasks.notify.type.edit', ['NotifyType' => $NotifyType]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\NotifyType  $notifyType
      * @return \Illuminate\Http\Response
      */
     public function edit(NotifyType $notifyType)
@@ -105,14 +81,14 @@ class NotifyTypeController extends Controller
      * @param  \App\Models\NotifyType  $notifyType
      * @return \Illuminate\Http\Response
      */
-    public function update(storeNotifyTypeRequest $request,NotifyType $NotifyType)
+    public function update(storeNotifyTypeRequest $request, NotifyType $NotifyType)
     {
 
-        $NotifyType->name=$request->name;
+        $NotifyType->name = $request->name;
 
         $NotifyType->save();
 
-        return redirect()->route('admin.TasksNotify.index')->with('OkToast','تم تعديل العنصر');
+        return redirect()->route('admin.TasksNotify.index')->with('OkToast', 'تم تعديل العنصر');
     }
 
     /**
@@ -123,13 +99,30 @@ class NotifyTypeController extends Controller
      */
     public function destroy(NotifyType $NotifyType)
     {
-      $task=  TasksNotify::where('type',$NotifyType->id)->get();
+        $task = TasksNotify::where('type', $NotifyType->id)->get();
 
-      if(!$task->isEmpty()){
-        return redirect()->route('admin.TasksNotify.index')->with('OkToast','  هذا العنصر مستخدم . لايمكنك حذفه');
+        if (! $task->isEmpty()) {
+            return redirect()->route('admin.TasksNotify.index')->with('OkToast', '  هذا العنصر مستخدم . لايمكنك حذفه');
 
-      }
+        }
         $NotifyType->delete();
-        return redirect()->route('admin.TasksNotify.index')->with('OkToast','تم حذف العنصر');
+
+        return redirect()->route('admin.TasksNotify.index')->with('OkToast', 'تم حذف العنصر');
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'يجب كتابة العنوان ',
+            'name.string' => 'يجب ان يكون العنوان نص فقط',
+            'name.max' => 'يجب ان لا يزيد عنوان النص عن 25 حرف',
+            'name.min' => 'يجب ان لا يقل عنوان النص عن 3 حرف',
+
+        ];
     }
 }

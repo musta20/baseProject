@@ -9,15 +9,16 @@ use Tests\TestCase;
 
 class CustmerSlideT extends TestCase
 {
- 
     /**
      * Test listing customer slides.
+     *
+     * @test
      */
-    public function test_index_shows_paginated_customer_slides(): void
+    public function index_shows_paginated_customer_slides(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         CustmerSlide::factory()->count(15)->create();
 
         $response = $this->get(route('admin.CustmerSlide.index'));
@@ -30,8 +31,10 @@ class CustmerSlideT extends TestCase
 
     /**
      * Test creating a new customer slide.
+     *
+     * @test
      */
-    public function test_store_creates_a_new_customer_slide(): void
+    public function store_creates_a_new_customer_slide(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -54,8 +57,10 @@ class CustmerSlideT extends TestCase
 
     /**
      * Test updating a customer slide.
+     *
+     * @test
      */
-    public function test_update_modifies_a_customer_slide(): void
+    public function update_modifies_a_customer_slide(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -79,12 +84,14 @@ class CustmerSlideT extends TestCase
 
     /**
      * Test deleting a customer slide.
+     *
+     * @test
      */
-    public function test_destroy_removes_a_customer_slide(): void
+    public function destroy_removes_a_customer_slide(): void
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         $slide = CustmerSlide::factory()->create();
 
         $response = $this->delete(route('admin.CustmerSlide.destroy', $slide));
@@ -93,6 +100,3 @@ class CustmerSlideT extends TestCase
         $this->assertDatabaseMissing('custmer_slides', ['id' => $slide->id]);
     }
 }
-
-
-?>

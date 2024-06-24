@@ -12,13 +12,12 @@ class TestSeeder extends Seeder
     public function run(): void
     {
 
-        
         $this->call([
             settingSeeder::class,
             permissionSeeder::class,
             categorySeeder::class,
             clientsSeeder::class,
             deliverySeeder::class,
-         ]);
+        ]);
     }
 }

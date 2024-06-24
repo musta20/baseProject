@@ -43,7 +43,7 @@
             <br>
 <h3> تعديل</h3>
             <hr>
-            <form  method="POST" action="{{route('admin.postMyNotifyTask',$task->id)}}" >
+            <form  method="POST" action="{{ route('admin.postMyNotifyTask',$task->id) }}" >
                 @csrf
                 <div class="mb-3">
                     <label class="form-label"> تاريخ الاصدار</label>
@@ -53,47 +53,47 @@
                             {{ $message }}
                         </span>
                     @enderror
-    
+
                 </div>
-    
-    
+
+
                 <div class="mb-3">
                     <label  class="form-label">بالشهر مدة الصلاحية</label>
-    
+
                     <select class="form-control" name="duration">
                         @for ($i = 1; $i < 25; $i++)
                             <option>{{ $i }}</option>
                         @endfor
-    
+
                     </select>
-    
+
                     @error('duration')
                         <span class="helper">
                             {{ $message }}
                         </span>
                     @enderror
-    
+
                 </div>
-    
-    
-            
-    
-    
-    
+
+
+
+
+
+
                 <div class="mb-3">
-    
+
                     <div class="px-3 pb-3">
                         <button type="submit" class="btn btn-primary">
                             <i class="mdi mdi-send me-1"></i> حفظ</button>
-    
+
                         <a type="button" href="{{ route('admin.showMyNotifyTask',1) }}" class="btn btn-light">الغاء</a>
                     </div>
                 </div>
-    
-    
-    
+
+
+
             </form>
-    
+
 
     </x-admin-contaner>
 </x-admin-layout>

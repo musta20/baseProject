@@ -41,7 +41,7 @@
                                 <x-admin-bill-search :resault=$resault />
                             @break
 
-                            @default 
+                            @default
                         @endswitch
                         --}}
                     @endisset

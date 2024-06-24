@@ -13,18 +13,18 @@
         <tr>
             <td style="text-align: center;">
                 <img width="150" src="{{ url('/imgs/h.png') }}">
-              
+
             </td>
         </tr>
             <tr>
                 <td>
-                    {{$Title}}
+                    {{ $Title }}
                 </td>
             </tr>
 
         </tr>
         <tr>
-            <p>{{$Message}}</p>
+            <p>{{ $Message }}</p>
 
         </tr>
         <tr>

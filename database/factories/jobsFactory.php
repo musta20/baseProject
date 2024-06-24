@@ -18,9 +18,9 @@ class jobsFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => $this->faker->name(),
-            "des" => $this->faker->name(),
-            "job_cities_id" => job_city::factory()->create()->id
+            'title' => $this->faker->name(),
+            'des' => $this->faker->name(),
+            'job_cities_id' => job_city::factory()->create()->id,
         ];
     }
 }

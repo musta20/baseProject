@@ -10,7 +10,7 @@
         <form method="POST" class="w-75" action="{{ route('admin.NotifyType.store') }}">
             @csrf
 
-            
+
 
 
             <div class="mb-3">
@@ -24,7 +24,7 @@
                 @enderror
             </div>
 
-      
+
 
 
 

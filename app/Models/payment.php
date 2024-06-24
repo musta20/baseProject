@@ -10,10 +10,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class payment extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
+    use HasFactory , HasUlids , LogsActivity;
 
     protected $guarded = [];
-
 
     public function getActivitylogOptions(): LogOptions
     {

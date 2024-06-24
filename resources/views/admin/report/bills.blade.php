@@ -6,9 +6,9 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>الفواتير </h3>
             </span>
-            <form 
+            <form
             {{-- target="_blank"  --}}
-            class="flex gap-2 " 
+            class="flex gap-2 "
             method="GET"  action="{{ route('admin.billReport') }}"
             >
                 @csrf
@@ -40,13 +40,13 @@
                         <th scope="col" class="px-6 py-3">
                          نوع الفاتورة
                         </th>
-                        
+
                         <th scope="col" class="px-6 py-3">
                             تاريخ الفاتورة
                         </th>
-             
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -55,13 +55,13 @@
                     <td>#{{ sprintf('%04d', $item->id) }}</td>
 
                         <td scope="col" class="px-6 py-3">
-                            {{__("messages.".App\Enums\BillType::getname($item->type))}}
+                            {{ __("messages.".App\Enums\BillType::getname($item->type)) }}
                         </td>
 
                             <td scope="col" class="px-6 py-3">
                                 {{ $item->created_at }}</td>
-                     
-                  
+
+
                         <td scope="col" class="px-6  flex gap-3 py-3">
                             <a target="_blank" href="{{ url('storage/pdf/' . $item->file) }}">عرض الفاتورة
                             </a>
@@ -69,7 +69,7 @@
                                 حذف
                               </a>
                     </td>
-                   
+
                     </td>
                     </tr>
                     @endforeach
@@ -81,7 +81,7 @@
     </div>
 </x-admin.layout>
 
-{{-- 
+{{--
 <x-admin-layout>
     <h3> الفواتير المصدرة</h3>
     <hr>

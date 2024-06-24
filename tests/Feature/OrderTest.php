@@ -12,9 +12,10 @@ use Tests\TestCase;
 
 class OrderTest extends TestCase
 {
-
-
-    public function test_showOrderList_shows_orders_by_status()
+    /**
+     * @test
+     */
+    public function showOrderList_shows_orders_by_status()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -38,8 +39,10 @@ class OrderTest extends TestCase
         $response->assertViewHas('title', 'الطلبات المكتملة');
     }
 
-
-    public function test_edit_shows_order_details_and_edit_form()
+    /**
+     * @test
+     */
+    public function edit_shows_order_details_and_edit_form()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -60,13 +63,16 @@ class OrderTest extends TestCase
         $response->assertViewHas('PayStatus');
     }
 
-    public function test_update_updates_order_details()
+    /**
+     * @test
+     */
+    public function update_updates_order_details()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
 
         // Create an order
-        
+
         $order = Order::factory()->create();
 
         // Update the order with valid data
@@ -90,7 +96,10 @@ class OrderTest extends TestCase
         ]);
     }
 
-    public function test_update_fails_with_invalid_data()
+    /**
+     * @test
+     */
+    public function update_fails_with_invalid_data()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -108,7 +117,10 @@ class OrderTest extends TestCase
         $response->assertSessionHasErrors('status');
     }
 
-    public function test_destroy_cancels_an_order()
+    /**
+     * @test
+     */
+    public function destroy_cancels_an_order()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);

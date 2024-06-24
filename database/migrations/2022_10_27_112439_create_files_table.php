@@ -6,29 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFilesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
 
             $table->ulid('id')->primary();
-            
-            $table->string("name");
-            $table->string("typeid");
-            $table->string("type");
+
+            $table->string('name');
+            $table->string('typeid');
+            $table->string('type');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('files');

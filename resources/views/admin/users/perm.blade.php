@@ -20,7 +20,7 @@
 
                         <th scope="col" class="px-6 py-3">الصلاحية / الوظيفة </th>
                         @foreach ($perm as $permName)
-                        <th scope="col" class="px-6 py-3"> {{__("messages.".$permName->name)}}</th>
+                        <th scope="col" class="px-6 py-3"> {{ __("messages.".$permName->name) }}</th>
                         @endforeach
 
                     </tr>
@@ -32,7 +32,7 @@
 
                     <tr>
 
-                        <th class="px-6 py-3" >  {{__("messages.".$roleName->name)}}</th>
+                        <th class="px-6 py-3" >  {{ __("messages.".$roleName->name) }}</th>
                         @foreach ($perm as $key1 => $permName)
                         <td>
 
@@ -85,7 +85,7 @@
     <script>
         function chek(input)
 {
-        if (input.checked) 
+        if (input.checked)
         {
         input.value = 1;
         } else {
@@ -112,18 +112,18 @@
         <x-card-message />
         <div class="page-title p-1">
 
-            <a href="{{route('admin.indexrole')}}" class="btn btn-success"> اضافة / حذف : وظيفي</a>
+            <a href="{{ route('admin.indexrole') }}" class="btn btn-success"> اضافة / حذف : وظيفي</a>
 
         </div>
 
-        <form method="POST" class="overflow-scroll" action="{{route('admin.addPerm')}}">
+        <form method="POST" class="overflow-scroll" action="{{ route('admin.addPerm') }}">
             @csrf
             <table class="table table-striped  table-centered mb-0 ">
                 <thead class="table-dark">
                     <tr>
                         <th>الصلاحية / الوظيفة </th>
                         @foreach ($perm as $permName)
-                        <th> {{__($permName->name)}}</th>
+                        <th> {{ __($permName->name) }}</th>
                         @endforeach
 
                     </tr>
@@ -132,7 +132,7 @@
 
                 <tr>
 
-                    <th class="table-dark"> {{__($roleName->name)}}</th>
+                    <th class="table-dark"> {{ __($roleName->name) }}</th>
                     @foreach ($perm as $key1 => $permName)
                     <td>
 
@@ -161,7 +161,7 @@
         <script>
             function chek(input)
 {
-  if (input.checked) 
+  if (input.checked)
   {
     input.value = 1;
   } else {

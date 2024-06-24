@@ -22,7 +22,7 @@ class EditTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-           "status" => ["required","integer"],
+            'status' => ['required', 'integer'],
 
         ];
     }

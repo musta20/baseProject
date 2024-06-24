@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-       
+
                 </div>
 
 
@@ -87,8 +87,8 @@
 'myChart'
  --}}                <script>
                     function drawFunction(dataArray,lable,id,bgc,bc) {
-                        
-                    
+
+
                     const labels = [
                         'السبت',
                         'الاحد',
@@ -106,7 +106,7 @@
 
 
 
-                    let count = dataArray.reduce(add, 0); 
+                    let count = dataArray.reduce(add, 0);
                     const data = {
                         labels: labels,
                         datasets: [{
@@ -140,7 +140,7 @@
                 </script>
 
 
-{{-- 
+{{--
 
 public $orderWeekConplete = [];
 public $orderWeekOnProsses = [];
@@ -149,7 +149,7 @@ public $orderWeekDelevred = []; --}}
 
 
 
-{{-- 
+{{--
 
                 <div class="row">
 

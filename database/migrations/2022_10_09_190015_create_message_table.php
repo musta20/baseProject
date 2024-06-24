@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMessageTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('message', function (Blueprint $table) {
@@ -18,23 +13,18 @@ class CreateMessageTable extends Migration
 
             $table->foreignUlid('from')->references('id')->on('users')->onDelete('cascade');
             //->constrained('users');
-            
+
             $table->foreignUlid('to')->references('id')->on('users')->onDelete('cascade');
             //->constrained('users');
 
-            $table->string("title");
-            $table->integer("isred");
-            $table->longText("message");
+            $table->string('title');
+            $table->integer('isred');
+            $table->longText('message');
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('message');

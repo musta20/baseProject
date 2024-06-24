@@ -6,7 +6,7 @@
                 <h3>المدن</h3>
             </span>
             <a
-            href="{{ url('admin.JobCity.create') }}" 
+            href="{{ url('admin.JobCity.create') }}"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 إضافة مدينة</a>
 
@@ -16,7 +16,7 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                     
+
 
                         <th scope="col" class="px-6 py-3">الاسم</th>
 س
@@ -37,7 +37,7 @@
                             <a href="{{ route('admin.Jobs.index' , $item->id) }}">
                                تعديل
                             </a>
-                            <a  onclick="OpenDeleteModel(showModel('{{$item->title}}','{{route('admin.Jobs.destroy',$item->id)}}'))" 
+                            <a  onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Jobs.destroy',$item->id) }}'))"
                                 >
                                 حذف
                             </a>

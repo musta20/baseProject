@@ -13,40 +13,39 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class jobs extends Model
 {
-    use HasFactory, LogsActivity,HasUlids,Withfilter;
-    protected $guarded = [];
-
-    protected $table = "jobs";
+    use HasFactory, HasUlids,LogsActivity,Withfilter;
 
     protected static $filterFiled = [
         [
-            "lable" => "الاقدم",
-            "orderType" => Sorting::ASC, 
-            "value" => 0, 
-            "name" => "created_at"
+            'lable' => 'الاقدم',
+            'orderType' => Sorting::ASC,
+            'value' => 0,
+            'name' => 'created_at',
         ],
-        
+
         [
-            "lable" => "الاحدث",
-            "orderType" => Sorting::NEWEST, 
-            "value" => 1, 
-            "name" => "created_at"
+            'lable' => 'الاحدث',
+            'orderType' => Sorting::NEWEST,
+            'value' => 1,
+            'name' => 'created_at',
         ],
-    
-    
+
     ];
 
     protected static $filterByRelation = [''];
 
     protected static $searchField = ['title', 'message'];
+    protected $guarded = [];
 
-    public function city():BelongsTo
+    protected $table = 'jobs';
+
+    public function city(): BelongsTo
     {
-        return $this->belongsTo(job_city::class,'job_cities_id');
+        return $this->belongsTo(job_city::class, 'job_cities_id');
     }
+
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logOnly(['title', 'des','job_cities_id'])->useLogName('jobs');
+        return LogOptions::defaults()->logOnly(['title', 'des', 'job_cities_id'])->useLogName('jobs');
     }
-
 }

@@ -8,7 +8,7 @@
             <h2 class="text-3xl text-gray-700">تقديم طلب خدمة</h2>
             <hr class="my-5  border-slate-400">
             <div class="mb-5 flex gap-2">
-                <x-admin.input-card value="{{$services->name}}" label="الخدمة المطلوبة" disabled />
+                <x-admin.input-card value="{{ $services->name }}" label="الخدمة المطلوبة" disabled />
                 <x-admin.input-card value="{{ old('name') }}" name="name" label="الاسم كامل" placeholder="الاسم كامل" />
             </div>
 
@@ -23,14 +23,14 @@
                 <x-admin.input-card name="title" label="عنوان الطلب" value="{{ old('title') }}"
                     placeholder="عنوان الطلب" />
 
-                <x-admin.input-card 
-                
-                name="count" 
-                
-                placeholder="العدد" 
+                <x-admin.input-card
+
+                name="count"
+
+                placeholder="العدد"
 
                 type="number"
-         
+
                 @change="$refs.result.value = $refs.value1.value * $refs.value2.value"
 
                 value="{{ old('count') }}" x-ref="value1" label="عدد مرات طلب الخدمة" />
@@ -75,7 +75,7 @@
                 label="اضف وصف للطلب (اختياري)" />
             <div class="input-form" style="height: auto !important; ">
                 <b>المواصلة وتأكيد طلبك تعني الموافقة على
-                    <a href="{{route('term')}}">شروط واحكام الموقع اضغط هنا لقراءة الشروط والاحكام </a></b>
+                    <a href="{{ route('term') }}">شروط واحكام الموقع اضغط هنا لقراءة الشروط والاحكام </a></b>
                 <br />
                 <br />
                 <button class="btn " type="submit" name="submit"> تأكيد الطلب </button>
@@ -96,14 +96,14 @@
 
             console.log(value1Input);
                             const val1 = +value1Input;
-                            
+
                 const val2 = +value2Input.value;
                 resultInput.value = val1 * val2;
             };
 
         // $(document).ready(function() {
 
-         
+
 
         //     value1Input.addEventListener('input', calculateResult);
 

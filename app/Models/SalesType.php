@@ -10,15 +10,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class SalesType extends Model
 {
-    use HasFactory, LogsActivity , HasUlids;
-    
+    use HasFactory, HasUlids , LogsActivity;
+
     protected $guarded = [];
-
-
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logonly(['name'])->useLogName('SalesType');
     }
-
 }

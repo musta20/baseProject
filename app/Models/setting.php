@@ -10,14 +10,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class setting extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
+    use HasFactory , HasUlids , LogsActivity;
     protected $guarded = [];
 
-    protected $table = "setting";
-
- 
-
-
+    protected $table = 'setting';
 
     /**
      * Returns the log options for the activity log.
@@ -34,10 +30,8 @@ class setting extends Model
         return LogOptions::defaults()
             // Log only the specified attributes.
             ->logOnly([
-                'title', 'des', 'keyword', 'map', 'terms', 'phone', 
-                'adress', 'email', 'billterm', 'footer', 'footertext'
+                'title', 'des', 'keyword', 'map', 'terms', 'phone',
+                'adress', 'email', 'billterm', 'footer', 'footertext',
             ])->useLogName('setting');
-        }
-
-
+    }
 }

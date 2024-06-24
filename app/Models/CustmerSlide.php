@@ -10,11 +10,8 @@ class CustmerSlide extends Model
 {
     use HasFactory ,HasUlids;
 
-        
+    protected static $logAttributes = ['url', 'img'];
+
     protected $guarded = [];
-
-
-    protected static $logAttributes = ['url','img'];
-
 
 }

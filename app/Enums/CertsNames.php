@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-
-
 enum CertsNames: string
 {
     case Highschool = 'Highschool';
@@ -12,10 +10,4 @@ enum CertsNames: string
     case Master = 'Master';
     case APhD = 'A Ph.D';
 
-
-
-
 }
-
-
-?>

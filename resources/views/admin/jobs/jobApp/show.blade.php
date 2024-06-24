@@ -72,7 +72,7 @@
             <td>
 
                 <br>
-             
+
                 <div class="card my-1 shadow-none border">
                     <div class="p-2">
                         <div class="row align-items-center">
@@ -85,7 +85,7 @@
                                 <a target="_blank" href="{{ url('/storage/' .  $job->cv) }}"
                                     class="text-muted fw-bold">
                                     السيرة الذاتية
-                                </a>  
+                                </a>
                             </div>
                             <div class="col-auto">
                                 <!-- Button -->
@@ -105,7 +105,7 @@
         </div>
     </div>
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
     <h3>طلبات التوظيف</h3>
     <hr>

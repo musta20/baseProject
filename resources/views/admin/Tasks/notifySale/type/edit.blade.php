@@ -5,34 +5,34 @@
         <x-admin-contaner>
     <x-card-message></x-card-message>
 
-<form method="POST" action="{{url('/admin/SalesType/'.$NotifyType->id)}}">
+<form method="POST" action="{{ url('/admin/SalesType/'.$NotifyType->id) }}">
     @csrf
     @method('PUT')
 
     <div class="mb-3">
         <label class="form-label"> الاسم </label>
         <input class="form-control"
-        value="{{$NotifyType->name}}"
+        value="{{ $NotifyType->name }}"
         name="name" placeholder="عنوان التصنيف" />
 
         @error('name')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
     </div>
-  
+
 
     <div  class="mb-3">
         <label class="form-label"> السعر </label>
         <input class="form-control"
-        value="{{$NotifyType->price}}"
+        value="{{ $NotifyType->price }}"
         name="price" placeholder="عنوان التصنيف" />
 
         @error('price')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -49,6 +49,6 @@
         </div>
     </div>
 </form>
-    
+
         </x-admin-contaner>
     </x-admin-layout>

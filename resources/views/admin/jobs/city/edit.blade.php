@@ -5,24 +5,24 @@
     <x-card-message></x-card-message>
 
 
-    <form method="POST" class="w-75" action="{{url('/admin/JobCity/'.$jobcity->id)}}">
+    <form method="POST" class="w-75" action="{{ url('/admin/JobCity/'.$jobcity->id) }}">
     @csrf
     @method('PUT')
 
     <div class="mb-3">
                 <label class="form-label">اسم مدينة </label>
         <input class="form-control"
-        value="{{$jobcity->name}}"
+        value="{{ $jobcity->name }}"
         name="name" placeholder=" اسم مدينة" />
 
         @error('name')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
     </div>
-  
+
 
     <div class="mb-3">
 
@@ -34,6 +34,6 @@
         </div>
     </div>
 </form>
-    
+
     </x-admin-contaner>
 </x-admin-layout>

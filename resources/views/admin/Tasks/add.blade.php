@@ -2,7 +2,7 @@
     <div class="px-5  pt-5">
         <form method="POST"  enctype="multipart/form-data" action="{{ route('admin.Task.index') }}">
             @csrf
-           
+
             <div
                 class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
                 <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600"> تعديل المهمة</span>
@@ -15,30 +15,30 @@
 
                     <div class="flex gap-3 w-full">
 
-                           
+
 
                                 <x-admin.input-card for="title"  name="title" label="عنوان المهمة" />
 
 
                         </div>
 
-                    
+
 
                         <div class="flex gap-3   ">
-                       
+
 
                                     <x-admin.input-card name="start" type="date" label="تاريخ بداية المهمة" />
                                 <x-admin.input-card name="end" type="date"   label="تاريخ إنهاء المهمة" />
 
                         </div>
                         <div class="flex gap-3 w-full" >
-                            
+
                             <x-admin.select-input  :options="$users" name="user_id"
                                 label="الى الموظف " />
                         </div>
 
                         <div class="flex gap-5 p-3 text-slate-800 ">
-                        
+
                                 <x-admin.textarea-card  name="des"   rows="4"
                                  label="تفاصيل المهمة" />
                         </div>
@@ -49,7 +49,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-3">المرفقات</h5>
-                         
+
                 <div class="mb-3">
 
                     <button
@@ -102,7 +102,7 @@
 
 
 
-{{-- 
+{{--
 <x-admin-layout>
     <h3>اسناد مهمة</h3>
     <hr>

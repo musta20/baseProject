@@ -7,7 +7,6 @@ use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
-
 class permissionSeeder extends Seeder
 {
     /**
@@ -15,7 +14,7 @@ class permissionSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $Admin = Role::create(['name' => UserRole::Admin->value]);
         $Manger = Role::create(['name' => UserRole::Manager->value]);
         $Worker = Role::create(['name' => UserRole::Employee->value]);
@@ -33,20 +32,16 @@ class permissionSeeder extends Seeder
         $TaskMangment = Permission::create(['name' => 'TaskMangment']);
         $Report = Permission::create(['name' => 'Report']);
 
-
         //$TaskMangment = Permission::create(['name' => 'Search']);
 
-        
         $Worker->givePermissionTo($Massages);
 
         $Worker->givePermissionTo($Order);
-
 
         $Manger->givePermissionTo($Massages);
         $Manger->givePermissionTo($Order);
         $Manger->givePermissionTo($CategoryServices);
         $Manger->givePermissionTo($jobs);
-
 
         $Admin->givePermissionTo($Massages);
         $Admin->givePermissionTo($Order);

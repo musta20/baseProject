@@ -6,9 +6,9 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>الصلاحية :</h3>
             </span>
-           
-            
-          
+
+
+
 
         </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
@@ -19,8 +19,8 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             الاسم</th>
-                      
-                    
+
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
 
                     </tr>
@@ -28,17 +28,17 @@
                 <tbody>
                     @foreach ($role as $item)
                     <tr class="bg-white border-b  hover:bg-gray-50 ">
-               
+
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->name }}</td>
 
-                     
+
                         <td scope="col" class="gap-2 flex px-6 py-3">
-                            
-                            
+
+
                                     <a onclick="OpenDeleteModel(showModel('{{ $item->NAME }}','{{ route('admin.removerole' , $item->id) }}'))" href="#">                                    حذف</a>
-                    
+
                             حذف</a>
 
                         </td>
@@ -66,9 +66,9 @@
 
                             <button type="submit"
                             class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                            
+
                                 حفظ</button>
-    
+
                         </div>
                     </div>
             </form>
@@ -77,7 +77,7 @@
 </x-admin.layout>
 
 
-{{-- 
+{{--
 <x-admin-layout>
     <h3>الموظفين</h3>
     <hr>
@@ -95,7 +95,7 @@
             @foreach ($role as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{__($item->name) }}</td>
+                    <td>{{ __($item->name) }}</td>
                     <td class="table-action">
                         <a onclick="OpenDeleteModel(showModel('{{ $item->NAME }}','{{ route('admin.removerole' , $item->id) }}'))" href="#"><i
                                 class="mdi  mdi-delete"></i></a>
@@ -132,7 +132,7 @@
 
         </div>
 
-   
+
 
         <x-model-box></x-model-box>
 

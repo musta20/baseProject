@@ -15,13 +15,28 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasUlids,Notifiable , HasRoles , LogsActivity , Withfilter;
+    use HasApiTokens, HasFactory, HasRoles,HasUlids , LogsActivity , Notifiable , Withfilter;
 
-    
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()->logonly(['name','email'])->useLogName('User');
-    }
+    protected static $filterFiled = [
+        [
+            'lable' => 'الاقدم',
+            'orderType' => Sorting::ASC,
+            'value' => 0,
+            'name' => 'created_at',
+        ],
+
+        [
+            'lable' => 'الاحدث',
+            'orderType' => Sorting::NEWEST,
+            'value' => 3,
+            'name' => 'created_at',
+        ],
+
+    ];
+
+    protected static $filterByRelation = 'user';
+
+    protected static $searchField = ['name', 'email'];
 
     /**
      * The attributes that are mass assignable.
@@ -32,45 +47,20 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'admin'
+        'admin',
     ];
 
-
-
-
-    protected static $filterFiled = [
-        [
-            "lable" => "الاقدم",
-            "orderType" => Sorting::ASC, 
-            "value" => 0, 
-            "name" => "created_at"
-        ],
-      
-        [
-            "lable" => "الاحدث",
-            "orderType" => Sorting::NEWEST, 
-            "value" => 3, 
-            "name" => "created_at"
-        ],
-    
-    
-    ];
-
-    protected static $filterByRelation = 'user';
-    protected static $searchField = ['name', 'email'];
-
-
-/*     public function message()
-    {
-        return $this->hasOneThrough(
-            message::class,
-            'from', // Foreign key on the cars table...
-        );
-        return $this->hasOneThrough(
-            message::class,
-            'to', // Foreign key on the cars table...
-        );
-    } */
+    /*     public function message()
+        {
+            return $this->hasOneThrough(
+                message::class,
+                'from', // Foreign key on the cars table...
+            );
+            return $this->hasOneThrough(
+                message::class,
+                'to', // Foreign key on the cars table...
+            );
+        } */
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -89,4 +79,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logonly(['name', 'email'])->useLogName('User');
+    }
 }

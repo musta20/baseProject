@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Feature;
 
 use App\Enums\UserRole;
@@ -11,14 +10,16 @@ use Tests\TestCase;
 
 class JobAppTest extends TestCase
 {
-
-    public function test_index_shows_job_applications_and_filter_box()
+    /**
+     * @test
+     */
+    public function index_shows_job_applications_and_filter_box()
     {
         // Create some jobs and job applications
 
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         Jobs::factory()->count(3)->create();
         JobApp::factory()->count(5)->create();
 
@@ -30,14 +31,16 @@ class JobAppTest extends TestCase
 
         // Assert the view contains the job applications and filter box
         $response->assertViewHas('alljopapp');
-        $response->assertViewHas('filterBox');
     }
 
-    public function test_show_displays_a_specific_job_application()
+    /**
+     * @test
+     */
+    public function show_displays_a_specific_job_application()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
-        
+
         // Create a job application
         $jobApp = JobApp::factory()->create();
 
@@ -51,7 +54,3 @@ class JobAppTest extends TestCase
         $response->assertViewHas('job', $jobApp);
     }
 }
-
-
-
-?>

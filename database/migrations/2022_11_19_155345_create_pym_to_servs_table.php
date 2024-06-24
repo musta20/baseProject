@@ -6,26 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePymToServsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('pym_to_servs', function (Blueprint $table) {
-            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
-            $table->foreignUlid("payment_id")->references("id")->on("payments")->onDelete("cascade");
+            $table->foreignUlid('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreignUlid('payment_id')->references('id')->on('payments')->onDelete('cascade');
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('pym_to_servs');

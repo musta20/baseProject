@@ -10,16 +10,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class RequiredFiles extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
-    
+    use HasFactory , HasUlids , LogsActivity;
+
     protected $guarded = [];
-
-
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logOnly(['name','service_id','type'])->useLogName('requiredfiles');
+        return LogOptions::defaults()->logOnly(['name', 'service_id', 'type'])->useLogName('requiredfiles');
     }
-
-
 }

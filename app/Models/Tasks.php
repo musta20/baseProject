@@ -12,44 +12,41 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Tasks extends Model
 {
-    use HasFactory, LogsActivity, HasUlids, Withfilter;
-
-    protected $guarded = [];
-
-
-
+    use HasFactory, HasUlids, LogsActivity, Withfilter;
 
     protected static $filterFiled = [
         [
-            "lable" => "لم يستلم المهمة بعد",
-            "orderType" => Sorting::EQULE, 
-            "value" => 0, 
-            "name" => "isdone"
+            'lable' => 'لم يستلم المهمة بعد',
+            'orderType' => Sorting::EQULE,
+            'value' => 0,
+            'name' => 'isdone',
         ],
         [
-            "lable" => "بداء العمل عليها",
-            "orderType" => Sorting::EQULE, 
-            "value" => 1, 
-            "name" => "isdone"
+            'lable' => 'بداء العمل عليها',
+            'orderType' => Sorting::EQULE,
+            'value' => 1,
+            'name' => 'isdone',
         ],
         [
-            "lable" => "الاحدث",
-            "orderType" => Sorting::NEWEST, 
-            "value" => 3, 
-            "name" => "created_at"
+            'lable' => 'الاحدث',
+            'orderType' => Sorting::NEWEST,
+            'value' => 3,
+            'name' => 'created_at',
         ],
-    
-    
+
     ];
 
     protected static $filterByRelation = 'user';
+
     protected static $searchField = ['title', 'des'];
 
+    protected $guarded = [];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logonly(['title', 'des', 'user_id'])->useLogName('task');

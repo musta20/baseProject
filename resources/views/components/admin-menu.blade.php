@@ -4,15 +4,15 @@
                 <!-- Logo Light -->
                 <a href="{{ url('admin/') }}"class="logo logo-light">
                     <span class="logo-lg ">
-                        <img 
-                        src="{{ asset('storage/' . $setting->logo) }}" 
-                        alt="logo" 
+                        <img
+                        src="{{ asset('storage/' . $setting->logo) }}"
+                        alt="logo"
                         height="55">
                     </span>
                     <span class="logo-sm ">
-                        <img 
-                        src="{{ asset('storage/' . $setting->logo) }}" 
-                        alt="small logo" 
+                        <img
+                        src="{{ asset('storage/' . $setting->logo) }}"
+                        alt="small logo"
                         height="22">
                     </span>
                 </a>
@@ -111,7 +111,7 @@
 
                             </a>
                         </li>
-                        
+
                         @can('Search')
 
                                             <li class="side-nav-item">
@@ -156,7 +156,7 @@
                                                                 <a href="{{ route('admin.showMyNotifyTask',1) }}">
                                                                     تنبيهات</a>
                                                             </li>
-                                               
+
 
                                                         </ul>
                                                     </div>
@@ -209,7 +209,7 @@
                                                                 <a href="{{ url('admin.TasksNotify.index') }}">التنبيهات</a>
                                                             </li>
                                                             <li>
-                                                               
+
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -233,25 +233,25 @@
                                                     <div class="collapse" id="sidebarEcommerce">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{route('admin.showOrderList',0)}}" >
+                                                                <a href="{{ route('admin.showOrderList',0) }}" >
                                                                     جديدة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{route('admin.showOrderList',1)}}" >
+                                                                <a href="{{ route('admin.showOrderList',1) }}" >
                                                                     مستلمة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{route('admin.showOrderList',2)}}" >
+                                                                <a href="{{ route('admin.showOrderList',2) }}" >
                                                                     طلبات
                                                                     مكتملة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{route('admin.showOrderList',3)}}" >
+                                                                <a href="{{ route('admin.showOrderList',3) }}" >
                                                                     طلبات
                                                                     مسلمة</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{route('admin.showOrderList',4)}}" >
+                                                                <a href="{{ route('admin.showOrderList',4) }}" >
                                                                     طلبات
 
                                                                     ملغية</a>
@@ -359,7 +359,7 @@
                                                             <li>
                                                                 <a href="{{ route('admin.JobApp.index') }}">طلبات التوظيف</a>
                                                             </li>
-                                                       
+
                                                         </ul>
                                                     </div>
                                                 </li>
@@ -427,7 +427,7 @@
                                             @endcan
 
 
-                                            {{--                   
+                                            {{--
                                                 <li class="side-nav-title side-nav-item">Custom</li>
 
                         <li class="side-nav-item">
@@ -951,7 +951,7 @@
                         <a href="javascript: void(0);" class="float-end close-btn text-white">
                             <i class="mdi mdi-close"></i>
                         </a>
-                        <img src="{{asset('Dashboard/help-icon.svg')}}" height="90" alt="Helper Icon Image">
+                        <img src="{{ asset('Dashboard/help-icon.svg') }}" height="90" alt="Helper Icon Image">
                         <h5 class="mt-3">Unlimited Access</h5>
                         <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
                         <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>

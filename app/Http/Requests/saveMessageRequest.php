@@ -22,9 +22,9 @@ class saveMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-        "title" => ["required","string","max:100","min:3"],
-        "message" => ["required","string","max:100","min:3"],
-        "to" => "required",
+            'title' => ['required', 'string', 'max:100', 'min:3'],
+            'message' => ['required', 'string', 'max:100', 'min:3'],
+            'to' => 'required',
         ];
     }
 }

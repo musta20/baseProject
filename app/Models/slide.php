@@ -10,17 +10,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class slide extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
-
+    use HasFactory , HasUlids , LogsActivity;
 
     protected $guarded = [];
 
-    protected $table = "slide";
-
-
+    protected $table = 'slide';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logOnly(['des','url','title','img'])->useLogName('services');
+        return LogOptions::defaults()->logOnly(['des', 'url', 'title', 'img'])->useLogName('services');
     }
 }

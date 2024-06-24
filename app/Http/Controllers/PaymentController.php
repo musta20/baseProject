@@ -8,12 +8,11 @@ use App\Models\payment;
 
 class PaymentController extends Controller
 {
- 
     public function index()
     {
         $payment = payment::latest()->paginate(10);
 
-        return view("admin.order.payment.index",  ['payment' => $payment] );
+        return view('admin.order.payment.index', ['payment' => $payment]);
     }
 
     /**
@@ -23,7 +22,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        return view("admin.order.payment.add" );
+        return view('admin.order.payment.add');
 
     }
 
@@ -36,18 +35,16 @@ class PaymentController extends Controller
     public function store(storePaymentRequest $request)
     {
 
-        
         payment::create([
             'name' => $request->name,
         ]);
-       
-        return redirect()->route('admin.Payment.index')->with('OkToast','تم إضافة البيانات');
+
+        return redirect()->route('admin.Payment.index')->with('OkToast', 'تم إضافة البيانات');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
     public function show(payment $payment)
@@ -62,7 +59,7 @@ class PaymentController extends Controller
      */
     public function edit(payment $Payment)
     {
-        return view("admin.order.payment.edit",  ['payment' => $Payment] );
+        return view('admin.order.payment.edit', ['payment' => $Payment]);
 
     }
 
@@ -73,18 +70,17 @@ class PaymentController extends Controller
      * @param  \App\Models\payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(updatePaymentRequest $request,payment  $Payment)
+    public function update(updatePaymentRequest $request, payment $Payment)
     {
-       // $data = $request->validate( $this->rule,$this->messages());
+        // $data = $request->validate( $this->rule,$this->messages());
 
         //$payment = payment::find($id);
 
-        $Payment->name=$request->name;
-
+        $Payment->name = $request->name;
 
         $Payment->save();
 
-        return redirect()->route('admin.Payment.index')->with('OkToast','تم تعديل العنصر');
+        return redirect()->route('admin.Payment.index')->with('OkToast', 'تم تعديل العنصر');
 
     }
 
@@ -96,8 +92,9 @@ class PaymentController extends Controller
      */
     public function destroy(payment $Payment)
     {
-      //  $payment = payment::find($id);
+        //  $payment = payment::find($id);
         $Payment->delete();
-        return redirect()->route('admin.Payment.index')->with('OkToast','تم حذف العنصر');
+
+        return redirect()->route('admin.Payment.index')->with('OkToast', 'تم حذف العنصر');
     }
 }

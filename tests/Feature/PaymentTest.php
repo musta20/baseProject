@@ -9,8 +9,10 @@ use Tests\TestCase;
 
 class PaymentTest extends TestCase
 {
-
-    public function test_authenticated_user_can_view_payment_list()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_view_payment_list()
     {
         // Create a user and authenticate
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
@@ -27,7 +29,10 @@ class PaymentTest extends TestCase
         $response->assertViewHas('payment');
     }
 
-    public function test_unauthenticated_user_cannot_view_payment_list()
+    /**
+     * @test
+     */
+    public function unauthenticated_user_cannot_view_payment_list()
     {
         // Get the response without authentication
         $response = $this->get('/admin/Payment');
@@ -36,7 +41,10 @@ class PaymentTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-    public function test_authenticated_user_can_access_create_payment_form()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_access_create_payment_form()
     {
         // Create a user and authenticate
         $user = User::factory()->withRole(UserRole::Admin->value)->create();

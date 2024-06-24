@@ -54,7 +54,7 @@
 
 
                 @foreach ($reports as $item)
-                
+
                     @switch($type)
                         @case(0)
                             @if ($item->count * $item->servicesNmae->price - $item->payed)
@@ -136,7 +136,7 @@
                         @default
                     @endswitch
                 @endforeach
-        
+
         </table>
     </section>
 </body>

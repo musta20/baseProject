@@ -17,12 +17,12 @@ class ActivityFactory extends Factory
     public function definition(): array
     {
         return [
-            "causer_type" => $this->faker->word(),
-            "causer_id" => $this->faker->word(),
-            "description" => $this->faker->sentence(),
-            "subject_type" => $this->faker->word(),
-            "subject_id" => $this->faker->word(),
-            "properties" => $this->faker->sentence(),
+            'causer_type' => $this->faker->word(),
+            'causer_id' => $this->faker->word(),
+            'description' => $this->faker->sentence(),
+            'subject_type' => $this->faker->word(),
+            'subject_id' => $this->faker->word(),
+            'properties' => $this->faker->sentence(),
         ];
     }
 }

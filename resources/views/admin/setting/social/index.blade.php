@@ -17,13 +17,13 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            الصورة 
+                            الصورة
                         </th>
                         <th scope="col" class="px-6 py-3">
                             الرابط
                         </th>
-                     
-                       
+
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
                     </tr>
                 </thead>
@@ -35,9 +35,9 @@
 
                             <td scope="col" class="px-6 py-3">
                                 {{ $item->url }}</td>
-                            
-                           
-                  
+
+
+
                         <td scope="col" class="px-6  flex gap-3 py-3">
                             <a href="{{ route('admin.Social.edit' , $item->id) }}">
                             تعديل

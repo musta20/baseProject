@@ -2,10 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\Category;
 use App\Models\setting;
-use App\Models\Store;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class LayoutComposers
@@ -27,14 +24,13 @@ class LayoutComposers
     {
         $uri = url()->current();
 
-
-        if (!strpos($uri, 'admin')) {
+        if (! strpos($uri, 'admin')) {
             $setting = setting::first();
 
             $this->props = [
-             
-                "setting"=> $setting ,
-           
+
+                'setting' => $setting,
+
             ];
         }
     }
@@ -42,7 +38,6 @@ class LayoutComposers
     /**
      * Bind data to the view.
      *
-     * @param  View  $view
      * @return void
      */
     public function compose(View $view)

@@ -7,15 +7,10 @@ use Tests\TestCase;
 
 class SocialTest extends TestCase
 {
-
-    protected function authenticateUser()
-    {
-        $user = User::factory()->withRole(UserRole::Admin->value)->create();
-        $this->actingAs($user);
-        return $user;
-    }
-
-    public function test_authenticated_user_can_view_social_links_list()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_view_social_links_list()
     {
         $this->authenticateUser();
 
@@ -29,14 +24,20 @@ class SocialTest extends TestCase
         $response->assertViewHas('allsocial');
     }
 
-    public function test_unauthenticated_user_cannot_view_social_links_list()
+    /**
+     * @test
+     */
+    public function unauthenticated_user_cannot_view_social_links_list()
     {
         $response = $this->get('/admin/Social');
 
         $response->assertRedirect('/login');
     }
 
-    public function test_authenticated_user_can_access_create_social_link_form()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_access_create_social_link_form()
     {
         $this->authenticateUser();
 
@@ -46,7 +47,10 @@ class SocialTest extends TestCase
         $response->assertViewIs('admin.setting.social.add');
     }
 
-    public function test_authenticated_user_can_create_a_social_link()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_create_a_social_link()
     {
         $this->authenticateUser();
 
@@ -62,20 +66,26 @@ class SocialTest extends TestCase
         $this->assertDatabaseHas('social', ['url' => 'https://example.com']);
     }
 
-    public function test_authenticated_user_can_view_a_social_link()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_view_a_social_link()
     {
         $this->authenticateUser();
 
         $socialLink = Social::factory()->create();
 
-        $response = $this->get('/admin/Social/' . $socialLink->id. '/edit');
+        $response = $this->get('/admin/Social/' . $socialLink->id . '/edit');
 
         $response->assertStatus(200);
         $response->assertViewIs('admin.setting.social.edit');
         $response->assertViewHas('social', $socialLink);
     }
 
-    public function test_authenticated_user_can_update_a_social_link()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_update_a_social_link()
     {
         $this->authenticateUser();
 
@@ -93,7 +103,10 @@ class SocialTest extends TestCase
         $this->assertDatabaseHas('social', ['url' => 'https://updated.com']);
     }
 
-    public function test_authenticated_user_can_delete_a_social_link()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_delete_a_social_link()
     {
         $this->authenticateUser();
 
@@ -106,7 +119,13 @@ class SocialTest extends TestCase
         $this->assertDatabaseMissing('social', ['id' => $socialLink->id]);
     }
 
+    protected function authenticateUser()
+    {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
+        return $user;
+    }
+
     // ... (Additional tests for error scenarios, etc.)
 }
-
-?>

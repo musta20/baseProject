@@ -11,7 +11,7 @@
                 <label class="form-label"> نوع السجل</label>
                 <select class="form-control"   name="type">
                     @foreach ($types as $item)
-                        <option value={{$item->id}} >{{$item->name}}</option>
+                        <option value={{ $item->id }} >{{ $item->name }}</option>
                     @endforeach
                 </select>
                 @error('type')
@@ -19,19 +19,19 @@
                         {{ $message }}
                     </span>
                 @enderror
-            </div>      
-                 
+            </div>
+
             <div class="mb-3" >
                 <label  class="form-label">الى الموظف : </label>
                 <select name="user_id" class="form-control" >
                     @foreach ($users as $item)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
-        
+
                 @error('user_id')
                 <span class="helper">
-                {{$message}}
+                {{ $message }}
                 </span>
                 @enderror
             </div>

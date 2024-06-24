@@ -40,10 +40,10 @@
                     </td>
                 </tr>
             @endforeach
-    
-              
+
+
               <x-model-box></x-model-box>
-   
+
         </table>
             </x-admin-contaner>
 </x-admin-layout>

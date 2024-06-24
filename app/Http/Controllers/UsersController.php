@@ -5,20 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createUserRequest;
 use App\Http\Requests\loginRequest;
 use App\Http\Requests\updateUserRequest;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use  App\Models\Role;
-use  App\Models\Permission;
-
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-
-    
-
+    public $ADMIN = 'Admin';
+    public $MANGER = 'Manager';
+    public $WORKER = 'employee';
 
     /**
      * Display a listing of the resource.
@@ -27,27 +26,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view("admin.users.main");
+        return view('admin.users.main');
     }
 
-
-
-
-    public function UsersList()
-    {
-       // $locale = App::currentLocale();
-
-       $allRole = Role::all();
-
-        $filterBox=User::showFilter(realData: $allRole, relType: 'roles', relName: 'الصلاحية');
-
-        $Users = User::Filter()->with('roles')->requestPaginate();
-
-        return view("admin.users.index", [
-        'Users' => $Users,
-        'filterBox'=>$filterBox,
-        'allRole'=>$allRole]);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -56,119 +37,30 @@ class UsersController extends Controller
     public function create()
     {
         $role = Role::get()->reverse();
-        return view("admin.users.add", ['role' => $role]);
+
+        return view('admin.users.add', ['role' => $role]);
     }
-
-
-    public function loginView()
-    {
-      //
-         if(Auth::user()){
-            return redirect('admin/');
-        } 
-        return view("auth.login");
-    }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/admin');
-    }
-
-    public function login(loginRequest $credentials)
-    {
-
-
-      
-
-        if ($credentials->authenticate()) {
-            $credentials->session()->regenerate();
-
-            return redirect()->intended('admin');
-        }
-
-        return back()->withErrors([
-            'email' => 'كلمة المرور او البريد الالكتروني غير صحيح',
-        ])->onlyInput('email');
-    }
-
-
-    public function createUser(createUserRequest $request)
-    {
-
-        //$user = $request->validate($this->Rule, $this->messages());
-
-        // $user = $request->all();
-        $request['password'] = Hash::make($request->password);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
-
-     //   $user->givePermissionTo('edit articles');
-
-        return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
-    }
-public function addpermison()
-{
-
- $TaskMangment = Permission::create(['name' => 'Search']);
-
-
-    return "new perm added";
-}
-
-    public $ADMIN = 'Admin';
-    public $MANGER = 'Manager';
-    public $WORKER = 'employee';
-
-    
-
-    public function createAllPerm()
-    {
-      
-        
-
-       // $user = User::create(['email' => 'saif.muh2020@gmail.com', 'name' => 'مصطفى', 'password' => Hash::make('Aa@123456')]);
-
-      //  $user->assignRole($this->ADMIN);
-
-
-        return ("<h1>all perm added and admin created</h1>");
-    }
-
-
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $user = $request->validate($this->Rule, $this->messages());
 
-        if($request->hasFile('img'))
-    {
-        $$user['img'] =  $request->file('img')->store('userimg','public');
-    }
+        if ($request->hasFile('img')) {
+            $$user['img'] = $request->file('img')->store('userimg', 'public');
+        }
 
-    $user['password'] = Hash::make($request->password);
+        $user['password'] = Hash::make($request->password);
 
-        $role= Role::findById($request['role']);
+        $role = Role::findById($request['role']);
 
         $user = User::create($user);
 
-        $user->assignRole( $role);
-   
+        $user->assignRole($role);
 
         return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
     }
@@ -195,7 +87,7 @@ public function addpermison()
 
         $role = Role::get()->reverse();
 
-        return view("admin.users.edit",  ['user' => $User, 'role' => $role]);
+        return view('admin.users.edit', ['user' => $User, 'role' => $role]);
     }
 
     /**
@@ -205,107 +97,37 @@ public function addpermison()
      * @param  \App\Models\users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(updateUserRequest $request,User $User)
+    public function update(updateUserRequest $request, User $User)
     {
 
-      
-        if($request->hasFile('img'))
-        {
-            $User->img =  $request->file('img')->store('userimg','public');
+        if ($request->hasFile('img')) {
+            $User->img = $request->file('img')->store('userimg', 'public');
         }
 
         if ($request->password) {
             $request->validate($this->PasswordRule, $this->messages());
-            $User->password =  Hash::make($request->password);
+            $User->password = Hash::make($request->password);
         }
 
-        $User->name =  $request->name;
-        $User->email =  $request->email;
+        $User->name = $request->name;
+        $User->email = $request->email;
         $roles = Role::all();
 
-       if( $User->hasAnyRole($roles)){
-        $User->removeRole($User->getRoleNames()[0]);
-       }
+        if ($User->hasAnyRole($roles)) {
+            $User->removeRole($User->getRoleNames()[0]);
+        }
         foreach ($roles as $item) {
 
-           if($item->id == $request['role']) {
-            $User->assignRole($item->name);
+            if ($item->id == $request['role']) {
+                $User->assignRole($item->name);
 
-           }
+            }
         }
-
 
         $User->save();
 
         return redirect()->route('admin.UsersList')->with('OkToast', 'تم تعديل الموظف');
     }
-
-    public function addPerm(Request $request)
-    {
-        $allRolToP =$request->all();
-        $removed = array_shift($allRolToP);
-
-        foreach ( $allRolToP as $key=>$va ) {
-           
-          $toRole=json_decode($key);
-
-          $Role=Role::find($toRole->permRole->role);
-          $perm=Permission::find($toRole->permRole->perm);
-
-          if($va){
-            
-          $Role->givePermissionTo($perm);
-
-          }else{
-
-            $Role->revokePermissionTo($perm);
-
-          }
-            
-        }
-
-        return redirect()->route('admin.perm')->with('OkToast', 'تعديل الصلاحيات');
-
-    }
-
-   
-
-    public function  indexrole()
-    {
-        $role =Role::all();
-        return view("admin.users.role.index",['role'=>$role]);
-    }
-    
-    public function rmrole(Role $role)
-    {
-        
-      //  $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
-      //  Role::create(['name' => $role['role']]);
-      if( $role->name ==$this->ADMIN){
-        return redirect()->route('admin.perm')->with('OkToast', 'لا يمكن حذف المدير   ');
-
-      }
-      $role->delete();
-        return redirect()->route('admin.perm')->with('OkToast', 'تم حذ العنصر ');
-
-    }
-
-    public function addrole(Request $request)
-    {
-        $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
-        Role::create(['name' => $role['role']]);
-        return redirect()->route('admin.perm')->with('OkToast', 'تم اضافة الصلاحية');
-
-    }
-    public function Perm()
-    {
-        $role = Role::all();
-        $perm = Permission::all();
-      return view('admin.users.perm',['role'=>$role,'perm'=> $perm ]);
-    }
-
-
-
 
     /**
      * Remove the specified resource from storage.
@@ -316,6 +138,162 @@ public function addpermison()
     public function destroy(User $user)
     {
         $user->delete();
+
         return redirect()->route('admin.UsersList')->with('OkToast', 'تم حذف العنصر');
+    }
+
+    public function UsersList()
+    {
+        // $locale = App::currentLocale();
+
+        $allRole = Role::all();
+
+        $filterBox = User::showFilter(realData: $allRole, relType: 'roles', relName: 'الصلاحية');
+
+        $Users = User::Filter()->with('roles')->requestPaginate();
+
+        return view('admin.users.index', [
+            'Users' => $Users,
+            'filterBox' => $filterBox,
+            'allRole' => $allRole]);
+    }
+
+    public function loginView()
+    {
+        //
+        if (Auth::user()) {
+            return redirect('admin/');
+        }
+
+        return view('auth.login');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/admin');
+    }
+
+    public function login(loginRequest $credentials)
+    {
+
+        if ($credentials->authenticate()) {
+            $credentials->session()->regenerate();
+
+            return redirect()->intended('admin');
+        }
+
+        return back()->withErrors([
+            'email' => 'كلمة المرور او البريد الالكتروني غير صحيح',
+        ])->onlyInput('email');
+    }
+
+    public function createUser(createUserRequest $request)
+    {
+
+        //$user = $request->validate($this->Rule, $this->messages());
+
+        // $user = $request->all();
+        $request['password'] = Hash::make($request->password);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        //   $user->givePermissionTo('edit articles');
+
+        return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
+    }
+
+    public function addpermison()
+    {
+
+        $TaskMangment = Permission::create(['name' => 'Search']);
+
+        return 'new perm added';
+    }
+
+    public function createAllPerm()
+    {
+
+        // $user = User::create(['email' => 'saif.muh2020@gmail.com', 'name' => 'مصطفى', 'password' => Hash::make('Aa@123456')]);
+
+        //  $user->assignRole($this->ADMIN);
+
+        return '<h1>all perm added and admin created</h1>';
+    }
+
+    public function addPerm(Request $request)
+    {
+        $allRolToP = $request->all();
+        $removed = array_shift($allRolToP);
+
+        foreach ($allRolToP as $key => $va) {
+
+            $toRole = json_decode($key);
+
+            $Role = Role::find($toRole->permRole->role);
+            $perm = Permission::find($toRole->permRole->perm);
+
+            if ($va) {
+
+                $Role->givePermissionTo($perm);
+
+            } else {
+
+                $Role->revokePermissionTo($perm);
+
+            }
+
+        }
+
+        return redirect()->route('admin.perm')->with('OkToast', 'تعديل الصلاحيات');
+
+    }
+
+    public function indexrole()
+    {
+        $role = Role::all();
+
+        return view('admin.users.role.index', ['role' => $role]);
+    }
+
+    public function rmrole(Role $role)
+    {
+
+        //  $role = $request->validate(['role'=>"required|string|max:100|min:3"], $this->messages());
+        //  Role::create(['name' => $role['role']]);
+        if ($role->name == $this->ADMIN) {
+            return redirect()->route('admin.perm')->with('OkToast', 'لا يمكن حذف المدير   ');
+
+        }
+        $role->delete();
+
+        return redirect()->route('admin.perm')->with('OkToast', 'تم حذ العنصر ');
+
+    }
+
+    public function addrole(Request $request)
+    {
+        $role = $request->validate(['role' => 'required|string|max:100|min:3'], $this->messages());
+        Role::create(['name' => $role['role']]);
+
+        return redirect()->route('admin.perm')->with('OkToast', 'تم اضافة الصلاحية');
+
+    }
+
+    public function Perm()
+    {
+        $role = Role::all();
+        $perm = Permission::all();
+
+        return view('admin.users.perm', ['role' => $role, 'perm' => $perm]);
     }
 }

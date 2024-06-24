@@ -32,7 +32,7 @@
 <script>
   function showModel(name, uri) {
 
-  return `<form method='POST' 
+  return `<form method='POST'
   class='flex flex-col gap-3 py-2 mx-auto'
             action='${uri}' >
             @method('DELETE')
@@ -40,10 +40,10 @@
             <div class='' >
             <label> هل انت متأكد من حذف العنصر :</label>
             <br>
-            
+
             <h3 class='text-xl py-3'>${name}</h3>
             <hr>
-            <button type='submit' 
+            <button type='submit'
             class='my-2 bg-red-500 flex gap-2 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded'
 
             >حذف</button>
@@ -66,15 +66,15 @@
         let span = document.getElementsByClassName("close")[0];
         let modal = document.getElementById("OpenDeleteModel");
         let itemToDelete = document.getElementById("itemToDelete");
-        
+
         itemToDelete.innerHTML=e;
 
         modal.style.display = "block";
         span.onclick = function() {
         modal.style.display = "none";
-        
+
     }
-    
+
 
     window.onclick = function(event) {
       if (event.target == modal) {

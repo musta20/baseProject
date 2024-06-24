@@ -6,20 +6,20 @@
 
     <x-card-message></x-card-message>
 
-<form method="POST" class="w-75" action="{{url('/admin/Number')}}">
+<form method="POST" class="w-75" action="{{ url('/admin/Number') }}">
     @csrf
 
     <div class="mb-3">
         <label class="form-label"> الصورة</label>
-        <input class="form-control" 
-        
-        value="{{old('img')}}"
+        <input class="form-control"
+
+        value="{{ old('img') }}"
 
         name="img" placeholder=" الصورة" />
-        
+
         @error('img')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -29,13 +29,13 @@
     <div class="mb-3">
         <label class="form-label"> النص</label>
         <input class="form-control"
-        value="{{old('title')}}"
+        value="{{ old('title') }}"
 
         name="title" placeholder=" النص" />
-        
+
         @error('title')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -44,13 +44,13 @@
     <div class="mb-3">
         <label class="form-label"> الرقم</label>
         <input class="form-control"
-        value="{{old('number')}}"
+        value="{{ old('number') }}"
 
         name="number" placeholder=" الرقم" />
-        
+
         @error('number')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 

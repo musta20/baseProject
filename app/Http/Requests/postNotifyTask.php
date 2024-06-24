@@ -22,9 +22,9 @@ class postNotifyTask extends FormRequest
     public function rules(): array
     {
         return [
-            
-        "duration" => ["required","integer","min:1"],
-        "issueAt" => ["required","date"],
+
+            'duration' => ['required', 'integer', 'min:1'],
+            'issueAt' => ['required', 'date'],
         ];
     }
 }

@@ -22,9 +22,9 @@ class updateOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "time" =>[ "nullable","date"],
+            'time' => ['nullable', 'date'],
 
-            "status" => ["required","integer","max:4","min:0"]
+            'status' => ['required', 'integer', 'max:4', 'min:0'],
         ];
     }
 }

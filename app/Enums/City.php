@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-
-
 enum City: string
 {
     case Riyadh = 'الرياض';
@@ -15,12 +13,12 @@ enum City: string
     case Makkah = 'مكة المكرمة';
     case Yanbu = 'ينبع';
     case Taif = 'الطائف';
-    case  AlBaha = 'الباحة';
-    case  AlJouf = 'الجوف';
-    case  Tabuk = 'تبوك';
-    case  AlMajmaah = 'المجمعة';
-    case  AlKharag = 'الخرج';
-    case  AlAhsa = 'الاحساء';
-    case  Jubail = 'الجبيل';
-    case  AlDawadmi = 'الدوادمي';
-    }
+    case AlBaha = 'الباحة';
+    case AlJouf = 'الجوف';
+    case Tabuk = 'تبوك';
+    case AlMajmaah = 'المجمعة';
+    case AlKharag = 'الخرج';
+    case AlAhsa = 'الاحساء';
+    case Jubail = 'الجبيل';
+    case AlDawadmi = 'الدوادمي';
+}

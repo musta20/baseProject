@@ -21,10 +21,10 @@
                             الموظف</th>
 
                         <th scope="col" class="px-6 py-3">
-                            تاريخ البداية 
+                            تاريخ البداية
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            
+
                             تاريخ الانتهاء
                         </th>
                         <th scope="col" class="px-6 py-3">الحالة</th>
@@ -35,7 +35,7 @@
                 <tbody>
                     @foreach ($alltask as $item)
                     <tr class="bg-white border-b  hover:bg-gray-50 ">
-               
+
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->title }}</td>
@@ -48,9 +48,9 @@
                         <td scope="col" class="px-6 py-3">
                             {{ $item->end }}</td>
                         <td scope="col" class="px-6 py-3">
-                       
-                           {{__('messages.'.$option[$item->isdone]->name)}}
-                           
+
+                           {{ __('messages.'.$option[$item->isdone]->name) }}
+
                         </td>
 
                         <td scope="col" class="gap-2 flex px-6 py-3">

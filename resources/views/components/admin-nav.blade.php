@@ -71,22 +71,22 @@
                                 </form>
                             </div>
                         </li>
-                        {{-- 
+                        {{--
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="https://coderthemes.com/hyper_2/saas/index-rtl.html#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{asset('Dashboard/us.jpg')}}" alt="user-image" class="me-0 me-sm-1" height="12"> 
+                                <img src="{{ asset('Dashboard/us.jpg') }}" alt="user-image" class="me-0 me-sm-1" height="12">
                                 <span class="align-middle d-none d-lg-inline-block">English</span> <i class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu">
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="{{asset('Dashboard/germany.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                                    <img src="{{ asset('Dashboard/germany.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="{{asset('Dashboard/italy.jpg')}}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                                    <img src="{{ asset('Dashboard/italy.jpg') }}" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
                                 </a>
 
                             </div>
@@ -125,7 +125,7 @@
                                                 <a href="{{ route('admin.admin.MainTask') }}"
                                                     class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                                     <div class="card-body">
-                                                        {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>   
+                                                        {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
  --}}
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0">
@@ -153,7 +153,7 @@
                                                 <a href="{{ url('/admin/inbox/2') }}"
                                                     class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                                     <div class="card-body">
-                                                        {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>   
+                                                        {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
  --}} <div class="d-flex align-items-center">
                                                             <div class="flex-shrink-0">
                                                                 <div class="notify-icon bg-primary">
@@ -442,7 +442,7 @@
                     @endauth
                     <!-- Topbar Search Form -->
                     <div class="app-search dropdown">
-                                   
+
                     </div>
                 </div>
             </div>

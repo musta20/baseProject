@@ -17,9 +17,9 @@ class socialFactory extends Factory
     public function definition(): array
     {
         return [
-            "img" => $this->faker->name(),
-            "url" => $this->faker->name(),
-            
+            'img' => $this->faker->name(),
+            'url' => $this->faker->name(),
+
         ];
     }
 }

@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\storeJobCityRequest;
 use App\Http\Requests\updateJobCityRequest;
 use App\Models\job_city;
-use Illuminate\Http\Request;
 
 class JobCityController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +16,8 @@ class JobCityController extends Controller
     public function index()
     {
         $jobcity = job_city::latest()->paginate(10);
-        
-        return view("admin.jobs.city.index",  ['jobcity' => $jobcity] );
+
+        return view('admin.jobs.city.index', ['jobcity' => $jobcity]);
     }
 
     /**
@@ -29,7 +27,7 @@ class JobCityController extends Controller
      */
     public function create()
     {
-        return view("admin.jobs.city.add" );
+        return view('admin.jobs.city.add');
 
     }
 
@@ -41,52 +39,49 @@ class JobCityController extends Controller
      */
     public function store(storeJobCityRequest $request)
     {
-        
-    job_city::create($request);
-   
-    return redirect('/admin/JobCity')->with('OkToast','تم إضافة البيانات');
+
+        job_city::create($request);
+
+        return redirect('/admin/JobCity')->with('OkToast', 'تم إضافة البيانات');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\job_city  $job_city
      * @return \Illuminate\Http\Response
      */
     public function show(job_city $job_city)
     {
-        return view("admin.jobs.city.edit",  ['jobcity' => $job_city] );
+        return view('admin.jobs.city.edit', ['jobcity' => $job_city]);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\job_city  $job_city
      * @return \Illuminate\Http\Response
      */
     public function update(updateJobCityRequest $request, job_city $job_city)
     {
 
-        $job_city->name=$request->name;
+        $job_city->name = $request->name;
 
         $job_city->save();
 
-        return redirect('/admin/JobCity/')->with('OkToast','تم تعديل العنصر');
+        return redirect('/admin/JobCity/')->with('OkToast', 'تم تعديل العنصر');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\job_city  $job_city
      * @return \Illuminate\Http\Response
      */
     public function destroy(job_city $job_city)
     {
         $job_city->delete();
-        return redirect('/admin/JobCity/')->with('OkToast','تم حذف العنصر');
+
+        return redirect('/admin/JobCity/')->with('OkToast', 'تم حذف العنصر');
     }
 }

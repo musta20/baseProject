@@ -43,8 +43,8 @@
         <script>
             function showModel(e) {
 
-                return `<form method='POST' 
-        
+                return `<form method='POST'
+
         action='{{ url('/admin/NotifySales/${e.id}') }}' >
         @method('DELETE')
         @csrf

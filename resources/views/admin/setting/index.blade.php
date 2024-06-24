@@ -4,7 +4,7 @@
             @csrf
             <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
                 <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600"> اعداد الموقغ</span>
-           
+
             </div>
             <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
                 <form enctype="multipart/form-data" method="POST" action="{{ route('admin.Setting.update' , $setting->id) }}">
@@ -16,7 +16,7 @@
 
 
                     @if ($setting->logo)
-                    <img width="80" src="{{asset('storage/'.$setting->logo)}}">
+                    <img width="80" src="{{ asset('storage/'.$setting->logo) }}">
                     @endif
 
 
@@ -32,7 +32,7 @@
 
                     <x-admin.textarea-card label="وصف الموقع" name="des" value="{{ $setting->des }}"  placeholder=" وصف  الموقع" />
 
-                    <x-admin.textarea-card label="وصف اسفل الموقع" name="footertext" value="{{ $setting->footertext}}" />
+                    <x-admin.textarea-card label="وصف اسفل الموقع" name="footertext" value="{{ $setting->footertext }}" />
 
                             <x-admin.textarea-card value="{{ $setting->map }}"  label="رابط موقع جوجل " name="map"
                                 placeholder="رابط موقع جوجل " />
@@ -40,7 +40,7 @@
 
                             <x-admin.textarea-card value="{{ $setting->keyword }}"  label="  كلمات مفتاحية" name="keyword"
                                 placeholder="  كلمات مفتاحية" />
-                                
+
 
                             <x-admin.textarea-card value="{{ $setting->copyright }}" name="copyright"
                                 placeholder="حقوق النشر"  label="حقوق النشر" />
@@ -52,7 +52,7 @@
             <x-admin.input-card value="{{ $setting->adress }}" name="adress"
                                 placeholder="العنوان"  label="العنوان" />
 
-                                
+
                             <x-admin.input-card value="{{ $setting->email }}" name="email"
                                 placeholder="البريد الالكتروني"  label="البريد الالكتروني" />
 

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\delivery;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class deliverySeeder extends Seeder
@@ -17,7 +16,7 @@ class deliverySeeder extends Seeder
 
         foreach ($delivery as $value) {
             delivery::factory()->create([
-                'name' => $value
+                'name' => $value,
             ]);
         }
     }

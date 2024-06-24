@@ -9,8 +9,10 @@ use Tests\TestCase;
 
 class JobsTest extends TestCase
 {
-
-    public function test_it_lists_all_jobs()
+    /**
+     * @test
+     */
+    public function it_lists_all_jobs()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -24,7 +26,10 @@ class JobsTest extends TestCase
         $response->assertViewHas('alljobs');
     }
 
-    public function test_it_shows_create_job_form()
+    /**
+     * @test
+     */
+    public function it_shows_create_job_form()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -35,7 +40,10 @@ class JobsTest extends TestCase
         $response->assertViewIs('admin.jobs.add');
     }
 
-    public function test_it_stores_a_new_job()
+    /**
+     * @test
+     */
+    public function it_stores_a_new_job()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -48,7 +56,10 @@ class JobsTest extends TestCase
         $this->assertDatabaseHas('jobs', $data);
     }
 
-    public function test_it_shows_edit_job_form()
+    /**
+     * @test
+     */
+    public function it_shows_edit_job_form()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -62,7 +73,10 @@ class JobsTest extends TestCase
         $response->assertViewHas('Jobs');
     }
 
-    public function test_it_updates_a_job()
+    /**
+     * @test
+     */
+    public function it_updates_a_job()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);
@@ -81,7 +95,10 @@ class JobsTest extends TestCase
         $this->assertDatabaseHas('jobs', $data);
     }
 
-    public function test_it_deletes_a_job()
+    /**
+     * @test
+     */
+    public function it_deletes_a_job()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);

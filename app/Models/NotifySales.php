@@ -10,28 +10,23 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class NotifySales extends Model
 {
-    use HasFactory , LogsActivity,HasUlids;
-    
-    protected $guarded = [];
+    use HasFactory , HasUlids,LogsActivity;
 
+    protected $guarded = [];
 
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id','id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function from()
     {
-        return $this->belongsTo(User::class,'from','id');
+        return $this->belongsTo(User::class, 'from', 'id');
     }
-
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logOnly(['name'])->useLogName('NotifySales');
-;
+
     }
-
-
-
 }

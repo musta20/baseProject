@@ -18,10 +18,10 @@ class messageFactory extends Factory
         return [
             'from' => User::factory()->withRole(UserRole::Admin->value)->create()->id,
             'to' => User::factory()->withRole(UserRole::Admin->value)->create()->id,
-            'isred' => rand(0,1),
+            'isred' => rand(0, 1),
             'title' => $this->faker->name(),
             'message' => $this->faker->paragraph(),
-            
+
         ];
     }
 }

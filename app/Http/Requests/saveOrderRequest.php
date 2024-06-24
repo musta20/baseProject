@@ -22,19 +22,19 @@ class saveOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "count" => "integer|digits_between:1,50",
-            "delivery_id" => "required",
-            "payment_id" => "required",
-    
-            "email" => "required|email|max:100|min:3",
-            "title" => "required|string|max:100|min:3",
-            "name" => "required|string|max:100|min:3",
+            'count' => 'integer|digits_between:1,50',
+            'delivery_id' => 'required',
+            'payment_id' => 'required',
+
+            'email' => 'required|email|max:100|min:3',
+            'title' => 'required|string|max:100|min:3',
+            'name' => 'required|string|max:100|min:3',
             //  "adress" => "required|string|max:255|min:3",
-    
-            "time" => "required|date",
-            "name" => "required|string|max:100|min:3",
-            "des" => "nullable|string|max:255|min:5",
-            "phone" => "required|numeric|digits_between:10,10"
+
+            'time' => 'required|date',
+            'name' => 'required|string|max:100|min:3',
+            'des' => 'nullable|string|max:255|min:5',
+            'phone' => 'required|numeric|digits_between:10,10',
         ];
     }
 }

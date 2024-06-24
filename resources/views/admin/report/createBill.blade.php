@@ -5,7 +5,7 @@
             @csrf
             <div class=" flex justify-between p-3 mb-3 bg-slate-100 w-full rounded-md border border-gray-300 ">
                 <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600"> إنشاء فاتورة</span>
-              
+
             </div>
             <div class=" p-3 bg-slate-100 rounded-md border border-gray-300 ">
                 <form class="mx-auto w-1/2  " method="POST" action="{{ route('admin.Report.postCreateBill') }}">
@@ -26,7 +26,7 @@
                     <div class=" p-3 text-slate-800 ">
                         <x-admin.input-card name="phone" placeholder="رقم الهاتف" label=" هاتف العميل " />
 
-                       
+
                     </div>
 
                     <span class="flex gap-5" >
@@ -35,16 +35,16 @@
                         <x-admin.input-card name="des" placeholder=" الوصف" label=" الوصف  " />
                         <x-admin.input-card name="price" placeholder=" السعر" label=" السعر   " />
                         <x-admin.input-card name="count"  placeholder=" العدد" label=" الكمية  " />
-                       
+
 
                     </span>
                     <x-admin.input-card name="price" placeholder=" المبلغ" label=" المبلغ  " />
 
                     <hr>
-                    <button type="submit" 
+                    <button type="submit"
                         class="bg-blue-500 my-4 flex gap-2 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                
-                          
+
+
                         أنشاء</button>
                 </form>
 
@@ -57,7 +57,7 @@
 
 
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
     <h3>إضافة وظيفة</h3>
     <hr>
@@ -150,12 +150,12 @@
                     @enderror
 
                 </div>
-     
+
             </div>
 
             <div class="mb-3">
                 <label class="form-label">  المبلغ المدفوع </label>
-                <input class="form-control" value="{{ old('payed') }}" 
+                <input class="form-control" value="{{ old('payed') }}"
                 name="payed" placeholder="المبلغ المدفوع " />
                 @error('payed')
                     <span class="helper">

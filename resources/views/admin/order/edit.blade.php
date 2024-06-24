@@ -34,7 +34,7 @@
                             @if ($order->still)
 
                             <x-admin.input-card name="cost" id="payed" placeholder="المبلغ " label="اضافة مبلغ مدفوع" />
-                            @elseif(!$order->still)
+                            @elseif (!$order->still)
                             <x-admin.input-card name="cost" id="payed" hidden placeholder="المبلغ "
                                 label="اضافة مبلغ مدفوع" />
 
@@ -108,7 +108,7 @@
                     <div class="px-2 py-3">
 
 
-           
+
 
                     <div class="flex gap-3   ">
                         <div class="mb-5 w-1/2">
@@ -146,8 +146,8 @@
                     <div class="flex gap-3   ">
                         <div class="mb-5 w-1/2">
                             <label class="px-1 py-2 text-sm font-bold"> تاريخ الاعنماد : </label>
-                            @if($order->approve_time)
-                            {{$order->approve_time}}
+                            @if ($order->approve_time)
+                            {{ $order->approve_time }}
                             @else
                             غير محدد
                             @endif
@@ -182,7 +182,7 @@
                                 $files = [];
                                 @endphp
                                 <!-- end file preview template -->
-                                @if(!count($files))
+                                @if (!count($files))
                                 لايوجد مرفقات
                                 @endif
 

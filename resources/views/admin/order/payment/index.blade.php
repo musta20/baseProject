@@ -4,7 +4,7 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>وسائل الدفع :</h3>
             </span>
-            <a href="{{ route('admin.Payment.create') }}" 
+            <a href="{{ route('admin.Payment.create') }}"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 إضافة </a>
 
@@ -15,11 +15,11 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                        
+
                         <th scope="col" class="px-6 py-3">
                             الاسم</th>
 
-                
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
 
                     </tr>
@@ -27,14 +27,14 @@
                 <tbody>
                     @foreach ($payment as $item)
                     <tr class="bg-white border-b  hover:bg-gray-50 ">
-               
 
-                   
+
+
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->name }}</td>
 
-                
+
 
                         <td scope="col" class="gap-2 flex px-6 py-3">
                             <a href="{{ route('admin.Payment.edit' , $item->id) }}">

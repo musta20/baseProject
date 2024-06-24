@@ -12,9 +12,9 @@
                 <div class=" p-3 bg-slate-100 w-1/2 rounded-md border border-gray-300 ">
                     <form class=" mx-5">
                         <div class="flex gap-3 w-full">
-                         
 
-                        <x-admin.select-input :selected="$task->isdone" 
+
+                        <x-admin.select-input :selected="$task->isdone"
                                 :options="$option" name="status" label="تعديل حالة المهمة" />
                         </div>
 
@@ -38,7 +38,7 @@
                             <div class="flex gap-5 p-3 text-slate-800 ">
                                 <span> حالة المهمة:</span>
                                 <span>
-                                    {{__('messages.'.$option[$task->isdone]->name)}}
+                                    {{ __('messages.'.$option[$task->isdone]->name) }}
                                 </span>
                             </div>
 

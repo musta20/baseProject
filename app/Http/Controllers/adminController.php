@@ -10,11 +10,9 @@ use App\Models\Report;
 use App\Models\services;
 use App\Models\Tasks;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
-
     public $allnumber;
     public $orderWeek = [];
     public $orderWeekConplete = [];
@@ -50,11 +48,9 @@ class adminController extends Controller
             array_push($this->alltaskrWeek, count($key));
         }
 
-
         $this->orderWeekConplete = $this->getDataWeek(2);
         $this->orderWeekOnProsses = $this->getDataWeek(1);
-        $this->orderWeekDelevred =  $this->getDataWeek(3);
-
+        $this->orderWeekDelevred = $this->getDataWeek(3);
 
         $this->taskrWeek = $this->getTaskDataWeek(0);
         $this->taskWeekdone = $this->getTaskDataWeek(1);
@@ -69,17 +65,15 @@ class adminController extends Controller
             'clent' => count(clients::get()),
         ];
 
-
-
         return view('admin.index', [
-            "allnumber" => $this->allnumber,
-            "orderWeek" => $this->orderWeek,
-            "orderWeekConplete" => $this->orderWeekConplete,
-            "orderWeekOnProsses" => $this->orderWeekOnProsses,
-            "orderWeekDelevred" => $this->orderWeekDelevred,
-            "taskrWeek" => $this->taskrWeek,
-            "taskWeekdone" => $this->taskWeekdone,
-            "alltaskrWeek" => $this->alltaskrWeek,
+            'allnumber' => $this->allnumber,
+            'orderWeek' => $this->orderWeek,
+            'orderWeekConplete' => $this->orderWeekConplete,
+            'orderWeekOnProsses' => $this->orderWeekOnProsses,
+            'orderWeekDelevred' => $this->orderWeekDelevred,
+            'taskrWeek' => $this->taskrWeek,
+            'taskWeekdone' => $this->taskWeekdone,
+            'alltaskrWeek' => $this->alltaskrWeek,
 
         ]);
     }
@@ -97,9 +91,9 @@ class adminController extends Controller
         foreach ($orderData as $key) {
             array_push($count, count($key));
         }
-        return  $count;
-    }
 
+        return $count;
+    }
 
     public function getTaskDataWeek($type)
     {
@@ -114,7 +108,7 @@ class adminController extends Controller
         foreach ($orderData as $key) {
             array_push($count, count($key));
         }
-        return  $count;
-    }
 
+        return $count;
+    }
 }

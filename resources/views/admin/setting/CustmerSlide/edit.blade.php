@@ -8,38 +8,38 @@
 
 
     <form method="POST" class="w-75" enctype="multipart/form-data"
-action="{{route('admin.CustmerSlide.update',$slide->id)}}">
+action="{{ route('admin.CustmerSlide.update',$slide->id) }}">
     @csrf
     @method('PUT')
 
     <div class="mb-3">
         <label class="form-label"> الصورة</label>
-        <input class="form-control" 
-        
+        <input class="form-control"
+
 
         type="file"
 
         name="img" placeholder=" الصورة" />
-        
+
         @error('img')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
     </div>
 
-    
+
     <div class="mb-3">
         <label class="form-label"> الرابط</label>
         <input class="form-control"
-        value="{{$slide->url}}"
+        value="{{ $slide->url }}"
 
         name="url" placeholder=" الرابط" />
-        
+
         @error('url')
         <span class="helper">
-        {{$message}}
+        {{ $message }}
         </span>
         @enderror
 
@@ -58,7 +58,7 @@ action="{{route('admin.CustmerSlide.update',$slide->id)}}">
         </div>
     </div>
 </form>
-    
+
 
     </x-admin-contaner>
 </x-admin-layout>

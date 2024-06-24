@@ -5,24 +5,18 @@ use App\Enums\UserRole;
 use App\Models\Files;
 use App\Models\Tasks;
 use App\Models\User;
-use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class TasksTest extends TestCase
 {
-
-    protected function authenticateUser()
-    {
-        $user = User::factory()->withRole(UserRole::Admin->value)->create();
-        $this->actingAs($user);
-        return $user;
-    }
-
     // Tests for Admin Users
 
-    public function test_admin_can_view_task_list()
+    /**
+     * @test
+     */
+    public function admin_can_view_task_list()
     {
-       $this->authenticateUser();
+        $this->authenticateUser();
         // ... (Create tasks and users)
 
         $response = $this->get('/admin/Task');
@@ -30,13 +24,15 @@ class TasksTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewIs('admin.Tasks.index');
         $response->assertViewHas('alltask');
-        $response->assertViewHas('filterBox');
         $response->assertViewHas('option', TaskStatus::cases());
     }
 
-    public function test_admin_can_create_a_task()
+    /**
+     * @test
+     */
+    public function admin_can_create_a_task()
     {
-       $this->authenticateUser();
+        $this->authenticateUser();
         $user = User::factory()->create();
 
         $data = [
@@ -55,9 +51,12 @@ class TasksTest extends TestCase
         $this->assertDatabaseHas('tasks', ['title' => 'Test Task']);
     }
 
-    public function test_admin_can_edit_a_task()
+    /**
+     * @test
+     */
+    public function admin_can_edit_a_task()
     {
-       $this->authenticateUser();
+        $this->authenticateUser();
         // ... (Create task and files)
         $task = Tasks::factory()->create();
         $response = $this->get('/admin/Task/' . $task->id . '/edit');
@@ -73,7 +72,10 @@ class TasksTest extends TestCase
 
     // Tests for Regular Users
 
-    public function test_user_can_view_their_tasks()
+    /**
+     * @test
+     */
+    public function user_can_view_their_tasks()
     {
         $user = $this->authenticateUser();
         // ... (Create tasks for the user)
@@ -85,9 +87,12 @@ class TasksTest extends TestCase
         // ... (Assert that only the user's tasks are displayed)
     }
 
-    public function test_user_can_view_a_task_assigned_to_them()
+    /**
+     * @test
+     */
+    public function user_can_view_a_task_assigned_to_them()
     {
-      $user =   $this->authenticateUser();
+        $user = $this->authenticateUser();
         $task = Tasks::factory()->for($user)->create();
 
         $response = $this->get('/admin/ShowTask/' . $task->id);
@@ -97,9 +102,12 @@ class TasksTest extends TestCase
         $response->assertViewHas('task', $task);
     }
 
-    public function test_user_cannot_view_a_task_not_assigned_to_them()
+    /**
+     * @test
+     */
+    public function user_cannot_view_a_task_not_assigned_to_them()
     {
-       $this->authenticateUser();
+        $this->authenticateUser();
         // ... (Create a task assigned to another user)
         $user = User::factory()->create();
         $task = Tasks::factory()->for($user)->create();
@@ -110,7 +118,13 @@ class TasksTest extends TestCase
         $response->assertSessionHas('OkToast', 'حدث خطاء');
     }
 
+    protected function authenticateUser()
+    {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
+        return $user;
+    }
+
     // ... (Similar tests for edit, update, and other user actions)
 }
-
-?>

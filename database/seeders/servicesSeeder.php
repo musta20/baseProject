@@ -17,7 +17,7 @@ class servicesSeeder extends Seeder
     public function run(): void
     {
         $imagePath = storage_path() . '/Images/';
-        
+
         $serviceImagePath = storage_path() . '/app/public/services/';
 
         $services = SeederData::$Services;
@@ -28,26 +28,25 @@ class servicesSeeder extends Seeder
         $category = category::get();
         foreach ($services as $key) {
 
-
             $productMediaImage = collect(SeederData::$imageName)->random();
 
-           // Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
-                 
+            // Process::run("cp " . $imagePath . $productMediaImage . " " . $serviceImagePath . $productMediaImage);
+
             $item = collect($key);
 
             services::factory()->for($category->random())
-            ->hasAttached(
-                $payment->random(2),
-            )
-            ->hasAttached(
-                $delivery->random(2),
-            )
-            ->create([
-                "name"=>$item['name'],
-                "des"=>$item['description'],
-                "icon"=>$productMediaImage ,
-            ]);
-            
+                ->hasAttached(
+                    $payment->random(2),
+                )
+                ->hasAttached(
+                    $delivery->random(2),
+                )
+                ->create([
+                    'name' => $item['name'],
+                    'des' => $item['description'],
+                    'icon' => $productMediaImage,
+                ]);
+
         }
     }
 }

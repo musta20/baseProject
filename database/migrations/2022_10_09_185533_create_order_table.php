@@ -6,48 +6,37 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateOrderTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string("name");
-            $table->string("email");
+            $table->string('name');
+            $table->string('email');
 
-            $table->foreignUlid("user_id")->nullable()->references("id")->on("users")->onDelete("cascade");
+            $table->foreignUlid('user_id')->nullable()->references('id')->on('users')->onDelete('cascade');
 
-            $table->bigInteger("phone");
-            $table->text("des")->nullable();
-            $table->string("title");
-            $table->foreignUlid("delivery_id")->nullable()->references("id")->on("delivery")->onDelete("cascade");
-            $table->foreignUlid("payment_id")->nullable()->references("id")->on("payments")->onDelete("cascade");;
+            $table->bigInteger('phone');
+            $table->text('des')->nullable();
+            $table->string('title');
+            $table->foreignUlid('delivery_id')->nullable()->references('id')->on('delivery')->onDelete('cascade');
+            $table->foreignUlid('payment_id')->nullable()->references('id')->on('payments')->onDelete('cascade');
 
-            $table->string("ip");
-            $table->string("count");
-            $table->string("time");
-            $table->string("approve_time");
-            $table->string("adress");
+            $table->string('ip');
+            $table->string('count');
+            $table->string('time');
+            $table->string('approve_time');
+            $table->string('adress');
 
-            $table->string("files");
-            $table->integer("status");
-            $table->integer("code");
-            $table->integer("payed");
+            $table->string('files');
+            $table->integer('status');
+            $table->integer('code');
+            $table->integer('payed');
 
-            
-            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
+            $table->foreignUlid('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('order');

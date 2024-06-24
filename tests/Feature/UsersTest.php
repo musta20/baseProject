@@ -7,18 +7,12 @@ use Tests\TestCase;
 
 class UsersControllerTest extends TestCase
 {
-
-    protected function authenticateUser($role = null)
-    {
-        
-        $user = User::factory()->withRole($role ?? UserRole::Admin->value)->create();
-        $this->actingAs($user);
-        return $user;
-    }
-
     // Tests for Admin Users
 
-    public function test_admin_can_view_users_list()
+    /**
+     * @test
+     */
+    public function admin_can_view_users_list()
     {
         $admin = $this->authenticateUser();
         // ... (Create users and roles)
@@ -28,11 +22,13 @@ class UsersControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewIs('admin.users.index');
         $response->assertViewHas('Users');
-        $response->assertViewHas('filterBox');
         $response->assertViewHas('allRole');
     }
 
-    public function test_admin_can_access_create_user_form()
+    /**
+     * @test
+     */
+    public function admin_can_access_create_user_form()
     {
         $admin = $this->authenticateUser();
         // ... (Create roles)
@@ -44,7 +40,10 @@ class UsersControllerTest extends TestCase
         $response->assertViewHas('role');
     }
 
-    public function test_admin_can_create_a_user()
+    /**
+     * @test
+     */
+    public function admin_can_create_a_user()
     {
         $this->authenticateUser();
 
@@ -63,7 +62,10 @@ class UsersControllerTest extends TestCase
         $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
     }
 
-    public function test_admin_can_edit_a_user()
+    /**
+     * @test
+     */
+    public function admin_can_edit_a_user()
     {
         $admin = $this->authenticateUser();
         $user = User::factory()->create();
@@ -81,7 +83,10 @@ class UsersControllerTest extends TestCase
 
     // Tests for Role and Permission Management
 
-    public function test_admin_can_view_roles_list()
+    /**
+     * @test
+     */
+    public function admin_can_view_roles_list()
     {
         $admin = $this->authenticateUser();
         // ... (Create roles)
@@ -93,8 +98,12 @@ class UsersControllerTest extends TestCase
         $response->assertViewHas('role');
     }
 
+    protected function authenticateUser($role = null)
+    {
 
+        $user = User::factory()->withRole($role ?? UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
+        return $user;
+    }
 }
-
-
-?>

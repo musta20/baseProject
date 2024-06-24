@@ -5,7 +5,7 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>جميع المهام :</h3>
             </span>
-         
+
 
         </div>
         <div class=" p-3 bg-slate-100  rounded-md border border-gray-300 ">
@@ -13,8 +13,8 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
-                    
-                
+
+
 
                         <th scope="col" class="px-6 py-3">
                             العنوان
@@ -38,28 +38,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                     
-                  
+
+
                         @foreach ($alltask as $item)
                         <tr class="bg-white border-b  hover:bg-gray-50 ">
-        
+
                             <td  scope="col" class="px-6 py-3">{{ $item->title }}</td>
-        
+
                             <td  scope="col" class="px-6 py-3">{{ $item->start }}</td>
                             <td  scope="col" class="px-6 py-3">{{ $item->end }}</td>
                             <td  scope="col" class="px-6 py-3">{{ $item->created_at->diffForHumans() }}</td>
                             <td  scope="col" class="px-6 py-3">
-                                {{__('messages.'.$option[$item->isdone]->name)}}
+                                {{ __('messages.'.$option[$item->isdone]->name) }}
 
-                              
+
                             </td>
-                     
+
                             <td  scope="col" class="px-6 py-3">
                                 <a href="{{ route('admin.admin.ShowTask' , $item->id) }}">
                                 إجراء
                                 </i></a>
                             </td>
-                    
+
                     </tr>
                     @endforeach
 

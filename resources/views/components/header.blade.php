@@ -16,7 +16,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
             </svg>
-            {{ $setting->adress }} 
+            {{ $setting->adress }}
         </a>
     </div>
 
@@ -57,19 +57,19 @@
     </div>
     <ul class="flex justify-center items-center w-2/6">
         <li class=" py-2">
-            <a class="px-2 hover:text-slate-300" href="{{route('CheckStatus')}}">الإستعلام</a>
+            <a class="px-2 hover:text-slate-300" href="{{ route('CheckStatus') }}">الإستعلام</a>
         </li>
         <li class=" py-2">
-            <a class="px-2 hover:text-slate-300"  href="{{route('category')}}">الخدمات</a>
+            <a class="px-2 hover:text-slate-300"  href="{{ route('category') }}">الخدمات</a>
         </li>
         <li class=" py-2">
-            <a class="px-2 hover:text-slate-300" href="{{route('contact')}}">تواصل معنا</a>
+            <a class="px-2 hover:text-slate-300" href="{{ route('contact') }}">تواصل معنا</a>
         </li>
         <li class=" py-2">
             <a class="px-2 hover:text-slate-300" href="{{ route('term') }}">الشروط و الاحكام </a>
         </li>
         <li class="py-2 ">
-            <a class="px-2 hover:text-slate-300" href="{{route('jobs')}}">الوظائف</a>
+            <a class="px-2 hover:text-slate-300" href="{{ route('jobs') }}">الوظائف</a>
         </li>
 
     </ul>

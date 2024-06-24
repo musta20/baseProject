@@ -17,10 +17,10 @@ class slideFactory extends Factory
     public function definition(): array
     {
         return [
-            "title" => $this->faker->name(),
-            "des" => $this->faker->name(),
-            "url" => $this->faker->name(),
-            "img" => $this->faker->name()
+            'title' => $this->faker->name(),
+            'des' => $this->faker->name(),
+            'url' => $this->faker->name(),
+            'img' => $this->faker->name(),
         ];
     }
 }

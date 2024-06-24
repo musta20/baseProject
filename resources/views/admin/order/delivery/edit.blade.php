@@ -8,16 +8,16 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>تعديل وسيلة التوصيل</h3>
             </span>
-            <a 
+            <a
             href="{{ route('admin.Delivery.index') }}"
-            
+
             class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
 
             الغاء</a>
 
         </div>
         <form method="POST" class="w-full mx-auto" action="{{ route('admin.Delivery.update' , $delivery->id) }}" class="flex gap-2">
-           
+
             @csrf
             @method('PUT')
             <div class=" p-3 bg-slate-100 w-full mx-auto rounded-md border border-gray-300 ">
@@ -27,18 +27,18 @@
                 </div>
                 <hr>
                 <br>
-                <button type="submit" 
+                <button type="submit"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
 
                 حفظ</button>
-            
+
             </div>
-           
-      
 
 
 
-     
+
+
+
         </form>
     </div>
 

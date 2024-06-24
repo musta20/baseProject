@@ -7,15 +7,10 @@ use Tests\TestCase;
 
 class SettingControllerTest extends TestCase
 {
-
-    protected function authenticateUser()
-    {
-        $user = User::factory()->withRole(UserRole::Admin->value)->create();
-        $this->actingAs($user);
-        return $user;
-    }
-
-    public function test_authenticated_user_can_access_setting_main_page()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_access_setting_main_page()
     {
         $this->authenticateUser();
 
@@ -25,19 +20,25 @@ class SettingControllerTest extends TestCase
         $response->assertViewIs('admin.setting.index');
     }
 
-    public function test_unauthenticated_user_cannot_access_setting_main_page()
+    /**
+     * @test
+     */
+    public function unauthenticated_user_cannot_access_setting_main_page()
     {
         $response = $this->get('/admin/basic');
 
         $response->assertRedirect('/login');
     }
 
-    public function test_authenticated_user_can_view_setting_details()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_view_setting_details()
     {
         $this->authenticateUser();
 
         // Create a setting record
-       // Setting::factory()->create();
+        // Setting::factory()->create();
 
         $response = $this->get('/admin/basic');
 
@@ -46,7 +47,10 @@ class SettingControllerTest extends TestCase
         $response->assertViewHas('setting');
     }
 
-    public function test_authenticated_user_can_update_settings()
+    /**
+     * @test
+     */
+    public function authenticated_user_can_update_settings()
     {
         $user = $this->authenticateUser();
 
@@ -69,7 +73,7 @@ class SettingControllerTest extends TestCase
             'billterm' => 'Updated Bill Term',
             'terms' => 'Updated Terms',
             'weekwork' => 'Updated Week Work',
-     
+
             // ... (Other setting fields)
         ];
 
@@ -80,7 +84,13 @@ class SettingControllerTest extends TestCase
         $this->assertDatabaseHas('setting', ['title' => 'Updated Title']);
     }
 
+    protected function authenticateUser()
+    {
+        $user = User::factory()->withRole(UserRole::Admin->value)->create();
+        $this->actingAs($user);
+
+        return $user;
+    }
+
     // ... (Additional tests for updating settings with file uploads, error scenarios, etc.)
 }
-
-?>

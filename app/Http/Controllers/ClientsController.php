@@ -29,7 +29,7 @@ class ClientsController extends Controller
         $client = clients::Filter()->latest()->RequestPaginate();
 
         // Render the view for the index of clients
-        return view("admin.client.index",
+        return view('admin.client.index',
             [
                 'client' => $client,  // The paginated list of clients
                 'filterBox' => $filterBox, // The filter box for clients
@@ -37,6 +37,7 @@ class ClientsController extends Controller
         );
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -50,7 +51,6 @@ class ClientsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -61,7 +61,6 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\clients  $clients
      * @return \Illuminate\Http\Response
      */
     public function show(clients $clients)
@@ -78,15 +77,16 @@ class ClientsController extends Controller
     public function edit(clients $Client)
     {
         $statusoption = CommentStatus::cases();
-        return view("admin.client.edit",[ "statusoption" => $statusoption,'client'=>$Client]);
+
+        return view('admin.client.edit', ['statusoption' => $statusoption, 'client' => $Client]);
 
     }
 
     /**
      * Update the specified client resource in storage.
      *
-     * @param  updateClientRequest  $request The request object containing the updated status
-     * @param  clients  $Client The client object to be updated
+     * @param  updateClientRequest  $request  The request object containing the updated status
+     * @param  clients  $Client  The client object to be updated
      * @return \Illuminate\Http\Response Redirects to the index page with a success message
      */
     public function update(updateClientRequest $request, clients $Client)
@@ -103,7 +103,7 @@ class ClientsController extends Controller
             ->with('OkToast', 'تم تعديل العنصر');
 
     }
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -113,6 +113,7 @@ class ClientsController extends Controller
     public function destroy(clients $Client)
     {
         $Client->delete();
-        return redirect()->route('admin.Clients.index')->with('OkToast','تم حذف العنصر');
+
+        return redirect()->route('admin.Clients.index')->with('OkToast', 'تم حذف العنصر');
     }
 }

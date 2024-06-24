@@ -22,7 +22,7 @@ class updateClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "status" => ["required","integer","digits_between:1,2"]
+            'status' => ['required', 'integer', 'digits_between:1,2'],
         ];
     }
 }

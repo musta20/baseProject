@@ -42,10 +42,10 @@
                                     <div class="simplebar-content" style="padding: 0px;">
 
                                         <div class="card mb-0 p-3">
-                                            {{--                            
+                                            {{--
      <h5 class="mt-0 font-16 fw-bold mb-3">Choose Layout</h5>
  --}} {{--   <div class="row">
-                               
+
     <div class="col-4">
                                     <div class="form-check card-radio">
                                         <input id="customizer-layout01" name="data-layout" type="radio" value="vertical" class="form-check-input">

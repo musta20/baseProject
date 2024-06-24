@@ -46,7 +46,7 @@
         </div>
     </div>
     <script>
-        
+
         function goToUser() {
             const users = document.getElementById('users')
 
@@ -56,7 +56,7 @@
 
 </x-admin.layout>
 
-{{-- 
+{{--
 
 <x-admin-layout>
 
@@ -97,7 +97,7 @@
                 <td>{{ __($item->description) }}</td>
                 <td>{{ $item->created_at }}</td>
                 <td>
-                    <a href="{{route('admin.Logs.show',$item->id)}}">عرض</a>
+                    <a href="{{ route('admin.Logs.show',$item->id) }}">عرض</a>
                 </td>
             </tr>
         @endforeach

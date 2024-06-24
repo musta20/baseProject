@@ -1,9 +1,8 @@
 <?php
+
 namespace App\Enums;
 
-
-
-enum ReportStatus:int
+enum ReportStatus: int
 {
     case WAITING = 0;
     case IN_PROGRESS = 1;
@@ -13,8 +12,3 @@ enum ReportStatus:int
     case EXPIRED = 6;
     case CLOSED = 5;
 };
-
-
-
-
-?>

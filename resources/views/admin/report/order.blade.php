@@ -6,9 +6,9 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>تقارير الطلبات</h3>
             </span>
-            <form method="POST" 
+            <form method="POST"
             {{-- target="_blank"  --}}
-            class="flex gap-2 " 
+            class="flex gap-2 "
             action="{{ route('admin.Report.store') }}">
                 @csrf
                 <input hidden name="reporttype" value="ORDER" />
@@ -50,7 +50,7 @@
                 @foreach ($orderReport as $item)
                 <tr class="bg-white border-b  hover:bg-gray-50 ">
                         <td scope="col" class="px-6 py-3">
-                            {{__("messages.".App\Enums\OrderStatus::getname($item->type))}}
+                            {{ __("messages.".App\Enums\OrderStatus::getname($item->type)) }}
                         </td>
 
                             <td scope="col" class="px-6 py-3">
@@ -69,7 +69,7 @@
                                 حذف
                               </a>
                     </td>
-                   
+
                     </td>
                     </tr>
                     @endforeach
@@ -82,14 +82,14 @@
 </x-admin.layout>
 
 
-{{-- 
+{{--
 
 <x-admin-layout>
     <h3>تقارير الطلبات</h3>
     <hr>
     <x-admin-contaner>
 
-        <form method="POST" target="_blank" class="D-flex w-25" 
+        <form method="POST" target="_blank" class="D-flex w-25"
         action="{{ route('admin.Report.store') }}">
             @csrf
 
@@ -147,7 +147,7 @@
 
 
         <table class="table  table-striped table-centered mb-0">
-            <thead class="table-dark">            
+            <thead class="table-dark">
                 <tr>
                 <th>#</th>
                 <th>نوع التقرير</th>
@@ -161,8 +161,8 @@
                 <tr>
                     <td>{{ $item->id }}</td>
                     <td>
-                      
-                        {{App/Enums/ReportType::getname($item->type)}}
+
+                        {{ App/Enums/ReportType::getname($item->type) }}
 
                     </td>
                     <td>{{ $item->created_at }}</td>

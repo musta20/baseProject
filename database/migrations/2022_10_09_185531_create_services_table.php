@@ -6,35 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateServicesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
             $table->ulid('id')->primary();
 
-            $table->string("name");
-            
-            $table->integer("price");
+            $table->string('name');
 
-            $table->foreignUuid("category_id")->references("id")->on("category")->onDelete("cascade");
+            $table->integer('price');
 
-            $table->text("des")->nullable();
+            $table->foreignUuid('category_id')->references('id')->on('category')->onDelete('cascade');
 
-            $table->string("icon")->nullable();
+            $table->text('des')->nullable();
+
+            $table->string('icon')->nullable();
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('services');

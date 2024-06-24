@@ -27,8 +27,8 @@
                         <th scope="col" class="px-6 py-3">
                             السعر
                         </th>
-                            
-                       
+
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
                     </tr>
                 </thead>
@@ -37,15 +37,15 @@
                 <tr class="bg-white border-b  hover:bg-gray-50 ">
                         <td scope="col" class="px-6 py-3">
                             {{ $item->name }}</td>
-                        
+
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->category->title }}</td>
 
                             <td scope="col" class="px-6 py-3">
                                 {{ $item->price }}</td>
-                            
-                  
+
+
                         <td scope="col" class="px-6  flex gap-3 py-3">
                             <a href="{{ route('admin.Services.edit' , $item->id) }}">
                             تعديل
@@ -63,7 +63,7 @@
         </div>
     </div>
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
 
     <h3>الخدمات</h3>
@@ -73,14 +73,14 @@
 <x-card-message />
 <div class="page-title p-1" >
 
-<a href="{{route('admin.Services.create')}}" class="btn btn-success">إضافة خدمة</a>
+<a href="{{ route('admin.Services.create') }}" class="btn btn-success">إضافة خدمة</a>
 
 </div>
 
 <table class="table  table-striped table-centered mb-0">
-   
 
-    <thead class="table-dark">        
+
+    <thead class="table-dark">
         <tr>
             <th>#</th>
             <th>الاسم</th>
@@ -90,19 +90,19 @@
     </thead>
         @foreach ($allServices as $item)
         <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->name}}</td>
-        <td>{{$item->price}}</td>
-        
+        <td>{{ $item->id }}</td>
+        <td>{{ $item->name }}</td>
+        <td>{{ $item->price }}</td>
+
        <td class="table-action">
-        <a  href="{{route('admin.Services.edit',$item->id)}}"><i class="mdi mdi-pencil"></i></a>
+        <a  href="{{ route('admin.Services.edit',$item->id) }}"><i class="mdi mdi-pencil"></i></a>
             <a onclick="OpenDeleteModel(showModel('{{ $item->name }}','{{ route('admin.Services.destroy' , $item->id) }}'))" href="#">
                 <i class="mdi mdi-delete"></i></a>
         </td>
         </tr>
             @endforeach
         </table>
-        {{$allServices->links('admin.pagination.custom')}}
+        {{ $allServices->links('admin.pagination.custom') }}
 
 
 

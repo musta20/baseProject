@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-
-
 enum TaskStatus: int
 {
     case NOT_ASSINED = 0;
@@ -11,20 +9,14 @@ enum TaskStatus: int
     case PARTILY_DONE = 2;
     case DONE = 3;
 
-
-
-public static function getName( $value)
-{
-    foreach (self::cases() as $case) {
-        if ($case->name === $value) {
-            break;
+    public static function getName($value)
+    {
+        foreach (self::cases() as $case) {
+            if ($case->name === $value) {
+                break;
+            }
         }
+
+        return $case->name;
     }
-    return $case->name;
 }
-
-}
-
-
-
-?>

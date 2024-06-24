@@ -22,8 +22,8 @@ class storeReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "from" => "required|date",
-            "to" => "required|date",
+            'from' => 'required|date',
+            'to' => 'required|date',
         ];
     }
 }

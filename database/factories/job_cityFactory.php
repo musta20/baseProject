@@ -18,7 +18,7 @@ class job_cityFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            
+
         ];
     }
 }

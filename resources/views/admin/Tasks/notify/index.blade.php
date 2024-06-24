@@ -23,7 +23,7 @@
 
             @foreach ($tasks as $item)
                 <tr>
-                    <td>{{$item->id}}</td>
+                    <td>{{ $item->id }}</td>
 
                     <td>
                         <a href="{{ route('admin.TasksNotify.edit' , $item->id) }}">
@@ -47,7 +47,7 @@
         </table>
 
 
-    
+
     </x-admin-contaner>
     <x-model-box></x-model-box>
 

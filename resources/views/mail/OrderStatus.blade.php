@@ -13,7 +13,7 @@
         <tr>
             <td style="text-align: center;">
                 <img width="150" src="{{ url('/imgs/h.png') }}">
-              
+
             </td>
         </tr>
         @isset($bill)
@@ -30,7 +30,7 @@
 
         @if ($ratingCode)
             <tr>
-                
+
                 <td class="Bill"
                     style="display: flex;align-content: center;text-align: center;border: 5px solid #004111;border-radius: 1em;padding: 5px;font-size: 1.3rem;">
                     <a href={{ url('rating/' . $ratingCode->token) }}

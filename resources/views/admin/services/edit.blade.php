@@ -41,13 +41,13 @@
                              border-blue-700 my-8 hover:border-blue-500 rounded" onclick="addDev(event)"> اضافة
                             </button>
                         </div>
-                       
+
                         <div id="delivery">
 
                             @foreach ($services->deliveries as $item)
                             <div class="mb-1 input-group w-25">
                                 <span class="bg-white flex justify-between p-2 w-2/3">
-                                 
+
                                 <span>{{ $item->name }}</span>
                                 <button onclick="remitem(this)" class="text-red-500  ">حذف</button>
                                 <input hidden="" value="{{ $item->id }}" name="dev[]">
@@ -72,7 +72,7 @@
 
                             <x-admin.select-input id="paymentValue" :options="$pym" />
 
-                   
+
 
                             <button class="bg-blue-500 hover:bg-blue-400
                              text-white h-10 font-bold py-2 px-4 border-b-4
@@ -86,7 +86,7 @@
                                 <span class="bg-white flex justify-between p-2 w-2/3">
                                     <span>{{ $item->name }}</span>
                                     <button onclick="remitem(this)" class="text-red-500  ">حذف</button>
-                                    <input hidden="" value="{{$item->id}}" name="pys[]">
+                                    <input hidden="" value="{{ $item->id }}" name="pys[]">
 
                                 </span>
                             </div>
@@ -102,7 +102,7 @@
                     </div>
 
 
-           
+
                 </div>
 
 
@@ -118,7 +118,7 @@
                                 <!-- Preview -->
                                 <div class="dropzone-previews mt-3" id="file-previews"></div>
 
-                            
+
                     <div class="flex gap-3  ">
                         <div class="mb-5 w-full">
                             <button class="bg-blue-500 hover:bg-blue-400

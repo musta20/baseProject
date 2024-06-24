@@ -5,16 +5,16 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>تعديل  التصنيف</h3>
             </span>
-            <a 
+            <a
             href="{{ route('admin.Category.index') }}"
-            
+
             class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
 
             الغاء</a>
 
-        </div> 
+        </div>
         <form method="POST" class="w-full  bg-slate-100 rounded-md border border-gray-300" action="{{ route('admin.Category.update' , $category->id) }}" class="flex gap-2">
-           
+
             @csrf
             @method('PUT')
             <div class=" p-3 mx-auto w-1/2  ">
@@ -28,18 +28,18 @@
                 </div>
                 <hr>
                 <br>
-                <button type="submit" 
+                <button type="submit"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
 
                 حفظ</button>
-            
+
             </div>
-           
-      
 
 
 
-     
+
+
+
         </form>
     </div>
 

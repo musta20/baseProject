@@ -6,25 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDevToServsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('dev_to_servs', function (Blueprint $table) {
-            $table->foreignUlid("service_id")->references("id")->on("services")->onDelete("cascade");
-            $table->foreignUlid("delivery_id")->references("id")->on("delivery")->onDelete("cascade");
+            $table->foreignUlid('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreignUlid('delivery_id')->references('id')->on('delivery')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('dev_to_servs');

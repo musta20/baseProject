@@ -40,13 +40,13 @@
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
                                     <li class="paginate_button page-item active">
-                                        <a href="#" aria-controls="basic-datatable" 
+                                        <a href="#" aria-controls="basic-datatable"
                                         data-dt-idx="1" tabindex="0"
                                             class="page-link">{{ $page }}</a>
                                     </li>
                                 @else
                                     <li class="paginate_button page-item ">
-                                        <a href="{{ $url }}" aria-controls="basic-datatable" 
+                                        <a href="{{ $url }}" aria-controls="basic-datatable"
                                         data-dt-idx="2"
                                             tabindex="0" class="page-link">{{ $page }}</a>
                                     </li>

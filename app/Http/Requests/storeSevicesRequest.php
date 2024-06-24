@@ -22,10 +22,10 @@ class storeSevicesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required","string","max:100","min:3"],
-            "price" => ["required","integer","digits_between:1,10"],
-            "icon" => ["nullable","string","max:255","min:3"],
-            "category_id" => "required"
+            'name' => ['required', 'string', 'max:100', 'min:3'],
+            'price' => ['required', 'integer', 'digits_between:1,10'],
+            'icon' => ['nullable', 'string', 'max:255', 'min:3'],
+            'category_id' => 'required',
         ];
     }
 }

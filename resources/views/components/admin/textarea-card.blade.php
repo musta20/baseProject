@@ -14,14 +14,14 @@
     @php
         $class = $errors->has($name) ? '!border-red-500' : 'border-gray-300';
     @endphp
-   
-    <textarea 
-   
+
+    <textarea
+
     name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} type="password" id="password" {!!
         $attributes->merge(["class"=>"shadow-sm bg-gray-50  $class border
      text-gray-900 text-sm rounded-lg focus:ring-blue-500
     focus:border-blue-500 block w-full p-2.5 "]) !!} >
-{{old($name,$value)}}    
+{{ old($name,$value) }}
 </textarea>
     <x-input-error :messages="$errors->get($name)" class="pt-1" />
 

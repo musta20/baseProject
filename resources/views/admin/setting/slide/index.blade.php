@@ -27,7 +27,7 @@
                         <th scope="col" class="px-6 py-3">
                             الرابط
                         </th>
-                       
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
                     </tr>
                 </thead>
@@ -39,18 +39,18 @@
 
                             <td scope="col" class="px-6 py-3">
                                 {{ $item->des }}</td>
-                            
-                       
-                                              
+
+
+
                                 <td scope="col" class="px-6 py-3">
-                                    <a target="blank" href="{{url('storage/'.$item->img)}}" ><img width="100" src="{{url('storage/'.$item->img)}}" />
+                                    <a target="blank" href="{{ url('storage/'.$item->img) }}" ><img width="100" src="{{ url('storage/'.$item->img) }}" />
                                     </td>
                                     <td scope="col" class="px-6 py-3">
-                                        {{$item->url}}</td>
-                                    
-                  
+                                        {{ $item->url }}</td>
+
+
                         <td scope="col" class="px-6  flex gap-3 py-3">
-                            <a href="{{route('admin.Slide.edit',$item->id)}}">
+                            <a href="{{ route('admin.Slide.edit',$item->id) }}">
                             تعديل
                         </a>
                         <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Slide.destroy' , $item->id) }}'))"  href="#">
@@ -66,7 +66,7 @@
         </div>
     </div>
 </x-admin.layout>
-{{-- 
+{{--
 <x-admin-layout>
     <h3> السلايدات</h3>
     <hr>
@@ -74,11 +74,11 @@
 <x-card-message />
 <div class="page-title p-1" >
 
-<a href="{{route('admin.Slide.create')}}" class="btn btn-success">إضافة سلايد</a>
+<a href="{{ route('admin.Slide.create') }}" class="btn btn-success">إضافة سلايد</a>
 
 </div>
 <table class="table  table-striped table-centered mb-0">
-    <thead class="table-dark">        
+    <thead class="table-dark">
         <tr>
             <th>#</th>
             <th>الاسم</th>
@@ -90,14 +90,14 @@
     </thead>
         @foreach ($allslide as $item)
         <tr>
-        <td>{{$item->id}}</td>
-        <td>{{$item->title}}</td>
-        <td>{{$item->des}}</td>
-        <td><a target="blank" href="{{url('storage/'.$item->img)}}" ><img width="100" src="{{url('storage/'.$item->img)}}" /></td>
-        <td>{{$item->url}}</td>
+        <td>{{ $item->id }}</td>
+        <td>{{ $item->title }}</td>
+        <td>{{ $item->des }}</td>
+        <td><a target="blank" href="{{ url('storage/'.$item->img) }}" ><img width="100" src="{{ url('storage/'.$item->img) }}" /></td>
+        <td>{{ $item->url }}</td>
 
         <td class="table-action">
-            <a  href="{{route('admin.Slide.edit',$item->id)}}">
+            <a  href="{{ route('admin.Slide.edit',$item->id) }}">
                 <i class="mdi mdi-pencil"></i></a>
             <a onclick="OpenDeleteModel(showModel('{{ $item->title }}','{{ route('admin.Slide.destroy' , $item->id) }}'))" href="#">
                 <i class="mdi mdi-delete"></i></a>

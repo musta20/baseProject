@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Role as ModelsRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -25,12 +24,12 @@ class UserFactory extends Factory
         ];
 
     }
-    public function withRole($role):static {
-   
+
+    public function withRole($role): static
+    {
+
         return $this->afterMaking(function (User $user) use ($role) {
             $user->assignRole($role);
         });
-       }
-    
-
+    }
 }

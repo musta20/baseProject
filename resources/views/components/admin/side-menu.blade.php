@@ -5,7 +5,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
           </svg>
-          
+
         <h1 class="text-sm font-bold py-2">لوحة التحكم</h1>
     </span>
 
@@ -113,7 +113,7 @@
                         </svg>
 
 
-                        <a href="{{route('admin.showOrderList',0)}}">
+                        <a href="{{ route('admin.showOrderList',0) }}">
                             جديدة</a>
                     </li>
                     <li class="flex items-center w-full text-xs p-2 gap-2 rounded hover:bg-slate-300">
@@ -123,7 +123,7 @@
                         </svg>
 
 
-                        <a href="{{route('admin.showOrderList',1)}}">
+                        <a href="{{ route('admin.showOrderList',1) }}">
                             مستلمة</a>
                     </li>
                     <li class="flex items-center w-full text-xs p-2 gap-2 rounded hover:bg-slate-300">
@@ -134,7 +134,7 @@
                         </svg>
 
 
-                        <a href="{{route('admin.showOrderList',2)}}">
+                        <a href="{{ route('admin.showOrderList',2) }}">
                             طلبات
                             مكتملة</a>
                     </li>
@@ -144,7 +144,7 @@
                                 d="M2 3.5A1.5 1.5 0 0 1 3.5 2h2.879a1.5 1.5 0 0 1 1.06.44l1.122 1.12A1.5 1.5 0 0 0 9.62 4H12.5A1.5 1.5 0 0 1 14 5.5v1.401a2.986 2.986 0 0 0-1.5-.401h-9c-.546 0-1.059.146-1.5.401V3.5ZM2 9.5v3A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5v-3A1.5 1.5 0 0 0 12.5 8h-9A1.5 1.5 0 0 0 2 9.5Z" />
                         </svg>
 
-                        <a href="{{route('admin.showOrderList',3)}}">
+                        <a href="{{ route('admin.showOrderList',3) }}">
                             طلبات
                             مسلمة</a>
                     </li>
@@ -157,7 +157,7 @@
                                 clip-rule="evenodd" />
                         </svg>
 
-                        <a href="{{route('admin.showOrderList',4)}}">
+                        <a href="{{ route('admin.showOrderList',4) }}">
                             طلبات
 
                             ملغية</a>
@@ -256,7 +256,7 @@
         $url = request()->url();
         $openReportMenu = Str::contains($url, ['admin/orderReport','admin/cashReport','admin/billReportView','admin/createBill']);
           @endphp
-        <li x-data="{ open: {{$openReportMenu ? 'true' : 'false'}}  }" class="mb-1 text-sm" x-data="{ open: false }">
+        <li x-data="{ open: {{ $openReportMenu ? 'true' : 'false' }}  }" class="mb-1 text-sm" x-data="{ open: false }">
             <button @click="open = !open" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -300,8 +300,8 @@
                             <path
                                 d="M13 11.75a.75.75 0 0 0-1.5 0v.179c0 .15-.138.28-.306.255A65.277 65.277 0 0 0 1.75 11.5a.75.75 0 0 0 0 1.5c3.135 0 6.215.228 9.227.668A1.764 1.764 0 0 0 13 11.928v-.178Z" />
                         </svg>
-                        
-                                            
+
+
                                                                                   <a href="{{ route('admin.billReportView') }}">الفواتير</a>
 
 
@@ -368,7 +368,7 @@
 
                     </li>
 
-         
+
                 </ul>
             </div>
         </li>
@@ -450,7 +450,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
                   </svg>
-                  
+
 
                 <span> اعداد الموقع </span>
                 <svg :class="{ 'rotate-90': open }" x-transition class="    mr-auto -mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -463,18 +463,18 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                             <path fill-rule="evenodd" d="M6.455 1.45A.5.5 0 0 1 6.952 1h2.096a.5.5 0 0 1 .497.45l.186 1.858a4.996 4.996 0 0 1 1.466.848l1.703-.769a.5.5 0 0 1 .639.206l1.047 1.814a.5.5 0 0 1-.14.656l-1.517 1.09a5.026 5.026 0 0 1 0 1.694l1.516 1.09a.5.5 0 0 1 .141.656l-1.047 1.814a.5.5 0 0 1-.639.206l-1.703-.768c-.433.36-.928.649-1.466.847l-.186 1.858a.5.5 0 0 1-.497.45H6.952a.5.5 0 0 1-.497-.45l-.186-1.858a4.993 4.993 0 0 1-1.466-.848l-1.703.769a.5.5 0 0 1-.639-.206l-1.047-1.814a.5.5 0 0 1 .14-.656l1.517-1.09a5.033 5.033 0 0 1 0-1.694l-1.516-1.09a.5.5 0 0 1-.141-.656L2.46 3.593a.5.5 0 0 1 .639-.206l1.703.769c.433-.36.928-.65 1.466-.848l.186-1.858Zm-.177 7.567-.022-.037a2 2 0 0 1 3.466-1.997l.022.037a2 2 0 0 1-3.466 1.997Z" clip-rule="evenodd" />
                           </svg>
-                          
+
 
                         <a href="{{ route('admin.basic') }}">اعداد الموقع
                             الاساسبة</a>
-                           
+
                     </li>
 
                     <li class="flex items-center w-full text-xs p-2 gap-2 rounded hover:bg-slate-300">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                             <path fill-rule="evenodd" d="M2 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4Zm10.5 5.707a.5.5 0 0 0-.146-.353l-1-1a.5.5 0 0 0-.708 0L9.354 9.646a.5.5 0 0 1-.708 0L6.354 7.354a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0-.146.353V12a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V9.707ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" clip-rule="evenodd" />
                           </svg>
-                          
+
 
                         <a href="{{ url('/admin/Slide') }}">العروض الاعلانية</a>
 
@@ -484,7 +484,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
                             <path fill-rule="evenodd" d="M11.914 4.086a2 2 0 0 0-2.828 0l-5 5a2 2 0 1 0 2.828 2.828l.556-.555a.75.75 0 0 1 1.06 1.06l-.555.556a3.5 3.5 0 0 1-4.95-4.95l5-5a3.5 3.5 0 0 1 4.95 4.95l-1.972 1.972a2.125 2.125 0 0 1-3.006-3.005L9.97 4.97a.75.75 0 1 1 1.06 1.06L9.058 8.003a.625.625 0 0 0 .884.883l1.972-1.972a2 2 0 0 0 0-2.828Z" clip-rule="evenodd" />
                           </svg>
-                          
+
 
                         <a href="{{ url('/admin/Social') }}">وسائل التواصل</a>
 

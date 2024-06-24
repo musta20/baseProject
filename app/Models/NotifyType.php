@@ -10,14 +10,12 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class NotifyType extends Model
 {
-    use HasFactory,LogsActivity,HasUlids;
-    
-    protected $guarded = [];
+    use HasFactory,HasUlids,LogsActivity;
 
+    protected $guarded = [];
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logonly(['name'])->useLogName('NotifyType');
     }
-
 }

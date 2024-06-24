@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\payment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class paymentSeeder extends Seeder
@@ -19,9 +18,9 @@ class paymentSeeder extends Seeder
         foreach ($payments as $value) {
 
             payment::create([
-                'name' => $value
+                'name' => $value,
             ]);
-            
+
         }
     }
 }

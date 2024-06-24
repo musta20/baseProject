@@ -6,8 +6,8 @@
             <span class=" text-xl py-2 px-2 font-IBMPlex text-slate-600">
                 <h3>جميع الموظفيين :</h3>
             </span>
-            <a 
-            
+            <a
+
             href="{{ route('admin.Users.create') }}"
                 class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 إضافة موظف</a>
@@ -27,7 +27,7 @@
                         <th scope="col" class="px-6 py-3">
                            البريد الالكتروني
                         </th>
-                    
+
                         <th scope="col" class="px-6 py-3">التحكم</th>
 
                     </tr>
@@ -35,17 +35,17 @@
                 <tbody>
                     @foreach ($Users as $item)
                     <tr class="bg-white border-b  hover:bg-gray-50 ">
-               
+
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->name }}</td>
 
                         <td scope="col" class="px-6 py-3">
-                            {{count( $item->getRoleNames() )? __( $item->getRoleNames()[0]): 'بدون صلاحية' }}</td>
+                            {{ count( $item->getRoleNames() )? __( $item->getRoleNames()[0]): 'بدون صلاحية' }}</td>
 
                         <td scope="col" class="px-6 py-3">
                             {{ $item->email }}</td>
-                        
+
 
                         <td scope="col" class="gap-2 flex px-6 py-3">
                             @if ($item->hasAnyRole($allRole))
@@ -75,7 +75,7 @@
 </x-admin.layout>
 
 
-{{-- 
+{{--
 
 <x-admin-layout>
     <h3>الموظفين</h3>
@@ -137,7 +137,7 @@
         {{ $Users->links('admin.pagination.custom') }}
 
 
-    
+
 
         <x-model-box></x-model-box>
 

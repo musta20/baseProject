@@ -12,7 +12,7 @@
 
             </span>
             <span>العنوان :</span>
-            <span>{{$setting->adress}}</span>
+            <span>{{ $setting->adress }}</span>
         </div>
 
 
@@ -25,7 +25,7 @@
                 </svg>
             </span>
             <span>ارقامنا :</span>
-            <span>{{$setting->phone}}</span>
+            <span>{{ $setting->phone }}</span>
         </div>
 
         <div class=" mb-3 flex gap-2    ">
@@ -38,7 +38,7 @@
 
             </span>
             <span>البريد الاكتروني :</span>
-            <span>{{$setting->email}}</span>
+            <span>{{ $setting->email }}</span>
         </div>
 
         <div class="text-xs mb-3 flex gap-2    ">
@@ -53,30 +53,30 @@
             </span>
             <span> مواعيد العمل :</span>
             <span>
-                {{$setting->weekwork}}
+                {{ $setting->weekwork }}
 
             </span>
         </div>
     </div>
     <div dir="rtl" class=" border-l-2 border-slate-400  w-2/6">
         <ul class="flex flex-col gap-3">
-      
-         
+
+
             <li>
-                <a href="{{ route('contact')}}" class="p-2 hover:text-slate-400">تواصل معنا</a>
+                <a href="{{ route('contact') }}" class="p-2 hover:text-slate-400">تواصل معنا</a>
             </li>
             <li>
-                <a href="{{ route('about')}}" class="p-2 hover:text-slate-400"> من نحن</a>
+                <a href="{{ route('about') }}" class="p-2 hover:text-slate-400"> من نحن</a>
             </li>
             <li>
-                <a href="{{ route('term')}}" class="p-2 hover:text-slate-400">الشروط و الاحكام</a>
+                <a href="{{ route('term') }}" class="p-2 hover:text-slate-400">الشروط و الاحكام</a>
             </li>
         </ul>
     </div>
     <div dir="rtl" class=" w-2/6 border-l-2 border-slate-400 ">
-        <img class="w-1/6 left-0" src="{{  asset('storage/'.$setting->logo) }}" alt="">
+        <img class="w-1/6 left-0" src="{{ asset('storage/'.$setting->logo) }}" alt="">
         <p class="w-1/2">
-        {{$setting->des}}
+        {{ $setting->des }}
         </p>
         <ul class="flex  gap-3">
             <li>
@@ -138,7 +138,7 @@
                 <a class="p-2 " href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30"
                         viewBox="0,0,256,256">
-                        <g fill="#ffffff" 
+                        <g fill="#ffffff"
                         class="hover:text-slate-900"
                         fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
                             stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"

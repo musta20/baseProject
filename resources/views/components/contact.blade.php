@@ -17,7 +17,7 @@
 
             </span>
             <span>العنوان :</span>
-            <span>{{$setting->adress}}</span>
+            <span>{{ $setting->adress }}</span>
         </div>
 
 
@@ -30,7 +30,7 @@
                 </svg>
             </span>
             <span>ارقامنا :</span>
-            <span>{{$setting->phone}}</span>
+            <span>{{ $setting->phone }}</span>
         </div>
 
         <div class="text-xl mb-10 flex gap-2    ">
@@ -43,7 +43,7 @@
 
             </span>
             <span>البريد الاكتروني :</span>
-            <span>{{$setting->email}}</span>
+            <span>{{ $setting->email }}</span>
         </div>
 
         <div class="text-xl mb-10 flex gap-2    ">
@@ -58,7 +58,7 @@
             </span>
             <span> مواعيد العمل :</span>
             <span>
-                {{$setting->weekwork}}
+                {{ $setting->weekwork }}
 
             </span>
         </div>

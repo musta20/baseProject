@@ -10,17 +10,14 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class numbers extends Model
 {
-    use HasFactory , LogsActivity , HasUlids;
-
+    use HasFactory , HasUlids , LogsActivity;
 
     protected $guarded = [];
 
-    protected $table = "numbers";
-
+    protected $table = 'numbers';
 
     public function getActivitylogOptions(): LogOptions
     {
-        return LogOptions::defaults()->logOnly(['title','number','img'])->useLogName('numbers');
+        return LogOptions::defaults()->logOnly(['title', 'number', 'img'])->useLogName('numbers');
     }
-
 }
