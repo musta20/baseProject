@@ -23,7 +23,6 @@ class PaymentController extends Controller
     public function create()
     {
         return view('admin.order.payment.add');
-
     }
 
     /**
@@ -60,7 +59,6 @@ class PaymentController extends Controller
     public function edit(payment $Payment)
     {
         return view('admin.order.payment.edit', ['payment' => $Payment]);
-
     }
 
     /**
@@ -81,7 +79,6 @@ class PaymentController extends Controller
         $Payment->save();
 
         return redirect()->route('admin.Payment.index')->with('OkToast', 'تم تعديل العنصر');
-
     }
 
     /**

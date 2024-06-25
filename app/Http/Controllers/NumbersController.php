@@ -48,7 +48,6 @@ class NumbersController extends Controller
         numbers::create($data);
 
         return redirect('/admin/Number')->with('OkToast', 'تم إضافة البيانات');
-
     }
 
     /**
@@ -73,7 +72,6 @@ class NumbersController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -95,7 +93,6 @@ class NumbersController extends Controller
         $number->save();
 
         return redirect()->route('admin.Number.index')->with('OkToast', 'تم تعديل العنصر');
-
     }
 
     /**

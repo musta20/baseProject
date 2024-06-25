@@ -110,7 +110,6 @@ class MessageController extends Controller
             $filterBox = message::showFilter(realData: $users, relType: 'ToUser', relName: 'المستلمين');
 
             $Messages = message::Filter()->where('from', Auth::user()->id)->with('toUser')->latest()->RequestPaginate();
-
         } elseif ($type == 2) {
 
             $filterBox = message::showFilter(realData: $users, relType: 'FromUser', relName: 'مرسل من');

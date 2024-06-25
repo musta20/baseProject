@@ -37,7 +37,8 @@ class TasksController extends Controller
 
         $alltask = Tasks::Filter()->latest()->with('user')->RequestPaginate();
 
-        return view('admin.Tasks.index', ['alltask' => $alltask,
+        return view('admin.Tasks.index', [
+            'alltask' => $alltask,
             'filterBox' => $filterBox,
             'option' => $option,
         ]);
@@ -209,7 +210,8 @@ class TasksController extends Controller
         return view('admin.Tasks.mainTask', [
             'alltask' => $alltask,
             'option' => $option,
-            'filterBox' => $filterBox]);
+            'filterBox' => $filterBox
+        ]);
     }
 
     public function showTask(Tasks $task)
@@ -219,7 +221,8 @@ class TasksController extends Controller
             $files = Files::where('type', 0)->where('typeid', $task->id)->get();
             $option = TaskStatus::cases();
 
-            return view('admin.Tasks.showTask', ['task' => $task, 'files' => $files,
+            return view('admin.Tasks.showTask', [
+                'task' => $task, 'files' => $files,
                 'option' => $option,
             ]);
         }
@@ -265,7 +268,6 @@ class TasksController extends Controller
 
         if (Auth::user()->id != $tasksNotify->user_id) {
             return redirect('/admin/showmysale/1');
-
         }
         $tasksNotify->issueAt = $request->issueAt;
         $tasksNotify->duration = $request->duration;
@@ -281,7 +283,6 @@ class TasksController extends Controller
 
         if (Auth::user()->id != $task->user_id) {
             return redirect('/admin/showmysale/1');
-
         }
 
         return view('admin.Tasks.editMyNotifyTask', ['task' => $task]);

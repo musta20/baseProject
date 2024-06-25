@@ -34,7 +34,6 @@ class DeliveryController extends Controller
     public function create()
     {
         return view('admin.order.delivery.add');
-
     }
 
     /**
@@ -71,7 +70,6 @@ class DeliveryController extends Controller
     public function edit(delivery $Delivery)
     {
         return view('admin.order.delivery.edit', ['delivery' => $Delivery]);
-
     }
 
     /**
