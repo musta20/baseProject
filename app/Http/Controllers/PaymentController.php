@@ -47,7 +47,8 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(payment $payment)
-    {}
+    {
+    }
 
     /**
      * Show the form for editing the specified resource.
