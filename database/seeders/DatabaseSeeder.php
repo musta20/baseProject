@@ -15,21 +15,21 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            settingSeeder::class,
-            permissionSeeder::class,
-            userSeeder::class,
-            clientsSeeder::class,
-            deliverySeeder::class,
-            paymentSeeder::class,
-            categorySeeder::class,
-            cityseeder::class,
-            servicesSeeder::class,
-            orderSeeder::class,
+            SettingSeeder::class,
+            PermissionSeeder::class,
+            UserSeeder::class,
+            ClientsSeeder::class,
+            DeliverySeeder::class,
+            PaymentSeeder::class,
+            CategorySeeder::class,
+            CitySeeder::class,
+            ServicesSeeder::class,
+            OrderSeeder::class,
             MessageSeeder::class,
-            reportSeeder::class,
-            taskSeeder::class,
+            ReportSeeder::class,
+            TaskSeeder::class,
             NotifyTypeSeeder::class,
-            slideseeder::class,
+            SlideSeeder::class,
         ]);
         // \App\Models\Tasks::factory(10)->create();
 
