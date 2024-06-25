@@ -57,9 +57,7 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(delivery $delivery)
-    {
-    }
+    public function show(delivery $delivery) {}
 
     /**
      * Show the form for editing the specified resource.

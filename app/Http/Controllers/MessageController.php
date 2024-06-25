@@ -15,9 +15,7 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.
@@ -72,18 +70,14 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(message $message)
-    {
-    }
+    public function edit(message $message) {}
 
     /**
      * Update the specified resource in storage.
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, message $message)
-    {
-    }
+    public function update(Request $request, message $message) {}
 
     /**
      * Remove the specified resource from storage.
