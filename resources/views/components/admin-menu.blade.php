@@ -141,7 +141,7 @@
 
 
 
-                                                    {{--                <a href="{{ url('/admin/MainTask') }}" class="side-nav-link">
+                                                    {{--                <a href="{{ url('/admin/mainTask') }}" class="side-nav-link">
                                                         <i class="uil uil-tachometer-fast"></i>
                                                         <span> المهام </span>
                                                     </a> --}}
@@ -150,7 +150,7 @@
                                                     <div class="collapse" id="SidebarMyTask">
                                                         <ul class="side-nav-second-level">
                                                             <li>
-                                                                <a href="{{ route('admin.admin.MainTask') }}">المهام الداخلية </a>
+                                                                <a href="{{ route('admin.admin.mainTask') }}">المهام الداخلية </a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('admin.showMyNotifyTask',1) }}">
@@ -380,7 +380,7 @@
                                                                 <a href="{{ route('admin.perm') }}">ادارة الصلاحيات</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('admin.UsersList') }}">جميع الموظفين</a>
+                                                                <a href="{{ route('admin.usersList') }}">جميع الموظفين</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('admin.Users.create') }}">اضافة موظف

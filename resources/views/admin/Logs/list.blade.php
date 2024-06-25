@@ -50,7 +50,7 @@
         function goToUser() {
             const users = document.getElementById('users')
 
-            document.location = '/admin/LogsList/' + users.value;
+            document.location = '/admin/logsList/' + users.value;
         }
     </script>
 
@@ -112,7 +112,7 @@
             function goToUser() {
                 // console.log('use');
                 const users = document.getElementById('users')
-                document.location = '/admin/LogsList/' + users.value;
+                document.location = '/admin/logsList/' + users.value;
             }
         </script>
 

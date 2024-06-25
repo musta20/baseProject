@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\TaskStatus;
-use App\Http\Requests\EditTaskRequest;
+use App\Http\Requests\editTaskRequest;
 use App\Http\Requests\postNotifyTask;
 use App\Http\Requests\storeTaskRequest;
 use App\Http\Requests\updateTaskRequest;
@@ -196,7 +196,7 @@ class TasksController extends Controller
         return redirect()->route('admin.Task.index')->with('OkToast', 'تم حذف البيانات');
     }
 
-    public function MainTask(Request $request)
+    public function mainTask(Request $request)
     {
         $filterBox = Tasks::showFilter();
 
@@ -206,20 +206,20 @@ class TasksController extends Controller
 
         Tasks::where('user_id', Auth::user()->id)->update(['isread' => 1]);
 
-        return view('admin.Tasks.MainTask', [
+        return view('admin.Tasks.mainTask', [
             'alltask' => $alltask,
             'option' => $option,
             'filterBox' => $filterBox]);
     }
 
-    public function ShowTask(Tasks $task)
+    public function showTask(Tasks $task)
     {
 
         if ($task->user_id == Auth::user()->id) {
             $files = Files::where('type', 0)->where('typeid', $task->id)->get();
             $option = TaskStatus::cases();
 
-            return view('admin.Tasks.ShowTask', ['task' => $task, 'files' => $files,
+            return view('admin.Tasks.showTask', ['task' => $task, 'files' => $files,
                 'option' => $option,
             ]);
         }
@@ -234,7 +234,7 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function EditTask(EditTaskRequest $request, Tasks $task)
+    public function editTask(editTaskRequest $request, Tasks $task)
     {
 
         if ($task->user_id == Auth::user()->id) {
@@ -247,10 +247,10 @@ class TasksController extends Controller
             }
         }
 
-        return redirect()->route('admin.admin.MainTask')->with('OkToast', 'تم تعديل البيانات');
+        return redirect()->route('admin.admin.mainTask')->with('OkToast', 'تم تعديل البيانات');
     }
 
-    public function MenuTask()
+    public function menuTask()
     {
         //
         return view('admin.Tasks.Menu');

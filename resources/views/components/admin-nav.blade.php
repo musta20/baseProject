@@ -122,7 +122,7 @@
                                                 لا يوجد
                                             @endif
                                             @foreach (getNotif()['task'] as $item)
-                                                <a href="{{ route('admin.admin.MainTask') }}"
+                                                <a href="{{ route('admin.admin.mainTask') }}"
                                                     class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                                     <div class="card-body">
                                                         {{--                                                     <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>

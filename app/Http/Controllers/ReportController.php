@@ -8,9 +8,9 @@ use App\Enums\ReportType;
 use App\Enums\Sorting;
 use App\Http\Requests\showPdfReportRequest;
 use App\Http\Requests\storeReportRequest;
-use App\Models\order;
+use App\Models\Order;
 use App\Models\Report;
-use App\Models\setting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -149,7 +149,7 @@ class ReportController extends Controller
         return view('admin.report.main');
     }
 
-    public function BillInnerPrint($id)
+    public function billInnerPrint($id)
     {
         $setting = setting::first();
         $order = order::with('servicesNmae')->with('user')->with('delivery')->with('payment')->find($id);
@@ -192,7 +192,7 @@ class ReportController extends Controller
         return $pdf->inline();
     }
 
-    public function Billprint(order $order)
+    public function billPrint(order $order)
     {
         $setting = setting::first();
 
@@ -256,7 +256,7 @@ class ReportController extends Controller
         // case DELIVERED_ORDER = 3;
         // case CANCLED_ORDER = 4;
 
-        $filterBox = Report::ShowCustomFilter(filterFiled: [
+        $filterBox = Report::showCustomFilter(filterFiled: [
             [
                 'lable' => 'طلبات جديدة',
                 'orderType' => Sorting::EQULE,
@@ -280,7 +280,7 @@ class ReportController extends Controller
     public function billReportView()
     {
 
-        $filterBox = Report::ShowCustomFilter(filterFiled: [
+        $filterBox = Report::showCustomFilter(filterFiled: [
             [
                 'lable' => 'فاتورة داخلية',
                 'orderType' => Sorting::EQULE,
@@ -384,7 +384,7 @@ class ReportController extends Controller
     public function cashReport()
     {
 
-        $filterBox = Report::ShowCustomFilter(filterFiled: [
+        $filterBox = Report::showCustomFilter(filterFiled: [
             [
                 'lable' => 'مدفوع بالكامل',
                 'orderType' => Sorting::EQULE,

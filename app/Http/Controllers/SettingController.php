@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\setting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -62,7 +62,7 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\setting  $setting
+     * @param  \App\Models\Setting  $setting
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

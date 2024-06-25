@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\message;
+use App\Models\Message;
 use App\Models\Tasks;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

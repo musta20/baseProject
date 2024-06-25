@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeDeliveryRequest;
 use App\Http\Requests\updateDeliveryRequest;
-use App\Models\delivery;
+use App\Models\Delivery;
 
 class DeliveryController extends Controller
 {
@@ -65,7 +65,7 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\delivery  $delivery
+     * @param  \App\Models\Delivery  $delivery
      * @return \Illuminate\Http\Response
      */
     public function edit(delivery $Delivery)
@@ -93,7 +93,7 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\delivery  $delivery
+     * @param  \App\Models\Delivery  $delivery
      * @return \Illuminate\Http\Response
      */
     public function destroy(delivery $Delivery)

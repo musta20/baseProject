@@ -6,7 +6,7 @@ use App\Enums\CashReport;
 use App\Enums\OrderStatus;
 use App\Enums\ReportType;
 use App\Enums\UserRole;
-use App\Models\order as Order;
+use App\Models\Order as Order;
 use App\Models\Report;
 use App\Models\User;
 use Tests\TestCase;

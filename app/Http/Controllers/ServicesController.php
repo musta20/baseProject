@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeSevicesRequest;
 use App\Http\Requests\updateSevicesRequest;
-use App\Models\category;
-use App\Models\delivery;
-use App\Models\payment;
+use App\Models\Category;
+use App\Models\Delivery;
+use App\Models\Payment as payment;
 use App\Models\RequiredFiles;
-use App\Models\services;
+use App\Models\Services;
 
 class ServicesController extends Controller
 {
@@ -92,7 +92,7 @@ class ServicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\services  $services
+     * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
     public function edit(services $Service)
@@ -116,7 +116,7 @@ class ServicesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\services  $services
+     * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
     public function update(updateSevicesRequest $request, services $Service)

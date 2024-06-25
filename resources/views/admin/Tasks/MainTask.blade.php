@@ -55,7 +55,7 @@
                             </td>
 
                             <td  scope="col" class="px-6 py-3">
-                                <a href="{{ route('admin.admin.ShowTask' , $item->id) }}">
+                                <a href="{{ route('admin.admin.showTask' , $item->id) }}">
                                 إجراء
                                 </i></a>
                             </td>

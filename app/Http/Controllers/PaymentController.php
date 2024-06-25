@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storePaymentRequest;
 use App\Http\Requests\updatePaymentRequest;
-use App\Models\payment;
+use App\Models\Payment as payment;
 
 class PaymentController extends Controller
 {

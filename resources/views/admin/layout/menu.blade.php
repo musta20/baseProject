@@ -13,12 +13,12 @@
 
 
         @can('TaskMangment')
-        <a href="{{ route('admin.admin.MenuTask') }}">إدارة المهام</a>
+        <a href="{{ route('admin.admin.menuTask') }}">إدارة المهام</a>
         @endcan
 
 
         @can('Task')
-        <a href="{{ route('admin.admin.MainTask') }}">المهام</a>
+        <a href="{{ route('admin.admin.mainTask') }}">المهام</a>
         @endcan
 
         @can('Category/Services')

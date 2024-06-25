@@ -5,7 +5,7 @@ use App\Models\Role;
 use App\Models\User;
 use Tests\TestCase;
 
-class UsersControllerTest extends TestCase
+class UsersTest extends TestCase
 {
     // Tests for Admin Users
 
@@ -17,7 +17,7 @@ class UsersControllerTest extends TestCase
         $admin = $this->authenticateUser();
         // ... (Create users and roles)
 
-        $response = $this->get('/admin/UsersList');
+        $response = $this->get('/admin/usersList');
 
         $response->assertStatus(200);
         $response->assertViewIs('admin.users.index');
@@ -57,7 +57,7 @@ class UsersControllerTest extends TestCase
 
         $response = $this->post('/admin/createUser', $data);
 
-        $response->assertRedirect('/admin/UsersList');
+        $response->assertRedirect('/admin/usersList');
         $response->assertSessionHas('OkToast', 'تم إضافة المستخدم');
         $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
     }

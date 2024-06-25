@@ -28,7 +28,8 @@ class Recaptcha implements Rule
     public function passes($attribute, $value)
     {
 
-        $data = ['secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+        $data = [
+            //'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
             'response' => $value];
 
         try {

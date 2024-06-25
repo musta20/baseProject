@@ -1,6 +1,6 @@
 <x-layout>
 
-    <form method="POST" action="{{ route('SaveOrder' , $services->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('saveOrder' , $services->id) }}" enctype="multipart/form-data">
 
         @csrf
 

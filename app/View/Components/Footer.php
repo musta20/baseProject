@@ -2,8 +2,8 @@
 
 namespace App\View\Components;
 
-use App\Models\setting;
-use App\Models\social;
+use App\Models\Setting;
+use App\Models\Social;
 use Closure;
 use Illuminate\View\Component;
 

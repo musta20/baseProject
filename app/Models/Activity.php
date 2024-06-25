@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Enums\Sorting;
-use App\Models\Conserns\Withfilter;
+use App\Models\Conserns\WithFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\Models\Activity as ActivityModel;
 
 class Activity extends ActivityModel
 {
-    use HasFactory , Withfilter;
+    use HasFactory , WithFilter;
 
     protected static $filterFiled = [
         [

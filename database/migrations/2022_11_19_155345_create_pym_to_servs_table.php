@@ -8,7 +8,7 @@ class CreatePymToServsTable extends Migration
 {
     public function up()
     {
-        Schema::create('pym_to_servs', function (Blueprint $table) {
+        Schema::create('Pymtoservs', function (Blueprint $table) {
             $table->foreignUlid('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreignUlid('payment_id')->references('id')->on('payments')->onDelete('cascade');
 
@@ -18,6 +18,6 @@ class CreatePymToServsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('pym_to_servs');
+        Schema::dropIfExists('Pymtoservs');
     }
 }

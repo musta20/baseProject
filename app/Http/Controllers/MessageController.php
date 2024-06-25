@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\saveMessageRequest;
-use App\Models\message;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +54,7 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
     public function show(message $Message)
@@ -90,7 +90,7 @@ class MessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\message  $message
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
     public function destroy(message $Message)
@@ -107,13 +107,13 @@ class MessageController extends Controller
 
         if ($type == 1) {
 
-            $filterBox = message::ShowFilter(realData: $users, relType: 'ToUser', relName: 'المستلمين');
+            $filterBox = message::showFilter(realData: $users, relType: 'ToUser', relName: 'المستلمين');
 
             $Messages = message::Filter()->where('from', Auth::user()->id)->with('toUser')->latest()->RequestPaginate();
 
         } elseif ($type == 2) {
 
-            $filterBox = message::ShowFilter(realData: $users, relType: 'FromUser', relName: 'مرسل من');
+            $filterBox = message::showFilter(realData: $users, relType: 'FromUser', relName: 'مرسل من');
 
             message::where('to', Auth::user()->id)->update(['isred' => 1]);
 

@@ -1,14 +1,14 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Models\category as Category;
-use App\Models\delivery as Delivery;
+use App\Models\Category as Category;
+use App\Models\Delivery as Delivery;
 use App\Models\payment as Payment;
-use App\Models\services as Services;
+use App\Models\Services as Services;
 use App\Models\User;
 use Tests\TestCase;
 
-class ServicesControllerTest extends TestCase
+class ServicesTest extends TestCase
 {
     /**
      * @test

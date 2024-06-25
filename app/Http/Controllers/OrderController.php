@@ -6,8 +6,8 @@ use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
 use App\Http\Requests\updateOrderRequest;
 use App\Models\Files;
-use App\Models\order;
-use App\Models\services;
+use App\Models\Order;
+use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,7 +50,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function show(order $Order)
@@ -62,7 +62,7 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function edit(order $Order)
@@ -108,7 +108,7 @@ class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function update(updateOrderRequest $request, order $Order)
@@ -146,7 +146,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\order  $order
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(order $Order)
@@ -166,7 +166,7 @@ class OrderController extends Controller
     public function showOrderList($type)
     {
         $services = services::all();
-        // $filterBox = order::ShowFilter(realData:$services,relType:'services', relName:'الخدمة');
+        // $filterBox = order::showFilter(realData:$services,relType:'services', relName:'الخدمة');
 
         $AllOrder = order::where('status', $type)->Filter(); //->RequestPaginate();
 

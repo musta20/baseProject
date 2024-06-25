@@ -5,7 +5,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Tests\TestCase;
 
-class SettingControllerTest extends TestCase
+class SettingTest extends TestCase
 {
     /**
      * @test

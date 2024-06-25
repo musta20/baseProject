@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Models\delivery as Delivery;
+use App\Models\Delivery as Delivery;
 use App\Models\User;
 use Tests\TestCase;
 

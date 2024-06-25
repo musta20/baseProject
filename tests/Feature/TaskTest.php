@@ -7,7 +7,7 @@ use App\Models\Tasks;
 use App\Models\User;
 use Tests\TestCase;
 
-class TasksTest extends TestCase
+class TaskTest extends TestCase
 {
     // Tests for Admin Users
 
@@ -80,10 +80,10 @@ class TasksTest extends TestCase
         $user = $this->authenticateUser();
         // ... (Create tasks for the user)
 
-        $response = $this->get('/admin/MainTask');
+        $response = $this->get('/admin/mainTask');
 
         $response->assertStatus(200);
-        $response->assertViewIs('admin.Tasks.MainTask');
+        $response->assertViewIs('admin.Tasks.mainTask');
         // ... (Assert that only the user's tasks are displayed)
     }
 
@@ -95,10 +95,10 @@ class TasksTest extends TestCase
         $user = $this->authenticateUser();
         $task = Tasks::factory()->for($user)->create();
 
-        $response = $this->get('/admin/ShowTask/' . $task->id);
+        $response = $this->get('/admin/showTask/' . $task->id);
 
         $response->assertStatus(200);
-        $response->assertViewIs('admin.Tasks.ShowTask');
+        $response->assertViewIs('admin.Tasks.showTask');
         $response->assertViewHas('task', $task);
     }
 
@@ -112,7 +112,7 @@ class TasksTest extends TestCase
         $user = User::factory()->create();
         $task = Tasks::factory()->for($user)->create();
 
-        $response = $this->get('/admin/ShowTask/' . $task->id);
+        $response = $this->get('/admin/showTask/' . $task->id);
 
         $response->assertRedirect('/admin/Task');
         $response->assertSessionHas('OkToast', 'حدث خطاء');

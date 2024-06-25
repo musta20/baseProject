@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\numbers;
+use App\Models\Numbers;
 use Illuminate\Http\Request;
 
 class NumbersController extends Controller
@@ -54,7 +54,7 @@ class NumbersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,19 +68,18 @@ class NumbersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        dd($id);
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -102,7 +101,7 @@ class NumbersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

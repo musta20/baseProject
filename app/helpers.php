@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\message;
+use App\Models\Message;
 use App\Models\Tasks;
 use Illuminate\Support\Facades\Auth;
 

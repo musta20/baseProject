@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Models\setting;
+use App\Models\Setting;
 use Illuminate\View\View;
 
 class LayoutComposers

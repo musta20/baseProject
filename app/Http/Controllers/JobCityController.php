@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeJobCityRequest;
 use App\Http\Requests\updateJobCityRequest;
-use App\Models\job_city;
+use App\Models\Jobcity;
 
 class JobCityController extends Controller
 {
@@ -15,7 +15,7 @@ class JobCityController extends Controller
      */
     public function index()
     {
-        $jobcity = job_city::latest()->paginate(10);
+        $jobcity = Jobcity::latest()->paginate(10);
 
         return view('admin.jobs.city.index', ['jobcity' => $jobcity]);
     }
@@ -40,7 +40,7 @@ class JobCityController extends Controller
     public function store(storeJobCityRequest $request)
     {
 
-        job_city::create($request);
+        Jobcity::create($request);
 
         return redirect('/admin/JobCity')->with('OkToast', 'تم إضافة البيانات');
 
@@ -51,9 +51,9 @@ class JobCityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(job_city $job_city)
+    public function show(Jobcity $Jobcity)
     {
-        return view('admin.jobs.city.edit', ['jobcity' => $job_city]);
+        return view('admin.jobs.city.edit', ['jobcity' => $Jobcity]);
     }
 
     /**
@@ -62,12 +62,12 @@ class JobCityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(updateJobCityRequest $request, job_city $job_city)
+    public function update(updateJobCityRequest $request, Jobcity $Jobcity)
     {
 
-        $job_city->name = $request->name;
+        $Jobcity->name = $request->name;
 
-        $job_city->save();
+        $Jobcity->save();
 
         return redirect('/admin/JobCity/')->with('OkToast', 'تم تعديل العنصر');
 
@@ -78,9 +78,9 @@ class JobCityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(job_city $job_city)
+    public function destroy(Jobcity $Jobcity)
     {
-        $job_city->delete();
+        $Jobcity->delete();
 
         return redirect('/admin/JobCity/')->with('OkToast', 'تم حذف العنصر');
     }

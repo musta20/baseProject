@@ -8,7 +8,7 @@ class CreateDevToServsTable extends Migration
 {
     public function up()
     {
-        Schema::create('dev_to_servs', function (Blueprint $table) {
+        Schema::create('Devtoservs', function (Blueprint $table) {
             $table->foreignUlid('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreignUlid('delivery_id')->references('id')->on('delivery')->onDelete('cascade');
             $table->timestamps();
@@ -17,6 +17,6 @@ class CreateDevToServsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('dev_to_servs');
+        Schema::dropIfExists('Devtoservs');
     }
 }

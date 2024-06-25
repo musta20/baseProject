@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Enums\OrderStatus;
 use App\Enums\UserRole;
-use App\Models\order as Order;
-use App\Models\services as Services;
+use App\Models\Order as Order;
+use App\Models\Services as Services;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;

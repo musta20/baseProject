@@ -37,7 +37,7 @@ class LogsTest extends TestCase
         $otherUser = User::factory()->create();
         Activity::factory()->count(3)->create(['causer_id' => $otherUser->id]);
 
-        $response = $this->get(route('admin.LogsList', $otherUser));
+        $response = $this->get(route('admin.logsList', $otherUser));
 
         $response->assertOk();
         $response->assertViewIs('admin.Logs.list');

@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Enums\UserRole;
-use App\Models\job_app as JobApp;
-use App\Models\jobs as Jobs;
+use App\Models\Jobapp as JobApp;
+use App\Models\Jobs as Jobs;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ class JobAppTest extends TestCase
     /**
      * @test
      */
-    public function index_shows_job_applications_and_filter_box()
+    public function index_shows_Jobapplications_and_filter_box()
     {
         // Create some jobs and job applications
 
@@ -36,7 +36,7 @@ class JobAppTest extends TestCase
     /**
      * @test
      */
-    public function show_displays_a_specific_job_application()
+    public function show_displays_a_specific_Jobapplication()
     {
         $user = User::factory()->withRole(UserRole::Admin->value)->create();
         $this->actingAs($user);

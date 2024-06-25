@@ -11,4 +11,4 @@ enum ReportStatus: int
     case CANCELLED = 4;
     case EXPIRED = 6;
     case CLOSED = 5;
-};
+}

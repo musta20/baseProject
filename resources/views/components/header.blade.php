@@ -57,7 +57,7 @@
     </div>
     <ul class="flex justify-center items-center w-2/6">
         <li class=" py-2">
-            <a class="px-2 hover:text-slate-300" href="{{ route('CheckStatus') }}">الإستعلام</a>
+            <a class="px-2 hover:text-slate-300" href="{{ route('checkStatus') }}">الإستعلام</a>
         </li>
         <li class=" py-2">
             <a class="px-2 hover:text-slate-300"  href="{{ route('category') }}">الخدمات</a>

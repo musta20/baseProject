@@ -8,7 +8,7 @@ class CreateJobAppsTable extends Migration
 {
     public function up()
     {
-        Schema::create('job_apps', function (Blueprint $table) {
+        Schema::create('Jobapps', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
             $table->string('email');
@@ -18,7 +18,7 @@ class CreateJobAppsTable extends Migration
             $table->longText('exp_des');
             $table->string('city');
 
-            $table->string('job_city');
+            $table->string('Jobcity');
 
             $table->string('majer');
             $table->string('code');
@@ -34,6 +34,6 @@ class CreateJobAppsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('job_apps');
+        Schema::dropIfExists('Jobapps');
     }
 }

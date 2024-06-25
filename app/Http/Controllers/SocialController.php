@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\storeSocialRequest;
-use App\Models\social;
+use App\Models\Social;
 
 class SocialController extends Controller
 {
@@ -63,7 +63,7 @@ class SocialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\social  $social
+     * @param  \App\Models\Social  $social
      * @return \Illuminate\Http\Response
      */
     public function edit(social $Social)
@@ -76,7 +76,7 @@ class SocialController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\social  $social
+     * @param  \App\Models\Social  $social
      * @return \Illuminate\Http\Response
      */
     public function update(storeSocialRequest $request, social $Social)
@@ -94,7 +94,7 @@ class SocialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\social  $social
+     * @param  \App\Models\Social  $social
      * @return \Illuminate\Http\Response
      */
     public function destroy(social $Social)

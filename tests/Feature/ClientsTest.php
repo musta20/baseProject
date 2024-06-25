@@ -2,7 +2,7 @@
 
 use App\Enums\CommentStatus;
 use App\Enums\UserRole;
-use App\Models\clients;
+use App\Models\Clients;
 use App\Models\User;
 use Tests\TestCase;
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\job_app;
-use App\Models\jobs;
+use App\Models\Jobapp;
+use App\Models\Jobs;
 use Illuminate\Http\Request;
 
 class JobAppController extends Controller
@@ -16,8 +16,8 @@ class JobAppController extends Controller
     public function index()
     {
         $jobs = jobs::get();
-        $filterBox = job_app::showFilter(realData: $jobs, relType: 'jobs', relName: 'الوظيفة');
-        $alljopapp = job_app::Filter()->with('job')->requestPaginate();
+        $filterBox = Jobapp::showFilter(realData: $jobs, relType: 'jobs', relName: 'الوظيفة');
+        $alljopapp = Jobapp::Filter()->with('job')->requestPaginate();
 
         return view('admin.jobs.jobApp.index', ['alljopapp' => $alljopapp, 'filterBox' => $filterBox]);
     }
@@ -45,10 +45,10 @@ class JobAppController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\job_app  $job_app
+     * @param  \App\Models\Jobapp  $Jobapp
      * @return \Illuminate\Http\Response
      */
-    public function show(job_app $JobApp)
+    public function show(Jobapp $JobApp)
     {
         return view('admin.jobs.jobApp.show', ['job' => $JobApp]);
     }
@@ -58,7 +58,7 @@ class JobAppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(job_app $job_app)
+    public function edit(Jobapp $Jobapp)
     {
         //
     }
@@ -68,7 +68,7 @@ class JobAppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, job_app $job_app)
+    public function update(Request $request, Jobapp $Jobapp)
     {
         //
     }
@@ -78,9 +78,9 @@ class JobAppController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(job_app $job_app)
+    public function destroy(Jobapp $Jobapp)
     {
-        $job_app->delete();
+        $Jobapp->delete();
 
         return redirect('/admin/JobApp')->with('OkToast', 'تم حذف العنصر');
     }

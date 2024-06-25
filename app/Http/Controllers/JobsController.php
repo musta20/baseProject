@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeJobRequest;
 use App\Http\Requests\updateJobRequest;
-use App\Models\job_city;
-use App\Models\jobs;
+use App\Models\Jobcity;
+use App\Models\Jobs;
 
 class JobsController extends Controller
 {
@@ -40,7 +40,7 @@ class JobsController extends Controller
      */
     public function create()
     {
-        $jobCity = job_city::get();
+        $jobCity = Jobcity::get();
 
         return view('admin.jobs.add', ['jobCity' => $jobCity,
 
@@ -70,13 +70,13 @@ class JobsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\jobs  $jobs
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
     public function show(jobs $Job)
     {
-        $jobCity = job_city::get();
-        $currentcity = job_city::find($Job->job_cities_id);
+        $jobCity = Jobcity::get();
+        $currentcity = Jobcity::find($Job->job_cities_id);
 
         return view('admin.jobs.edit', ['Jobs' => $Job, 'currentcity' => $currentcity, 'jobCity' => $jobCity]);
     }
@@ -84,12 +84,12 @@ class JobsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\jobs  $jobs
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
     public function edit(jobs $Job)
     {
-        $jobCity = job_city::get();
+        $jobCity = Jobcity::get();
 
         return view('admin.jobs.edit', ['Jobs' => $Job, 'jobCity' => $jobCity]);
     }
@@ -98,7 +98,7 @@ class JobsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\jobs  $jobs
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
     public function update(updateJobRequest $request, jobs $Job)
@@ -117,7 +117,7 @@ class JobsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\jobs  $jobs
+     * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
     public function destroy(jobs $Job)

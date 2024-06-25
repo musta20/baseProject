@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\UserRole;
-use App\Models\message;
+use App\Models\Message;
 use App\Models\User;
 use Tests\TestCase;
 

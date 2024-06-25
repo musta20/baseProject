@@ -62,7 +62,7 @@ class UsersController extends Controller
 
         $user->assignRole($role);
 
-        return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
+        return redirect()->route('admin.usersList')->with('OkToast', 'تم إضافة المستخدم');
     }
 
     /**
@@ -126,7 +126,7 @@ class UsersController extends Controller
 
         $User->save();
 
-        return redirect()->route('admin.UsersList')->with('OkToast', 'تم تعديل الموظف');
+        return redirect()->route('admin.usersList')->with('OkToast', 'تم تعديل الموظف');
     }
 
     /**
@@ -139,10 +139,10 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.UsersList')->with('OkToast', 'تم حذف العنصر');
+        return redirect()->route('admin.usersList')->with('OkToast', 'تم حذف العنصر');
     }
 
-    public function UsersList()
+    public function usersList()
     {
         // $locale = App::currentLocale();
 
@@ -209,7 +209,7 @@ class UsersController extends Controller
 
         //   $user->givePermissionTo('edit articles');
 
-        return redirect()->route('admin.UsersList')->with('OkToast', 'تم إضافة المستخدم');
+        return redirect()->route('admin.usersList')->with('OkToast', 'تم إضافة المستخدم');
     }
 
     public function addpermison()
@@ -289,7 +289,7 @@ class UsersController extends Controller
 
     }
 
-    public function Perm()
+    public function perm()
     {
         $role = Role::all();
         $perm = Permission::all();

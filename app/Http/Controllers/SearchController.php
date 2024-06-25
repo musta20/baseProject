@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Enums\ReportType;
 use App\Models\Files;
-use App\Models\job_app;
-use App\Models\order;
+use App\Models\Jobapp;
+use App\Models\Order;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -60,7 +60,7 @@ class SearchController extends Controller
 
             case '2':
 
-                $job = job_app::with('job')->where('code', $request->keyword)->first();
+                $job = Jobapp::with('job')->where('code', $request->keyword)->first();
 
                 if (! $job) {
                     return view('admin.search.index', ['resault' => true]);
@@ -69,7 +69,7 @@ class SearchController extends Controller
 
                 return view('admin.jobs.jobApp.show', ['job' => $job]);
 
-                // $resault = job_app::where('code', $request->keyword)->first();
+                // $resault = Jobapp::where('code', $request->keyword)->first();
                 break;
 
             case '3':

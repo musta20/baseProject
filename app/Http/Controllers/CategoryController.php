@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\storeCategoryRequest;
 use App\Http\Requests\updateCategoryRequest;
-use App\Models\category;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -80,7 +80,7 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\category  $category
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(updateCategoryRequest $request, Category $Category)
@@ -99,7 +99,7 @@ class CategoryController extends Controller
     /**
      * Delete a category from storage.
      *
-     * @param  \App\Models\category  $Category  The category to be deleted.
+     * @param  \App\Models\Category  $Category  The category to be deleted.
      * @return \Illuminate\Http\Response A redirect response to the admin category index page with a success message.
      */
     public function destroy(category $Category)

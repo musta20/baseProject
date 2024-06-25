@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CommentStatus;
 use App\Http\Requests\updateClientRequest;
-use App\Models\clients;
+use App\Models\Clients;
 use Illuminate\Http\Request;
 
 class ClientsController extends Controller
@@ -71,7 +71,7 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\clients  $clients
+     * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
     public function edit(clients $Client)
@@ -107,7 +107,7 @@ class ClientsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\clients  $clients
+     * @param  \App\Models\Clients  $clients
      * @return \Illuminate\Http\Response
      */
     public function destroy(clients $Client)

@@ -15,6 +15,3 @@ enum BillType: int
         }
     }
 }
-
-?>
-

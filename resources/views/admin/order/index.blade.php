@@ -44,8 +44,8 @@
                                 {{ $item->name }}</td>
                             @if ($type != 0)
                             <td scope="col" class="px-6 py-3">
-                                <a target="_blank" href="{{ route('admin.BillInnerPrint' , $item->id) }}">الفاتورة الداخلية</a>
-                                <a target="_blank" href="{{ route('admin.Billprint' , $item->id) }}">فاتورة الزبون</a>
+                                <a target="_blank" href="{{ route('admin.billInnerPrint' , $item->id) }}">الفاتورة الداخلية</a>
+                                <a target="_blank" href="{{ route('admin.billPrint' , $item->id) }}">فاتورة الزبون</a>
                             </td>
                         @endif
                         <td scope="col" class="px-6 py-3">
@@ -106,8 +106,8 @@
                     </td>
                     @if ($type != 0)
                         <td>
-                            <a target="_blank" href="{{ route('admin.BillInnerPrint' , $item->id) }}">الفاتورة الداخلية</a>
-                            <a target="_blank" href="{{ route('admin.Billprint' , $item->id) }}">فاتورة الزبون</a>
+                            <a target="_blank" href="{{ route('admin.billInnerPrint' , $item->id) }}">الفاتورة الداخلية</a>
+                            <a target="_blank" href="{{ route('admin.billPrint' , $item->id) }}">فاتورة الزبون</a>
                         </td>
                     @else
                     @endif

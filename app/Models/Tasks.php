@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Sorting;
-use App\Models\Conserns\Withfilter;
+use App\Models\Conserns\WithFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Tasks extends Model
 {
-    use HasFactory, HasUlids, LogsActivity, Withfilter;
+    use HasFactory, HasUlids, LogsActivity, WithFilter;
 
     protected static $filterFiled = [
         [

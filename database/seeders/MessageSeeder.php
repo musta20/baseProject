@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\message;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 

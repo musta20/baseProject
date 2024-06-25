@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Models\social as Social;
+use App\Models\Social as Social;
 use App\Models\User;
 use Tests\TestCase;
 

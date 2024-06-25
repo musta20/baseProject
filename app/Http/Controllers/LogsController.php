@@ -88,9 +88,9 @@ class LogsController extends Controller
         //
     }
 
-    public function LogsList($id)
+    public function logsList($id)
     {
-        //AllLogs LogsList
+        //AllLogs logsList
         $filterBox = Activity::showFilter();
 
         $AllLogs = Activity::Filter()->where('causer_id', $id)->RequestPaginate();

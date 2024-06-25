@@ -1,6 +1,6 @@
 <x-layout>
 
-    <form method="POST" class="colorTexetFooter" action="{{ route('SaveJobs') }}" enctype="multipart/form-data">
+    <form method="POST" class="colorTexetFooter" action="{{ route('saveJobs') }}" enctype="multipart/form-data">
 
         @csrf
 
@@ -29,14 +29,14 @@
         </div>
 
         <div class="flex gap-5 p-3">
-            <x-admin.select-input name="job_city" :options="$jobcity" label="مدينة الوظيفة" />
+            <x-admin.select-input name="Jobcity" :options="$jobcity" label="مدينة الوظيفة" />
         </div>
 
         <x-admin.textarea-card name="about" placeholder="التفاصيل" cols="30" rows="5" label="تحدث عن نفسك" />
 
 
         <div class="flex gap-5 p-3">
-            <x-admin.select-input name="job_city" :options="$jobcity" label="مدينة الوظيفة" />
+            <x-admin.select-input name="Jobcity" :options="$jobcity" label="مدينة الوظيفة" />
             <x-admin.input-card name="cv" type="file" label="اضف السيرة الذاتية" />
         </div>
 

@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Enums\UserRole;
-use App\Models\jobs as Jobs;
+use App\Models\Jobs as Jobs;
 use App\Models\User;
 use Tests\TestCase;
 

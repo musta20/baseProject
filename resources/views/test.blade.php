@@ -21,7 +21,7 @@
                 <td>
                     <span class="Bill">
                         تم اصدار فاتورة:
-                        <a href={{ route('admin.Billprint' , $bill) }}
+                        <a href={{ route('admin.billPrint' , $bill) }}
                             style="display: flex;align-content: center;justify-content: center;">طباعة الفاتورة</a>
                     </span>
                 </td>

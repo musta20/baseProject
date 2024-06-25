@@ -106,7 +106,7 @@
                     <span class="text-sm block px-4 py-2 text-md  flex gap-2 "> لا يوجد</span>
                     @endif
                     @foreach (getNotif()['task'] as $item)
-                    <a href="{{ route('admin.admin.MainTask') }}"
+                    <a href="{{ route('admin.admin.mainTask') }}"
                         class="text-gray-800   hover:bg-slate-100  block px-4 py-2 text-sm  flex gap-2">
                         <div class="flex justify-between gap-1 w-full">
                             <h5 class="">

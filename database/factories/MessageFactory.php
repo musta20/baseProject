@@ -2,24 +2,25 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\=message>
- */
 class MessageFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'title' => $this->faker->name(),
+            'from' => User::factory()->withRole(UserRole::Admin->value)->create()->id,
+            'to' => User::factory()->withRole(UserRole::Admin->value)->create()->id,
             'isred' => rand(0, 1),
-            'message' => $this->faker->sentence(),
+            'title' => $this->faker->name(),
+            'message' => $this->faker->paragraph(),
 
         ];
     }

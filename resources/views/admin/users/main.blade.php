@@ -7,7 +7,7 @@
             <h3> ادارة الصلاحيات</h3>
         </a>
 
-        <a href="{{ route('admin.UsersList') }}" >
+        <a href="{{ route('admin.usersList') }}" >
             <i class="fa-solid fa-clipboard-check fa-2x"></i>
             <h3>عرض جميع الموظفين</h3>
         </a>

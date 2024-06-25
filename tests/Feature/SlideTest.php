@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\UserRole;
-use App\Models\slide as Slide;
+use App\Models\Slide as Slide;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Tests\TestCase;

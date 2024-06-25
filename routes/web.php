@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\adminController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\CustmerSlideController;
@@ -57,19 +57,19 @@ Route::get('/', [mainSite::class, 'index']);
 Route::get('category', [mainSite::class, 'category'])->name('category');
 Route::get('services/{category}', [mainSite::class, 'services'])->name('services');
 Route::get('order/{services}', [mainSite::class, 'order'])->name('order');
-Route::post('SaveOrder/{services}', [mainSite::class, 'SaveOrder'])->name('SaveOrder');
+Route::post('saveOrder/{services}', [mainSite::class, 'saveOrder'])->name('saveOrder');
 Route::get('jobs', [mainSite::class, 'job'])->name('jobs');
 
 Route::get('about', [mainSite::class, 'about'])->name('about');
 Route::get('term', [mainSite::class, 'term'])->name('term');
 
 Route::get('contact', [mainSite::class, 'contact'])->name('contact');
-Route::post('SendContact', [mainSite::class, 'SendContact'])->name('SendContact');
+Route::post('sendContact', [mainSite::class, 'sendContact'])->name('sendContact');
 
-Route::get('CheckStatus', [mainSite::class, 'CheckStatus'])->name('CheckStatus');
-Route::post('CheckOrderStatus', [mainSite::class, 'CheckOrderStatus'])->name('CheckOrderStatus');
+Route::get('checkStatus', [mainSite::class, 'checkStatus'])->name('checkStatus');
+Route::post('checkOrderStatus', [mainSite::class, 'checkOrderStatus'])->name('checkOrderStatus');
 
-Route::post('SaveJobs', [mainSite::class, 'SaveJobs'])->name('SaveJobs');
+Route::post('saveJobs', [mainSite::class, 'saveJobs'])->name('saveJobs');
 
 Route::get('test', function () {
     $ratingCode = (object) ['token' => '0'];
@@ -91,7 +91,7 @@ Route::post('login/', [UsersController::class, 'login'])->name('admin.login');
 
 Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], function () {
 
-    Route::get('/', [adminController::class, 'index'])->name('index');
+    Route::get('/', [AdminController::class, 'index'])->name('index');
 
     Route::group(['middleware' => ['permission:Search']], function () {
 
@@ -103,9 +103,9 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     Route::group(['middleware' => ['permission:Task']], function () {
 
-        Route::get('MainTask', [TasksController::class, 'MainTask'])->name('admin.MainTask');
-        Route::get('ShowTask/{task}', [TasksController::class, 'ShowTask'])->name('admin.ShowTask');
-        Route::post('EditTask/{task}', [TasksController::class, 'EditTask'])->name('admin.EditTask');
+        Route::get('mainTask', [TasksController::class, 'mainTask'])->name('admin.mainTask');
+        Route::get('showTask/{task}', [TasksController::class, 'showTask'])->name('admin.showTask');
+        Route::post('editTask/{task}', [TasksController::class, 'editTask'])->name('admin.editTask');
 
         Route::get('showMyNotifyTask/{type}', [TasksController::class, 'showMyNotifyTask'])->name('showMyNotifyTask');
         Route::get('editMyNotifyTask/{type}', [TasksController::class, 'editMyNotifyTask'])->name('editMyNotifyTask');
@@ -128,7 +128,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('NotifyType', NotifyTypeController::class);
 
-        Route::get('MenuTask', [TasksController::class, 'MenuTask'])->name('admin.MenuTask');
+        Route::get('menuTask', [TasksController::class, 'menuTask'])->name('admin.menuTask');
 
     });
 
@@ -164,7 +164,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Logs', LogsController::class);
 
-        Route::get('LogsList/{id}', [LogsController::class, 'LogsList'])->name('LogsList');
+        Route::get('logsList/{id}', [LogsController::class, 'logsList'])->name('logsList');
 
     });
 
@@ -201,9 +201,9 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Order', OrderController::class);
 
-        Route::get('Billprint/{id}', [ReportController::class, 'Billprint'])->name('Billprint');
+        Route::get('billPrint/{id}', [ReportController::class, 'billPrint'])->name('billPrint');
 
-        Route::get('BillInnerPrint/{id}', [ReportController::class, 'BillInnerPrint'])->name('BillInnerPrint');
+        Route::get('billInnerPrint/{id}', [ReportController::class, 'billInnerPrint'])->name('billInnerPrint');
 
         // Route::get('seedAllOrderList/', [OrderController::class, 'seedAllOrderList'])->name('seedAllOrderList');
     });
@@ -222,7 +222,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::post('addPerm/', [UsersController::class, 'addPerm'])->name('addPerm');
 
-        Route::get('UsersList/', [UsersController::class, 'UsersList'])->name('UsersList');
+        Route::get('usersList/', [UsersController::class, 'usersList'])->name('usersList');
 
         //Route::get('addpermison/', [UsersController::class, 'addpermison'])->name('addpermison');
 
