@@ -210,7 +210,7 @@ class TasksController extends Controller
         return view('admin.Tasks.mainTask', [
             'alltask' => $alltask,
             'option' => $option,
-            'filterBox' => $filterBox
+            'filterBox' => $filterBox,
         ]);
     }
 
