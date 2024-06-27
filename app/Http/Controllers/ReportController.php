@@ -46,8 +46,8 @@ class ReportController extends Controller
      */
     public function store(StoreReportRequest $request)
     {
-        if (!Storage::disk('public')->exists('pdf')) {
-            
+        if (! Storage::disk('public')->exists('pdf')) {
+
             Storage::disk('public')->makeDirectory('pdf');
         }
 
