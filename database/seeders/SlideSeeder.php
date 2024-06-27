@@ -6,6 +6,7 @@ use App\Models\Services;
 use App\Models\Slide;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Facades\Storage;
 
 class SlideSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class SlideSeeder extends Seeder
 
         $imagePath = storage_path() . '/Images/';
 
-        $SlideImagePath = storage_path() . '/app/public/Slide/';
+        // $SlideImagePath = storage_path() . '/app/public/Slide/';
 
         $slides = [
             [
@@ -35,7 +36,15 @@ class SlideSeeder extends Seeder
 
         foreach ($slides as $key => $value) {
 
-            Process::run('cp ' . $imagePath . $value['img'] . ' ' . $SlideImagePath . $value['img']);
+            //  Process::run('cp ' . $imagePath . $value['img'] . ' ' . $SlideImagePath . $value['img']);
+
+            // create the /slide folder if it does not exist
+            if (! Storage::disk('public')->exists('Slide')) {
+                Storage::disk('public')->makeDirectory('Slide');
+            }
+
+            // copy the file to the /Slide folder
+            Storage::disk('public')->put('Slide/' . $value['img'], file_get_contents($imagePath . $value['img']));
 
             slide::factory()->create([
                 'img' => 'Slide/' . $value['img'],

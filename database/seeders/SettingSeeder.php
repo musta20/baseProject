@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class SettingSeeder extends Seeder
 {
@@ -44,6 +45,16 @@ class SettingSeeder extends Seeder
             'footertext' => 'footertext',
 
         ]);
+
+        // create the /slide folder if it does not exist
+        if (! Storage::disk('public')->exists('logo')) {
+            Storage::disk('public')->makeDirectory('logo');
+        }
+        // $SlideImagePath = storage_path() . '/app/public/Slide/';
+        $imagePath = storage_path() . '/Images/';
+
+        // copy the file to the /Slide folder
+        Storage::disk('public')->put('logo/logo.png', file_get_contents($imagePath . 'logo.png'));
 
     }
 }
