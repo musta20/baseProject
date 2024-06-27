@@ -62,9 +62,9 @@ class ReportTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-
     /**
      * @test
+     *
      * @skip
      */
     // public function authenticated_user_can_generate_cash_report()
