@@ -10,7 +10,7 @@ use App\Http\Controllers\JobCityController;
 use App\Http\Controllers\JobsController;
 //use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LogsController;
-use App\Http\Controllers\mainSite;
+use App\Http\Controllers\Mainsite;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotifyTypeController;
 use App\Http\Controllers\NumbersController;
@@ -53,23 +53,23 @@ Route::get('testlocal', function () {
    return view('dash.index');
 }); */
 
-Route::get('/', [mainSite::class, 'index']);
-Route::get('category', [mainSite::class, 'category'])->name('category');
-Route::get('services/{category}', [mainSite::class, 'services'])->name('services');
-Route::get('order/{services}', [mainSite::class, 'order'])->name('order');
-Route::post('saveOrder/{services}', [mainSite::class, 'saveOrder'])->name('saveOrder');
-Route::get('jobs', [mainSite::class, 'job'])->name('jobs');
+Route::get('/', [Mainsite::class, 'index']);
+Route::get('category', [Mainsite::class, 'category'])->name('category');
+Route::get('services/{category}', [Mainsite::class, 'services'])->name('services');
+Route::get('order/{services}', [Mainsite::class, 'order'])->name('order');
+Route::post('saveOrder/{services}', [Mainsite::class, 'saveOrder'])->name('saveOrder');
+Route::get('jobs', [Mainsite::class, 'job'])->name('jobs');
 
-Route::get('about', [mainSite::class, 'about'])->name('about');
-Route::get('term', [mainSite::class, 'term'])->name('term');
+Route::get('about', [Mainsite::class, 'about'])->name('about');
+Route::get('term', [Mainsite::class, 'term'])->name('term');
 
-Route::get('contact', [mainSite::class, 'contact'])->name('contact');
-Route::post('sendContact', [mainSite::class, 'sendContact'])->name('sendContact');
+Route::get('contact', [Mainsite::class, 'contact'])->name('contact');
+Route::post('sendContact', [Mainsite::class, 'sendContact'])->name('sendContact');
 
-Route::get('checkStatus', [mainSite::class, 'checkStatus'])->name('checkStatus');
-Route::post('checkOrderStatus', [mainSite::class, 'checkOrderStatus'])->name('checkOrderStatus');
+Route::get('checkStatus', [Mainsite::class, 'checkStatus'])->name('checkStatus');
+Route::post('checkOrderStatus', [Mainsite::class, 'checkOrderStatus'])->name('checkOrderStatus');
 
-Route::post('saveJobs', [mainSite::class, 'saveJobs'])->name('saveJobs');
+Route::post('saveJobs', [Mainsite::class, 'saveJobs'])->name('saveJobs');
 
 Route::get('test', function () {
     $ratingCode = (object) ['token' => '0'];

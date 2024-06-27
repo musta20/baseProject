@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\payment;
+use App\Models\Payment;
 use Illuminate\Database\Seeder;
 
 class PaymentSeeder extends Seeder
@@ -17,7 +17,7 @@ class PaymentSeeder extends Seeder
 
         foreach ($payments as $value) {
 
-            payment::create([
+            Payment::create([
                 'name' => $value,
             ]);
 

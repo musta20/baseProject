@@ -48,7 +48,6 @@ class NumbersController extends Controller
         numbers::create($data);
 
         return redirect('/admin/Number')->with('OkToast', 'تم إضافة البيانات');
-
     }
 
     /**
@@ -71,10 +70,7 @@ class NumbersController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-
-    }
+    public function edit($id) {}
 
     /**
      * Update the specified resource in storage.
@@ -95,7 +91,6 @@ class NumbersController extends Controller
         $number->save();
 
         return redirect()->route('admin.Number.index')->with('OkToast', 'تم تعديل العنصر');
-
     }
 
     /**

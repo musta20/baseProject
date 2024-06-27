@@ -14,6 +14,8 @@ class Jobcity extends Model
 
     protected $guarded = [];
 
+    protected $table = 'job_cities';
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logOnly(['name'])->useLogName('Jobcity');

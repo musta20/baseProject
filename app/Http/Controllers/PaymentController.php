@@ -23,7 +23,6 @@ class PaymentController extends Controller
     public function create()
     {
         return view('admin.order.payment.add');
-
     }
 
     /**
@@ -47,9 +46,7 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(payment $payment)
-    {
-    }
+    public function show(payment $payment) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -60,7 +57,6 @@ class PaymentController extends Controller
     public function edit(payment $Payment)
     {
         return view('admin.order.payment.edit', ['payment' => $Payment]);
-
     }
 
     /**
@@ -81,7 +77,6 @@ class PaymentController extends Controller
         $Payment->save();
 
         return redirect()->route('admin.Payment.index')->with('OkToast', 'تم تعديل العنصر');
-
     }
 
     /**

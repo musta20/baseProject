@@ -34,7 +34,6 @@ class DeliveryController extends Controller
     public function create()
     {
         return view('admin.order.delivery.add');
-
     }
 
     /**
@@ -58,9 +57,7 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(delivery $delivery)
-    {
-    }
+    public function show(delivery $delivery) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +68,6 @@ class DeliveryController extends Controller
     public function edit(delivery $Delivery)
     {
         return view('admin.order.delivery.edit', ['delivery' => $Delivery]);
-
     }
 
     /**
