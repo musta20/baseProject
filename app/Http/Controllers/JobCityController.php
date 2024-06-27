@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeJobCityRequest;
+use App\Http\Requests\StoreJobCityRequest;
 use App\Http\Requests\updateJobCityRequest;
 use App\Models\Jobcity;
 
@@ -37,7 +37,7 @@ class JobCityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeJobCityRequest $request)
+    public function store(StoreJobCityRequest $request)
     {
 
         Jobcity::create($request);

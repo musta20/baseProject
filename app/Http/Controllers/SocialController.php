@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeSocialRequest;
+use App\Http\Requests\StoreSocialRequest;
 use App\Models\Social;
 
 class SocialController extends Controller
@@ -38,7 +38,7 @@ class SocialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeSocialRequest $request)
+    public function store(StoreSocialRequest $request)
     {
 
         social::create([
@@ -79,7 +79,7 @@ class SocialController extends Controller
      * @param  \App\Models\Social  $social
      * @return \Illuminate\Http\Response
      */
-    public function update(storeSocialRequest $request, social $Social)
+    public function update(StoreSocialRequest $request, social $Social)
     {
 
         $Social->img = $request->img;

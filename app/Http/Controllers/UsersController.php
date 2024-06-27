@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\createUserRequest;
+use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\loginRequest;
-use App\Http\Requests\updateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -97,7 +97,7 @@ class UsersController extends Controller
      * @param  \App\Models\users  $users
      * @return \Illuminate\Http\Response
      */
-    public function update(updateUserRequest $request, User $User)
+    public function update(UpdateUserRequest $request, User $User)
     {
 
         if ($request->hasFile('img')) {
@@ -193,7 +193,7 @@ class UsersController extends Controller
         ])->onlyInput('email');
     }
 
-    public function createUser(createUserRequest $request)
+    public function createUser(CreateUserRequest $request)
     {
 
         //$user = $request->validate($this->Rule, $this->messages());

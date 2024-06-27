@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CommentStatus;
-use App\Http\Requests\updateClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Models\Clients;
 use Illuminate\Http\Request;
 
@@ -85,11 +85,11 @@ class ClientsController extends Controller
     /**
      * Update the specified client resource in storage.
      *
-     * @param  updateClientRequest  $request  The request object containing the updated status
+     * @param  UpdateClientRequest  $request  The request object containing the updated status
      * @param  clients  $Client  The client object to be updated
      * @return \Illuminate\Http\Response Redirects to the index page with a success message
      */
-    public function update(updateClientRequest $request, clients $Client)
+    public function update(UpdateClientRequest $request, clients $Client)
     {
         // Update the status of the client with the new status from the request
         $Client->status = $request->status;

@@ -13,11 +13,11 @@ class TestSeeder extends Seeder
     {
 
         $this->call([
-            settingSeeder::class,
-            permissionSeeder::class,
-            categorySeeder::class,
-            clientsSeeder::class,
-            deliverySeeder::class,
+            SettingSeeder::class,
+            PermissionSeeder::class,
+            CategorySeeder::class,
+            ClientsSeeder::class,
+            DeliverySeeder::class,
         ]);
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
-use App\Http\Requests\updateOrderRequest;
+use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Files;
 use App\Models\Order;
 use App\Models\Services;
@@ -111,7 +111,7 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(updateOrderRequest $request, order $Order)
+    public function update(UpdateOrderRequest $request, order $Order)
     {
 
         if ($request->time) {

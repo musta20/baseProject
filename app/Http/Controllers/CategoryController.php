@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeCategoryRequest;
-use App\Http\Requests\updateCategoryRequest;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -42,10 +42,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created category in storage.
      *
-     * @param  \Illuminate\Http\storeCategoryRequest  $request  The request object containing the category data.
+     * @param  \Illuminate\Http\StoreCategoryRequest  $request  The request object containing the category data.
      * @return \Illuminate\Http\Response Redirects to the index page with a success message.
      */
-    public function store(storeCategoryRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         // Create a new category using the data from the request.
 
@@ -83,7 +83,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(updateCategoryRequest $request, Category $Category)
+    public function update(UpdateCategoryRequest $request, Category $Category)
     {
 
         $Category->update([

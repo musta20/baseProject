@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\saveMessageRequest;
+use App\Http\Requests\SaveMessageRequest;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class MessageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(saveMessageRequest $request)
+    public function store(SaveMessageRequest $request)
     {
         message::create([
             'title' => $request['title'],

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeSevicesRequest;
+use App\Http\Requests\StoreSevicesRequest;
 use App\Http\Requests\updateSevicesRequest;
 use App\Models\Category;
 use App\Models\Delivery;
@@ -49,7 +49,7 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeSevicesRequest $request)
+    public function store(StoreSevicesRequest $request)
     {
         // $data = $request->validate($this->rule, $this->messages());
 
