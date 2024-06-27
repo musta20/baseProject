@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeJobRequest;
-use App\Http\Requests\updateJobRequest;
+use App\Http\Requests\StoreJobRequest;
+use App\Http\Requests\Updatejobrequest;
 use App\Models\Jobcity;
 use App\Models\Jobs;
 
@@ -54,7 +54,7 @@ class JobsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeJobRequest $request)
+    public function store(StoreJobRequest $request)
     {
 
         jobs::create([
@@ -101,7 +101,7 @@ class JobsController extends Controller
      * @param  \App\Models\Jobs  $jobs
      * @return \Illuminate\Http\Response
      */
-    public function update(updateJobRequest $request, jobs $Job)
+    public function update(Updatejobrequest $request, jobs $Job)
     {
 
         $Job->title = $request->title;

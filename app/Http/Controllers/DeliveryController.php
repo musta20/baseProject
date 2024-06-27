@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\storeDeliveryRequest;
-use App\Http\Requests\updateDeliveryRequest;
+use App\Http\Requests\StoreDeliveryRequest;
+use App\Http\Requests\UpdateDeliveryRequest;
 use App\Models\Delivery;
 
 class DeliveryController extends Controller
@@ -42,7 +42,7 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeDeliveryRequest $request)
+    public function store(StoreDeliveryRequest $request)
     {
 
         delivery::create([
@@ -76,7 +76,7 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(updateDeliveryRequest $request, delivery $delivery)
+    public function update(UpdateDeliveryRequest $request, delivery $delivery)
     {
 
         $delivery->name = $request->name;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\TaskStatus;
 use App\Http\Requests\editTaskRequest;
 use App\Http\Requests\postNotifyTask;
-use App\Http\Requests\storeTaskRequest;
+use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\updateTaskRequest;
 use App\Models\Files;
 use App\Models\NotifyType;
@@ -63,7 +63,7 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeTaskRequest $request)
+    public function store(StoreTaskRequest $request)
     {
 
         // $data = $request->validate($this->rule, $this->messages());

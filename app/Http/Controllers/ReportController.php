@@ -6,8 +6,8 @@ use App\Enums\CashReport;
 use App\Enums\OrderStatus;
 use App\Enums\ReportType;
 use App\Enums\Sorting;
-use App\Http\Requests\showPdfReportRequest;
-use App\Http\Requests\storeReportRequest;
+use App\Http\Requests\ShowPdfReportRequest;
+use App\Http\Requests\StoreReportRequest;
 use App\Models\Order;
 use App\Models\Report;
 use App\Models\Setting;
@@ -44,7 +44,7 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(storeReportRequest $request)
+    public function store(StoreReportRequest $request)
     {
 
         if ($request->reporttype == ReportType::CASH->value) {
@@ -233,7 +233,7 @@ class ReportController extends Controller
         return $pdf->inline();
     }
 
-    public function showPdfReport(showPdfReportRequest $request)
+    public function showPdfReport(ShowPdfReportRequest $request)
     {
         //$request->validate( $this->rule,$this->messages());
 
@@ -302,7 +302,7 @@ class ReportController extends Controller
 
     }
 
-    public function billReport(showPdfReportRequest $request)
+    public function billReport(ShowPdfReportRequest $request)
     {
         //  $request->validate( $this->rule,$this->messages());
 
