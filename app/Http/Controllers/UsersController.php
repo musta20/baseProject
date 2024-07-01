@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\loginRequest;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Permission;
 use App\Models\Role;
@@ -179,7 +179,7 @@ class UsersController extends Controller
         return redirect('/admin');
     }
 
-    public function login(loginRequest $credentials)
+    public function login(LoginRequest $credentials)
     {
 
         if ($credentials->authenticate()) {

@@ -1,7 +1,38 @@
 {
+  "_module.esm-DZs5scYj.js": {
+    "file": "assets/module.esm-DZs5scYj.js",
+    "name": "module.esm"
+  },
+  "resources/assets/css/style.css": {
+    "file": "assets/style-CxWQ38Dr.css",
+    "src": "resources/assets/css/style.css",
+    "isEntry": true
+  },
+  "resources/assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Medium.ttf": {
+    "file": "assets/IBMPlexSansArabic-Medium-B-89VveJ.ttf",
+    "src": "resources/assets/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Medium.ttf"
+  },
+  "resources/assets/fonts/Lateef/Lateef-Bold.ttf": {
+    "file": "assets/Lateef-Bold-CWCda9zO.ttf",
+    "src": "resources/assets/fonts/Lateef/Lateef-Bold.ttf"
+  },
+  "resources/assets/js/app.js": {
+    "file": "assets/app-PqPhfH1c.js",
+    "name": "app",
+    "src": "resources/assets/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_module.esm-DZs5scYj.js"
+    ]
+  },
   "resources/css/app.css": {
     "file": "assets/app-BbjT2AKV.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/model.css": {
+    "file": "assets/model-B0RStJL9.css",
+    "src": "resources/css/model.css",
     "isEntry": true
   },
   "resources/css/slide.css": {
@@ -19,10 +50,13 @@
     "src": "resources/font/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-DPlD8VmD.js",
+    "file": "assets/app-Ce9Rttwz.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_module.esm-DZs5scYj.js"
+    ]
   },
   "resources/logo/brand2.png": {
     "file": "assets/brand2-CDZxuRHZ.png",

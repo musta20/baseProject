@@ -34,3 +34,6 @@ prodbuild:
 
 profresh: 
 	rm -rf storage/tenant* && rm -rf storage/app/*  && @docker exec crm_php php artisan migrate:fresh --seed &&	chmod -R 777 storage && @docker exec crm_php php artisan storage:link
+
+dockerFresh:
+	@docker exec -it baseProject_php make fresh
