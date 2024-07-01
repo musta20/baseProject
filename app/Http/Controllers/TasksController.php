@@ -121,7 +121,9 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Tasks $tasks) {}
+    public function show(Tasks $tasks)
+    {
+    }
 
     /**
      * Show the form for editing the specified resource.
