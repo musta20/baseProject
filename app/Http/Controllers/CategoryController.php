@@ -33,7 +33,6 @@ class CategoryController extends Controller
     {
         // This function renders the view "admin.category.add" which is used to create a new category.
         // The view is returned and does not receive any variables.
-
         // Render the "admin.category.add" view.
         return view('admin.category.add');
 

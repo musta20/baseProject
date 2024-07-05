@@ -38,7 +38,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
 
 Route::get('testlocal', function () {
@@ -224,9 +223,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::get('usersList/', [UsersController::class, 'usersList'])->name('usersList');
 
-        //Route::get('addpermison/', [UsersController::class, 'addpermison'])->name('addpermison');
 
-        //Route::get('createAllPerm/', [UsersController::class, 'createAllPerm'])->name('admin.createAllPerm');
 
         Route::post('createUser/', [UsersController::class, 'createUser'])->name('createUser');
     });
