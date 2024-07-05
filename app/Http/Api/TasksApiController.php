@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enums\TaskStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\editTaskRequest;
-use App\Http\Requests\postNotifyTask;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\updateTaskRequest;
 use App\Models\Files;
-use App\Models\NotifyType;
 use App\Models\Tasks;
-use App\Models\TasksNotify;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +15,7 @@ class TasksApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api'); 
+        $this->middleware('auth:api');
     }
 
     public function index(Request $request)
@@ -41,7 +35,7 @@ class TasksApiController extends Controller
 
     public function store(StoreTaskRequest $request)
     {
-        $user = User::findOrFail($request->user_id); 
+        $user = User::findOrFail($request->user_id);
 
         $task = Tasks::create([
             'title' => $request->title,
@@ -59,7 +53,6 @@ class TasksApiController extends Controller
         return response()->json(['message' => 'Task created successfully.', 'task' => $task], 201);
     }
 
-
     public function show(Tasks $task)
     {
         return response()->json(['task' => $task->load('files')]);
@@ -75,10 +68,10 @@ class TasksApiController extends Controller
         return response()->json(['message' => 'Task updated successfully.', 'task' => $task]);
     }
 
-
     public function destroy(Tasks $task)
     {
         $task->delete();
+
         return response()->json(['message' => 'Task deleted successfully.']);
     }
 
@@ -99,13 +92,12 @@ class TasksApiController extends Controller
             Files::create([
                 'name' => $filenameName,
                 'typeid' => $task->id,
-                'type' => 0, 
+                'type' => 0,
             ]);
 
             $i++;
         }
     }
 
-
-    // ... rest of your controller methods (mainTask, showTask, editTask, etc.) 
+    // ... rest of your controller methods (mainTask, showTask, editTask, etc.)
 }

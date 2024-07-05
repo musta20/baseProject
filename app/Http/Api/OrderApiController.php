@@ -2,35 +2,30 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
 use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Files;
 use App\Models\Order;
 use App\Models\Services;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderApiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         $allOrder = Order::latest()->paginate(10);
+
         return response()->json($allOrder);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param Order $order
-     * @return JsonResponse
      */
     public function show(Order $order): JsonResponse
     {
@@ -39,9 +34,6 @@ class OrderApiController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param Order $order
-     * @return JsonResponse
      */
     public function edit(Order $order): JsonResponse
     {
@@ -74,10 +66,6 @@ class OrderApiController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param UpdateOrderRequest $request
-     * @param Order $order
-     * @return JsonResponse
      */
     public function update(UpdateOrderRequest $request, Order $order): JsonResponse
     {
@@ -112,9 +100,6 @@ class OrderApiController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Order $order
-     * @return JsonResponse
      */
     public function destroy(Order $order): JsonResponse
     {
@@ -126,9 +111,6 @@ class OrderApiController extends Controller
 
     /**
      * Display a listing of the resource by status.
-     *
-     * @param int $type
-     * @return JsonResponse
      */
     public function showOrderList(int $type): JsonResponse
     {
@@ -146,7 +128,7 @@ class OrderApiController extends Controller
 
         $title = $titleMap[$type] ?? null;
 
-        if (!$title) {
+        if (! $title) {
             return response()->json(['error' => 'Invalid order status'], Response::HTTP_NOT_FOUND);
         }
 

@@ -13,20 +13,18 @@ class CategoryApiController extends Controller
 {
     /**
      * Display a paginated listing of the category resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         $categories = Category::latest()->paginate(10);
+
         return response()->json($categories);
     }
 
     /**
      * Store a newly created category in storage.
      *
-     * @param StoreCategoryRequest $request The request object containing the category data.
-     * @return JsonResponse
+     * @param  StoreCategoryRequest  $request  The request object containing the category data.
      */
     public function store(StoreCategoryRequest $request): JsonResponse
     {
@@ -35,15 +33,12 @@ class CategoryApiController extends Controller
 
         return response()->json([
             'message' => 'Category created successfully',
-            'category' => $category
+            'category' => $category,
         ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified category.
-     *
-     * @param Category $category
-     * @return JsonResponse
      */
     public function show(Category $category): JsonResponse
     {
@@ -52,10 +47,6 @@ class CategoryApiController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param UpdateCategoryRequest $request
-     * @param Category $category
-     * @return JsonResponse
      */
     public function update(UpdateCategoryRequest $request, Category $category): JsonResponse
     {
@@ -64,22 +55,21 @@ class CategoryApiController extends Controller
 
         return response()->json([
             'message' => 'Category updated successfully',
-            'category' => $category
+            'category' => $category,
         ]);
     }
 
     /**
      * Delete a category from storage.
      *
-     * @param Category $category The category to be deleted.
-     * @return JsonResponse
+     * @param  Category  $category  The category to be deleted.
      */
     public function destroy(Category $category): JsonResponse
     {
         $category->delete();
 
         return response()->json([
-            'message' => 'Category deleted successfully'
+            'message' => 'Category deleted successfully',
         ]);
     }
 }

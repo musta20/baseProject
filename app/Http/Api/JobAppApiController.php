@@ -6,15 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Jobapp;
 use App\Models\Jobs;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class JobAppApiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
@@ -24,15 +20,12 @@ class JobAppApiController extends Controller
 
         return response()->json([
             'jobApplications' => $allJobApps,
-            'filterBox' => $filterBox
+            'filterBox' => $filterBox,
         ]);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param Jobapp $jobApp
-     * @return JsonResponse
      */
     public function show(Jobapp $jobApp): JsonResponse
     {
@@ -41,16 +34,13 @@ class JobAppApiController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Jobapp $jobApp
-     * @return JsonResponse
      */
     public function destroy(Jobapp $jobApp): JsonResponse
     {
         $jobApp->delete();
 
         return response()->json([
-            'message' => 'Job application deleted successfully'
+            'message' => 'Job application deleted successfully',
         ]);
     }
 }

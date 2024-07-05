@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,10 +16,9 @@ class UsersApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['login']); 
+        $this->middleware('auth:api')->except(['login']);
     }
 
-    
     public function index(Request $request)
     {
         $allRoles = Role::all();
@@ -31,35 +29,32 @@ class UsersApiController extends Controller
         return response()->json(['users' => $users, 'filter' => $filterBox]);
     }
 
-
     public function store(CreateUserRequest $request)
     {
-        $data = $request->validated(); 
-        $data['password'] = Hash::make($data['password']); 
+        $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
 
         if ($request->hasFile('img')) {
             $data['img'] = $request->file('img')->store('userimg', 'public');
         }
 
         $user = User::create($data);
-        $user->assignRole($request->role); 
+        $user->assignRole($request->role);
 
         return response()->json(['message' => 'User created successfully.', 'user' => $user], 201);
     }
 
-    
     public function show(User $user)
     {
         return response()->json(['user' => $user]);
     }
-
 
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
 
         if ($request->hasFile('img')) {
-            $data['img'] = $request->file('img')->store('userimg', 'public'); 
+            $data['img'] = $request->file('img')->store('userimg', 'public');
         }
 
         if ($request->has('password') && $request->filled('password')) {
@@ -68,16 +63,16 @@ class UsersApiController extends Controller
 
         $user->update($data);
 
-        $roles = Role::all(); 
-        $user->roles()->sync($request->role); 
+        $roles = Role::all();
+        $user->roles()->sync($request->role);
 
         return response()->json(['message' => 'User updated successfully.', 'user' => $user]);
     }
 
-    
     public function destroy(User $user)
     {
         $user->delete();
+
         return response()->json(['message' => 'User deleted successfully.']);
     }
 
@@ -87,7 +82,7 @@ class UsersApiController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken; 
+            $token = $user->createToken('authToken')->plainTextToken;
 
             return response()->json(['message' => 'Login successful.', 'token' => $token]);
         }

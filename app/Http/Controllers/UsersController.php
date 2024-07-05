@@ -220,7 +220,6 @@ class UsersController extends Controller
         return 'new perm added';
     }
 
-
     public function addPerm(Request $request)
     {
         $allRolToP = $request->all();

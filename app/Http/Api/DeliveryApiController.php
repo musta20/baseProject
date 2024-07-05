@@ -13,20 +13,16 @@ class DeliveryApiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         $deliveries = Delivery::latest()->paginate(10);
+
         return response()->json($deliveries);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param StoreDeliveryRequest $request
-     * @return JsonResponse
      */
     public function store(StoreDeliveryRequest $request): JsonResponse
     {
@@ -36,15 +32,12 @@ class DeliveryApiController extends Controller
 
         return response()->json([
             'message' => 'Delivery created successfully',
-            'delivery' => $delivery
+            'delivery' => $delivery,
         ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param Delivery $delivery
-     * @return JsonResponse
      */
     public function show(Delivery $delivery): JsonResponse
     {
@@ -53,10 +46,6 @@ class DeliveryApiController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param UpdateDeliveryRequest $request
-     * @param Delivery $delivery
-     * @return JsonResponse
      */
     public function update(UpdateDeliveryRequest $request, Delivery $delivery): JsonResponse
     {
@@ -65,22 +54,19 @@ class DeliveryApiController extends Controller
 
         return response()->json([
             'message' => 'Delivery updated successfully',
-            'delivery' => $delivery
+            'delivery' => $delivery,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Delivery $delivery
-     * @return JsonResponse
      */
     public function destroy(Delivery $delivery): JsonResponse
     {
         $delivery->delete();
 
         return response()->json([
-            'message' => 'Delivery deleted successfully'
+            'message' => 'Delivery deleted successfully',
         ]);
     }
 }

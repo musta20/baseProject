@@ -223,8 +223,6 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::get('usersList/', [UsersController::class, 'usersList'])->name('usersList');
 
-
-
         Route::post('createUser/', [UsersController::class, 'createUser'])->name('createUser');
     });
 
