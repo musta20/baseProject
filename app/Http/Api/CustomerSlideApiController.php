@@ -7,27 +7,23 @@ use App\Http\Requests\StoreCustmerSlideRequest;
 use App\Http\Requests\UpdateCustmerSlideRequest;
 use App\Models\CustmerSlide;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerSlideApiController extends Controller
 {
     /**
      * Display a paginated listing of the Customer Slide resources.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
         $customerSlides = CustmerSlide::latest()->paginate(10);
+
         return response()->json($customerSlides);
     }
 
     /**
      * Store a newly created Customer Slide in storage.
-     *
-     * @param StoreCustmerSlideRequest $request
-     * @return JsonResponse
      */
     public function store(StoreCustmerSlideRequest $request): JsonResponse
     {
@@ -36,15 +32,12 @@ class CustomerSlideApiController extends Controller
 
         return response()->json([
             'message' => 'Customer slide created successfully',
-            'customerSlide' => $customerSlide
+            'customerSlide' => $customerSlide,
         ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param CustmerSlide $slide
-     * @return JsonResponse
      */
     public function show(CustmerSlide $slide): JsonResponse
     {
@@ -53,10 +46,6 @@ class CustomerSlideApiController extends Controller
 
     /**
      * Update the specified CustomerSlide resource in storage.
-     *
-     * @param UpdateCustmerSlideRequest $request
-     * @param CustmerSlide $slide
-     * @return JsonResponse
      */
     public function update(UpdateCustmerSlideRequest $request, CustmerSlide $slide): JsonResponse
     {
@@ -71,15 +60,12 @@ class CustomerSlideApiController extends Controller
 
         return response()->json([
             'message' => 'Customer slide updated successfully',
-            'customerSlide' => $slide
+            'customerSlide' => $slide,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param CustmerSlide $slide
-     * @return JsonResponse
      */
     public function destroy(CustmerSlide $slide): JsonResponse
     {
@@ -88,12 +74,12 @@ class CustomerSlideApiController extends Controller
 
         if ($slide->delete()) {
             return response()->json([
-                'message' => 'Customer slide deleted successfully'
+                'message' => 'Customer slide deleted successfully',
             ]);
         }
 
         return response()->json([
-            'message' => 'Error occurred while deleting the customer slide'
+            'message' => 'Error occurred while deleting the customer slide',
         ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

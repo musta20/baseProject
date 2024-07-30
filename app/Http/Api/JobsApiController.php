@@ -13,8 +13,6 @@ class JobsApiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
@@ -29,9 +27,6 @@ class JobsApiController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param StoreJobRequest $request
-     * @return JsonResponse
      */
     public function store(StoreJobRequest $request): JsonResponse
     {
@@ -43,15 +38,12 @@ class JobsApiController extends Controller
 
         return response()->json([
             'message' => 'Job created successfully',
-            'job' => $job
+            'job' => $job,
         ], 201);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param Jobs $job
-     * @return JsonResponse
      */
     public function show(Jobs $job): JsonResponse
     {
@@ -59,16 +51,12 @@ class JobsApiController extends Controller
 
         return response()->json([
             'job' => $job,
-            'jobCity' => $jobCity
+            'jobCity' => $jobCity,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param UpdateJobRequest $request
-     * @param Jobs $job
-     * @return JsonResponse
      */
     public function update(UpdateJobRequest $request, Jobs $job): JsonResponse
     {
@@ -80,22 +68,19 @@ class JobsApiController extends Controller
 
         return response()->json([
             'message' => 'Job updated successfully',
-            'job' => $job
+            'job' => $job,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Jobs $job
-     * @return JsonResponse
      */
     public function destroy(Jobs $job): JsonResponse
     {
         $job->delete();
 
         return response()->json([
-            'message' => 'Job deleted successfully'
+            'message' => 'Job deleted successfully',
         ]);
     }
 }

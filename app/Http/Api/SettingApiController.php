@@ -16,13 +16,13 @@ class SettingApiController extends Controller
     public function index()
     {
         $setting = Setting::first();
+
         return response()->json(['setting' => $setting]);
     }
 
     /**
      * Update the specified setting in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -34,7 +34,7 @@ class SettingApiController extends Controller
             'logo' => 'sometimes|image|mimes:ico,png,svg|max:2048', // Adjust validation as needed
         ]);
 
-        $data = $request->except('logo'); 
+        $data = $request->except('logo');
 
         if ($request->hasFile('logo')) {
             $file_extension = $request->file('logo')->getClientOriginalExtension();

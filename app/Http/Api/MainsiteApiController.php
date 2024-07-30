@@ -61,6 +61,7 @@ class MainsiteApiController extends Controller
     public function contact(): JsonResponse
     {
         $setting = Setting::first();
+
         return response()->json(['setting' => $setting]);
     }
 
@@ -87,7 +88,7 @@ class MainsiteApiController extends Controller
 
         $order = Order::where('code', $request->code)->first();
 
-        if (!$order) {
+        if (! $order) {
             return response()->json(['error' => 'Invalid order code'], 404);
         }
 
@@ -107,6 +108,7 @@ class MainsiteApiController extends Controller
     public function category(): JsonResponse
     {
         $category = Category::paginate(10);
+
         return response()->json($category);
     }
 
@@ -164,6 +166,7 @@ class MainsiteApiController extends Controller
     public function services(Category $category): JsonResponse
     {
         $services = $category->services;
+
         return response()->json(['services' => $services]);
     }
 

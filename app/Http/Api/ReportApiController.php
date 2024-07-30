@@ -20,12 +20,11 @@ class ReportApiController extends Controller
     /**
      * Store a newly created report in storage.
      *
-     * @param  \App\Http\Requests\StoreReportRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreReportRequest $request)
     {
-        if (!Storage::disk('public')->exists('pdf')) {
+        if (! Storage::disk('public')->exists('pdf')) {
             Storage::disk('public')->makeDirectory('pdf');
         }
 
@@ -39,91 +38,8 @@ class ReportApiController extends Controller
     }
 
     /**
-     * Generate and return a cash report.
-     *
-     * @param  \App\Http\Requests\StoreReportRequest  $request
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    private function generateCashReport(StoreReportRequest $request)
-    {
-        $reports = Order::whereBetween('created_at', [$request->from, $request->to])
-            ->with('servicesNmae')
-            ->get();
-
-        if ($reports->isEmpty()) {
-            return response()->json(['message' => 'No records found for the given dates.'], 404);
-        }
-
-        $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
-        $pdf = PDF::loadView(
-            'admin.pdf.reportcash',
-            [
-                'from' => $request->from,
-                'to' => $request->to,
-                'reports' => $reports,
-                'type' => $request->type,
-            ]
-        )
-            ->setOption('enable-local-file-access', true)
-            ->setOption('margin-bottom', '0mm')
-            ->setOption('margin-top', '0mm')
-            ->setOption('margin-right', '0mm')
-            ->setOption('margin-left', '0mm')
-            ->save(storage_path('app/public/pdf/') . $filename, true);
-
-        Report::create([
-            'type' => $request->type,
-            'reporttype' => ReportType::CASH->value,
-            'from' => $request->from,
-            'to' => $request->from,
-            'file' => $filename,
-        ]);
-
-        return response()->file(storage_path('app/public/pdf/') . $filename);
-    }
-
-    /**
-     * Generate and return an order report.
-     *
-     * @param  \App\Http\Requests\StoreReportRequest  $request
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    private function generateOrderReport(StoreReportRequest $request)
-    {
-        if ($request->type == '6') {
-            $reports = Order::whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
-        } else {
-            $reports = Order::where('status', $request->type)->whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
-        }
-
-        if ($reports->isEmpty()) {
-            return response()->json(['message' => 'No records found for the given dates.'], 404);
-        }
-
-        $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
-        $pdf = PDF::loadView('admin.pdf.report', ['from' => $request->from, 'to' => $request->to, 'reports' => $reports, 'type' => $request->type])
-            ->setOption('enable-local-file-access', true)
-            ->setOption('margin-bottom', '0mm')
-            ->setOption('margin-top', '0mm')
-            ->setOption('margin-right', '0mm')
-            ->setOption('margin-left', '0mm')
-            ->save(storage_path('app/public/pdf/') . $filename, true);
-
-        Report::create([
-            'type' => $request->type,
-            'reporttype' => ReportType::ORDER->value,
-            'from' => $request->from,
-            'to' => $request->from,
-            'file' => $filename,
-        ]);
-
-        return response()->file(storage_path('app/public/pdf/') . $filename);
-    }
-
-    /**
      * Remove the specified report from storage.
      *
-     * @param  \App\Models\Report  $report
      * @return \Illuminate\Http\Response
      */
     public function destroy(Report $report)
@@ -144,7 +60,7 @@ class ReportApiController extends Controller
         $setting = Setting::first();
         $order = Order::with('servicesNmae')->with('user')->with('delivery')->with('payment')->find($id);
 
-        if (!$order) {
+        if (! $order) {
             return response()->json(['message' => 'Order not found.'], 404);
         }
 
@@ -184,14 +100,13 @@ class ReportApiController extends Controller
     /**
      * Generate and return a bill for a given order.
      *
-     * @param  \App\Models\Order  $order
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function billPrint(Order $order)
     {
         $setting = Setting::first();
 
-        if (!$order->first()) {
+        if (! $order->first()) {
             return response()->json(['message' => 'Order not found.'], 404);
         }
 
@@ -290,7 +205,6 @@ class ReportApiController extends Controller
     /**
      * Display a listing of bill reports based on filters.
      *
-     * @param  \App\Http\Requests\ShowPdfReportRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function billReport(ShowPdfReportRequest $request)
@@ -329,7 +243,6 @@ class ReportApiController extends Controller
     /**
      * Generate and return a custom bill.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function postCreateBill(Request $request)
@@ -400,5 +313,85 @@ class ReportApiController extends Controller
             ->RequestPaginate(10);
 
         return response()->json(['reports' => $orderReport, 'filter' => $filterBox]);
+    }
+
+    /**
+     * Generate and return a cash report.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    private function generateCashReport(StoreReportRequest $request)
+    {
+        $reports = Order::whereBetween('created_at', [$request->from, $request->to])
+            ->with('servicesNmae')
+            ->get();
+
+        if ($reports->isEmpty()) {
+            return response()->json(['message' => 'No records found for the given dates.'], 404);
+        }
+
+        $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
+        $pdf = PDF::loadView(
+            'admin.pdf.reportcash',
+            [
+                'from' => $request->from,
+                'to' => $request->to,
+                'reports' => $reports,
+                'type' => $request->type,
+            ]
+        )
+            ->setOption('enable-local-file-access', true)
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm')
+            ->save(storage_path('app/public/pdf/') . $filename, true);
+
+        Report::create([
+            'type' => $request->type,
+            'reporttype' => ReportType::CASH->value,
+            'from' => $request->from,
+            'to' => $request->from,
+            'file' => $filename,
+        ]);
+
+        return response()->file(storage_path('app/public/pdf/') . $filename);
+    }
+
+    /**
+     * Generate and return an order report.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    private function generateOrderReport(StoreReportRequest $request)
+    {
+        if ($request->type == '6') {
+            $reports = Order::whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
+        } else {
+            $reports = Order::where('status', $request->type)->whereBetween('created_at', [$request->from, $request->to])->with('servicesNmae')->get();
+        }
+
+        if ($reports->isEmpty()) {
+            return response()->json(['message' => 'No records found for the given dates.'], 404);
+        }
+
+        $filename = $request->reporttype . '_' . $request->from . '_' . $request->to . '.pdf';
+        $pdf = PDF::loadView('admin.pdf.report', ['from' => $request->from, 'to' => $request->to, 'reports' => $reports, 'type' => $request->type])
+            ->setOption('enable-local-file-access', true)
+            ->setOption('margin-bottom', '0mm')
+            ->setOption('margin-top', '0mm')
+            ->setOption('margin-right', '0mm')
+            ->setOption('margin-left', '0mm')
+            ->save(storage_path('app/public/pdf/') . $filename, true);
+
+        Report::create([
+            'type' => $request->type,
+            'reporttype' => ReportType::ORDER->value,
+            'from' => $request->from,
+            'to' => $request->from,
+            'file' => $filename,
+        ]);
+
+        return response()->file(storage_path('app/public/pdf/') . $filename);
     }
 }

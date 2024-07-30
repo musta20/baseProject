@@ -7,15 +7,12 @@ use App\Http\Requests\SaveMessageRequest;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MessageApiController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return JsonResponse
      */
     public function index(): JsonResponse
     {
@@ -25,20 +22,16 @@ class MessageApiController extends Controller
 
     /**
      * Get users for message creation.
-     *
-     * @return JsonResponse
      */
     public function getUsers(): JsonResponse
     {
         $users = User::get();
+
         return response()->json(['users' => $users]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param SaveMessageRequest $request
-     * @return JsonResponse
      */
     public function store(SaveMessageRequest $request): JsonResponse
     {
@@ -55,9 +48,6 @@ class MessageApiController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param Message $message
-     * @return JsonResponse
      */
     public function show(Message $message): JsonResponse
     {
@@ -70,21 +60,16 @@ class MessageApiController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param Message $message
-     * @return JsonResponse
      */
     public function destroy(Message $message): JsonResponse
     {
         $message->delete();
+
         return response()->json(['message' => 'Message deleted successfully']);
     }
 
     /**
      * Display inbox messages.
-     *
-     * @param int $type
-     * @return JsonResponse
      */
     public function inbox(int $type): JsonResponse
     {
@@ -110,8 +95,6 @@ class MessageApiController extends Controller
 
     /**
      * Get main dashboard data.
-     *
-     * @return JsonResponse
      */
     public function main(): JsonResponse
     {

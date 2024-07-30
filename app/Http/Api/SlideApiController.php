@@ -13,13 +13,12 @@ class SlideApiController extends Controller
         $this->middleware('auth:api')->except(['index', 'show']); // Apply authentication to all except 'index' and 'show'
     }
 
-
     public function index()
     {
         $slides = Slide::latest()->paginate(10);
+
         return response()->json(['slides' => $slides]);
     }
-
 
     public function store(Request $request)
     {
@@ -33,6 +32,7 @@ class SlideApiController extends Controller
         $validatedData['img'] = $request->file('img')->store('slides');
 
         $slide = Slide::create($validatedData);
+
         return response()->json(['message' => 'Slide created successfully', 'slide' => $slide], 201);
     }
 
@@ -40,7 +40,6 @@ class SlideApiController extends Controller
     {
         return response()->json(['slide' => $slide]);
     }
-
 
     public function update(Request $request, Slide $slide)
     {
@@ -56,12 +55,14 @@ class SlideApiController extends Controller
         }
 
         $slide->update($validatedData);
+
         return response()->json(['message' => 'Slide updated successfully', 'slide' => $slide]);
     }
 
     public function destroy(Slide $slide)
     {
         $slide->delete();
+
         return response()->json(['message' => 'Slide deleted successfully']);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSevicesRequest;
 use App\Http\Requests\updateSevicesRequest;
-
 use App\Models\RequiredFiles;
 use App\Models\Services;
 
@@ -19,9 +18,9 @@ class ServicesApiController extends Controller
     public function index()
     {
         $allServices = Services::Filter();
+
         return response()->json(['services' => $allServices]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -65,7 +64,6 @@ class ServicesApiController extends Controller
         return response()->json(['service' => $service]);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -97,12 +95,12 @@ class ServicesApiController extends Controller
         }
 
         $pys = [];
-        if (!empty($request['pys'])) {
+        if (! empty($request['pys'])) {
             $pys = array_unique($request['pys']);
         }
 
         $dev = [];
-        if (!empty($request['dev'])) {
+        if (! empty($request['dev'])) {
             $dev = array_unique($request['dev']);
         }
 
@@ -121,6 +119,7 @@ class ServicesApiController extends Controller
     public function destroy(Services $service)
     {
         $service->delete();
+
         return response()->json(['message' => 'Service deleted successfully.']);
     }
 }
