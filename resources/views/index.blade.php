@@ -1,12 +1,12 @@
 <x-layout>
     <x-Slide :slides="$slides" />
     <x-services :services="$category" />
-    <section class=" px-36 flex justify-center border-t-3 bg-slate-100  flex-col py-5 w-full">
-        <div class="flex justify-end ">
-            <div class="w-1/2 ">
-                <div class="text-xl -z-20 -skew-x-12 w-1/2  h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
+    <section class=" lg:px-36 flex justify-center border-t-3 bg-slate-100  flex-col py-5 w-full">
+        <div class="flex lg:justify-end ">
+            <div class="lg:w-1/2 mx-5">
+                <div class="text-xl -z-20 lg:-skew-x-12 lg:w-1/2 w-full h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
                     من نحن</div>
-                <div class="  -skew-x-12  text-center p-10  w-10/12  text-base bg-white text-slate-800">
+                <div class="  lg:-skew-x-12  text-center p-10  w-full lg:w-10/12  text-base bg-white text-slate-800">
                     [اسم مكتب المحاماة] هو مكتب محاماة رائد يقدم خدمات قانونية عالية الجودة في مختلف المجالات. نمتلك
                     فريقًا من المحامين ذوي الخبرة والمهارة الذين يمتلكون المعرفة القانونية الواسعة والقدرة على
                     التعامل مع مختلف القضايا القانونية.
@@ -26,12 +26,12 @@
             </div>
         </div>
 
-        <div class="flex justify-start ">
-            <div class="w-1/2 ">
-                <div class="text-xl -z-20 -skew-x-12 w-1/2  h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
+        <div class="flex lg:justify-start ">
+            <div class="lg:w-1/2 mx-5">
+                <div class="text-xl -z-20 lg:-skew-x-12 lg:w-1/2 w-full h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
                     رؤيتنا</div>
-                <div class="  -skew-x-12  text-center p-10  w-10/12  text-base bg-white text-slate-800">
-                    في مكتب [اسم مكتب المحاماة]، نسعى إلى أن نكون مكتب المحاماة الرائد في تقديم خدمات قانونية متميزة
+                    <div class="  lg:-skew-x-12  text-center p-10  w-full lg:w-10/12  text-base bg-white text-slate-800">
+                        في مكتب [اسم مكتب المحاماة]، نسعى إلى أن نكون مكتب المحاماة الرائد في تقديم خدمات قانونية متميزة
                     في جميع أنحاء العالم.
 
                     نؤمن بأن العدالة حق للجميع، ونعمل على تحقيق هذا الحق من خلال تقديم خدمات قانونية عالية الجودة
@@ -60,12 +60,12 @@
         </div>
 
 
-        <div class="flex justify-end ">
-            <div class="w-1/2 ">
-                <div class="text-xl -z-20 -skew-x-12 w-1/2  h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
+        <div class="flex lg:justify-end ">
+            <div class="lg:w-1/2 mx-5">
+                <div class="text-xl -z-20 lg:-skew-x-12 lg:w-1/2 w-full h-10 text-end py-2 px-5 text-slate-100  bg-slate-900 ">
                     رسالتنا
                 </div>
-                <div class="  -skew-x-12  p-10 text-base w-10/12  bg-white text-slate-800 text-">
+                <div class="  lg:-skew-x-12  text-center p-10  w-full lg:w-10/12  text-base bg-white text-slate-800">
                     في مكتب الراشد، نؤمن بأن لكل شخص الحق في الحصول على تمثيل قانوني متميز. نهدف إلى تقديم خدمات
                     قانونية عالية الجودة لعملائنا، بغض النظر عن خلفيتهم أو ظروفهم.
 
@@ -99,8 +99,8 @@
     </section>
 
   <x-contact />
-    <section class="flex flex-col py-5 items-center ">
-        <h3 class="text-5xl  font-bold text-wrap py-5  mb-5 text-slate-600">عملائنا</h3>
+    <section class=" flex-col hidden lg:flex py-5 items-center ">
+        <h3 class="text-xl  font-bold text-wrap py-5  mb-5 text-slate-600">عملائنا</h3>
         <hr>
         <x-brands />
     </section>

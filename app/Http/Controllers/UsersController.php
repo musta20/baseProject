@@ -220,16 +220,6 @@ class UsersController extends Controller
         return 'new perm added';
     }
 
-    public function createAllPerm()
-    {
-
-        // $user = User::create(['email' => 'saif.muh2020@gmail.com', 'name' => 'مصطفى', 'password' => Hash::make('Aa@123456')]);
-
-        //  $user->assignRole($this->ADMIN);
-
-        return '<h1>all perm added and admin created</h1>';
-    }
-
     public function addPerm(Request $request)
     {
         $allRolToP = $request->all();

@@ -1,6 +1,6 @@
 @props(['settings'])
-<footer class="flex justify-between border-t-2 border-blue-900 gap-10 px-10 py-10 bg-slate-800 text-slate-300">
-    <div dir="rtl" class="flex  flex-col w-2/6">
+<footer class="flex flex-col md:flex-row md:justify-between border-t-2 border-blue-900 gap-10 px-10 py-10 bg-slate-800 text-slate-300">
+    <div dir="rtl" class="flex  flex-col md:w-2/6">
         <div class="text-xs  flex gap-2  mb-3 ">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -58,7 +58,7 @@
             </span>
         </div>
     </div>
-    <div dir="rtl" class=" border-l-2 border-slate-400  w-2/6">
+    <div dir="rtl" class=" border-l-2 border-slate-400  md:w-2/6">
         <ul class="flex flex-col gap-3">
 
 
@@ -73,7 +73,7 @@
             </li>
         </ul>
     </div>
-    <div dir="rtl" class=" w-2/6 border-l-2 border-slate-400 ">
+    <div dir="rtl" class=" md:w-2/6 border-l-2 border-slate-400 ">
         <img class="w-1/6 left-0" src="{{ asset('storage/'.$setting->logo) }}" alt="">
         <p class="w-1/2">
         {{ $setting->des }}

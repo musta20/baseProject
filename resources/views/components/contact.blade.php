@@ -1,11 +1,11 @@
-<section dir="rtl" class=" bg-slate-800  p-6 gap-3  flex">
-    <div class="w-1/2 p-10 text-end  text-slate-300 ">
-        <div class="text-3xl mb-10 flex gap-2   ">
+<section dir="rtl" class=" bg-slate-800 text-sm p-6 gap-3  flex flex-col md:flex-row">
+    <div class="md:w-1/2 p-10 text-end   text-slate-300 ">
+        <div class="text-xl  mb-10 flex gap-2   ">
             احصل على استشارة شخصية
         </div>
         <hr class="border-slate-100 py-3">
 
-        <div class="text-xl mb-10 flex gap-2   ">
+        <div class="text-md mb-10 flex gap-2   ">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -17,11 +17,11 @@
 
             </span>
             <span>العنوان :</span>
-            <span>{{ $setting->adress }}</span>
+            <span class="text-xs">{{ $setting->adress }}</span>
         </div>
 
 
-        <div class="text-xl mb-10 flex gap-2    ">
+        <div class="text-md mb-10 flex gap-2    ">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -33,7 +33,7 @@
             <span>{{ $setting->phone }}</span>
         </div>
 
-        <div class="text-xl mb-10 flex gap-2    ">
+        <div class="text-md mb-10 flex gap-2    ">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -46,7 +46,7 @@
             <span>{{ $setting->email }}</span>
         </div>
 
-        <div class="text-xl mb-10 flex gap-2    ">
+        <div class="text-md mb-10 flex gap-2    ">
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -64,7 +64,7 @@
         </div>
 
     </div>
-    <div class="w-3/6 rounded-lg  bg-slate-100 p-5">
+    <div class="md:w-3/6 rounded-lg  bg-slate-100 p-5">
         <x-admin.input-card name="name" placeholder="الاسم" />
         <x-admin.input-card name="phone" placeholder="رقم الهاتف" />
         <x-admin.input-card name="email" placeholder="البريد الالكتروني" />
