@@ -38,14 +38,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
+// Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
 
-Route::get('testlocal', function () {
+// Route::get('testlocal', function () {
 
-    Artisan::call('storage:link');
+//     Artisan::call('storage:link');
 
-    return 'linked';
-});
+//     return 'linked';
+// });
 
 /* Route::get('/admin2', function ()
 {

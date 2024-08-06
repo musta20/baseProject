@@ -9,7 +9,7 @@
         "barryvdh/laravel-snappy": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.2",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.5",
         "musta20/laravel-records-filter": "^1.0",
         "spatie/laravel-activitylog": "^4.0",
