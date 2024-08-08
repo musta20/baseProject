@@ -70,17 +70,17 @@ Route::post('checkOrderStatus', [Mainsite::class, 'checkOrderStatus'])->name('ch
 
 Route::post('saveJobs', [Mainsite::class, 'saveJobs'])->name('saveJobs');
 
-Route::get('test', function () {
-    $ratingCode = (object) ['token' => '0'];
+// Route::get('test', function () {
+//     $ratingCode = (object) ['token' => '0'];
 
-    return view('test', [
-        'img' => 'banana.png',
-        'status' => 0,
-        'bill' => 1,
-        'ratingCode' => $ratingCode,
+//     return view('test', [
+//         'img' => 'banana.png',
+//         'status' => 0,
+//         'bill' => 1,
+//         'ratingCode' => $ratingCode,
 
-    ]);
-});
+//     ]);
+// });
 
 Route::get('login/', [UsersController::class, 'loginView'])->name('login');
 

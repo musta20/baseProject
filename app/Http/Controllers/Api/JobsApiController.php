@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreJobRequest;
@@ -47,7 +47,7 @@ class JobsApiController extends Controller
      */
     public function show(Jobs $job): JsonResponse
     {
-        $jobCity = Jobcity::find($job->job_cities_id);
+         $jobCity = Jobcity::find($job->job_cities_id);
 
         return response()->json([
             'job' => $job,

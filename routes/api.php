@@ -7,8 +7,8 @@ use App\Http\Controllers\Api\CustomerSlideApiController;
 use App\Http\Controllers\Api\DeliveryApiController;
 use App\Http\Controllers\Api\JobAppApiController;
 use App\Http\Controllers\Api\JobCityApiController;
-use App\Http\Controllers\API\JobsApiController;
-use App\Http\Controllers\API\PaymentApiController;
+use App\Http\Controllers\Api\JobsApiController;
+use App\Http\Controllers\Api\PaymentApiController;
 use App\Http\Controllers\Api\ReportApiController;
 use App\Http\Controllers\Api\ServicesApiController;
 use App\Http\Controllers\Api\SettingApiController;
@@ -33,39 +33,67 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('admin/login', [UsersApiController::class, 'login']);
 
-Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
+Route::group(['as' => 'admin.', 'middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function () {
 
-Route::apiResource('job-cities', JobCityApiController::class);
 
-Route::apiResource('job-applications', JobAppApiController::class)->only(['index', 'show', 'destroy']);
 
-Route::apiResource('customer-slides', CustomerSlideApiController::class);
+    Route::group(['middleware' => ['permission:Category/Services']], function () {
 
-Route::apiResource('clients', ClientsApiController::class);
+        Route::apiResource('job-cities', JobCityApiController::class);
 
-Route::get('clients/{client}/edit-options', [ClientsApiController::class, 'editOptions']);
+        Route::apiResource('Services', ServicesApiController::class);
 
-Route::apiResource('deliveries', DeliveryApiController::class);
+        Route::apiResource('job-applications', JobAppApiController::class)->only(['index', 'show', 'destroy']);
 
-Route::apiResource('categories', CategoryApiController::class);
+        Route::apiResource('deliveries', DeliveryApiController::class);
 
-Route::apiResource('payments', PaymentApiController::class);
+        Route::apiResource('categories', CategoryApiController::class);
 
-Route::apiResource('Jobs', JobsApiController::class);
+        Route::apiResource('payments', PaymentApiController::class);
+    });
 
-Route::apiResource('Users', UsersApiController::class);
+    Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
 
-Route::apiResource('Tasks', TasksApiController::class);
 
-Route::apiResource('Social', SocialApiController::class);
+    Route::group(['middleware' => ['permission:jobs']], function () {
 
-Route::apiResource('Slide', SlideApiController::class);
+        Route::apiResource('Jobs', JobsApiController::class);
+    });
 
-Route::apiResource('Setting', SettingApiController::class);
+    Route::group(['middleware' => ['permission:Reviews']], function () {
 
-Route::apiResource('Services', ServicesApiController::class);
+        Route::apiResource('clients', ClientsApiController::class);
 
-Route::apiResource('Report', ReportApiController::class);
+        Route::get('clients/{client}/edit-options', [ClientsApiController::class, 'editOptions']);
+    });
 
-Route::apiResource('ReportA', ReportApiController::class);
+    Route::group(['middleware' => ['permission:Users']], function () {
+
+        Route::apiResource('Users', UsersApiController::class);
+    });
+
+    Route::group(['middleware' => ['permission:Task']], function () {
+
+        Route::apiResource('Tasks', TasksApiController::class);
+    });
+
+    Route::group(['middleware' => ['permission:Setting']], function () {
+
+        Route::apiResource('customer-slides', CustomerSlideApiController::class);
+
+        Route::apiResource('Social', SocialApiController::class);
+
+        Route::apiResource('Slide', SlideApiController::class);
+
+        Route::apiResource('Setting', SettingApiController::class);
+    });
+
+    Route::group(['middleware' => ['permission:Report']], function () {
+
+        Route::apiResource('Report', ReportApiController::class);
+
+        Route::apiResource('ReportA', ReportApiController::class);
+    });
+});

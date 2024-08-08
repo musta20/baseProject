@@ -22,7 +22,7 @@ class StoreJobCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100|min:3'],
+            'name' => ['required', 'string', 'max:100','min:3'],
 
         ];
     }
