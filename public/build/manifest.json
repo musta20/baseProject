@@ -4,7 +4,7 @@
     "name": "module.esm"
   },
   "resources/assets/css/style.css": {
-    "file": "assets/style-BtPcK-K0.css",
+    "file": "assets/style-tmGPYrEJ.css",
     "src": "resources/assets/css/style.css",
     "isEntry": true
   },
@@ -17,7 +17,7 @@
     "src": "resources/assets/fonts/Lateef/Lateef-Bold.ttf"
   },
   "resources/assets/js/app.js": {
-    "file": "assets/app-Ce9Rttwz.js",
+    "file": "assets/app-PqPhfH1c.js",
     "name": "app",
     "src": "resources/assets/js/app.js",
     "isEntry": true,
@@ -26,7 +26,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-CUZbl6CW.css",
+    "file": "assets/app-Dqb-e8mu.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -41,7 +41,7 @@
     "isEntry": true
   },
   "resources/css/style.css": {
-    "file": "assets/style-DhiMLnPZ.css",
+    "file": "assets/style-DUdDi73v.css",
     "src": "resources/css/style.css",
     "isEntry": true
   },
@@ -50,7 +50,7 @@
     "src": "resources/font/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-PqPhfH1c.js",
+    "file": "assets/app-Ce9Rttwz.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -61,6 +61,10 @@
   "resources/logo/brand2.png": {
     "file": "assets/brand2-CDZxuRHZ.png",
     "src": "resources/logo/brand2.png"
+  },
+  "resources/logo/google-icon-logo-svgrepo-com.svg": {
+    "file": "assets/google-icon-logo-svgrepo-com-CksRRPxu.svg",
+    "src": "resources/logo/google-icon-logo-svgrepo-com.svg"
   },
   "resources/logo/logo.png": {
     "file": "assets/logo-YlaaR9Hv.png",
