@@ -67,16 +67,16 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class=" rounded-full border p-2 flex justify-evenly gap-2  w-full">
-                         
-                          الدخول بواسطة جوجل 
-                        
+
+                          الدخول بواسطة جوجل
+
 
                         <img class="fill" width="25" src="{{ Vite::asset('resources/logo/google-icon-logo-svgrepo-com.svg') }}" />
                     </button>
                 </div>
             </form>
             <div class="backLogin w-1/2 hidden md:flex">
-                <img class="fill" src="{{  Vite::asset('resources/logo/logo.png') }}" />
+                <img class="fill" src="{{ Vite::asset('resources/logo/logo.png') }}" />
             </div>
         </main>
     </section>
