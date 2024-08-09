@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSevicesRequest;
-use App\Http\Requests\updateSevicesRequest;
+use App\Http\Requests\UpdateSevicesRequest;
 use App\Models\RequiredFiles;
 use App\Models\Services;
 
@@ -59,9 +59,9 @@ class ServicesApiController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function show(Services $service)
+    public function show(Services $Service)
     {
-        return response()->json(['service' => $service]);
+        return response()->json(['service' => $Service]);
     }
 
     /**
@@ -71,24 +71,26 @@ class ServicesApiController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(updateSevicesRequest $request, Services $service)
+    public function update(UpdateSevicesRequest $request, Services $Service)
     {
-        $service->update([
+        $Service->update([
             'name' => $request->name,
             'price' => $request->price,
             'icon' => $request->icon,
             'category_id' => $request->category_id,
         ]);
 
-        RequiredFiles::where('type', 0)->where('service_id', $service->id)->delete();
 
         if ($request['files']) {
+
+            RequiredFiles::where('type', 0)->where('service_id', $Service->id)->delete();
+
             foreach ($request['files'] as $value) {
                 if ($value) {
                     RequiredFiles::create([
                         'type' => 0,
                         'name' => $value,
-                        'service_id' => $service->id,
+                        'service_id' => $Service->id,
                     ]);
                 }
             }
@@ -97,17 +99,21 @@ class ServicesApiController extends Controller
         $pys = [];
         if (! empty($request['pys'])) {
             $pys = array_unique($request['pys']);
+
+            $Service->payments()->sync($pys);
+
         }
 
         $dev = [];
         if (! empty($request['dev'])) {
             $dev = array_unique($request['dev']);
+
+            $Service->deliveries()->sync($dev);
+
         }
 
-        $service->payments()->sync($pys);
-        $service->deliveries()->sync($dev);
 
-        return response()->json(['message' => 'Service updated successfully.', 'service' => $service]);
+        return response()->json(['message' => 'Service updated successfully.', 'service' => $Service]);
     }
 
     /**
@@ -116,9 +122,9 @@ class ServicesApiController extends Controller
      * @param  \App\Models\Services  $services
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Services $service)
+    public function destroy(Services $Service)
     {
-        $service->delete();
+        $Service->delete();
 
         return response()->json(['message' => 'Service deleted successfully.']);
     }
