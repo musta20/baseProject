@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
@@ -27,9 +27,10 @@ class OrderApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Order $order): JsonResponse
+    public function show(Order $Order): JsonResponse
     {
-        return response()->json($order->load('servicesNmae', 'delivery', 'payment'));
+        return response()->json($Order);
+        //->load('services', 'delivery', 'payment')
     }
 
     /**
@@ -67,44 +68,65 @@ class OrderApiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOrderRequest $request, Order $order): JsonResponse
+    public function update(UpdateOrderRequest $request, Order $Order): JsonResponse
     {
-        if ($request->has('time')) {
-            $order->time = $request->time;
+        // if ($request->has('time')) {
+        //     $Order->time = $request->time;
+        // }
+
+        // if ($request->has('cost')) {
+        //     $Order->payed += $request->cost;
+        // }
+
+        // $statusChanged = $Order->status != $request->status;
+
+        // $Order->status = $request->status;
+
+        // if ($request->status == 1) {
+        //     $Order->approve_time = now();
+        // }
+
+        // dd($request->time, $Order->time);
+        if ($request->time) {
+            $Order->time = $request->time;
         }
 
-        if ($request->has('cost')) {
-            $order->payed += $request->cost;
+        if ($request->cost) {
+            $Order->payed = $Order->payed + $request->cost;
         }
 
-        $statusChanged = $order->status != $request->status;
+        $send = false;
 
-        $order->status = $request->status;
+        if ($Order->status != $request->status) {
+            $send = true;
+        }
+
+        $Order->status = $request->status;
 
         if ($request->status == 1) {
-            $order->approve_time = now();
+            $Order->approve_time = date('d-m-y h:i:s');
         }
 
-        $order->save();
+        $Order->save();
 
-        if ($statusChanged) {
-            // Implement status change notification logic here
-            // For example: event(new OrderStatusChanged($order));
-        }
+        // if ($statusChanged) {
+        // Implement status change notification logic here
+        // For example: event(new OrderStatusChanged($order));
+        //  }
 
         return response()->json([
             'message' => 'Order updated successfully',
-            'order' => $order,
+            'order' => $Order,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Order $order): JsonResponse
+    public function destroy(Order $Order): JsonResponse
     {
-        $order->status = EnumsOrderStatus::CANCLED_ORDER->value;
-        $order->save();
+        $Order->status = EnumsOrderStatus::CANCLED_ORDER->value;
+        $Order->save();
 
         return response()->json(['message' => 'Order cancelled successfully']);
     }

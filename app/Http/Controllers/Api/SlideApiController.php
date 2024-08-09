@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class SlideApiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except(['index', 'show']); // Apply authentication to all except 'index' and 'show'
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api')->except(['index', 'show']); // Apply authentication to all except 'index' and 'show'
+    // }
 
     public function index()
     {

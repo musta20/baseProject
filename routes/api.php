@@ -7,8 +7,10 @@ use App\Http\Controllers\Api\CustomerSlideApiController;
 use App\Http\Controllers\Api\DeliveryApiController;
 use App\Http\Controllers\Api\JobAppApiController;
 use App\Http\Controllers\Api\JobCityApiController;
-use App\Http\Controllers\API\JobsApiController;
-use App\Http\Controllers\API\PaymentApiController;
+use App\Http\Controllers\Api\JobsApiController;
+use App\Http\Controllers\Api\MessageApiController;
+use App\Http\Controllers\Api\OrderApiController;
+use App\Http\Controllers\Api\PaymentApiController;
 use App\Http\Controllers\Api\ReportApiController;
 use App\Http\Controllers\Api\ServicesApiController;
 use App\Http\Controllers\Api\SettingApiController;
@@ -18,6 +20,8 @@ use App\Http\Controllers\Api\TasksApiController;
 use App\Http\Controllers\Api\UsersApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+//missing routes  message - order
 
 /*
 |--------------------------------------------------------------------------
@@ -33,39 +37,77 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('admin/login', [UsersApiController::class, 'login']);
 
-Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
+Route::group(['as' => 'api.admin.', 'middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function () {
 
-Route::apiResource('job-cities', JobCityApiController::class);
+    Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
 
-Route::apiResource('job-applications', JobAppApiController::class)->only(['index', 'show', 'destroy']);
+    Route::group(['middleware' => ['permission:Messages']], function () {
+        Route::get('inbox/{type}', [MessageApiController::class, 'inbox'])->name('inbox');
 
-Route::apiResource('customer-slides', CustomerSlideApiController::class);
+        Route::apiResource('Messages', MessageApiController::class);
 
-Route::apiResource('clients', ClientsApiController::class);
+    });
 
-Route::get('clients/{client}/edit-options', [ClientsApiController::class, 'editOptions']);
+    Route::group(['middleware' => ['permission:Order']], function () {
 
-Route::apiResource('deliveries', DeliveryApiController::class);
+        Route::apiResource('Order', OrderApiController::class);
 
-Route::apiResource('categories', CategoryApiController::class);
+    });
 
-Route::apiResource('payments', PaymentApiController::class);
+    Route::group(['middleware' => ['permission:Category/Services']], function () {
 
-Route::apiResource('Jobs', JobsApiController::class);
+        Route::apiResource('job-cities', JobCityApiController::class);
 
-Route::apiResource('Users', UsersApiController::class);
+        Route::apiResource('Services', ServicesApiController::class);
 
-Route::apiResource('Tasks', TasksApiController::class);
+        Route::apiResource('job-applications', JobAppApiController::class)->only(['index', 'show', 'destroy']);
 
-Route::apiResource('Social', SocialApiController::class);
+        Route::apiResource('deliveries', DeliveryApiController::class);
 
-Route::apiResource('Slide', SlideApiController::class);
+        Route::apiResource('categories', CategoryApiController::class);
 
-Route::apiResource('Setting', SettingApiController::class);
+        Route::apiResource('payments', PaymentApiController::class);
+    });
 
-Route::apiResource('Services', ServicesApiController::class);
+    Route::group(['middleware' => ['permission:jobs']], function () {
 
-Route::apiResource('Report', ReportApiController::class);
+        Route::apiResource('Jobs', JobsApiController::class);
+    });
 
-Route::apiResource('ReportA', ReportApiController::class);
+    Route::group(['middleware' => ['permission:Reviews']], function () {
+
+        Route::apiResource('clients', ClientsApiController::class);
+
+        Route::get('clients/{client}/edit-options', [ClientsApiController::class, 'editOptions']);
+    });
+
+    Route::group(['middleware' => ['permission:Users']], function () {
+
+        Route::apiResource('Users', UsersApiController::class);
+    });
+
+    Route::group(['middleware' => ['permission:Task']], function () {
+
+        Route::apiResource('Tasks', TasksApiController::class);
+    });
+
+    Route::group(['middleware' => ['permission:Setting']], function () {
+
+        Route::apiResource('customer-slides', CustomerSlideApiController::class);
+
+        Route::apiResource('Social', SocialApiController::class);
+
+        Route::apiResource('Slide', SlideApiController::class);
+
+        Route::apiResource('Setting', SettingApiController::class);
+    });
+
+    Route::group(['middleware' => ['permission:Report']], function () {
+
+        Route::apiResource('Report', ReportApiController::class);
+
+        Route::apiResource('ReportA', ReportApiController::class);
+    });
+});

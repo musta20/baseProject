@@ -38,14 +38,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
+// Route::get('addtpermre/', [UsersController::class, 'addtpermre'])->name('admin.addtpermre');
 
-Route::get('testlocal', function () {
+// Route::get('testlocal', function () {
 
-    Artisan::call('storage:link');
+//     Artisan::call('storage:link');
 
-    return 'linked';
-});
+//     return 'linked';
+// });
 
 /* Route::get('/admin2', function ()
 {
@@ -70,17 +70,17 @@ Route::post('checkOrderStatus', [Mainsite::class, 'checkOrderStatus'])->name('ch
 
 Route::post('saveJobs', [Mainsite::class, 'saveJobs'])->name('saveJobs');
 
-Route::get('test', function () {
-    $ratingCode = (object) ['token' => '0'];
+// Route::get('test', function () {
+//     $ratingCode = (object) ['token' => '0'];
 
-    return view('test', [
-        'img' => 'banana.png',
-        'status' => 0,
-        'bill' => 1,
-        'ratingCode' => $ratingCode,
+//     return view('test', [
+//         'img' => 'banana.png',
+//         'status' => 0,
+//         'bill' => 1,
+//         'ratingCode' => $ratingCode,
 
-    ]);
-});
+//     ]);
+// });
 
 Route::get('login/', [UsersController::class, 'loginView'])->name('login');
 
@@ -131,7 +131,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     });
 
-    Route::group(['middleware' => ['permission:Massages']], function () {
+    Route::group(['middleware' => ['permission:Messages']], function () {
 
         ///stoped here
 

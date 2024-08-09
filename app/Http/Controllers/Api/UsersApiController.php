@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersApiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except(['login']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api')->except(['login']);
+    // }
 
     public function index(Request $request)
     {

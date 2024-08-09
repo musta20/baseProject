@@ -26,41 +26,41 @@ class JobCityApiController extends Controller
      */
     public function store(StoreJobCityRequest $request): JsonResponse
     {
-        $jobCity = Jobcity::create($request->validated());
+        $JobCity = Jobcity::create($request->validated());
 
         return response()->json([
             'message' => 'Job city created successfully',
-            'jobCity' => $jobCity,
+            'jobCity' => $JobCity,
         ], Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Jobcity $jobCity): JsonResponse
+    public function show(Jobcity $JobCity): JsonResponse
     {
-        return response()->json($jobCity);
+        return response()->json($JobCity);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobCityRequest $request, Jobcity $jobCity): JsonResponse
+    public function update(UpdateJobCityRequest $request, Jobcity $JobCity): JsonResponse
     {
-        $jobCity->update($request->validated());
+        $JobCity->update($request->validated());
 
         return response()->json([
             'message' => 'Job city updated successfully',
-            'jobCity' => $jobCity,
+            'jobCity' => $JobCity,
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Jobcity $jobCity): JsonResponse
+    public function destroy(Jobcity $JobCity): JsonResponse
     {
-        $jobCity->delete();
+        $JobCity->delete();
 
         return response()->json([
             'message' => 'Job city deleted successfully',

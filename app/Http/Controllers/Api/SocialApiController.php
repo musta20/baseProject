@@ -8,10 +8,10 @@ use App\Models\Social;
 
 class SocialApiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except(['index']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api')->except(['index']);
+    // }
 
     public function index()
     {

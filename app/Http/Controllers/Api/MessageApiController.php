@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveMessageRequest;
@@ -76,10 +76,10 @@ class MessageApiController extends Controller
         $users = User::all();
 
         if ($type == 1) {
-            $filterBox = Message::showFilter(realData: $users, relType: 'ToUser', relName: 'المستلمين');
+            // $filterBox = Message::showFilter(realData: $users, relType: 'ToUser', relName: 'المستلمين');
             $messages = Message::Filter()->where('from', Auth::id())->with('toUser')->latest()->RequestPaginate();
         } elseif ($type == 2) {
-            $filterBox = Message::showFilter(realData: $users, relType: 'FromUser', relName: 'مرسل من');
+            //  $filterBox = Message::showFilter(realData: $users, relType: 'FromUser', relName: 'مرسل من');
             Message::where('to', Auth::id())->update(['isred' => 1]);
             $messages = Message::Filter()->where('to', Auth::id())->with('fromUser')->latest()->RequestPaginate();
         } else {
@@ -87,7 +87,7 @@ class MessageApiController extends Controller
         }
 
         return response()->json([
-            'filterBox' => $filterBox,
+            // 'filterBox' => $filterBox,
             'messages' => $messages,
             'type' => $type,
         ]);

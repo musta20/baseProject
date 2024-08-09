@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
         $Manger = Role::create(['name' => UserRole::Manager->value]);
         $Worker = Role::create(['name' => UserRole::Employee->value]);
 
-        $Massages = Permission::create(['name' => 'Massages']);
+        $Massages = Permission::create(['name' => 'Messages']);
         $Order = Permission::create(['name' => 'Order']);
         $CategoryServices = Permission::create(['name' => 'Category/Services']);
         $Setting = Permission::create(['name' => 'Setting']);

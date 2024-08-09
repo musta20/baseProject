@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TasksApiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function index(Request $request)
     {
         $users = User::all();

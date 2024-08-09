@@ -37,3 +37,6 @@ profresh:
 
 dockerFresh:
 	@docker exec -it baseProject_php make fresh
+
+pest:
+	  ./vendor/bin/pest
