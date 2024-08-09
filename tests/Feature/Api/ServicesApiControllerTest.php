@@ -2,13 +2,12 @@
 
 // tests/Feature/Admin/ServicesApiControllerTest.php
 
+use App\Enums\UserRole;
+use App\Models\Category;
+use App\Models\Delivery;
+use App\Models\Payment;
 use App\Models\Services;
 use App\Models\User;
-use App\Models\RequiredFiles;
-use App\Models\Category;
-use App\Models\Payment;
-use App\Models\Delivery;
-use App\Enums\UserRole;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Pest\Laravel;
 
@@ -125,5 +124,3 @@ it('validates required fields when creating a service', function () {
         ->assertStatus(422)
         ->assertJsonValidationErrors(['name', 'price', 'category_id']);
 });
-
- 

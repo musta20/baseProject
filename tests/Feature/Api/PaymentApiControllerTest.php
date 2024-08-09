@@ -11,7 +11,7 @@ use Pest\Laravel;
 uses(RefreshDatabase::class);
 
 beforeEach(function () {
-    $this->user  = User::factory()->withRole(UserRole::Admin->value)->create();
+    $this->user = User::factory()->withRole(UserRole::Admin->value)->create();
     // $this->user->givePermissionTo('Category/Services');
 });
 
@@ -83,9 +83,9 @@ it('can delete a payment method', function () {
 });
 
 it('validates required fields when creating a payment method', function () {
-   $response = Laravel\actingAs($this->user)
+    $response = Laravel\actingAs($this->user)
         ->postJson(route('api.admin.payments.store'), []);
-        $response->assertStatus(422)
+    $response->assertStatus(422)
         ->assertJsonValidationErrors(['name']);
 });
 

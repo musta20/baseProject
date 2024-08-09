@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\DeliveryApiController;
 use App\Http\Controllers\Api\JobAppApiController;
 use App\Http\Controllers\Api\JobCityApiController;
 use App\Http\Controllers\Api\JobsApiController;
+use App\Http\Controllers\Api\MessageApiController;
+use App\Http\Controllers\Api\OrderApiController;
 use App\Http\Controllers\Api\PaymentApiController;
 use App\Http\Controllers\Api\ReportApiController;
 use App\Http\Controllers\Api\ServicesApiController;
@@ -16,15 +18,10 @@ use App\Http\Controllers\Api\SlideApiController;
 use App\Http\Controllers\Api\SocialApiController;
 use App\Http\Controllers\Api\TasksApiController;
 use App\Http\Controllers\Api\UsersApiController;
-use App\Http\Controllers\Api\OrderApiController;
-use App\Http\Controllers\Api\MessageApiController;
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-//missing routes  message - order 
+//missing routes  message - order
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +42,7 @@ Route::post('admin/login', [UsersApiController::class, 'login']);
 Route::group(['as' => 'api.admin.', 'middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function () {
 
     Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
-    
+
     Route::group(['middleware' => ['permission:Messages']], function () {
         Route::get('inbox/{type}', [MessageApiController::class, 'inbox'])->name('inbox');
 

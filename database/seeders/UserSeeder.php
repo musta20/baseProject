@@ -20,14 +20,14 @@ class UserSeeder extends Seeder
             [
                 'email' => 'saif.muh2020@gmail.com',
                 'name' => 'مصطفى',
-                'password' => Hash::make('98527')
+                'password' => Hash::make('98527'),
             ]
         );
         User::factory()->withRole(UserRole::Employee->value)->create(
             [
                 'email' => 'employee@gmail.com',
                 'name' => 'موظف',
-                'password' => Hash::make('1234')
+                'password' => Hash::make('1234'),
             ]
         );
         User::factory(10)->withRole(UserRole::Employee->value)->create();

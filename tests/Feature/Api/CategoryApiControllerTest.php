@@ -8,23 +8,21 @@ use App\Models\User;
 use Database\Seeders\SeederData;
 use Pest\Laravel;
 
-
-  
 beforeEach(function () {
     //$this->user = User::factory()->create();
     //$this->user->givePermissionTo('Category/Services');
 
-     $this->user  = User::factory()->withRole(UserRole::Admin->value)->create();
-   // $this->actingAs($user);
+    $this->user = User::factory()->withRole(UserRole::Admin->value)->create();
+    // $this->actingAs($user);
 
 });
 
 it('can list all categories', function () {
-   // Category::factory(3)->create();
-   $categorys = SeederData::$arabicCategories;
-   $response = Laravel\actingAs($this->user)
+    // Category::factory(3)->create();
+    $categorys = SeederData::$arabicCategories;
+    $response = Laravel\actingAs($this->user)
         ->get(route('api.admin.categories.index'));
-         $response->assertStatus(200)
+    $response->assertStatus(200)
         ->assertJsonCount(count($categorys), 'data');
 });
 

@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TasksApiController extends Controller
 {
- 
-
     public function index(Request $request)
     {
         $users = User::all();

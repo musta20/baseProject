@@ -80,7 +80,6 @@ class ServicesApiController extends Controller
             'category_id' => $request->category_id,
         ]);
 
-
         if ($request['files']) {
 
             RequiredFiles::where('type', 0)->where('service_id', $Service->id)->delete();
@@ -111,7 +110,6 @@ class ServicesApiController extends Controller
             $Service->deliveries()->sync($dev);
 
         }
-
 
         return response()->json(['message' => 'Service updated successfully.', 'service' => $Service]);
     }

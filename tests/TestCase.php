@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->seed(TestSeeder::class);
 
-       // echo " ----running migrations------ \n";
+        // echo " ----running migrations------ \n";
 
     }
 }
