@@ -50,7 +50,7 @@
 
 
 
-        @can('Massages')
+        @can('Messages')
         <li class="mb-1 text-sm" x-data="{ open: false }">
             <a href="{{ url('/admin/inbox/2') }}" class="flex items-center w-full p-2 gap-2 rounded hover:bg-slate-300">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

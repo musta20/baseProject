@@ -1,5 +1,5 @@
 <nav>
-        @can('Massages')
+        @can('Messages')
         <a href="{{ route()->route('admin.AllMessages') }}">الرسائل</a>
         @endcan
 

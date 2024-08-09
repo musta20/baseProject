@@ -163,7 +163,7 @@
                                                 </li>
                                             @endcan
 
-                                            @can('Massages')
+                                            @can('Messages')
                                                 <li class="side-nav-item">
                                                     <a data-bs-toggle="collapse" href="#sidebarCrm" aria-expanded="false"
                                                         aria-controls="sidebarCrm" class="side-nav-link">

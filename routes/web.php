@@ -131,7 +131,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
     });
 
-    Route::group(['middleware' => ['permission:Massages']], function () {
+    Route::group(['middleware' => ['permission:Messages']], function () {
 
         ///stoped here
 

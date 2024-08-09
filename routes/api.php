@@ -16,8 +16,15 @@ use App\Http\Controllers\Api\SlideApiController;
 use App\Http\Controllers\Api\SocialApiController;
 use App\Http\Controllers\Api\TasksApiController;
 use App\Http\Controllers\Api\UsersApiController;
+use App\Http\Controllers\Api\OrderApiController;
+use App\Http\Controllers\Api\MessageApiController;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
+//missing routes  message - order 
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +42,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('admin/login', [UsersApiController::class, 'login']);
 
-Route::group(['as' => 'admin.', 'middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function () {
+Route::group(['as' => 'api.admin.', 'middleware' => ['auth:sanctum'], 'prefix' => 'admin'], function () {
 
+    Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
+    
+    Route::group(['middleware' => ['permission:Messages']], function () {
+        Route::get('inbox/{type}', [MessageApiController::class, 'inbox'])->name('inbox');
 
+        Route::apiResource('Messages', MessageApiController::class);
+
+    });
+
+    Route::group(['middleware' => ['permission:Order']], function () {
+
+        Route::apiResource('Order', OrderApiController::class);
+
+    });
 
     Route::group(['middleware' => ['permission:Category/Services']], function () {
 
@@ -53,9 +73,6 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth:sanctum'], 'prefix' => 'a
 
         Route::apiResource('payments', PaymentApiController::class);
     });
-
-    Route::get('admin/dashboard', [AdminApiController::class, 'getDashboardData']);
-
 
     Route::group(['middleware' => ['permission:jobs']], function () {
 
