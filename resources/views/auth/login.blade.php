@@ -14,12 +14,16 @@
 </head>
 
 <body class="m-0 bg-slate-100">
-    <section class="mainBody">
+    <section class="mainBody  m-24">
+<div class="logo flex w-5/6 m-5 font-extrabold mx-auto  justify-between items-center">
+    <a class="font-Noto text-xl" href="{{ url('/') }}">{{__('الرئيسية')}}</a>
+    <img width="100" src="{{ asset('storage/'. $setting->logo)}}" >
 
-        <main class="loginCard text-[#6B7280] font-Noto flex w-5/6 md:w-1/2  m-24 mx-auto bg-white rounded-md border">
+</div>
+        <main class="loginCard text-[#6B7280] font-Noto flex w-5/6 md:w-1/2  mx-auto bg-white rounded-md border">
             <form method="POST" class="loginform w-full md:w-1/2 flex flex-col p-5 gap-5 place-content-center" action="{{ url('/login') }}">
                 @csrf
-                <h4 class="text-xl font-bold">تسجيل الدخول
+                 <h4 class="text-xl font-bold">تسجيل الدخول
                     <hr>
                 </h4>
                 @if ($errors->any())
@@ -76,7 +80,7 @@
                 </div>
             </form>
             <div class="backLogin w-1/2 hidden md:flex">
-                <img class="fill" src="{{  Vite::asset('resources/logo/logo.png') }}" />
+                <img class="fill" src="{{asset('storage/'. $setting->logo)}}" />
             </div>
         </main>
     </section>

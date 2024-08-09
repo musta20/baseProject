@@ -6,18 +6,16 @@
 
             @foreach ($slides as $item)
             <div class="swiper-slide ">
-                <img
-                style="-webkit-filter: brightness(50%) saturate(150%); filter: brightness(50%) saturate(150%);"
-
+                <img style="-webkit-filter: brightness(50%) saturate(150%); filter: brightness(50%) saturate(150%);"
                     src="{{ asset('storage/'.    $item->img ) }}" />
-                    <div class="absolute text-slate-200 flex flex-col justify-center items-center   gap-4 py-20">
+                <div class="absolute text-slate-200 flex flex-col justify-center items-center   gap-4 py-20">
 
-                        <h3 class="text-3xl">  {{ $item->title }} </h3>
-                        <h1 class="text-xl">  {{ $item->des }} </h1>
-                        <a href="{{ $item->url }}" class="btn w-1/2 text-center">طلب الخدمة</a>
+                    <h3 class="text-3xl"> {{ $item->title }} </h3>
+                    <h1 class="text-xl"> {{ $item->des }} </h1>
+                    <a href="{{ $item->url }}" class="btn w-1/2 text-center">طلب الخدمة</a>
 
 
-                    </div>
+                </div>
             </div>
             @endforeach
 
