@@ -80,7 +80,7 @@
                 </div>
             </form>
             <div class="backLogin w-1/2 hidden md:flex">
-                <img class="fill" src="{{asset('storage/'. $setting->logo)}}" />
+                <img class="fill" src="{{ asset('storage/'. $setting->logo) }}" />
             </div>
         </main>
     </section>
