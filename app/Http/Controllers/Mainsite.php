@@ -91,7 +91,7 @@ class Mainsite extends Controller
 
     public function checkStatus()
     {
-        return view('checkStatus');
+        return view('CheckStatus');
     }
 
     public function checkOrderStatus(Request $request)

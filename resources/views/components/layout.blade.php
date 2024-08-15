@@ -8,6 +8,8 @@
     <title>{{ $setting->title ?? 'الرئيسية' }} </title>
     <meta name="description" content="{{ $setting->des }}">
     <meta name="keywords" content="{{ $setting->keyword }}">
+    <link rel="favicon" href="{{ asset('storage/' . $setting->logo) }}" type="image/x-icon">
+
         @vite(['resources/css/style.css', 'resources/js/app.js'])
 </head>
 

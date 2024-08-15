@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             [
                 'email' => 'saif.muh2020@gmail.com',
                 'name' => 'مصطفى',
-                'password' => Hash::make('98527'),
+                'password' => Hash::make('1234'),
             ]
         );
         User::factory()->withRole(UserRole::Employee->value)->create(
