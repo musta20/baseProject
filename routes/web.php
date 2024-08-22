@@ -203,7 +203,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Order', OrderController::class);
 
-        Route::get('billPrint/{id}', [ReportController::class, 'billPrint'])->name('billPrint');
+        Route::get('billPrint/{Order}', [ReportController::class, 'billPrint'])->name('billPrint');
 
         Route::get('billInnerPrint/{id}', [ReportController::class, 'billInnerPrint'])->name('billInnerPrint');
 

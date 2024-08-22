@@ -196,25 +196,27 @@ class ReportController extends Controller
         return $pdf->inline();
     }
 
-    public function billPrint(order $order)
+    public function billPrint(Order $Order)
     {
         $setting = setting::first();
 
-        if (! $order->first()) {
+        if (! $Order->first()) {
             return Redirect::back()->with('OkToast', 'غير موجود ');
         }
-        if ($order->payed == 0) {
+
+      //  dd($Order);
+        if ($Order->payed == 0) {
             return Redirect::back()->with('OkToast', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
         }
 
-        $filename = 'invoice' . sprintf('%04d', $order->id) . '.pdf';
+        $filename = 'invoice' . sprintf('%04d', $Order->id) . '.pdf';
         $fileName2 = Storage::get('public/logo/h.png');
         $dataUri = 'data:image/png;base64,' . base64_encode($fileName2);
         $pdf = PDF::loadView(
             'admin.pdf.bill',
             [
                 'setting' => $setting,
-                'order' => $order,
+                'order' => $Order,
                 'dataUri' => $dataUri,
             ]
         )
@@ -229,7 +231,7 @@ class ReportController extends Controller
         Report::create([
             'type' => 0,
             'reporttype' => ReportType::BILL->value,
-            'to' => $order->name,
+            'to' => $Order->name,
             'from' => 'none',
             'file' => $filename,
         ]);

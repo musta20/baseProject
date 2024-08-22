@@ -4,6 +4,10 @@ namespace App\Mail;
 
 use App\Models\Message;
 use App\Models\Tasks;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Address;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -19,24 +23,35 @@ class TasksMail extends Mailable
         $this->task = $task;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
 
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            from: new Address('info@basebroject.testgit.xyz', $this->task->title),
+            // replyTo: [
+            //     new Address('taylor@example.com', 'Taylor Otwell'),
+            // ],
+            subject: __('new task'),
+        );
+    }
+
+
+
+
+
+    public function content(): Content
+    {
         $Title = ' مهمة جديدة';
 
         $Message = ' : يوجد  مهمة جديدة بعنوان' . $this->task->title;
 
-        return $this->from('info@chessfor.org', 'admin')
-            ->subject($Title)
-            ->view('mail.InnerMessages')->with([
+        return new Content(
+            view: 'mail.InnerMessages',
+            with: [
                 'Title' => $Title,
-                'Message' => $Message,
-            ]);
-
+                'Message' => $Message,               
+                 ]
+        );
     }
 }

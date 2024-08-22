@@ -77,7 +77,7 @@ class Services extends Model
     public function category()
     {
 
-        return $this->belongsTo(category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function payments(): BelongsToMany
@@ -93,6 +93,6 @@ class Services extends Model
 
     public function deliveries(): BelongsToMany
     {
-        return $this->belongsToMany(delivery::class, 'Devtoservs', 'service_id', 'delivery_id');
+        return $this->belongsToMany(Delivery::class, 'Devtoservs', 'service_id', 'delivery_id');
     }
 }

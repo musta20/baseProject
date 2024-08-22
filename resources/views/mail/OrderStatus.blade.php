@@ -12,7 +12,7 @@
         style="margin: 3em !important;text-align: center;display: flex;flex-direction: column;gap: 0.2em;padding: 2em;align-items: center;justify-content: center;background-color: #fff;margin: 0px auto;border: 1px solid #f9f9f9;">
         <tr>
             <td style="text-align: center;">
-                <img width="150" src="{{ url('/imgs/h.png') }}">
+                <img width="150" src="{{ url('/storage/logo/logo.png') }}">
 
             </td>
         </tr>
@@ -45,7 +45,10 @@
                 margin-right: auto;"
                     href="{{ url('rating/' . $ratingCode->token) }}">
                     <img width="500" style=" display: flex;align-content: center;justify-content: center;"
-                        src={{ url('/imgs/' . $img) }} alt="logo" />
+
+                        src={{ url('/imgs/' . $img) }} 
+                        
+                        alt="logo" />
                 </a>
             </div>
                 </td>

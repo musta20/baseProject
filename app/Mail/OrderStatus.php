@@ -5,6 +5,9 @@ namespace App\Mail;
 use App\Models\Clients;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
@@ -15,9 +18,21 @@ class OrderStatus extends Mailable
 
     protected $order;
 
-    public function __construct(order $order)
+    public function __construct(Order $order)
     {
         $this->order = $order;
+    }
+
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            from: new Address('info@basebroject.testgit.xyz', $this->order->name),
+            // replyTo: [
+            //     new Address('taylor@example.com', 'Taylor Otwell'),
+            // ],
+            subject: __('order status'),
+        );
     }
 
     /**
@@ -25,7 +40,7 @@ class OrderStatus extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function content(): Content
     {
 
         $ratingCode = false;
@@ -73,14 +88,26 @@ class OrderStatus extends Mailable
 
         }
 
-        return $this->from('info@chessfor.org', 'admin')
-            ->subject('حالة الطلب')
-            ->view('mail.OrderStatus')
-            ->with([
-                'img' => $img,
-                'status' => $status,
-                'bill' => $bill,
-                'ratingCode' => $ratingCode,
-            ]);
+        //   $this->from('info@chessfor.org', 'admin')
+        //     ->subject('حالة الطلب')
+        //     ->view('mail.OrderStatus')
+        //     ->with([
+        //         'img' => $img,
+        //         'status' => $status,
+        //         'bill' => $bill,
+        //         'ratingCode' => $ratingCode,
+        //     ]);
+
+
+            return new Content(
+                view: 'mail.OrderStatus',
+                with: [
+                    'img' => $img,
+                    'status' => $status,
+                    'bill' => $bill,
+                    'ratingCode' => $ratingCode,                
+                     ]
+            );
+    
     }
 }
