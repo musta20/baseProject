@@ -22,7 +22,7 @@ class ContactSupport extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@basebroject.testgit.xyz', $this->data['fname'] . ' ' . $this->data['lname']),
+            from: new Address(config('mail.from.address'), $this->data['fname'] . ' ' . $this->data['lname']),
             // replyTo: [
             //     new Address('taylor@example.com', 'Taylor Otwell'),
             // ],

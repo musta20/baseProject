@@ -24,7 +24,7 @@ class TasksMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@basebroject.testgit.xyz', $this->task->title),
+            from: new Address(config('mail.from.address'), $this->task->title),
             // replyTo: [
             //     new Address('taylor@example.com', 'Taylor Otwell'),
             // ],
