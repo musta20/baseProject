@@ -26,7 +26,7 @@ class OrderStatus extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('info@basebroject.testgit.xyz', $this->order->name),
+            from: new Address(config('mail.from.address'), $this->order->name),
             // replyTo: [
             //     new Address('taylor@example.com', 'Taylor Otwell'),
             // ],
