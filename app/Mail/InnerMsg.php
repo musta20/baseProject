@@ -22,8 +22,6 @@ class InnerMsg extends Mailable
         $this->order = $order;
     }
 
-
-
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -34,8 +32,6 @@ class InnerMsg extends Mailable
             subject: __('order status'),
         );
     }
-
- 
 
     public function content(): Content
     {
@@ -52,16 +48,13 @@ class InnerMsg extends Mailable
             'isred' => 0,
         ]);
 
-
         return new Content(
             view: 'mail.InnerMessages',
             with: [
-                'Title' =>$Title,
- 
+                'Title' => $Title,
+
                 'Message' => $Message,
             ]
         );
     }
-
-
 }

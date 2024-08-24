@@ -5,10 +5,10 @@ namespace App\Mail;
 use App\Models\Clients;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
@@ -22,7 +22,6 @@ class OrderStatus extends Mailable
     {
         $this->order = $order;
     }
-
 
     public function envelope(): Envelope
     {
@@ -98,16 +97,15 @@ class OrderStatus extends Mailable
         //         'ratingCode' => $ratingCode,
         //     ]);
 
+        return new Content(
+            view: 'mail.OrderStatus',
+            with: [
+                'img' => $img,
+                'status' => $status,
+                'bill' => $bill,
+                'ratingCode' => $ratingCode,
+            ]
+        );
 
-            return new Content(
-                view: 'mail.OrderStatus',
-                with: [
-                    'img' => $img,
-                    'status' => $status,
-                    'bill' => $bill,
-                    'ratingCode' => $ratingCode,                
-                     ]
-            );
-    
     }
 }

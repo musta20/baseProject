@@ -19,17 +19,17 @@ class ContactSupport extends Mailable
         $this->$data = $data;
     }
 
-
     public function envelope(): Envelope
-{
-    return new Envelope(
-        from: new Address('info@basebroject.testgit.xyz', $this->data['fname'] . ' ' . $this->data['lname']),
-        // replyTo: [
-        //     new Address('taylor@example.com', 'Taylor Otwell'),
-        // ],
-        subject: __('support'),
-    );
-}
+    {
+        return new Envelope(
+            from: new Address('info@basebroject.testgit.xyz', $this->data['fname'] . ' ' . $this->data['lname']),
+            // replyTo: [
+            //     new Address('taylor@example.com', 'Taylor Otwell'),
+            // ],
+            subject: __('support'),
+        );
+    }
+
     /**
      * Build the message.
      *
@@ -46,6 +46,4 @@ class ContactSupport extends Mailable
             ]
         );
     }
-
-    
 }

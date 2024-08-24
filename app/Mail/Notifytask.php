@@ -4,10 +4,9 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
 
 class Notifytask extends Mailable
 {
@@ -30,7 +29,6 @@ class Notifytask extends Mailable
             subject: __('order status'),
         );
     }
-
 
     /**
      * Build the message.

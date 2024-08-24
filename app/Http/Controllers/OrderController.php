@@ -139,7 +139,7 @@ class OrderController extends Controller
         $Order->save();
 
         if ($send) {
-             Mail::to($Order->email)->send(new OrderStatus(($Order)));
+            Mail::to($Order->email)->send(new OrderStatus(($Order)));
         }
 
         return redirect()->route('admin.showOrderList', $Order->status)->with('OkToast', 'تم تعديل العنصر');

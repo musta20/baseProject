@@ -46,8 +46,8 @@
                     href="{{ url('rating/' . $ratingCode->token) }}">
                     <img width="500" style=" display: flex;align-content: center;justify-content: center;"
 
-                        src={{ url('/imgs/' . $img) }} 
-                        
+                        src={{ url('/imgs/' . $img) }}
+
                         alt="logo" />
                 </a>
             </div>

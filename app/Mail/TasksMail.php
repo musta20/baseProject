@@ -2,14 +2,12 @@
 
 namespace App\Mail;
 
-use App\Models\Message;
 use App\Models\Tasks;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class TasksMail extends Mailable
@@ -23,8 +21,6 @@ class TasksMail extends Mailable
         $this->task = $task;
     }
 
-
-
     public function envelope(): Envelope
     {
         return new Envelope(
@@ -36,10 +32,6 @@ class TasksMail extends Mailable
         );
     }
 
-
-
-
-
     public function content(): Content
     {
         $Title = ' مهمة جديدة';
@@ -50,8 +42,8 @@ class TasksMail extends Mailable
             view: 'mail.InnerMessages',
             with: [
                 'Title' => $Title,
-                'Message' => $Message,               
-                 ]
+                'Message' => $Message,
+            ]
         );
     }
 }

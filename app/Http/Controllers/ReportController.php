@@ -204,7 +204,7 @@ class ReportController extends Controller
             return Redirect::back()->with('OkToast', 'غير موجود ');
         }
 
-      //  dd($Order);
+        //  dd($Order);
         if ($Order->payed == 0) {
             return Redirect::back()->with('OkToast', 'يجب دفع جزء من المبلغ  لإصدار الفاتورة');
         }
