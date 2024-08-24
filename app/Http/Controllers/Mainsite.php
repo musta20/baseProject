@@ -191,9 +191,9 @@ class Mainsite extends Controller
         //$services  = services::find($id);
         $files = $services->files; //RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
 
-     //   $payment = Pymtoserv::where('service_id', $services->id)->with('pym')->get();
+        //   $payment = Pymtoserv::where('service_id', $services->id)->with('pym')->get();
 
-      //  $cash = Devtoserv::where('service_id', $services->id)->with('dev')->get();
+        //  $cash = Devtoserv::where('service_id', $services->id)->with('dev')->get();
 
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $services->deliveries(), 'payment' => $services->payments()]);
     }
