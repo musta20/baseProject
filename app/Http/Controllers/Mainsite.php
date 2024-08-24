@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\saveJobRequest;
-use App\Http\Requests\saveOrderRequest;
-use App\Http\Requests\sendContactRequest;
+use App\Http\Requests\SaveJobRequest;
+use App\Http\Requests\SaveOrderRequest;
+use App\Http\Requests\SendContactRequest;
 use App\Models\Category;
 use App\Models\Clients;
 use App\Models\CustmerSlide;
@@ -27,13 +27,13 @@ class Mainsite extends Controller
 {
     public function index()
     {
-        $slides = slide::get();
+        $slides = Slide::get();
         $allNumberObjects = numbers::get();
-        $category = category::take(10)->get();
-        $clints = clients::get();
+        $category = Category::take(10)->get();
+        $clints = Clients::get();
         $custmerSlide = CustmerSlide::get();
 
-        $services = services::get()->take(10);
+        $services = Services::get()->take(10);
 
         return view('index', [
             'slides' => $slides,
@@ -59,17 +59,17 @@ class Mainsite extends Controller
 
     public function contact()
     {
-        $setting = setting::first();
+        $setting = Setting::first();
 
         return view('contact', ['setting' => $setting]);
     }
 
-    public function sendContact(sendContactRequest $request)
+    public function sendContact(SendContactRequest $request)
     {
 
         $msg = '<br>' . $request['lname'] . '<br>' . $request['fname'] . '<br>' . $request['msg'];
 
-        message::create([
+        Message::create([
             'from' => 1,
             'to' => 1,
             'title' => 'طلب دعم فني',
@@ -99,7 +99,7 @@ class Mainsite extends Controller
         if (! isset($request->code)) {
             return redirect()->route('checkStatus')->withErrors('يجب كتابة رقم الطلب');
         }
-        $order = order::where('code', $request->code)->first();
+        $order = Order::where('code', $request->code)->first();
 
         if (! $order) {
             return redirect()->route('checkStatus')->withErrors('رقم الطلب غير صحيح   ');
@@ -131,12 +131,12 @@ class Mainsite extends Controller
 
     public function category()
     {
-        $category = category::paginate(10);
+        $category = Category::paginate(10);
 
         return view('category', ['category' => $category]);
     }
 
-    public function saveOrder(saveOrderRequest $request, services $services)
+    public function saveOrder(SaveOrderRequest $request, Services $services)
     {
         //  $data = $request->validate($this->rule, $this->messages());
 
@@ -155,7 +155,7 @@ class Mainsite extends Controller
 
         //  $services  = services::find($id);
         $uuidCode = rand(235164, 64655454);
-        $order = order::create([
+        $order = Order::create([
             'title' => $request['title'],
             'name' => $request['name'],
             'des' => $request['des'],
@@ -200,7 +200,7 @@ class Mainsite extends Controller
         return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
     }
 
-    public function services(category $category)
+    public function services(Category $category)
     {
 
         $services = $category->services; //services::where('category_id', $id)->get();
@@ -210,13 +210,13 @@ class Mainsite extends Controller
 
     public function job()
     {
-        $jobs = jobs::get();
+        $jobs = Jobs::get();
         $jobcity = Jobcity::get();
 
         return view('job', ['jobs' => $jobs, 'jobcity' => $jobcity]);
     }
 
-    public function saveJobs(saveJobRequest $request)
+    public function saveJobs(SaveJobRequest $request)
     {
 
         $filename = $request->file('cv')->store('cv', 'public');
