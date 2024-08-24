@@ -61,6 +61,12 @@
 
                             {{ $order->name }}
                         </div>
+                        <div class="mb-5 w-1/2">
+                            <label class="px-1 py-2 text-sm font-bold">البريد الالكتروني: </label>
+                            <br>
+
+                            {{ $order->email }}
+                        </div>
                     </div>
 
 

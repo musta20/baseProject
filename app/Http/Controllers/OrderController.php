@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Enums\OrderStatus as EnumsOrderStatus;
 use App\Enums\PayStatus;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Mail\OrderStatus;
 use App\Models\Files;
 use App\Models\Order;
 use App\Models\Services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -137,7 +139,7 @@ class OrderController extends Controller
         $Order->save();
 
         if ($send) {
-            // Mail::to($order->email)->send(new OrderStatus(($order)));
+            Mail::to($Order->email)->send(new OrderStatus(($Order)));
         }
 
         return redirect()->route('admin.showOrderList', $Order->status)->with('OkToast', 'تم تعديل العنصر');

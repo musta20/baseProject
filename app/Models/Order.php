@@ -94,32 +94,32 @@ class Order extends Model
 
     public function servicesNmae()
     {
-        return $this->belongsTo(services::class, 'service_id', 'id');
+        return $this->belongsTo(Services::class, 'service_id', 'id');
     }
 
     public function services()
     {
-        return $this->belongsTo(services::class, 'service_id', 'id');
+        return $this->belongsTo(Services::class, 'service_id', 'id');
     }
 
     public function pym()
     {
-        return $this->belongsTo(payment::class, 'cash', 'id');
+        return $this->belongsTo(Payment::class, 'cash', 'id');
     }
 
     public function payment()
     {
-        return $this->belongsTo(payment::class, 'payment_id', 'id');
+        return $this->belongsTo(Payment::class, 'payment_id', 'id');
     }
 
     public function delivery()
     {
-        return $this->belongsTo(delivery::class, 'delivery_id', 'id');
+        return $this->belongsTo(Delivery::class, 'delivery_id', 'id');
     }
 
     public function dev()
     {
-        return $this->belongsTo(delivery::class, 'receipt', 'id');
+        return $this->belongsTo(Delivery::class, 'receipt', 'id');
     }
 
     public function user()

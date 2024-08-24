@@ -4,6 +4,8 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class Notifytask extends Mailable
@@ -12,9 +14,20 @@ class Notifytask extends Mailable
 
     protected $task;
 
-    public function __construct(notifytask $task)
+    public function __construct(Notifytask $task)
     {
         $this->task = $task;
+    }
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            from: new Address('info@basebroject.testgit.xyz', $this->task->title),
+            // replyTo: [
+            //     new Address('taylor@example.com', 'Taylor Otwell'),
+            // ],
+            subject: __('order status'),
+        );
     }
 
     /**

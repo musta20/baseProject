@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\SocialiteAuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\CustmerSlideController;
@@ -25,7 +26,6 @@ use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasksNotifyController;
 use App\Http\Controllers\UsersController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +51,9 @@ use Illuminate\Support\Facades\Route;
 {
    return view('dash.index');
 }); */
+Route::get('auth/redirect/{driver}', [SocialiteAuthController::class, 'redirect'])->name('SocialiteRedirect');
+
+Route::get('auth/callback/{driver}', [SocialiteAuthController::class, 'callback'])->name('SocialiteCallback');
 
 Route::get('/', [Mainsite::class, 'index']);
 Route::get('category', [Mainsite::class, 'category'])->name('category');
@@ -200,7 +203,7 @@ Route::group(['as' => 'admin.', 'middleware' => ['auth'], 'prefix' => 'admin'], 
 
         Route::resource('Order', OrderController::class);
 
-        Route::get('billPrint/{id}', [ReportController::class, 'billPrint'])->name('billPrint');
+        Route::get('billPrint/{Order}', [ReportController::class, 'billPrint'])->name('billPrint');
 
         Route::get('billInnerPrint/{id}', [ReportController::class, 'billInnerPrint'])->name('billInnerPrint');
 

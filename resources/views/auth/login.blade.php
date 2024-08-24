@@ -15,13 +15,13 @@
 
 <body class="m-0 bg-slate-100">
     <section class="mainBody  m-24">
-<div class="logo flex w-5/6 m-5 font-extrabold mx-auto  justify-between items-center">
+<div class="logo flex w-full lg:w-5/6 m-5 font-extrabold mx-auto  justify-between items-center">
     <a class="font-Noto text-xl" href="{{ url('/') }}">{{ __('الرئيسية') }}</a>
     <img width="100" src="{{ asset('storage/'. $setting->logo) }}" >
 
 </div>
-        <main class="loginCard text-[#6B7280] font-Noto flex w-5/6 md:w-1/2  mx-auto bg-white rounded-md border">
-            <form method="POST" class="loginform w-full md:w-1/2 flex flex-col p-5 gap-5 place-content-center" action="{{ url('/login') }}">
+        <main class="loginCard text-[#6B7280] font-Noto flex  w-full lg:w-1/2  mx-auto bg-white rounded-md border">
+            <form method="POST" class="loginform w-full lg:w-1/2 flex flex-col p-5 gap-5 place-content-center" action="{{ url('/login') }}">
                 @csrf
                  <h4 class="text-xl font-bold">تسجيل الدخول
                     <hr>
@@ -70,13 +70,13 @@
                     <button type="submit" class="btn btn-primary  w-full">تسجيل الدخول</button>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class=" rounded-full border p-2 flex justify-evenly gap-2  w-full">
+                    <a href="{{ route('SocialiteRedirect','google') }}" type="submit" class=" rounded-full border p-2 flex justify-evenly gap-2  w-full">
 
                           الدخول بواسطة جوجل
 
 
                         <img class="fill" width="25" src="{{ Vite::asset('resources/logo/google-icon-logo-svgrepo-com.svg') }}" />
-                    </button>
+                    </a>
                 </div>
             </form>
             <div class="backLogin w-1/2 hidden md:flex">
