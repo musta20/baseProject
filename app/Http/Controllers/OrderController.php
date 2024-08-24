@@ -167,7 +167,7 @@ class OrderController extends Controller
      */
     public function showOrderList($type)
     {
-      //  $services = services::all();
+        //  $services = services::all();
         // $filterBox = order::showFilter(realData:$services,relType:'services', relName:'الخدمة');
 
         $AllOrder = order::where('status', $type)->Filter(); //->RequestPaginate();
