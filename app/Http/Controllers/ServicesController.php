@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSevicesRequest;
 use App\Http\Requests\updateSevicesRequest;
-use App\Models\Category;
-use App\Models\Delivery;
+use App\Models\Category as category;
+use App\Models\Delivery as delivery;
 use App\Models\Payment as payment;
 use App\Models\RequiredFiles;
-use App\Models\Services;
+use App\Models\Services as services;
 
 class ServicesController extends Controller
 {

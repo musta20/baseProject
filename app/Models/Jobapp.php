@@ -40,7 +40,7 @@ class Jobapp extends Model
 
     public function job()
     {
-        return $this->belongsTo(jobs::class, 'job_id', 'id');
+        return $this->belongsTo(Jobs::class, 'job_id', 'id');
     }
 
     public function getActivitylogOptions(): LogOptions

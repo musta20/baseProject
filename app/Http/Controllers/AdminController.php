@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Clients;
-use App\Models\Message;
-use App\Models\Order;
-use App\Models\Report;
-use App\Models\Services;
-use App\Models\Tasks;
+use App\Models\Category as category;
+use App\Models\Clients as clients;
+use App\Models\Message as message;
+use App\Models\Order as order;
+use App\Models\Report as report;
+use App\Models\Services as services;
+use App\Models\Tasks as tasks;
 use Carbon\Carbon;
 
 class AdminController extends Controller
