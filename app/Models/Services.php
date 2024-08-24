@@ -82,7 +82,7 @@ class Services extends Model
 
     public function payments(): BelongsToMany
     {
-        return $this->belongsToMany(payment::class, 'Pymtoservs', 'service_id', 'payment_id');
+        return $this->belongsToMany(Payment::class, 'Pymtoservs', 'service_id', 'payment_id');
     }
 
     public function files(): HasMany

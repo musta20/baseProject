@@ -14,6 +14,6 @@ class Devtoserv extends Model
 
     public function dev()
     {
-        return $this->belongsTo(delivery::class, 'delivery_id', 'id');
+        return $this->belongsTo(Delivery::class, 'delivery_id', 'id');
     }
 }

@@ -13,6 +13,6 @@ class Pymtoserv extends Model
 
     public function pym()
     {
-        return $this->belongsTo(payment::class, 'payment_id', 'id');
+        return $this->belongsTo(Payment::class, 'payment_id', 'id');
     }
 }
