@@ -8,7 +8,6 @@ use App\Http\Requests\SendContactRequest;
 use App\Models\Category;
 use App\Models\Clients;
 use App\Models\CustmerSlide;
-use App\Models\Devtoserv;
 use App\Models\Files;
 use App\Models\Jobapp;
 use App\Models\Jobcity;
@@ -16,7 +15,6 @@ use App\Models\Jobs;
 use App\Models\Message;
 use App\Models\Numbers;
 use App\Models\Order;
-use App\Models\Pymtoserv;
 use App\Models\Services;
 use App\Models\Setting;
 use App\Models\Slide;
@@ -193,11 +191,11 @@ class Mainsite extends Controller
         //$services  = services::find($id);
         $files = $services->files; //RequiredFiles::where('type', 0)->where('service_id', $services->id)->get();
 
-        $payment = Pymtoserv::where('service_id', $services->id)->with('pym')->get();
+     //   $payment = Pymtoserv::where('service_id', $services->id)->with('pym')->get();
 
-        $cash = Devtoserv::where('service_id', $services->id)->with('dev')->get();
+      //  $cash = Devtoserv::where('service_id', $services->id)->with('dev')->get();
 
-        return view('order', ['services' => $services, 'files' => $files, 'cash' => $cash, 'payment' => $payment]);
+        return view('order', ['services' => $services, 'files' => $files, 'cash' => $services->deliveries(), 'payment' => $services->payments()]);
     }
 
     public function services(Category $category)
