@@ -17,7 +17,7 @@ RUN docker-php-ext-configure gd --with-jpeg
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
 
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
