@@ -4,7 +4,7 @@
     "name": "module.esm"
   },
   "resources/assets/css/style.css": {
-    "file": "assets/style-CxWQ38Dr.css",
+    "file": "assets/style-BhDuo8c3.css",
     "src": "resources/assets/css/style.css",
     "isEntry": true
   },
@@ -26,7 +26,7 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-afw8rMQC.css",
+    "file": "assets/app-BYQ7eBXy.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -41,7 +41,7 @@
     "isEntry": true
   },
   "resources/css/style.css": {
-    "file": "assets/style-CJq08KEf.css",
+    "file": "assets/style-Cot2x9aT.css",
     "src": "resources/css/style.css",
     "isEntry": true
   },
@@ -61,6 +61,10 @@
   "resources/logo/brand2.png": {
     "file": "assets/brand2-CDZxuRHZ.png",
     "src": "resources/logo/brand2.png"
+  },
+  "resources/logo/google-icon-logo-svgrepo-com.svg": {
+    "file": "assets/google-icon-logo-svgrepo-com-CksRRPxu.svg",
+    "src": "resources/logo/google-icon-logo-svgrepo-com.svg"
   },
   "resources/logo/logo.png": {
     "file": "assets/logo-YlaaR9Hv.png",
