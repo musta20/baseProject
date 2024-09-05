@@ -4,7 +4,7 @@
     "name": "module.esm"
   },
   "resources/assets/css/style.css": {
-    "file": "assets/style-BhDuo8c3.css",
+    "file": "assets/style-q-Qioyhx.css",
     "src": "resources/assets/css/style.css",
     "isEntry": true
   },
@@ -17,7 +17,7 @@
     "src": "resources/assets/fonts/Lateef/Lateef-Bold.ttf"
   },
   "resources/assets/js/app.js": {
-    "file": "assets/app-PqPhfH1c.js",
+    "file": "assets/app-Ce9Rttwz.js",
     "name": "app",
     "src": "resources/assets/js/app.js",
     "isEntry": true,
@@ -26,7 +26,8 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-BYQ7eBXy.css",
+
+    "file": "assets/app-DVOYCcHL.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -50,7 +51,7 @@
     "src": "resources/font/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app-Ce9Rttwz.js",
+    "file": "assets/app-PqPhfH1c.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
