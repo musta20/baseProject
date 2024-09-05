@@ -6757,7 +6757,6 @@ return array(
     'Tests\\Browser\\Pages\\HomePage' => $baseDir . '/tests/Browser/Pages/HomePage.php',
     'Tests\\Browser\\Pages\\Page' => $baseDir . '/tests/Browser/Pages/Page.php',
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',
-    'Tests\\DuskTestCase' => $baseDir . '/tests/DuskTestCase.php',
     'Tests\\Feature\\CategoryTest' => $baseDir . '/tests/Feature/CategoryTest.php',
     'Tests\\Feature\\ExampleTest' => $baseDir . '/tests/Feature/ExampleTest.php',
     'Tests\\Feature\\JobAppTest' => $baseDir . '/tests/Feature/JobAppTest.php',

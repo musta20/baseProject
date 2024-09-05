@@ -7419,7 +7419,6 @@ class ComposerStaticInit722ad94e0ed41493b8ebd99a0a0f695e
         'Tests\\Browser\\Pages\\HomePage' => __DIR__ . '/../..' . '/tests/Browser/Pages/HomePage.php',
         'Tests\\Browser\\Pages\\Page' => __DIR__ . '/../..' . '/tests/Browser/Pages/Page.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
-        'Tests\\DuskTestCase' => __DIR__ . '/../..' . '/tests/DuskTestCase.php',
         'Tests\\Feature\\CategoryTest' => __DIR__ . '/../..' . '/tests/Feature/CategoryTest.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
         'Tests\\Feature\\JobAppTest' => __DIR__ . '/../..' . '/tests/Feature/JobAppTest.php',
