@@ -24,7 +24,6 @@ class UserSeeder extends Seeder
             ]
         );
 
-        
         User::factory()->withRole(UserRole::Admin->value)->create(
             [
                 'email' => 'saif.muh2020@gmail.com',
@@ -33,7 +32,6 @@ class UserSeeder extends Seeder
             ]
         );
 
-        
         User::factory()->withRole(UserRole::Employee->value)->create(
             [
                 'email' => 'employee@gmail.com',
