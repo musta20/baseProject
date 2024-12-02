@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin'),
             ]
         );
-    
+
         User::factory()->withRole(UserRole::Employee->value)->create(
             [
                 'email' => 'employee@gmail.com',
