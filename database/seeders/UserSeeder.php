@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     {
         User::factory()->withRole(UserRole::Admin->value)->create(
             [
-                'email' => 'admin@gmail.com',
+                'email' => 'admin@admin.com',
                 'name' => 'admin',
                 'password' => Hash::make('admin'),
             ]
